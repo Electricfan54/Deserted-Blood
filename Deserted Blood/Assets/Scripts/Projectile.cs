@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     public Damage dmg;
     private void Awake()
     {
-        dmg=GetComponent<Damage>();
+        
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,7 +18,17 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, destroytime);
         rb.linearVelocity = transform.forward * speed;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+       if(collision.gameObject.CompareTag("Enemy")||collision.gameObject.CompareTag("Player"))
+        {
 
+        }
+        else
+            Destroy(gameObject);
+        
+    }
+ 
     // Update is called once per frame
     void Update()
     {
