@@ -14,8 +14,6 @@ public class EnemyAI : MonoBehaviour
 
     Rigidbody rig;
     protected EnemyState curState;
-    //Temporary serialize for testing
-    [SerializeField]
     protected GameObject player;
     protected Vector3 targetPoint;
 
@@ -50,6 +48,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
     [SerializeField] protected Transform projectileSpawn;
 
+    protected bool inAttackAnim = false;
+
     protected float attackTimer = 0.0f;
 
     protected bool isGrounded;
@@ -74,6 +74,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        player = gameManager.instance.player;
         curState = startState;
         startPos = transform.position;
         reachedRoamTarget = true;
@@ -276,8 +277,9 @@ public class EnemyAI : MonoBehaviour
     protected void AttackState()
     {
         attackTimer += Time.deltaTime;
-        if (attackTimer >= attackRate)
+        if (!inAttackAnim && attackTimer >= attackRate)
         {
+            inAttackAnim = true;
             animator.SetTrigger("Attack0");
         }
     }
@@ -293,6 +295,11 @@ public class EnemyAI : MonoBehaviour
     {
         //Spawns a projectile
         Instantiate(projectiles[0], projectileSpawn.transform.position, projectileSpawn.transform.rotation);
+    }
+
+    public void AttackAnimEnd()
+    {
+        inAttackAnim = false;
     }
 
     protected void StoppedTransitionCheck()
@@ -335,7 +342,7 @@ public class EnemyAI : MonoBehaviour
 
     protected void AttackTransitionCheck()
     {
-        if (DistFromTarget() > chaseStopDist + 0.1f)//0.1 is a slight offset to prevent constant state changes
+        if (!inAttackAnim && DistFromTarget() > chaseStopDist + 0.1f)//0.1 is a slight offset to prevent constant state changes
         {
             curState = EnemyState.chase;
         }

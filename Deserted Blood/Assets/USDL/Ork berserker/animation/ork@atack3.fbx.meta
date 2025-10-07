@@ -8,7 +8,7 @@ AssetOrigin:
   assetPath: Assets/Ork berserker/animation/ork@atack3.fbx
   uploadId: 185068
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable:
   - first:
       1: 100000
@@ -2138,15 +2138,22 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.6105033
+      - time: 0.6175652
         functionName: Attack0
         data: 
         objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.66739607
+      - time: 0.7155363
         functionName: Attack0
+        data: 
+        objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.97374195
+        functionName: AttackAnimEnd
         data: 
         objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
         floatParameter: 0
@@ -2182,6 +2189,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
