@@ -78,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 5747798614704083144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.68, y: 1.29, z: 0}
+  m_LocalPosition: {x: 0.79, y: 1.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,8 +118,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2348362980816612675}
-  - {fileID: 1027418783661657145}
   - {fileID: 585229010947686679}
+  - {fileID: 7665051021020274698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8714883714319407142
@@ -134,10 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb942de432112804f9536e3ebe587e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 64
   lineOfSightIgnoreLayer:
     serializedVersion: 2
     m_Bits: 54
@@ -145,7 +144,8 @@ MonoBehaviour:
   startState: 1
   isSpecial: 0
   enemyType: 0
-  isFlying: 0
+  abilityDrop: {fileID: 1324692852175528817, guid: fdf160acd83343f409b7f4b97ee30bd5, type: 3}
+  isFlying: 1
   moveSpeed: 5
   chaseStopDist: 3
   enemyAggroRange: 3
@@ -190,10 +190,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6938404717349697744}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -231,7 +231,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!1001 &1032289778315278797
+--- !u!1001 &7660282873116661246
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -242,18 +242,6 @@ PrefabInstance:
     - target: {fileID: 1186413494234004, guid: 03228ebb154d829419e0ed3940352524, type: 3}
       propertyPath: m_Name
       value: ork berserk prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 4910303872038388, guid: 03228ebb154d829419e0ed3940352524, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4910303872038388, guid: 03228ebb154d829419e0ed3940352524, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4910303872038388, guid: 03228ebb154d829419e0ed3940352524, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4910303872038388, guid: 03228ebb154d829419e0ed3940352524, type: 3}
       propertyPath: m_LocalRotation.w
@@ -283,14 +271,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 95716040400269070, guid: 03228ebb154d829419e0ed3940352524, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03228ebb154d829419e0ed3940352524, type: 3}
---- !u!4 &1027418783661657145 stripped
+--- !u!4 &7665051021020274698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4910303872038388, guid: 03228ebb154d829419e0ed3940352524, type: 3}
-  m_PrefabInstance: {fileID: 1032289778315278797}
+  m_PrefabInstance: {fileID: 7660282873116661246}
   m_PrefabAsset: {fileID: 0}
