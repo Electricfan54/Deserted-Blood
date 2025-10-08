@@ -19,10 +19,12 @@ public class PlayerController : MonoBehaviour
 
     bool isGrounded;
     bool isWallSliding;
+
+    int origHP;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        origHP = HP;
     }
 
     // Update is called once per frame
@@ -80,4 +82,11 @@ public class PlayerController : MonoBehaviour
             playerVel.y = 0;
         }
     }
+
+    public void TakeDamage(int DamageAmount)
+    {
+        HP -= DamageAmount;
+    }
+
+
 }
