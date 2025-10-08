@@ -7,8 +7,12 @@ public class buttonManager : MonoBehaviour
     public void Play(string playSceneName)
     {
 
+        DontDestroyOnLoad(gameManager.instance.uiMain);
+
         Scene loadScene = SceneManager.GetSceneByName(playSceneName);
         SceneManager.LoadScene(playSceneName);
+
+        gameManager.instance.CloseAllMenus();
 
     }
 

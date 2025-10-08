@@ -6,6 +6,7 @@ public class gameManager : MonoBehaviour
 {
 
     public static gameManager instance;
+    public GameObject uiMain;
 
     public GameObject player;
     public PlayerController playerScript;
@@ -99,6 +100,16 @@ public class gameManager : MonoBehaviour
         menuActive = submenu;
         menuActive.SetActive(true);
 
+    }
+
+    public void CloseAllMenus()
+    {
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+            menuActive = null;
+            menuHierarchy.Clear();
+        }
     }
 
     public void CloseSubMenu() // Backs out in the menu list hierarchy
