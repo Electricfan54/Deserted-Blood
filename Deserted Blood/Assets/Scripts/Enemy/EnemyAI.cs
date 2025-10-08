@@ -96,6 +96,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         {
             case EnemyState.stopped:
                 StoppedTransitionCheck();
+                Stopped();
                 //for idle or spider
                 break;
             case EnemyState.roaming:
@@ -116,6 +117,7 @@ public class EnemyAI : MonoBehaviour, Idamage
                 AttackState();
                 break;
             case EnemyState.dead:
+                AddToMilestone();
                 DropAbility();
                 Destroy(gameObject);
                 break;
@@ -209,7 +211,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         RaycastHit hit;
         if (xDir >= 0)
         {
-            if (Physics.Raycast(startPos, Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
+            if (Physics.Raycast(new Vector3(startPos.x, startPos.y + 0.1f, startPos.z), Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
             {
                 targetPoint = hit.point;
             }
@@ -218,7 +220,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
         else
         {
-            if (Physics.Raycast(startPos, -Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
+            if (Physics.Raycast(new Vector3(startPos.x, startPos.y + 0.1f, startPos.z), -Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
             {
                 targetPoint = hit.point;
             }
@@ -407,6 +409,11 @@ public class EnemyAI : MonoBehaviour, Idamage
             Instantiate(abilityDrop, transform.position, Quaternion.identity);
     }
 
+    void AddToMilestone()
+    {
+        PlayerPassive.Instance.AddToMilestone(enemyType, isSpecial);
+    }
+
     public void TakeDamage(int damageAmount)
     {
         curHealth -= damageAmount;
@@ -415,5 +422,10 @@ public class EnemyAI : MonoBehaviour, Idamage
             curHealth = 0;
             curState = EnemyState.dead;
         }
+    }
+
+    protected void Stopped()
+    {
+
     }
 }
