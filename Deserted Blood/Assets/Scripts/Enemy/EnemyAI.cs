@@ -101,6 +101,7 @@ public class EnemyAI : MonoBehaviour, Idamage
             rig.linearVelocity = new Vector3(0, rig.linearVelocity.y, 0);
 
         GroundCheck();
+        UpdateAnimations();
 
         switch (curState)
         {
@@ -169,6 +170,11 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     }
 
+    protected void UpdateAnimations()
+    {
+        animator.SetFloat("curSpeed", curSpeed / moveSpeed);
+    }
+
     protected void GroundRoam()
     {
         if (LedgeCheck())
@@ -185,7 +191,7 @@ public class EnemyAI : MonoBehaviour, Idamage
 
         if (reachedRoamTarget == true && roamPauseTimer >= roamPauseTime)
         {
-            roamPauseTime = 0;
+            roamPauseTimer = 0;
             SetRoamTargetGround();
         }
         else if (reachedRoamTarget == true)
@@ -367,11 +373,7 @@ public class EnemyAI : MonoBehaviour, Idamage
     {
         if (DistFromTarget() <= chaseStopDist)
         {
-            if (isFlying)
-            {
-                curSpeed = 0; ;
-            }
-
+            curSpeed = 0;
             curState = EnemyState.attacking;
         }
         else if (DistFromTarget() > enemyAggroRange)
