@@ -38,6 +38,8 @@ public class EnemyAI : MonoBehaviour, Idamage
     [Header("Move Variables")]
     public bool isFlying = false;
     [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float acceleration;
+    protected float curSpeed;
     [SerializeField] protected float chaseStopDist;
 
     [Header("Attack Variables")]
@@ -86,35 +88,43 @@ public class EnemyAI : MonoBehaviour, Idamage
         {
             rig.useGravity = false;
         }
+        curSpeed = 0;
     }
 
     void Update()
     {
+        if (isFlying)
+        {
+            rig.linearVelocity = Vector3.zero;
+        }
+        else
+            rig.linearVelocity = new Vector3(0, rig.linearVelocity.y, 0);
+
         GroundCheck();
 
         switch (curState)
         {
             case EnemyState.stopped:
-                StoppedTransitionCheck();
-                Stopped();
                 //for idle or spider
+                Stopped();
+                StoppedTransitionCheck();
                 break;
             case EnemyState.roaming:
-                RoamingTransitionCheck();
                 FaceTarget();
                 if (isFlying)
                     AirRoam();
                 else
                     GroundRoam();
+                RoamingTransitionCheck();
                     break;
             case EnemyState.chase:
-                ChaseTransitionCheck();
                 FaceTarget();
+                ChaseTransitionCheck();
                 break;
             case EnemyState.attacking:
-                AttackTransitionCheck();
                 FaceTarget();
                 AttackState();
+                AttackTransitionCheck();
                 break;
             case EnemyState.dead:
                 AddToMilestone();
@@ -125,13 +135,7 @@ public class EnemyAI : MonoBehaviour, Idamage
     }
 
     private void FixedUpdate()
-    {
-        if (isFlying)
-        {
-            rig.linearVelocity = Vector3.zero;
-        }
-        else
-            rig.linearVelocity = new Vector3(0, rig.linearVelocity.y, 0);
+    { 
 
         // Physic updates are fixed
         // fixed update is called before the physics sytem updates
@@ -146,6 +150,8 @@ public class EnemyAI : MonoBehaviour, Idamage
                     {
                         Move();
                     }
+                    else
+                        curSpeed = 0;
                 }
                 else
                     Move();
@@ -153,7 +159,9 @@ public class EnemyAI : MonoBehaviour, Idamage
             case EnemyState.roaming:
                 if (reachedRoamTarget == false)
                     Move();
-                    break;
+                else
+                    curSpeed = 0;
+                break;
             case EnemyState.attacking:
                 targetPoint = player.transform.position;
                 break;
@@ -281,16 +289,18 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     protected void Move()
     {
+
+        curSpeed = Mathf.Lerp(curSpeed, moveSpeed, acceleration * Time.fixedTime);
         Vector3 dir = targetPoint - transform.position;
 
         if (isFlying)
         {
-            dir = dir.normalized * moveSpeed;
+            dir = dir.normalized * curSpeed;
         }
         else
         {
             dir.y = 0;
-            dir = dir.normalized * moveSpeed;
+            dir = dir.normalized * curSpeed;
             dir.y = rig.linearVelocity.y;
         }   
 
@@ -299,10 +309,13 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     protected void AttackState()
     {
+        if (inAttackAnim)
+            return;
         attackTimer += Time.deltaTime;
-        if (!inAttackAnim && attackTimer >= attackRate)
+        if (attackTimer >= attackRate)
         {
             inAttackAnim = true;
+            attackTimer = 0;
             animator.SetTrigger("Attack0");
         }
     }
@@ -316,7 +329,7 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     public void RangedAttack0()
     {
-        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 0.5f, targetPoint.z) - projectileSpawn.transform.position;
+        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
     }
 
@@ -356,18 +369,24 @@ public class EnemyAI : MonoBehaviour, Idamage
         {
             if (isFlying)
             {
-                rig.linearVelocity = Vector3.zero;
+                curSpeed = 0; ;
             }
-            
+
             curState = EnemyState.attacking;
+        }
+        else if (DistFromTarget() > enemyAggroRange)
+        {
+            curState = EnemyState.roaming;
         }
     }
 
     protected void AttackTransitionCheck()
     {
-        if (!inAttackAnim && DistFromTarget() > chaseStopDist + 0.1f)//0.1 is a slight offset to prevent constant state changes
+        if (inAttackAnim)
+            return;
+        if (DistFromTarget() > chaseStopDist + 0.1f)//0.1 is a slight offset to prevent constant state changes
         {
-            curState = EnemyState.chase;
+            curState = EnemyState.chase; 
         }
     }
 
