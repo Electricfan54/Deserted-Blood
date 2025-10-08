@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 8784653217750644761}
   - component: {fileID: 315832060053515863}
   - component: {fileID: 7434715620118725307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _TestEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   isFlying: 1
   moveSpeed: 5
   chaseStopDist: 3
+  maxHealth: 0
   enemyAggroRange: 3
   attackRate: 0.5
   hitBoxes:

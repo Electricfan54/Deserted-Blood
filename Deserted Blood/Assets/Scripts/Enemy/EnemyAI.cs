@@ -206,12 +206,25 @@ public class EnemyAI : MonoBehaviour, Idamage
             FlipDir();//Turn to face target
         }
 
+        RaycastHit hit;
         if (xDir >= 0)
         {
-            targetPoint = startPos + (Vector3.right * roamDist);
+            if (Physics.Raycast(startPos, Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
+            {
+                targetPoint = hit.point;
+            }
+            else
+                targetPoint = startPos + (Vector3.right * roamDist);
         }
         else
-            targetPoint = startPos + (-Vector3.right * roamDist);
+        {
+            if (Physics.Raycast(startPos, -Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
+            {
+                targetPoint = hit.point;
+            }
+            else
+                targetPoint = startPos + (-Vector3.right * roamDist);
+        }
     }
 
     protected void AirRoam()
@@ -301,7 +314,7 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     public void RangedAttack0()
     {
-        Vector3 playerDir = targetPoint - projectileSpawn.transform.position;
+        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 0.5f, targetPoint.z) - projectileSpawn.transform.position;
         Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
     }
 
