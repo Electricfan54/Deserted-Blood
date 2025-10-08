@@ -61,7 +61,7 @@ public class Ability : MonoBehaviour
 
     IEnumerator chargetime()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(.5f);
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, ~ignore))
         {
