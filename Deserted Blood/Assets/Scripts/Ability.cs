@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public class Ability : MonoBehaviour
 {
@@ -44,6 +45,12 @@ public class Ability : MonoBehaviour
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
             abilityuses--;
 
+        }
+        else if(Input.GetButtonDown("Fire1")&& abilitytype==AbilityType.tp && abilityuses > 0&&isusing==false)
+        {
+            isusing =true;
+            gameManager.instance.player.transform.position += gameManager.instance.player.transform.forward * 5;
+            isusing = false;
         }
     }
 
