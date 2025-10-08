@@ -144,7 +144,7 @@ MonoBehaviour:
   startState: 1
   isSpecial: 0
   enemyType: 0
-  abilityDrop: {fileID: 1324692852175528817, guid: fdf160acd83343f409b7f4b97ee30bd5, type: 3}
+  abilityDrop: {fileID: 6666584621998064518, guid: d29de680465943641bd3e4831ee8cdd4, type: 3}
   isFlying: 1
   moveSpeed: 5
   chaseStopDist: 3
@@ -153,7 +153,7 @@ MonoBehaviour:
   hitBoxes:
   - {fileID: 2572467355559241369}
   projectiles:
-  - {fileID: 1324692852175528817, guid: fdf160acd83343f409b7f4b97ee30bd5, type: 3}
+  - {fileID: 6666584621998064518, guid: d29de680465943641bd3e4831ee8cdd4, type: 3}
   projectileSpawn: {fileID: 585229010947686679}
   roamIgnoreLayer:
     serializedVersion: 2
