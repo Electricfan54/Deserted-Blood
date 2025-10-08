@@ -8,9 +8,9 @@ public class PlayerPassive : MonoBehaviour
     public int SpecialEnemyCount = 1;
 
     [SerializeField] int SpecialEnemyRequirement = 5;
-    [SerializeField] MileStoneClass GolemMilestone;
-    [SerializeField] MileStoneClass CerberusMilestone;
-    [SerializeField] MileStoneClass FlyingMilestone;
+    [SerializeField] MilestoneFramework GolemMilestone;
+    [SerializeField] MilestoneFramework CerberusMilestone;
+    [SerializeField] MilestoneFramework FlyingMilestone;
 
 
 
@@ -62,6 +62,7 @@ public class PlayerPassive : MonoBehaviour
         {
             GolemMilestone.MilestoneIndex += 1;
             // add buffs
+
         }
 
         if(CerberusMilestone.MilestoneCount >= CerberusMilestone.MilestoneAmountNeeded[CerberusMilestone.MilestoneIndex])
@@ -80,12 +81,4 @@ public class PlayerPassive : MonoBehaviour
         }
     }
 
-}
-
-[CreateAssetMenu]
-public class MileStoneClass : ScriptableObject
-{
-    public int[] MilestoneAmountNeeded;
-    public int MilestoneIndex;
-    public int MilestoneCount;
 }

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 651fefe2aefc2974395927addd24e92d, type: 3}
-  m_Name: GolemMileStone
+  m_Name: CerberusMileStone 1
   m_EditorClassIdentifier: Assembly-CSharp::MileStoneClass
   MilestoneAmountNeeded: 0a0000000a000000
   MilestoneIndex: 1
-  MilestoneCount: 3
+  MilestoneCount: 0
