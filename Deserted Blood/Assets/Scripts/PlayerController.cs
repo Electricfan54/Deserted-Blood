@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     Vector3 MoveDirection;
     Vector3 playerVel;
 
+    bool isGrounded;
+    bool isWallSliding;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +28,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (CharController.isGrounded)
+        {
+            playerVel.y = -2;
+            JumpCount = 0;
+        }
+        else
+        {
+            playerVel.y -= gravityStrength * Time.deltaTime;
+        }
+
+
         Movement();
     }
 
@@ -45,5 +59,25 @@ public class PlayerController : MonoBehaviour
         }
 
         CharController.Move(MoveDirection * Speed * Time.deltaTime);
+
+        Jump();
+
+        CharController.Move(playerVel * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        var InputDown = Input.GetButtonDown("Jump");
+        var InputUp = Input.GetButtonUp("Jump");
+        if(InputDown && JumpCount <  MaxJumps)
+        {
+            playerVel.y = JumpStrength;
+            JumpCount++;
+        }
+
+        if(InputUp && playerVel.y > 0)
+        {
+            playerVel.y = 0;
+        }
     }
 }
