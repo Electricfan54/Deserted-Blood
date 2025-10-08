@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     Vector3 MoveDirection;
     Vector3 playerVel;
 
-    bool isGrounded;
+    public bool isGrounded;
     bool isWallSliding;
 
     int origHP;
@@ -33,11 +33,13 @@ public class PlayerController : MonoBehaviour
 
         if (CharController.isGrounded)
         {
+            isGrounded = true;
             playerVel.y = -2;
             JumpCount = 0;
         }
         else
         {
+            isGrounded = false;
             playerVel.y -= gravityStrength * Time.deltaTime;
         }
 
