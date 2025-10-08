@@ -2922,10 +2922,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   CharController: {fileID: 6678921843056513605}
   PlayerAnimator: {fileID: 0}
-  HP: 0
-  MaxJumps: 0
-  JumpStrength: 0
-  gravityStrength: 0
+  HP: 100
+  MaxJumps: 2
+  JumpStrength: 15
+  gravityStrength: 30
   Speed: 15
 --- !u!143 &6678921843056513605
 CharacterController:
