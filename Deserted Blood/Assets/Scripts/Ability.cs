@@ -47,18 +47,18 @@ public class Ability : MonoBehaviour
 
     void mousemovements()
     {
-     float rotationSpeed = 5f;
-    //    Vector3 mousemv=Input.mousePosition;
-    //    mousemv.z=Camera.main.WorldToScreenPoint(mousemv).z;
-    //    Vector3 worldpos=Camera.main.ScreenToWorldPoint(mousemv);
+     //float rotationSpeed = 5f;
+        Vector3 mousemv = Input.mousePosition;
+        mousemv.z = Camera.main.WorldToScreenPoint(mousemv).z;
+        Vector3 worldpos = Camera.main.ScreenToWorldPoint(mousemv);
 
-    //Vector3 dir=worldpos-transform.position;
+        Vector3 dir = worldpos - transform.position;
 
-    //    float angle=Mathf.Atan2(dir.y,dir.x)*Mathf.Rad2Deg;
-    //    transform.rotation=Quaternion.AngleAxis(angle,Vector3.forward);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-    float mouseX = Input.GetAxis("Mouse Y");
-        transform.Rotate(Vector3.right, mouseX * rotationSpeed);
+        //float mouseX = Input.GetAxis("Mouse Y");
+        //    transform.Rotate(Vector3.right, mouseX * rotationSpeed);
     }
 
     IEnumerator chargetime()
