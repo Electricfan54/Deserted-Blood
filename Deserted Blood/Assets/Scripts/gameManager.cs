@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Device;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -8,6 +8,7 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
 
     public GameObject player;
+    public PlayerController playerScript;
 
     [Header("UI Specific")]
     [SerializeField] GameObject menuActive;
@@ -15,6 +16,13 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
 
     List<GameObject> menuHierarchy = new List<GameObject>();
+
+    [Header("Transition Variables")]
+    [SerializeField] Image transitionMain;
+
+    bool transitionActive;
+    [SerializeField] float transDuration;
+    float transTimer;
 
     private void Awake()
     {
@@ -28,16 +36,40 @@ public class gameManager : MonoBehaviour
             menuHierarchy.Add(menuActive);
         }
 
+        transTimer = 0;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void Transition()
+    {
+
+        float alphaLerp = Mathf.Lerp(0, transDuration, Time.deltaTime * transTimer);
         
+
+        if (transTimer >= transDuration)
+        {
+            transitionActive = false;
+            //transitionMain.gameObject.SetActive(false);
+        }
+
     }
 
     public void OpenSubMenu(GameObject submenu)
     {
+
+        transitionActive = true;
+        transitionMain.gameObject.SetActive(true);
+
+        while (transitionActive)
+        {
+            Transition();
+        }
 
         menuActive.SetActive(false);
         menuHierarchy.Add(submenu);
