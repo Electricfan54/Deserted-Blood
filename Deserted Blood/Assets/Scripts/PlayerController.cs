@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     bool isWallSliding;
 
+    public bool hasThirdAbility = false;
+
+
     int origHP;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
 
         if (CharController.isGrounded)
         {
@@ -42,7 +46,12 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             playerVel.y -= gravityStrength * Time.deltaTime;
         }
+        RaycastHit CeilingCheck;
 
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, 2.5f))
+        {
+            playerVel.y = 0;
+        }
 
         Movement();
     }

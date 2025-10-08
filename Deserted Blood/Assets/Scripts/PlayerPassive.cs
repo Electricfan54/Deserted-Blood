@@ -1,31 +1,33 @@
 using UnityEngine;
 
-[System.Serializable]
-public struct GolemMilestones
-{
-    [SerializeField] public int[] MilestoneAmounts;
-    public int MilestoneIndex;
-}
 
 public class PlayerPassive : MonoBehaviour
 {
     public static PlayerPassive Instance;
 
-    public int SpecialEnemyCount;
-    public int GolemMilestoneCount;
-    public int CerberusMilestoneCount;
-    public int FlyingMilestoneCount;
+    public int SpecialEnemyCount = 1;
 
-    [SerializeField] int SpecialEnemyRequirement;
+    [SerializeField] int SpecialEnemyRequirement = 5;
+    [SerializeField] MileStoneClass GolemMilestone;
+    [SerializeField] MileStoneClass CerberusMilestone;
+    [SerializeField] MileStoneClass FlyingMilestone;
 
-    [SerializeField] GolemMilestones GolemStruct;
-    
-    
-    
+
+
     private void Awake()
     {
         Instance = this;
 
+    }
+
+    private void Start()
+    {
+
+
+    }
+    void Update()
+    {
+        
     }
 
     public void AddToMilestone(EnemyAI.EnemyType type, bool isSpecial)
@@ -36,13 +38,13 @@ public class PlayerPassive : MonoBehaviour
                 
                 break;
             case EnemyAI.EnemyType.golem:
-                GolemMilestoneCount += 1;
+                GolemMilestone.MilestoneCount += 1;
                 break;
             case EnemyAI.EnemyType.cerberus:
-                CerberusMilestoneCount += 1;
+                CerberusMilestone.MilestoneCount += 1;
                 break;
             case EnemyAI.EnemyType.flying:
-                FlyingMilestoneCount += 1;
+                FlyingMilestone.MilestoneCount += 1;
                 break;
         }
 
@@ -50,12 +52,40 @@ public class PlayerPassive : MonoBehaviour
         {
             SpecialEnemyCount += 1;
         }
-            
+
+        CheckMileStone();
     }
 
     void CheckMileStone()
-    {
-        GolemStruct.MilestoneIndex = 1;
+    { 
+        if(GolemMilestone.MilestoneCount >= GolemMilestone.MilestoneAmountNeeded[GolemMilestone.MilestoneIndex])
+        {
+            GolemMilestone.MilestoneIndex += 1;
+            // add buffs
+        }
+
+        if(CerberusMilestone.MilestoneCount >= CerberusMilestone.MilestoneAmountNeeded[CerberusMilestone.MilestoneIndex])
+        {
+            CerberusMilestone.MilestoneIndex += 1;
+        }
+
+        if(FlyingMilestone.MilestoneCount >= FlyingMilestone.MilestoneAmountNeeded[FlyingMilestone.MilestoneIndex])
+        {
+            FlyingMilestone.MilestoneIndex += 1;
+        }
+
+        if(SpecialEnemyCount >= SpecialEnemyRequirement)
+        { 
+            gameManager.instance.player.GetComponent<PlayerController>().hasThirdAbility = true;
+        }
     }
-   
+
+}
+
+[CreateAssetMenu]
+public class MileStoneClass : ScriptableObject
+{
+    public int[] MilestoneAmountNeeded;
+    public int MilestoneIndex;
+    public int MilestoneCount;
 }
