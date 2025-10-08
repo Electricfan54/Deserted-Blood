@@ -40,11 +40,6 @@ public class Ability : MonoBehaviour
         }
     }
 
-    private void StartCoroutine(IEnumerable enumerable)
-    {
-        throw new NotImplementedException();
-    }
-
     void mousemovements()
     {
      //float rotationSpeed = 5f;
