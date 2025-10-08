@@ -11,6 +11,7 @@ public class Ability : MonoBehaviour
     }
     [SerializeField] LayerMask ignore;
     [SerializeField] AbilityType abilitytype;
+    [SerializeField] int abilityuses;
     public Damage dmg;
 
     private void Awake()
@@ -26,15 +27,16 @@ public class Ability : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0)&& abilitytype==AbilityType.fire)
+        if(Input.GetMouseButton(0)&& abilitytype==AbilityType.fire&&abilityuses>0)
         {
             mousemovements();
+            abilityuses--;
         }
-        else if(Input.GetMouseButton(0)&& abilitytype==AbilityType.lightning)
+        else if(Input.GetButtonUp("Fire1")&& abilitytype==AbilityType.lightning && abilityuses > 0)
         {StartCoroutine(chargetime());
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
-            
-           
+            abilityuses--;
+
         }
     }
 
@@ -56,7 +58,7 @@ public class Ability : MonoBehaviour
     //    transform.rotation=Quaternion.AngleAxis(angle,Vector3.forward);
 
     float mouseX = Input.GetAxis("Mouse Y");
-        transform.Rotate(Vector3.forward, mouseX * rotationSpeed);
+        transform.Rotate(Vector3.right, mouseX * rotationSpeed);
     }
 
     IEnumerator chargetime()
