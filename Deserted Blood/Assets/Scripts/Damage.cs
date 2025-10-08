@@ -21,5 +21,6 @@ public class Damage : MonoBehaviour
         {
             dmg.TakeDamage(damageammount);
         }
+        
     }
 }
