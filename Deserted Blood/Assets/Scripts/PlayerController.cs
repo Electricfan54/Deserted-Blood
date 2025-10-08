@@ -1,0 +1,83 @@
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] CharacterController CharController;
+    [SerializeField] Animator PlayerAnimator;
+
+    [SerializeField] int HP;
+
+    [SerializeField] int MaxJumps;
+    [SerializeField] int JumpStrength;
+    [SerializeField] int gravityStrength;
+
+    [SerializeField] int Speed;
+
+    int JumpCount;
+    Vector3 MoveDirection;
+    Vector3 playerVel;
+
+    bool isGrounded;
+    bool isWallSliding;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (CharController.isGrounded)
+        {
+            playerVel.y = -2;
+            JumpCount = 0;
+        }
+        else
+        {
+            playerVel.y -= gravityStrength * Time.deltaTime;
+        }
+
+
+        Movement();
+    }
+
+    void Movement()
+    {
+        float Horizantol = Input.GetAxis("Horizontal");
+
+        MoveDirection = new Vector3(Horizantol, 0, 0);
+
+        if(Horizantol > 0)
+        {
+            transform.rotation = Quaternion.Euler(0,90,0);
+        }
+        else if (Horizantol < 0)
+        {
+            transform.rotation = Quaternion.Euler(0,-90,0);
+        }
+
+        CharController.Move(MoveDirection * Speed * Time.deltaTime);
+
+        Jump();
+
+        CharController.Move(playerVel * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        var InputDown = Input.GetButtonDown("Jump");
+        var InputUp = Input.GetButtonUp("Jump");
+        if(InputDown && JumpCount <  MaxJumps)
+        {
+            playerVel.y = JumpStrength;
+            JumpCount++;
+        }
+
+        if(InputUp && playerVel.y > 0)
+        {
+            playerVel.y = 0;
+        }
+    }
+}
