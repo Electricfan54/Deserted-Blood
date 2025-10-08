@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     public Damage dmg;
     private void Awake()
     {
-        
+        dmg = GetComponent<Damage>();
 
     }
 
@@ -18,17 +18,16 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, destroytime);
         rb.linearVelocity = transform.forward * speed;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-       if(collision.gameObject.CompareTag("Enemy")||collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
         {
 
         }
         else
             Destroy(gameObject);
-        
     }
- 
+
     // Update is called once per frame
     void Update()
     {
