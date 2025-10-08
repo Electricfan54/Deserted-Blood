@@ -1,9 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class buttonManager : MonoBehaviour
 {
 
+    public void Play(string playSceneName)
+    {
 
+        Scene loadScene = SceneManager.GetSceneByName(playSceneName);
+        SceneManager.LoadScene(playSceneName);
+
+    }
 
     public void Quit()
     {
@@ -13,6 +20,20 @@ public class buttonManager : MonoBehaviour
     #else
             Application.Quit();
     #endif
+
+    }
+
+    public void OpenSubMenu(GameObject submenu)
+    {
+
+        gameManager.instance.OpenSubMenu(submenu);
+
+    }
+
+    public void CloseSubMenu()
+    {
+
+        gameManager.instance.CloseSubMenu();
 
     }
 
