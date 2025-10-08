@@ -83,8 +83,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void TakeDamage(int DamageAmount)
+    public void TakeDamage(int DamageAmount)
     {
         HP -= DamageAmount;
     }
+
+
 }
