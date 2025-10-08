@@ -19,9 +19,13 @@ public class gameManager : MonoBehaviour
 
     [Header("Transition Variables")]
     [SerializeField] Image transitionMain;
+    float alphaLerp;
 
     bool transitionActive;
-    [SerializeField] float transDuration;
+
+    [SerializeField] float transTimeScale;
+    private float transStart;
+    private float transEnd;
     float transTimer;
 
     private void Awake()
@@ -37,25 +41,48 @@ public class gameManager : MonoBehaviour
         }
 
         transTimer = 0;
+        alphaLerp = 0;
+
+        transStart = 0;
+        transEnd = 1;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (transitionActive)
+            Transition();
     }
 
     public void Transition()
     {
 
-        float alphaLerp = Mathf.Lerp(0, transDuration, Time.deltaTime * transTimer);
-        
+        transTimer += transTimeScale * Time.deltaTime;
+        alphaLerp = Mathf.Lerp(transStart, transEnd, transTimer);
 
-        if (transTimer >= transDuration)
+        transitionMain.color = new Color(transitionMain.color.r, transitionMain.color.g, transitionMain.color.b, alphaLerp);
+
+        if (transTimer >= 1 && transEnd == 0)
         {
             transitionActive = false;
-            //transitionMain.gameObject.SetActive(false);
+            float temp = transEnd;
+            transEnd = transStart;
+            transStart = temp;
+
+            transTimer = 0;
+
+            transitionMain.gameObject.SetActive(false);
+
+        }
+
+        if (transTimer >= 1)
+        {
+            float temp = transEnd;
+            transEnd = transStart;
+            transStart = temp;
+
+            transTimer = 0;
         }
 
     }
@@ -63,13 +90,9 @@ public class gameManager : MonoBehaviour
     public void OpenSubMenu(GameObject submenu)
     {
 
-        transitionActive = true;
-        transitionMain.gameObject.SetActive(true);
-
-        while (transitionActive)
-        {
-            Transition();
-        }
+        //transitionActive = true;
+        //alphaLerp = 0;
+        //transitionMain.gameObject.SetActive(true);
 
         menuActive.SetActive(false);
         menuHierarchy.Add(submenu);
