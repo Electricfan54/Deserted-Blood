@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public class Ability : MonoBehaviour
 {
@@ -27,23 +28,29 @@ public class Ability : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0)&& abilitytype==AbilityType.fire&&abilityuses>0)
+        if (Input.GetMouseButton(0) && abilitytype == AbilityType.fire && abilityuses > 0)
         {
-          gameObject.GetComponent<Collider>().enabled = true;
+            gameObject.GetComponent<Collider>().enabled = true;
             mousemovements();
             abilityuses--;
         }
-        else if(Input.GetMouseButtonUp(0)&& abilitytype==AbilityType.fire)
+        else if (Input.GetMouseButtonUp(0) && abilitytype == AbilityType.fire)
         {
             gameObject.GetComponent<Collider>().enabled = false;
         }
-        else if(Input.GetButtonDown("Fire1")&& abilitytype==AbilityType.lightning && abilityuses > 0&&isusing==false)
+        else if (Input.GetButtonDown("Fire1") && abilitytype == AbilityType.lightning && abilityuses > 0 && isusing == false)
         {
-            isusing =true;
+            isusing = true;
             StartCoroutine(chargetime());
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
             abilityuses--;
 
+        }
+        else if (Input.GetButtonDown("Fire1") && abilitytype == AbilityType.tp && abilityuses > 0 && isusing == false&&gameManager.instance.playerScript.isGrounded==false)
+        {
+            isusing = true;
+            gameManager.instance.player.transform.position += gameManager.instance.player.transform.forward * 5;
+            isusing = false;
         }
     }
 
@@ -71,9 +78,13 @@ public class Ability : MonoBehaviour
         {
  Debug.Log("Hit" + hit[i].collider.name);
             Idamage dam = hit[i].collider.GetComponent<Idamage>();
-            if (dmg != null)
+            if (dam != null)
             {
  dam.TakeDamage(dmg.damageammount);
+            }
+            else
+            {
+                Debug.Log("No Damageable component found on " + hit[i].collider.name);
             }
         }
 
