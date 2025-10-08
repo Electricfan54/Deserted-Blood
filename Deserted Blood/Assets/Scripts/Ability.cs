@@ -13,7 +13,7 @@ public class Ability : MonoBehaviour
     [SerializeField] AbilityType abilitytype;
     [SerializeField] int abilityuses;
     public Damage dmg;
-
+    bool isusing=false;
     private void Awake()
     {
         dmg = GetComponent<Damage>();
@@ -29,11 +29,18 @@ public class Ability : MonoBehaviour
     {
         if(Input.GetMouseButton(0)&& abilitytype==AbilityType.fire&&abilityuses>0)
         {
+          gameObject.GetComponent<Collider>().enabled = true;
             mousemovements();
             abilityuses--;
         }
-        else if(Input.GetButtonUp("Fire1")&& abilitytype==AbilityType.lightning && abilityuses > 0)
-        {StartCoroutine(chargetime());
+        else if(Input.GetMouseButtonUp(0)&& abilitytype==AbilityType.fire)
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
+        }
+        else if(Input.GetButtonDown("Fire1")&& abilitytype==AbilityType.lightning && abilityuses > 0&&isusing==false)
+        {
+            isusing =true;
+            StartCoroutine(chargetime());
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
             abilityuses--;
 
@@ -59,15 +66,17 @@ public class Ability : MonoBehaviour
     IEnumerator chargetime()
     {
         yield return new WaitForSeconds(.5f);
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 10f, ~ignore))
+        RaycastHit[] hit =Physics.RaycastAll(transform.position, transform.forward, 5);
+        for (int i = 0; i < hit.Length; i++)
         {
-            Debug.Log("Hit" + hit.collider.name);
-            Idamage dmg = hit.collider.GetComponent<Idamage>();
+ Debug.Log("Hit" + hit[i].collider.name);
+            Idamage dam = hit[i].collider.GetComponent<Idamage>();
             if (dmg != null)
             {
-                dmg.TakeDamage(10);
+ dam.TakeDamage(dmg.damageammount);
             }
         }
+
+        isusing = false;
     }
 }

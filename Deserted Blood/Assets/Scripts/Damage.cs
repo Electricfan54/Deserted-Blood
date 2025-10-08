@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    [SerializeField] int damageammount;
+    public int damageammount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
