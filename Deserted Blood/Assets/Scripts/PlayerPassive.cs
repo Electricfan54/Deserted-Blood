@@ -1,10 +1,10 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct MileStoneAmounts
+public struct GolemMilestones
 {
-    [SerializeField] int testamount;
-    [SerializeField] int Something;
+    [SerializeField] public int[] MilestoneAmounts;
+    public int MilestoneIndex;
 }
 
 public class PlayerPassive : MonoBehaviour
@@ -18,8 +18,10 @@ public class PlayerPassive : MonoBehaviour
 
     [SerializeField] int SpecialEnemyRequirement;
 
-    [SerializeField] MileStoneAmounts Somgekianhgnse;
-
+    [SerializeField] GolemMilestones GolemStruct;
+    
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -49,6 +51,11 @@ public class PlayerPassive : MonoBehaviour
             SpecialEnemyCount += 1;
         }
             
+    }
+
+    void CheckMileStone()
+    {
+        GolemStruct.MilestoneIndex = 1;
     }
    
 }
