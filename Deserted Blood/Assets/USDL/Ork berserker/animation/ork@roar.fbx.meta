@@ -2139,7 +2139,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.391685
-        functionName: Attack0
+        functionName: RangedAttack0
         data: 
         objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
         floatParameter: 0

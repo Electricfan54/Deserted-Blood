@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, Idamage
 {
     protected enum EnemyState
     {
@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
         roaming,
         chase,
         attacking,
+        dead,
     };
 
     Rigidbody rig;
@@ -40,6 +41,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] protected float chaseStopDist;
 
     [Header("Attack Variables")]
+    [SerializeField] protected int maxHealth;
+    protected int curHealth;
     [SerializeField] protected int enemyAggroRange;
     [SerializeField] protected float attackRate = 0.5f;
     [Tooltip("For melee enemies")]
@@ -75,6 +78,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         player = gameManager.instance.player;
+        curHealth = maxHealth;
         curState = startState;
         startPos = transform.position;
         reachedRoamTarget = true;
@@ -110,6 +114,10 @@ public class EnemyAI : MonoBehaviour
                 AttackTransitionCheck();
                 FaceTarget();
                 AttackState();
+                break;
+            case EnemyState.dead:
+                DropAbility();
+                Destroy(gameObject);
                 break;
         }
     }
@@ -198,12 +206,25 @@ public class EnemyAI : MonoBehaviour
             FlipDir();//Turn to face target
         }
 
+        RaycastHit hit;
         if (xDir >= 0)
         {
-            targetPoint = startPos + (Vector3.right * roamDist);
+            if (Physics.Raycast(startPos, Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
+            {
+                targetPoint = hit.point;
+            }
+            else
+                targetPoint = startPos + (Vector3.right * roamDist);
         }
         else
-            targetPoint = startPos + (-Vector3.right * roamDist);
+        {
+            if (Physics.Raycast(startPos, -Vector3.right, out hit, roamDist, ~roamIgnoreLayer))
+            {
+                targetPoint = hit.point;
+            }
+            else
+                targetPoint = startPos + (-Vector3.right * roamDist);
+        }
     }
 
     protected void AirRoam()
@@ -293,8 +314,8 @@ public class EnemyAI : MonoBehaviour
 
     public void RangedAttack0()
     {
-        //Spawns a projectile
-        Instantiate(projectiles[0], projectileSpawn.transform.position, projectileSpawn.transform.rotation);
+        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 0.5f, targetPoint.z) - projectileSpawn.transform.position;
+        Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
     }
 
     public void AttackAnimEnd()
@@ -382,7 +403,17 @@ public class EnemyAI : MonoBehaviour
 
     void DropAbility()
     {
-        Instantiate(abilityDrop, transform.position, Quaternion.identity);
+        if (abilityDrop != null)
+            Instantiate(abilityDrop, transform.position, Quaternion.identity);
     }
 
+    public void TakeDamage(int damageAmount)
+    {
+        curHealth -= damageAmount;
+        if (curHealth <= 0)
+        {
+            curHealth = 0;
+            curState = EnemyState.dead;
+        }
+    }
 }
