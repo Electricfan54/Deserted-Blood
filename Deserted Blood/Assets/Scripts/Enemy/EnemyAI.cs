@@ -86,13 +86,13 @@ public class EnemyAI : MonoBehaviour, Idamage
 
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rig = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         player = gameManager.instance.player;
         curHealth = maxHealth;
@@ -107,7 +107,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         origColor = meshRenderer.material.color;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         //Debug Code
 #if UNITY_EDITOR
@@ -174,7 +174,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     { 
         if (hitStunned)
         {
@@ -214,12 +214,12 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     }
 
-    protected void UpdateAnimations()
+    protected virtual void UpdateAnimations()
     {
         animator.SetFloat("curSpeed", curSpeed / moveSpeed);
     }
 
-    protected void GroundRoam()
+    protected virtual void GroundRoam()
     {
         if (LedgeCheck())
         {
@@ -244,7 +244,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected bool LedgeCheck()
+    protected virtual bool LedgeCheck()
     {
         // Offsets the ray position on the y and local x
         Vector3 rayPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z) + transform.right * .2f;
@@ -255,7 +255,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         return false;
     }
 
-    protected void SetRoamTargetGround()
+    protected virtual void SetRoamTargetGround()
     {
         reachedRoamTarget = false;
 
@@ -287,7 +287,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected void AirRoam()
+    protected virtual void AirRoam()
     {
         if (DistFromTarget() <= roamStopDist)
         {
@@ -304,7 +304,7 @@ public class EnemyAI : MonoBehaviour, Idamage
             roamPauseTimer += Time.deltaTime;
         }
     }
-    protected void SetRoamTargetAir()
+    protected virtual void SetRoamTargetAir()
     {
         reachedRoamTarget = false;
 
@@ -326,7 +326,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected void GroundCheck()
+    protected virtual void GroundCheck()
     {
         Vector3 rayPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
         if (Physics.Raycast(rayPos, Vector3.down, 0.2f, groundLayer))
@@ -337,7 +337,7 @@ public class EnemyAI : MonoBehaviour, Idamage
             isGrounded = false;
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
 
         curSpeed = Mathf.Lerp(curSpeed, moveSpeed, acceleration * Time.fixedTime);
@@ -357,7 +357,7 @@ public class EnemyAI : MonoBehaviour, Idamage
             rig.linearVelocity = dir;
     }
 
-    protected void AttackState()
+    protected virtual void AttackState()
     {
         if (inAttackAnim)
             return;
@@ -371,14 +371,14 @@ public class EnemyAI : MonoBehaviour, Idamage
     }
 
     // Will be called by the attack animation
-    public void Attack0()
+    public virtual void Attack0()
     {
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
     }
 
-    public void RangedAttack0()
+    public virtual void RangedAttack0()
     {
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
@@ -388,23 +388,23 @@ public class EnemyAI : MonoBehaviour, Idamage
         projScript.destroytime = projDestroyTime;
     }
 
-    protected void HitReact()
+    protected virtual void HitReact()
     {
         hitStunned = true;
         animator.SetTrigger("hit");
     }
 
-    public void AttackAnimEnd()
+    public virtual void AttackAnimEnd()
     {
         inAttackAnim = false;
     }
 
-    protected void StoppedTransitionCheck()
+    protected virtual void StoppedTransitionCheck()
     {
 
     }
 
-    protected void RoamingTransitionCheck()
+    protected virtual void RoamingTransitionCheck()
     {
         if (CanSeePlayer())
         {
@@ -412,7 +412,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected float DistFromTarget()
+    protected virtual float DistFromTarget()
     {
         if (isFlying)
         {
@@ -424,7 +424,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected void ChaseTransitionCheck()
+    protected virtual void ChaseTransitionCheck()
     {
         if (DistFromTarget() <= chaseStopDist)
         {
@@ -437,7 +437,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected void AttackTransitionCheck()
+    protected virtual void AttackTransitionCheck()
     {
         if (inAttackAnim)
             return;
@@ -447,7 +447,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected void FaceTarget()
+    protected virtual void FaceTarget()
     {
         float xDir = targetPoint.x - transform.position.x;
         if (xDir >= 0)
@@ -460,12 +460,12 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
     }
 
-    protected void FlipDir()
+    protected virtual void FlipDir()
     {
         transform.Rotate(0, 180, 0);
     }
 
-    protected bool CanSeePlayer()
+    protected virtual bool CanSeePlayer()
     {
         Vector3 playerDir = player.transform.position - transform.position;
         RaycastHit hit;
@@ -490,7 +490,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         PlayerPassive.Instance.AddToMilestone(enemyType, isSpecial);
     }
 
-    public void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount)
     {
         curHealth -= damageAmount;
         StartCoroutine(FlashRed());
@@ -502,12 +502,12 @@ public class EnemyAI : MonoBehaviour, Idamage
         HitReact();
     }
 
-    protected void Stopped()
+    protected virtual void Stopped()
     {
 
     }
 
-    protected IEnumerator FlashRed()
+    protected virtual IEnumerator FlashRed()
     {
         meshRenderer.material.color = Color.red;
         yield return new WaitForSeconds(.1f);
