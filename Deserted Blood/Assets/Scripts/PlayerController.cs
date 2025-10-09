@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     [SerializeField] Animator PlayerAnimator;
 
     [SerializeField] int HP;
+    [SerializeField] int MaxHP;
+    [SerializeField] int BloodMeter;
+    [SerializeField] int MaxBloodMeter;
+
+    [SerializeField] int BasePlayerDamage;
 
     [SerializeField] int MaxJumps;
     [SerializeField] int JumpStrength;
@@ -21,15 +27,18 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     public bool isGrounded;
     bool isWallSliding;
 
+    bool isInvinc = false;
+
     public bool hasThirdAbility = false;
 
 
    public List<Ability> abilities = new List<Ability>();
    public int listpos;
-    public playerablities PlayerAbilites;
+   public playerablities PlayerAbilites;
 
-
+    int origBloodMeter = 50;
     int origHP;
+
 
     private void Awake()
     {
@@ -39,6 +48,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     void Start()
     {
         origHP = HP;
+        MaxHP = origHP;
+        origBloodMeter = MaxBloodMeter;
     }
 
     // Update is called once per frame
@@ -107,7 +118,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
 
     public void TakeDamage(int DamageAmount)
     {
-        HP -= DamageAmount;
+        if(isInvinc == false)
+        {
+            HP -= DamageAmount;
+            StartCoroutine(IFrames());
+        }
     }
 
     public void abilitystats(Ability ability)
@@ -115,4 +130,34 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         abilities.Add(ability);
         listpos = abilities.Count - 1;
     }
+
+    IEnumerator IFrames()
+    {
+        isInvinc = true;
+        yield return new WaitForSeconds(0.4f);
+        isInvinc = false;
+    }
+
+    public void AddBloodMeter(int amount)
+    {
+        BloodMeter += amount;
+    }
+
+    public void AddBloodMeterMilestone(int AmounttoAdd)
+    {
+        MaxBloodMeter += AmounttoAdd;
+    }
+
+    public void AddPlayerDamageMilestone(int Amount)
+    {
+        BasePlayerDamage += Amount;
+    }
+
+    public void AddHPMilestone(int amount)
+    {
+        MaxHP += amount;
+    }
+
+
+
 }
