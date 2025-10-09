@@ -58,22 +58,34 @@ public class PlayerPassive : MonoBehaviour
 
     void CheckMileStone()
     { 
-        if(GolemMilestone.MilestoneCount >= GolemMilestone.MilestoneAmountNeeded[GolemMilestone.MilestoneIndex])
+        if(GolemMilestone.MilestoneCount == GolemMilestone.MilestoneAmountNeeded[GolemMilestone.MilestoneIndex])
         {
-            GolemMilestone.MilestoneIndex += 1;
+            if(GolemMilestone.MilestoneIndex != GolemMilestone.MilestoneAmountNeeded.Length - 1)
+            {
+                GolemMilestone.MilestoneIndex += 1;
+            }
+
             gameManager.instance.player.GetComponent<PlayerController>().AddHPMilestone(20);
 
         }
 
-        if(CerberusMilestone.MilestoneCount >= CerberusMilestone.MilestoneAmountNeeded[CerberusMilestone.MilestoneIndex])
+        if(CerberusMilestone.MilestoneCount == CerberusMilestone.MilestoneAmountNeeded[CerberusMilestone.MilestoneIndex])
         {
-            CerberusMilestone.MilestoneIndex += 1;
+            if(CerberusMilestone.MilestoneIndex != CerberusMilestone.MilestoneAmountNeeded.Length - 1)
+            {
+                CerberusMilestone.MilestoneIndex += 1;
+
+            }
             gameManager.instance.player.GetComponent<PlayerController>().AddBloodMeterMilestone(20);
         }
 
-        if(FlyingMilestone.MilestoneCount >= FlyingMilestone.MilestoneAmountNeeded[FlyingMilestone.MilestoneIndex])
+        if(FlyingMilestone.MilestoneCount == FlyingMilestone.MilestoneAmountNeeded[FlyingMilestone.MilestoneIndex])
         {
-            FlyingMilestone.MilestoneIndex += 1;
+            if (FlyingMilestone.MilestoneIndex != FlyingMilestone.MilestoneAmountNeeded.Length - 1)
+            {
+                FlyingMilestone.MilestoneIndex += 1;
+
+            }
             gameManager.instance.player.GetComponent<PlayerController>().AddPlayerDamageMilestone(10);
         }
 
