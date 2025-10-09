@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, Idamage
 {
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
