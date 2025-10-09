@@ -1,6 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Unity.Mathematics;
+
+[System.Serializable]
+public struct AbilitySlotMain
+{
+    [SerializeField] public GameObject chargeFrame;
+    [SerializeField] public int maxCharges;
+    [SerializeField] public int currCharges;
+
+    [SerializeField] public List<GameObject> chargeList;
+}
 
 public class gameManager : MonoBehaviour
 {
@@ -19,6 +30,15 @@ public class gameManager : MonoBehaviour
     List<GameObject> menuHierarchy = new List<GameObject>();
 
     public Image playerHPBar;
+
+    [SerializeField] GameObject chargeBase;
+
+    public AbilitySlotMain abilitySlot1;
+    public AbilitySlotMain abilitySlot2;
+    public AbilitySlotMain abilitySlot3;
+
+    [SerializeField] float frameHeight;
+    [SerializeField] float frameSpacing;
 
     [Header("Transition Variables")]
     [SerializeField] Image transitionMain;
@@ -56,11 +76,29 @@ public class gameManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+
+        abilitySlot1.currCharges = abilitySlot1.maxCharges;
+        abilitySlot2.currCharges = abilitySlot2.maxCharges;
+        abilitySlot3.currCharges = abilitySlot3.maxCharges;
+
+        AssignAbility(abilitySlot1);
+        AssignAbility(abilitySlot2);
+        AssignAbility(abilitySlot3);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (transitionActive)
             Transition();
+
+        UpdateCharges(abilitySlot1);
+        UpdateCharges(abilitySlot2);
+        UpdateCharges(abilitySlot3);
+
     }
 
     public void Transition()
@@ -125,6 +163,38 @@ public class gameManager : MonoBehaviour
         menuHierarchy.Remove(menuHierarchy[^1]);
         menuActive = menuHierarchy[^1];
         menuActive.SetActive(true);
+    }
+
+    public void AssignAbility(AbilitySlotMain selSlot)
+    {
+
+        for (int i = 0; i < selSlot.maxCharges; i++)
+        {
+
+            GameObject newCharge = Instantiate(chargeBase);
+            newCharge.SetActive(true);
+
+            newCharge.transform.SetParent(selSlot.chargeFrame.transform);
+
+            newCharge.transform.localPosition = new Vector2(0, ((frameHeight / selSlot.maxCharges) * i + frameSpacing) - (frameSpacing / 2));
+            newCharge.transform.localScale = new Vector2(newCharge.transform.localScale.x, frameHeight / selSlot.maxCharges - frameSpacing);
+
+            selSlot.chargeList.Add(newCharge);
+
+        }
+
+    }
+
+    public void UpdateCharges(AbilitySlotMain selSlot)
+    {
+
+        for (int i = 0; i < (selSlot.maxCharges - selSlot.currCharges); i++)
+        {
+
+            selSlot.chargeList[(selSlot.maxCharges - 1) - i].GetComponent<Image>().color = new Color(0.0925596f, 0.1941795f, 0.4528302f);
+
+        }
+
     }
 
 }
