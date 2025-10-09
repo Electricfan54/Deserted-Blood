@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Idamage
+public class PlayerController : MonoBehaviour, Idamage,IPickup
 {
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
@@ -22,6 +23,9 @@ public class PlayerController : MonoBehaviour, Idamage
 
     public bool hasThirdAbility = false;
 
+
+    [SerializeField] List<Ability> abilities = new List<Ability>();
+    int listpos;
 
     int origHP;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -99,5 +103,9 @@ public class PlayerController : MonoBehaviour, Idamage
         HP -= DamageAmount;
     }
 
-
+    public void abilitystats(Ability ability)
+    {
+        abilities.Add(ability);
+        listpos = abilities.Count - 1;
+    }
 }
