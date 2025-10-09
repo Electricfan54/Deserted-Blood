@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage
@@ -18,11 +19,14 @@ public class EnemyAI : MonoBehaviour, Idamage
     protected GameObject player;
     protected Vector3 targetPoint;
 
+    [SerializeField] protected Renderer meshRenderer;
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected LayerMask lineOfSightIgnoreLayer;
     [SerializeField] protected Animator animator;
     [SerializeField] protected EnemyState startState;
     public bool isSpecial = false;
+
+    Color origColor;
 
     //The type for passive milestones
     public enum EnemyType
@@ -47,11 +51,21 @@ public class EnemyAI : MonoBehaviour, Idamage
     protected int curHealth;
     [SerializeField] protected int enemyAggroRange;
     [SerializeField] protected float attackRate = 0.5f;
-    [Tooltip("For melee enemies")]
+    [SerializeField] protected float hitStunDuration = 0.5f;
+    protected float hitStunTimer = 0;
+    protected bool hitStunned = false;
+
+    [Header("Melee Variables")]
     [SerializeField] protected List<GameObject> hitBoxes = new List<GameObject>();
-    [Tooltip("For ranged enemies")]
+    [SerializeField] protected int meleeDamage;
+
+    [Header("Ranged Variables")]
     [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
     [SerializeField] protected Transform projectileSpawn;
+    [SerializeField] protected int projDamage;
+    [SerializeField] protected float projSpeed;
+    [SerializeField] protected float projDestroyTime;
+
 
     protected bool inAttackAnim = false;
 
@@ -75,6 +89,7 @@ public class EnemyAI : MonoBehaviour, Idamage
     private void Awake()
     {
         rig = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -89,16 +104,40 @@ public class EnemyAI : MonoBehaviour, Idamage
             rig.useGravity = false;
         }
         curSpeed = 0;
+        origColor = meshRenderer.material.color;
     }
 
     void Update()
     {
+        //Debug Code
+#if UNITY_EDITOR
+        if (Input.GetKeyDown("z"))
+        {
+            TakeDamage(1);
+        }
+#endif
+
+
         if (isFlying)
         {
             rig.linearVelocity = Vector3.zero;
         }
         else
             rig.linearVelocity = new Vector3(0, rig.linearVelocity.y, 0);
+
+        if (hitStunned)
+        {
+            if (hitStunTimer >= hitStunDuration)
+            {
+                hitStunned = false;
+                hitStunTimer = 0;
+            }
+            else
+            {
+                hitStunTimer += Time.deltaTime;
+                return;
+            }
+        }
 
         GroundCheck();
         UpdateAnimations();
@@ -137,6 +176,11 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     private void FixedUpdate()
     { 
+        if (hitStunned)
+        {
+            return;
+        }
+
 
         // Physic updates are fixed
         // fixed update is called before the physics sytem updates
@@ -331,12 +375,21 @@ public class EnemyAI : MonoBehaviour, Idamage
     {
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
+        hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
     }
 
     public void RangedAttack0()
     {
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
-        Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
+        GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
+        Projectile projScript = proj.GetComponent<Projectile>();
+        projScript.dmg.damageammount = projDamage;
+    }
+
+    protected void HitReact()
+    {
+        hitStunned = true;
+        animator.SetTrigger("hit");
     }
 
     public void AttackAnimEnd()
@@ -438,15 +491,24 @@ public class EnemyAI : MonoBehaviour, Idamage
     public void TakeDamage(int damageAmount)
     {
         curHealth -= damageAmount;
+        StartCoroutine(FlashRed());
         if (curHealth <= 0)
         {
             curHealth = 0;
             curState = EnemyState.dead;
         }
+        HitReact();
     }
 
     protected void Stopped()
     {
 
+    }
+
+    protected IEnumerator FlashRed()
+    {
+        meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        meshRenderer.material.color = origColor;
     }
 }

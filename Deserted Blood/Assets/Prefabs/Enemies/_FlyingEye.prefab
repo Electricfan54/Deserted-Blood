@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb942de432112804f9536e3ebe587e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  meshRenderer: {fileID: 5941265181797212856}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -67,9 +68,15 @@ MonoBehaviour:
   maxHealth: 10
   enemyAggroRange: 5
   attackRate: 0.5
+  hitStunDuration: 0.5
   hitBoxes: []
-  projectiles: []
-  projectileSpawn: {fileID: 0}
+  meleeDamage: 0
+  projectiles:
+  - {fileID: 387570333031549360, guid: 75aeb4b78a065a14692f430bc4fabad9, type: 3}
+  projectileSpawn: {fileID: 6203332092573605834}
+  projDamage: 0
+  projSpeed: 0
+  projDestroyTime: 0
   roamIgnoreLayer:
     serializedVersion: 2
     m_Bits: 182
@@ -207,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107771985693238, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.129
+      value: -0.879
       objectReference: {fileID: 0}
     - target: {fileID: 4107771985693238, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -251,6 +258,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
+--- !u!137 &5941265181797212856 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137779237333290786, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
+  m_PrefabInstance: {fileID: 6024374055292349850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6022570233150121900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4107771985693238, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
