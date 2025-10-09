@@ -61,18 +61,20 @@ public class PlayerPassive : MonoBehaviour
         if(GolemMilestone.MilestoneCount >= GolemMilestone.MilestoneAmountNeeded[GolemMilestone.MilestoneIndex])
         {
             GolemMilestone.MilestoneIndex += 1;
-            // add buffs
+            gameManager.instance.player.GetComponent<PlayerController>().AddHPMilestone(20);
 
         }
 
         if(CerberusMilestone.MilestoneCount >= CerberusMilestone.MilestoneAmountNeeded[CerberusMilestone.MilestoneIndex])
         {
             CerberusMilestone.MilestoneIndex += 1;
+            gameManager.instance.player.GetComponent<PlayerController>().AddBloodMeterMilestone(20);
         }
 
         if(FlyingMilestone.MilestoneCount >= FlyingMilestone.MilestoneAmountNeeded[FlyingMilestone.MilestoneIndex])
         {
             FlyingMilestone.MilestoneIndex += 1;
+            gameManager.instance.player.GetComponent<PlayerController>().AddPlayerDamageMilestone(10);
         }
 
         if(SpecialEnemyCount >= SpecialEnemyRequirement)

@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     [SerializeField] Animator PlayerAnimator;
 
     [SerializeField] int HP;
+    [SerializeField] int MaxHP;
+    [SerializeField] int BloodMeter;
+    [SerializeField] int MaxBloodMeter;
+
+    [SerializeField] int BasePlayerDamage;
 
     [SerializeField] int MaxJumps;
     [SerializeField] int JumpStrength;
@@ -31,8 +36,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
    public int listpos;
    public playerablities PlayerAbilites;
 
-
+    int origBloodMeter = 50;
     int origHP;
+
 
     private void Awake()
     {
@@ -42,6 +48,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     void Start()
     {
         origHP = HP;
+        MaxHP = origHP;
+        origBloodMeter = MaxBloodMeter;
     }
 
     // Update is called once per frame
@@ -129,5 +137,27 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         yield return new WaitForSeconds(0.4f);
         isInvinc = false;
     }
+
+    public void AddBloodMeter(int amount)
+    {
+        BloodMeter += amount;
+    }
+
+    public void AddBloodMeterMilestone(int AmounttoAdd)
+    {
+        MaxBloodMeter += AmounttoAdd;
+    }
+
+    public void AddPlayerDamageMilestone(int Amount)
+    {
+        BasePlayerDamage += Amount;
+    }
+
+    public void AddHPMilestone(int amount)
+    {
+        MaxHP += amount;
+    }
+
+
 
 }
