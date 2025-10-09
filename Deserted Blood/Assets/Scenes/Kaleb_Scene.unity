@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56114c26a9280b4b8ed6c80364d68db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gameManager
+  uiMain: {fileID: 0}
   player: {fileID: 0}
   playerScript: {fileID: 0}
   menuActive: {fileID: 0}
@@ -524,66 +525,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPassive
   SpecialEnemyCount: 0
-  GolemMilestoneCount: 0
-  CerberusMilestoneCount: 0
-  FlyingMilestoneCount: 0
   SpecialEnemyRequirement: 0
-  GolemStruct:
-    MilestoneAmounts: 
-    MilestoneIndex: 0
---- !u!1 &1380709851
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1380709853}
-  - component: {fileID: 1380709852}
-  m_Layer: 0
-  m_Name: _Attack0_Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!65 &1380709852
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380709851}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.81678176, y: 2.1671257, z: 1}
-  m_Center: {x: -1.0176986, y: 0.24103665, z: 0}
---- !u!4 &1380709853
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380709851}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 0.93, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  GolemMilestone: {fileID: 0}
+  CerberusMilestone: {fileID: 0}
+  FlyingMilestone: {fileID: 0}
 --- !u!1 &1770850936
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,10 +804,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Skeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 7788615725782641757, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
-      propertyPath: 'hitBoxes.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1380709851}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -879,4 +820,3 @@ SceneRoots:
   - {fileID: 22542242}
   - {fileID: 1963724311}
   - {fileID: 6703409318394035071}
-  - {fileID: 1380709853}
