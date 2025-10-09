@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 1268992342229276989}
   - component: {fileID: 7425832337986240939}
   m_Layer: 0
-  m_Name: AbilityIcon
+  m_Name: AbilityIcon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -901,7 +901,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3638864526119518826
 MonoBehaviour:
@@ -1707,7 +1707,7 @@ GameObject:
   - component: {fileID: 5414211398492332941}
   - component: {fileID: 8660077086413896972}
   m_Layer: 0
-  m_Name: AbilityIcon
+  m_Name: AbilityIcon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2431,7 +2431,7 @@ GameObject:
   - component: {fileID: 1875674273991994026}
   - component: {fileID: 8219600036896077027}
   m_Layer: 0
-  m_Name: AbilityIcon
+  m_Name: AbilityIcon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2890,7 +2890,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &7755095894309359045
 MonoBehaviour:
@@ -3127,7 +3127,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2469665300710076183
 MonoBehaviour:
@@ -3230,7 +3230,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &6402474008753934328
 MonoBehaviour:
@@ -3750,16 +3750,19 @@ MonoBehaviour:
   chargeBase: {fileID: 7823392671730014307}
   abilitySlot1:
     chargeFrame: {fileID: 5577354072312013328}
+    abilityIcon: {fileID: 8660077086413896972}
     maxCharges: 10
     currCharges: 0
     chargeList: []
   abilitySlot2:
     chargeFrame: {fileID: 938036626410609831}
+    abilityIcon: {fileID: 8219600036896077027}
     maxCharges: 7
     currCharges: 0
     chargeList: []
   abilitySlot3:
     chargeFrame: {fileID: 1749097777867793581}
+    abilityIcon: {fileID: 7425832337986240939}
     maxCharges: 3
     currCharges: 0
     chargeList: []
