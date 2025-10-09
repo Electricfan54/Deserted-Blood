@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
+    enum DamageType
+    {
+        deletable, nondeletable
+    }
     public int damageammount;
+    [SerializeField] DamageType damagetype;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +26,11 @@ public class Damage : MonoBehaviour
         {
             dmg.TakeDamage(damageammount);
         }
-        
+        if(damagetype==DamageType.deletable)
+        {
+            Destroy(gameObject);
+        }
+
+
     }
 }
