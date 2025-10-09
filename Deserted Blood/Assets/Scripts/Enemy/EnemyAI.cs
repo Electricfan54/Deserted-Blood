@@ -384,6 +384,8 @@ public class EnemyAI : MonoBehaviour, Idamage
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
         Projectile projScript = proj.GetComponent<Projectile>();
         projScript.dmg.damageammount = projDamage;
+        projScript.speed = projSpeed;
+        projScript.destroytime = projDestroyTime;
     }
 
     protected void HitReact()

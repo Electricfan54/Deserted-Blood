@@ -74,9 +74,9 @@ MonoBehaviour:
   projectiles:
   - {fileID: 387570333031549360, guid: 75aeb4b78a065a14692f430bc4fabad9, type: 3}
   projectileSpawn: {fileID: 6203332092573605834}
-  projDamage: 0
-  projSpeed: 0
-  projDestroyTime: 0
+  projDamage: 5
+  projSpeed: 5
+  projDestroyTime: 2
   roamIgnoreLayer:
     serializedVersion: 2
     m_Bits: 182

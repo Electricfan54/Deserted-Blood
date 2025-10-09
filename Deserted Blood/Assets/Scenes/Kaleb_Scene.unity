@@ -355,10 +355,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Skeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -864,10 +860,6 @@ PrefabInstance:
     - target: {fileID: 5777987036638552718, guid: 2ec93752fcf07f54e9f68d39d4a22c09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6956008646541002560, guid: 2ec93752fcf07f54e9f68d39d4a22c09, type: 3}
-      propertyPath: projDamage
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
