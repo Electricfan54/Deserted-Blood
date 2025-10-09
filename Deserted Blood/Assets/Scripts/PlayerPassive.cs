@@ -81,4 +81,20 @@ public class PlayerPassive : MonoBehaviour
         }
     }
 
+    public void ResetMilestone(bool Answer)
+    {
+        if(Answer == true)
+        {
+            FlyingMilestone.MilestoneCount = 0;
+            GolemMilestone.MilestoneCount = 0;
+            CerberusMilestone.MilestoneCount = 0;
+
+            FlyingMilestone.MilestoneIndex = 1;
+            GolemMilestone.MilestoneIndex = 1;
+            CerberusMilestone.MilestoneIndex = 1;
+
+            gameManager.instance.player.GetComponent<PlayerController>().hasThirdAbility = false;
+        }
+    }
+
 }
