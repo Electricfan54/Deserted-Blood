@@ -18,6 +18,8 @@ public class gameManager : MonoBehaviour
 
     List<GameObject> menuHierarchy = new List<GameObject>();
 
+    public Image playerHPBar;
+
     [Header("Transition Variables")]
     [SerializeField] Image transitionMain;
     float alphaLerp;
@@ -35,7 +37,12 @@ public class gameManager : MonoBehaviour
         instance = this;
 
         player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerController>();
+        }
+
         if (menuActive != null)
         {
             menuHierarchy.Add(menuActive);
