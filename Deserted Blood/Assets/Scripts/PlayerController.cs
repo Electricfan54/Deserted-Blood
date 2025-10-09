@@ -24,10 +24,17 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     public bool hasThirdAbility = false;
 
 
-    [SerializeField] List<Ability> abilities = new List<Ability>();
-    int listpos;
+   public List<Ability> abilities = new List<Ability>();
+   public int listpos;
+    public playerablities PlayerAbilites;
+
 
     int origHP;
+
+    private void Awake()
+    {
+        PlayerAbilites = GetComponent<playerablities>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

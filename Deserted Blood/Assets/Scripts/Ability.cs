@@ -6,12 +6,12 @@ using UnityEngine.UIElements;
 [CreateAssetMenu]
 public  class Ability : ScriptableObject
 {
-    enum AbilityType
+  public  enum AbilityType
     {
         fire,lightning,ice,shockwave,tp,sheild,sonicboom
     }
 
-   [SerializeField] AbilityType type;
+  public AbilityType type;
     public int maxCharge;
     public int currentcharge;
     public GameObject abilityPrefab;
