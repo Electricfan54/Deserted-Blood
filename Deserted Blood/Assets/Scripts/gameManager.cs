@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [System.Serializable]
 public struct AbilitySlotMain
@@ -31,8 +32,12 @@ public class gameManager : MonoBehaviour
 
     List<GameObject> menuHierarchy = new List<GameObject>();
 
+    [SerializeField] Slider sliderSFX, sliderMus;
+    [SerializeField] TMP_Text volTextSFX, volTextMus;
+
     public Image playerHPBar;
 
+    [Header("Ability UI")]
     [SerializeField] GameObject chargeBase;
 
     public AbilitySlotMain abilitySlot1;
@@ -94,6 +99,8 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
+
+        UpdateVolume();
 
         abilitySlot1.currCharges = abilitySlot1.maxCharges;
         abilitySlot2.currCharges = abilitySlot2.maxCharges;
@@ -179,6 +186,14 @@ public class gameManager : MonoBehaviour
         menuHierarchy.Remove(menuHierarchy[^1]);
         menuActive = menuHierarchy[^1];
         menuActive.SetActive(true);
+    }
+
+    public void UpdateVolume()
+    {
+
+        volTextSFX.text = (sliderSFX.value * 100).ToString("F0") + "%";
+        volTextMus.text = (sliderMus.value * 100).ToString("F0") + "%";
+
     }
 
     public void AssignAbility(AbilitySlotMain selSlot)

@@ -41,4 +41,9 @@ public class buttonManager : MonoBehaviour
 
     }
 
+    public void UpdateVolumeSlider()
+    {
+        gameManager.instance.UpdateVolume();
+    }
+
 }
