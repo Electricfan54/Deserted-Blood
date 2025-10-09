@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour, Idamage
         dead,
     };
 
-    Rigidbody rig;
+    protected Rigidbody rig;
     protected EnemyState curState;
     protected GameObject player;
     protected Vector3 targetPoint;
@@ -105,6 +105,8 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
         curSpeed = 0;
         origColor = meshRenderer.material.color;
+
+        attackTimer = attackRate;//When the enemy goes to attack for the first time they dont wait
     }
 
     protected virtual void Update()
