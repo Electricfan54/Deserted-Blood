@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
 
     public bool isGrounded;
     bool isWallSliding;
+    bool WallInRange;
 
     bool isInvinc = false;
 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     int origBloodMeter = 50;
     int origHP;
 
+    int playerXPush;
 
     private void Awake()
     {
@@ -56,11 +58,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     void Update()
     {
         Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
-
+        Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
         if (CharController.isGrounded)
         {
             isGrounded = true;
             playerVel.y = -2;
+            playerVel.x = 0;
             JumpCount = 0;
         }
         else
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         Movement();
     }
 
+    // Movement stuff
     void Movement()
     {
         float Horizantol = Input.GetAxis("Horizontal");
@@ -114,8 +118,37 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         {
             playerVel.y = 0;
         }
+
+        WallJump();
     }
 
+    void WallJump()
+    {
+        RaycastHit WallCheck;
+        if(Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out WallCheck, .7f))
+        {
+            WallInRange = true;
+        }
+        else
+        {
+            WallInRange = false;
+        }
+
+        if(WallInRange && Input.GetButtonDown("Jump"))
+        {
+            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength, 0);
+           
+        }
+
+        if(playerVel.x != 0)
+        {
+            
+        }
+        
+    }
+
+
+    // Ability or enemy related stuff
     public void TakeDamage(int DamageAmount)
     {
         if(isInvinc == false)
