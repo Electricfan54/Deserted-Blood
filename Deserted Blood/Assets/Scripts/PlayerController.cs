@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,12 +22,14 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     public bool isGrounded;
     bool isWallSliding;
 
+    bool isInvinc = false;
+
     public bool hasThirdAbility = false;
 
 
    public List<Ability> abilities = new List<Ability>();
    public int listpos;
-    public playerablities PlayerAbilites;
+   public playerablities PlayerAbilites;
 
 
     int origHP;
@@ -107,7 +110,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
 
     public void TakeDamage(int DamageAmount)
     {
-        HP -= DamageAmount;
+        if(isInvinc == false)
+        {
+            HP -= DamageAmount;
+            StartCoroutine(IFrames());
+        }
     }
 
     public void abilitystats(Ability ability)
@@ -115,4 +122,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         abilities.Add(ability);
         listpos = abilities.Count - 1;
     }
+
+    IEnumerator IFrames()
+    {
+        isInvinc = true;
+        yield return new WaitForSeconds(0.4f);
+        isInvinc = false;
+    }
+
 }
