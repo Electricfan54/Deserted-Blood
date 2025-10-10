@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct AbilitySlotMain
 {
     [SerializeField] public GameObject chargeFrame;
+    [SerializeField] public Image abilityIcon;
     [SerializeField] public int maxCharges;
     [SerializeField] public int currCharges;
 
@@ -56,12 +58,7 @@ public class gameManager : MonoBehaviour
 
         instance = this;
 
-        player = GameObject.FindWithTag("Player");
-
-        if (player != null)
-        {
-            playerScript = player.GetComponent<PlayerController>();
-        }
+        AttemptPlayerAssign();
 
         if (menuActive != null)
         {
@@ -74,6 +71,25 @@ public class gameManager : MonoBehaviour
         transStart = 0;
         transEnd = 1;
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+
+        AttemptPlayerAssign();
+        
+    }
+
+    private void AttemptPlayerAssign()
+    {
+        player = GameObject.FindWithTag("Player");
+
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerController>();
+        }
     }
 
     private void Start()
@@ -182,6 +198,8 @@ public class gameManager : MonoBehaviour
             selSlot.chargeList.Add(newCharge);
 
         }
+    
+
 
     }
 

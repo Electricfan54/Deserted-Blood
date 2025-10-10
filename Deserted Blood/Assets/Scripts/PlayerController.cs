@@ -1,16 +1,24 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Idamage,IPickup
+public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 {
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
+    [SerializeField] Renderer meshRenderer;
 
     [SerializeField] int HP;
+    [SerializeField] int MaxHP;
+    [SerializeField] int BloodMeter;
+    [SerializeField] int MaxBloodMeter;
+
+    [SerializeField] int BasePlayerDamage;
 
     [SerializeField] int MaxJumps;
     [SerializeField] int JumpStrength;
     [SerializeField] int gravityStrength;
+    [SerializeField] int SlideGravity;
 
     [SerializeField] int Speed;
 
@@ -20,16 +28,34 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
 
     public bool isGrounded;
     bool isWallSliding;
+    bool WallInRange;
+
+    bool isInvinc = false;
 
     public bool hasThirdAbility = false;
 
 
    public List<Ability> abilities = new List<Ability>();
    public int listpos;
-    public playerablities PlayerAbilites;
+   public playerablities PlayerAbilites;
 
-
+    int origBloodMeter = 50;
     int origHP;
+
+    int playerXPush = 3;
+
+    //Status effect variables
+    protected float burnDuration;
+    protected int burnTickDamage;
+    protected float burnTimer;
+    protected float burnTickRate;
+
+    protected float freezeDuration;
+    protected float origAnimSpeed;
+    protected Color beforeFreezeColor;
+
+    protected bool canUpdate = true; //for stopping player input update
+    protected bool canMove = true; //for stopping player movement
 
     private void Awake()
     {
@@ -39,37 +65,55 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     void Start()
     {
         origHP = HP;
+        MaxHP = origHP;
+        origBloodMeter = MaxBloodMeter;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
+        if (burnDuration > 0)
+            BurnEffect();
+        if (freezeDuration > 0)
+            FreezeEffect();
 
+        Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
+        Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
         if (CharController.isGrounded)
         {
             isGrounded = true;
             playerVel.y = -2;
+            playerVel.x = 0;
             JumpCount = 0;
         }
         else
         {
             isGrounded = false;
-            playerVel.y -= gravityStrength * Time.deltaTime;
+            if (WallInRange && playerVel.y <= 0)
+            {
+                playerVel.y -= SlideGravity * Time.deltaTime;
+            }
+            else
+            {
+                playerVel.y -= gravityStrength * Time.deltaTime;
+            }
         }
-        RaycastHit CeilingCheck;
 
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, 2.5f))
-        {
-            playerVel.y = 0;
-        }
+        //RaycastHit CeilingCheck;
+        //if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
+        //{
+        //    playerVel.y = -2;
+        //}
 
         Movement();
     }
 
+    // Movement stuff
     void Movement()
     {
-        float Horizantol = Input.GetAxis("Horizontal");
+        float Horizantol = 0;
+        if (canMove)
+            Horizantol = Input.GetAxis("Horizontal");
 
         MoveDirection = new Vector3(Horizantol, 0, 0);
 
@@ -84,7 +128,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
 
         CharController.Move(MoveDirection * Speed * Time.deltaTime);
 
-        Jump();
+        if(canMove)
+            Jump();
 
         CharController.Move(playerVel * Time.deltaTime);
     }
@@ -99,20 +144,147 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
             JumpCount++;
         }
 
-        if(InputUp && playerVel.y > 0)
+        if(InputUp && playerVel.y > 0 && WallInRange == false)
         {
             playerVel.y = 0;
         }
+
+        
+
+        WallJump();
     }
 
+    void WallJump()
+    {
+        RaycastHit WallCheck;
+        if(Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out WallCheck, .7f))
+        {
+            WallInRange = true;
+        }
+        else
+        {
+            WallInRange = false;
+        }
+
+        if(WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
+        {
+            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
+            transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
+        }
+
+        if(playerVel.x != 0)
+        {
+            if(playerVel.x > 0)
+            {
+                playerVel.x -= playerXPush * Time.deltaTime;
+            }
+            else
+            {
+                playerVel.x += playerXPush * Time.deltaTime;
+            }
+        }
+        
+    }
+
+
+    // Ability or enemy related stuff
     public void TakeDamage(int DamageAmount)
     {
-        HP -= DamageAmount;
+        if(isInvinc == false)
+        {
+            HP -= DamageAmount;
+            StartCoroutine(IFrames());
+        }
     }
 
     public void abilitystats(Ability ability)
     {
         abilities.Add(ability);
         listpos = abilities.Count - 1;
+    }
+
+    IEnumerator IFrames()
+    {
+        isInvinc = true;
+        yield return new WaitForSeconds(0.4f);
+        isInvinc = false;
+    }
+
+    public void AddBloodMeter(int amount)
+    {
+        BloodMeter += amount;
+    }
+
+    public void AddBloodMeterMilestone(int AmounttoAdd)
+    {
+        MaxBloodMeter += AmounttoAdd;
+    }
+
+    public void AddPlayerDamageMilestone(int Amount)
+    {
+        BasePlayerDamage += Amount;
+    }
+
+    public void AddHPMilestone(int amount)
+    {
+        MaxHP += amount;
+    }
+
+    public void ApplyBurnEffect(float duration, int tickDamage, float tickRate)
+    {
+        burnDuration = duration;
+        burnTickDamage = tickDamage;
+        burnTickRate = tickRate;
+        burnTimer = 0;
+    }
+
+    public void ApplyFreezeEffect(float duration)
+    {
+        freezeDuration = duration;
+        canMove = false;
+        canUpdate = false;
+
+        if (PlayerAnimator.speed != 0)
+        {
+            origAnimSpeed = PlayerAnimator.speed;
+            PlayerAnimator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            // Uncomment if player damage flash is implemented
+            //if (meshRenderer.material.color == Color.red)
+            //{
+            //    beforeFreezeColor = origColor;
+            //    origColor = Color.blue;
+            //}
+            //else
+                beforeFreezeColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.blue;
+        }
+    }
+
+    void BurnEffect()
+    {
+        burnDuration -= Time.deltaTime;
+        burnTimer += Time.deltaTime;
+        if (burnTimer >= burnTickRate)
+        {
+            burnTimer = 0;
+            TakeDamage(burnTickDamage);
+        }
+    }
+
+    void FreezeEffect()
+    {
+        freezeDuration -= Time.deltaTime;
+        if (freezeDuration <= 0)
+        {
+            freezeDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            PlayerAnimator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforeFreezeColor;
+        }
     }
 }

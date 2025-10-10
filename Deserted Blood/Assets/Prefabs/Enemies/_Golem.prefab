@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3666340246352024813}
   - component: {fileID: 4123440977820644714}
   - component: {fileID: 6036392389048627554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _Attack0_Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,9 +171,9 @@ GameObject:
   - component: {fileID: 5774685707626805314}
   - component: {fileID: 2166695438665948519}
   - component: {fileID: 452351330565565473}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _Golem
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

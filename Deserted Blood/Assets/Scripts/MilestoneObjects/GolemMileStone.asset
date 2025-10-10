@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651fefe2aefc2974395927addd24e92d, type: 3}
   m_Name: GolemMileStone
   m_EditorClassIdentifier: Assembly-CSharp::MileStoneClass
-  MilestoneAmountNeeded: 0a0000000a000000
-  MilestoneIndex: 1
-  MilestoneCount: 3
+  MilestoneAmountNeeded: 010000000300000005000000
+  MilestoneIndex: 0
+  MilestoneCount: 0
