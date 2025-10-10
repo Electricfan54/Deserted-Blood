@@ -1,16 +1,20 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-public class RedHornAI : EnemyAI
+public class GateKeeperAI : EnemyAI
 {
-    [Header("RedHorn Variables")]
-    [SerializeField] GameObject[] projSpawnList;
+
+    [Header("GateKeeper Variables")]
+    [SerializeField] GameObject[] projSpawnPointList;
     [SerializeField] int melee0Damage;
     [SerializeField] int melee1Damage;
-    [SerializeField] int melee2Damage;
+    [SerializeField] int slamDamage;
+    [SerializeField] float jumpAttackMoveSpeed;
     [SerializeField] float roarCooldown;
+    [SerializeField] float jumpCooldown;
 
     bool canRoar;
+    bool canJump;
 
     int attackCalls;
 
@@ -19,12 +23,83 @@ public class RedHornAI : EnemyAI
         base.Start();
         attackCalls = 0;
         canRoar = true;
+        canJump = true;
     }
 
 
     protected override void Update()
     {
-        base.Update();
+        //Debug Code
+#if UNITY_EDITOR
+        if (Input.GetKeyDown("z"))
+        {
+            TakeDamage(1);
+        }
+#endif
+
+
+
+        if (fireDuration > 0)
+            BurnEffect();
+
+        if (!canUpdate && freezeDuration > 0)
+        {
+            hitStunned = false;
+            FreezeEffect();
+            return;
+        }
+        else if (!canUpdate)
+        {
+            return;
+        }
+
+        UpdateAnimations();
+
+        if (isFlying)
+        {
+            rig.linearVelocity = Vector3.zero;
+        }
+        else
+            rig.linearVelocity = new Vector3(0, rig.linearVelocity.y, 0);
+
+        if (hitStunned)
+        {
+            if (hitStunTimer >= hitStunDuration)
+            {
+                hitStunned = false;
+                hitStunTimer = 0;
+            }
+            else
+            {
+                hitStunTimer += Time.deltaTime;
+                return;
+            }
+        }
+
+        GroundCheck();
+
+        switch (curState)
+        {
+            case EnemyState.stopped:
+                //for idle or spider
+                Stopped();
+                StoppedTransitionCheck();
+                break;
+            case EnemyState.chase:
+                FaceTarget();
+                ChaseTransitionCheck();
+                break;
+            case EnemyState.attacking:
+                FaceTarget();
+                AttackTransitionCheck();
+                AttackState();
+                break;
+            case EnemyState.dead:
+                AddToMilestone();
+                DropAbility();
+                Destroy(gameObject);
+                break;
+        }
     }
     protected override void FixedUpdate()
     {
@@ -76,11 +151,11 @@ public class RedHornAI : EnemyAI
                 break;
             case 1:
                 attackCalls++;
+                attackCalls = 0;
                 animator.SetTrigger("Attack1");
                 break;
             case 2:
                 hitReact = false;
-                attackCalls = 0;
                 animator.SetTrigger("Attack2");
                 break;
 
@@ -119,8 +194,16 @@ public class RedHornAI : EnemyAI
             if (!inAttackAnim && canRoar)
             {
                 canRoar = false;
+                curSpeed = 0;
                 StartCoroutine(RoarCooldown());
                 RangedAttack();
+                curState = EnemyState.attacking;
+            }
+            else if (!inAttackAnim && canJump)
+            {
+                canJump = false;
+                StartCoroutine(JumpCooldown());
+                JumpAttack();
                 curState = EnemyState.attacking;
             }
         }
@@ -128,6 +211,8 @@ public class RedHornAI : EnemyAI
 
     public override void Attack0()
     {
+        if (hitStunned)
+            return;
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = melee0Damage;
@@ -135,6 +220,8 @@ public class RedHornAI : EnemyAI
 
     public void Attack1()
     {
+        if (hitStunned)
+            return;
         //Toggle hitbox
         hitBoxes[1].SetActive(!hitBoxes[1].activeSelf);
         hitBoxes[1].GetComponent<Damage>().damageammount = melee1Damage;
@@ -142,33 +229,35 @@ public class RedHornAI : EnemyAI
 
     public void Attack2()
     {
+        if (hitStunned)
+            return;
         //Toggle hitbox
         hitBoxes[2].SetActive(!hitBoxes[2].activeSelf);
-        hitBoxes[2].GetComponent<Damage>().damageammount = melee2Damage;
+        hitBoxes[2].GetComponent<Damage>().damageammount = slamDamage;
     }
 
     public override void RangedAttack0()
     {
-        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projSpawnList[0].transform.position;
-        EnemyAI add = Instantiate(projectiles[0], projSpawnList[0].transform.position, Quaternion.LookRotation(playerDir)).GetComponent<EnemyAI>();
-        add.startState = EnemyState.chase;
-        add.enemyAggroRange = 50;
+        Projectile proj = Instantiate(projectiles[0], projSpawnPointList[0].transform.position, projSpawnPointList[0].transform.rotation).GetComponent<Projectile>();
+        proj.speed = projSpeed;
+        proj.destroytime = projDestroyTime;
+        proj.dmg.damageammount = projDamage;
     }
 
     public void RangedAttack1()
     {
-        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projSpawnList[1].transform.position;
-        EnemyAI add = Instantiate(projectiles[1], projSpawnList[1].transform.position, Quaternion.LookRotation(playerDir)).GetComponent<EnemyAI>();
-        add.startState = EnemyState.chase;
-        add.enemyAggroRange = 50;
+        Projectile proj = Instantiate(projectiles[1], projSpawnPointList[1].transform.position, projSpawnPointList[1].transform.rotation).GetComponent<Projectile>();
+        proj.speed = projSpeed;
+        proj.destroytime = projDestroyTime;
+        proj.dmg.damageammount = projDamage;
     }
 
     public void RangedAttack2()
     {
-        Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projSpawnList[2].transform.position;
-        EnemyAI add = Instantiate(projectiles[2], projSpawnList[2].transform.position, Quaternion.LookRotation(playerDir)).GetComponent<EnemyAI>();
-        add.startState = EnemyState.chase;
-        add.enemyAggroRange = 50;
+        Projectile proj = Instantiate(projectiles[2], projSpawnPointList[2].transform.position, projSpawnPointList[2].transform.rotation).GetComponent<Projectile>();
+        proj.speed = projSpeed;
+        proj.destroytime = projDestroyTime;
+        proj.dmg.damageammount = projDamage;
     }
 
 
@@ -185,8 +274,33 @@ public class RedHornAI : EnemyAI
         canRoar = true;
     }
 
+    IEnumerator JumpCooldown()
+    {
+        yield return new WaitForSeconds(jumpCooldown);
+        canJump = true;
+    }
+
     public override void TakeDamage(int damageAmount)
     {
         base.TakeDamage(damageAmount);
+    }
+
+    void JumpAttack()
+    {
+        hitReact = false;
+        //curSpeed = jumpAttackMoveSpeed;
+        animator.SetTrigger("Attack2");
+    }
+
+    public void StopMovement()
+    {
+        curSpeed = 0;
+        rig.linearVelocity = Vector3.zero;
+        canMove = false;
+    }
+
+    public void ResumeMovement()
+    {
+        canMove = true;
     }
 }
