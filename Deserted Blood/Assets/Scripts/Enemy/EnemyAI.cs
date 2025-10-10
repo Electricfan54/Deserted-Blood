@@ -152,11 +152,20 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             hitStunned = false;
             FreezeEffect();
             return;
+        }  
+        else if (!canUpdate && StunDuration > 0)
+        {
+            hitStunned = false;
+            StunEffect();
+            return;
         }
         else if (!canUpdate)
         {
             return;
         }
+
+      
+       
 
         UpdateAnimations();
 
@@ -592,7 +601,30 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             meshRenderer.material.color = Color.blue;
         }
     }
+public void ApplyStunEffect(float duration)
+    {
+        StunDuration = duration;
+        canMove = false;
+        canUpdate = false;
 
+        if (animator.speed != 0)
+        {
+            origAnimSpeed = animator.speed;
+            animator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            if (meshRenderer.material.color == Color.red)
+            {
+                beforestunColor = origColor;
+                origColor = Color.blue;
+            }
+            else
+                beforestunColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.yellow;
+        }
+    }
     protected virtual void BurnEffect()
     {
         fireDuration -= Time.deltaTime;
@@ -618,7 +650,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         }
     }
 
-    public void ApplyStunEffect(float duration)
+    
+
+    protected virtual void StunEffect()
     {
         StunDuration -= Time.deltaTime;
         if (StunDuration <= 0)

@@ -79,7 +79,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             BurnEffect();
         if (freezeDuration > 0)
             FreezeEffect();
-
+        if(StunDuration > 0)
+            StunEffect();
         Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
         Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
         if (CharController.isGrounded)
@@ -291,7 +292,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         }
     }
 
-    public void ApplyStunEffect(float duration)
+    void StunEffect()
     {
         StunDuration -= Time.deltaTime;
         if (StunDuration <= 0)
@@ -301,6 +302,31 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             canUpdate = true;
             PlayerAnimator.speed = origAnimSpeed;
             meshRenderer.material.color = beforeStunColor;
+        }
+    }
+    public void ApplyStunEffect(float duration)
+    {
+        StunDuration = duration;
+        canMove = false;
+        canUpdate = false;
+
+        if (PlayerAnimator.speed != 0)
+        {
+            origAnimSpeed = PlayerAnimator.speed;
+            PlayerAnimator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            // Uncomment if player damage flash is implemented
+            //if (meshRenderer.material.color == Color.red)
+            //{
+            //    beforeFreezeColor = origColor;
+            //    origColor = Color.blue;
+            //}
+            //else
+            beforeStunColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.yellow;
         }
     }
 }
