@@ -47,6 +47,11 @@ public class playerablities : MonoBehaviour
             Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
         }
+        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.shockwave && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+           StartCoroutine(Slamtime());
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+        }
     }
 
     void selectability()
@@ -89,5 +94,13 @@ public class playerablities : MonoBehaviour
         }
 
         isusing = false;
+    }
+
+    IEnumerator Slamtime()
+    {
+        gameManager.instance.playerScript.transform.position = gameManager.instance.playerScript.transform.position + Vector3.up * 5;
+        yield return new WaitForSeconds(.3f);
+        gameManager.instance.playerScript.transform.position = gameManager.instance.playerScript.transform.position + Vector3.up * -2; 
+        Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
     }
 }
