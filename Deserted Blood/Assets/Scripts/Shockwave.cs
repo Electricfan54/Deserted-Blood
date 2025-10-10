@@ -24,7 +24,8 @@ public class Shockwave : MonoBehaviour
         {
             dmg.TakeDamage(shockwavedamage);
         }
-       
+        other.GetComponent<Rigidbody>().AddExplosionForce(500f, transform.position, 2f, 0f, ForceMode.Impulse);
+
     }
     IEnumerator destroyshockwave()
     {

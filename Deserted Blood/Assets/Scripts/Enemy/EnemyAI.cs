@@ -614,4 +614,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             meshRenderer.material.color = beforeFreezeColor;
         }
     }
-}
+
+
+
+ 
+  
+    }
