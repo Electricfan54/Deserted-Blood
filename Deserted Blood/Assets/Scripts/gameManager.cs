@@ -31,6 +31,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
 
+    public bool isPaused;
+    float timeScaleOrig;
+
     List<GameObject> menuHierarchy = new List<GameObject>();
 
     [SerializeField] bool mainMenuActive;
@@ -75,6 +78,7 @@ public class gameManager : MonoBehaviour
     {
 
         instance = this;
+        timeScaleOrig = Time.timeScale;
 
         AttemptPlayerAssign();
 
@@ -82,6 +86,10 @@ public class gameManager : MonoBehaviour
         {
             menuActive = menuMain;
             menuActive.SetActive(true);
+        }
+        else
+        {
+            menuActive = null;
         }
 
         if (menuActive != null)
@@ -138,6 +146,48 @@ public class gameManager : MonoBehaviour
             Transition();
 
         UpdateAbilityUI();
+        PauseFunction();
+
+    }
+
+    void PauseFunction()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuActive == null)
+            {
+                PauseGame();
+                menuHierarchy.Add(menuPause);
+                menuActive = menuPause;
+                menuActive.SetActive(true);
+            }
+            else if (menuActive == menuPause)
+            {
+                UnpauseGame();
+            }
+        }
+    }
+
+    public void PauseGame()
+    {
+
+        isPaused = !isPaused;
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+    }
+
+    public void UnpauseGame()
+    {
+
+        isPaused = !isPaused;
+        Time.timeScale = timeScaleOrig;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        menuActive.SetActive(false);
+        menuActive = null;
+        menuHierarchy.Clear();
 
     }
 

@@ -19,6 +19,13 @@ public class buttonManager : MonoBehaviour
 
     }
 
+    public void Resume()
+    {
+
+        gameManager.instance.UnpauseGame();
+
+    }
+
     public void Quit()
     {
 
