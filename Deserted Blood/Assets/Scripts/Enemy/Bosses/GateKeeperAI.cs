@@ -9,7 +9,6 @@ public class GateKeeperAI : EnemyAI
     [SerializeField] int melee0Damage;
     [SerializeField] int melee1Damage;
     [SerializeField] int slamDamage;
-    [SerializeField] float jumpAttackMoveSpeed;
     [SerializeField] float roarCooldown;
     [SerializeField] float jumpCooldown;
 

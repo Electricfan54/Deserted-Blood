@@ -103,7 +103,7 @@ MonoBehaviour:
   hitBoxes: []
   meleeDamage: 0
   projectiles:
-  - {fileID: 1389089336480518792, guid: 243b546574c1fdd4b9760d6e2a9549ac, type: 3}
+  - {fileID: 387570333031549360, guid: 6dc21a7d792fea942be86efaad5739aa, type: 3}
   projectileSpawn: {fileID: 7290726468202686636}
   projDamage: 1
   projSpeed: 30
