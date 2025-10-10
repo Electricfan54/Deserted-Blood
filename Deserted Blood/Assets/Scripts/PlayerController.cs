@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     [SerializeField] int BloodMeter;
     [SerializeField] int MaxBloodMeter;
 
+    [SerializeField] GameObject[] BaseAttacks;
     [SerializeField] int BasePlayerDamage;
 
     [SerializeField] int MaxJumps;
@@ -27,10 +28,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     Vector3 playerVel;
 
     public bool isGrounded;
-    bool isWallSliding;
+    bool hasWallJumped = false;
     bool WallInRange;
 
     bool isInvinc = false;
+    bool isAttacking = false;
 
     public bool hasThirdAbility = false;
 
@@ -87,8 +89,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         {
             isGrounded = true;
             playerVel.y = -2;
-            playerVel.x = 0;
             JumpCount = 0;
+            if(hasWallJumped == true)
+            {
+                playerVel.x = 0;
+                hasWallJumped = false;
+            }
         }
         else
         {
@@ -135,6 +141,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if(canMove)
             Jump();
 
+        BaseAbilityInputCheck();
         CharController.Move(playerVel * Time.deltaTime);
     }
 
@@ -172,6 +179,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
         if(WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
         {
+            hasWallJumped = true;
             playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
             transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
         }
@@ -329,4 +337,45 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             meshRenderer.material.color = Color.yellow;
         }
     }
+
+    void BaseAbilityInputCheck()
+    {
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.X))
+        {
+            StartCoroutine(MappaPunch());
+        }
+
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(FallingPunch());
+        }
+    }
+
+    IEnumerator MappaPunch()
+    {
+        isAttacking = true;
+        playerVel.x = transform.forward.x * 20;
+        BaseAttacks[0].SetActive(true);
+        yield return new WaitForSeconds(.4f);
+        BaseAttacks[0].SetActive(false);
+        playerVel.x = 0;
+        isAttacking = false;
+    }
+
+    IEnumerator FallingPunch()
+    {
+        isAttacking = true;
+        playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
+        yield return new WaitForSeconds(.5f);
+        BaseAttacks[1].SetActive(true);
+        playerVel = new Vector3(transform.forward.x * 10, -50, 0);
+        yield return new WaitForSeconds(.2f);
+        playerVel.x = 0;
+        BaseAttacks[1].SetActive(false);
+        isAttacking = false;
+
+    }
+
+
+
 }
