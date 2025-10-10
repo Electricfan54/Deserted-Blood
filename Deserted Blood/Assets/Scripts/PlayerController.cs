@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     [SerializeField] int BloodMeter;
     [SerializeField] int MaxBloodMeter;
 
+    [Tooltip("Used for regular attacks")] [SerializeField] GameObject LightAttackHitbox;
     [SerializeField] GameObject[] BaseAttacks;
     [SerializeField] int BasePlayerDamage;
 
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     Vector3 MoveDirection;
     Vector3 playerVel;
 
+    int CurrentMoveAnimationIndex;
+
     public bool isGrounded;
     bool hasWallJumped = false;
     bool WallInRange;
@@ -37,9 +40,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     public bool hasThirdAbility = false;
 
 
-   public List<Ability> abilities = new List<Ability>();
-   public int listpos;
-   public playerablities PlayerAbilites;
+    public List<Ability> abilities = new List<Ability>();
+    public int listpos;
+    public playerablities PlayerAbilites;
 
     int origBloodMeter = 50;
     int origHP;
@@ -109,11 +112,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             }
         }
 
-        //RaycastHit CeilingCheck;
-        //if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
-        //{
-        //    playerVel.y = -2;
-        //}
+        RaycastHit CeilingCheck;
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
+        {
+            playerVel.y = -2;
+        }
 
         Movement();
     }
@@ -338,6 +341,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         }
     }
 
+    // attack stuff
     void BaseAbilityInputCheck()
     {
         if (isAttacking == false && Input.GetKeyDown(KeyCode.X))
@@ -348,6 +352,16 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if (isAttacking == false && Input.GetKeyDown(KeyCode.C))
         {
             StartCoroutine(FallingPunch());
+        }
+
+        if(isAttacking == false && Input.GetKeyDown(KeyCode.G))
+        {
+            // play animation using the animation index after making the stuff   for it
+            // left, right, hook, right
+            if (CurrentMoveAnimationIndex > 3)
+                CurrentMoveAnimationIndex = 0;
+
+            StartCoroutine(BasicAttack());
         }
     }
 
@@ -378,6 +392,15 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     }
 
+    IEnumerator BasicAttack()
+    {
+        isAttacking = true;
+        LightAttackHitbox.SetActive(true);
+        yield return new WaitForSeconds(.35f);
+        LightAttackHitbox.SetActive(false);
+        isAttacking = false;
+        CurrentMoveAnimationIndex += 1;
+    }
 
 
 }
