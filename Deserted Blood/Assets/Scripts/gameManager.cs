@@ -345,7 +345,7 @@ public class gameManager : MonoBehaviour
 
     public void UpdateBossBar(int currHealth)
     {
-        bossBar.fillAmount = bossHPMax / currHealth;
+        bossBar.fillAmount = currHealth / bossHPMax;
     }
 
 }
