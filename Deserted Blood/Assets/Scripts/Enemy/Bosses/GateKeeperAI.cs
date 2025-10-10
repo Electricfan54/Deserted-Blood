@@ -336,6 +336,11 @@ public class GateKeeperAI : EnemyAI
         }
     }
 
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        gameManager.instance.HideBossBar();
+    }
 
     void UpdateUI()
     {

@@ -1364,6 +1364,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8666960177129065020, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666960177129065020, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
       propertyPath: camDistance.y
       value: 1.2
       objectReference: {fileID: 0}

@@ -233,6 +233,12 @@ public class OrcKingAI : EnemyAI
         }
     }
 
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        gameManager.instance.HideBossBar();
+    }
+
     void UpdateUI()
     {
         gameManager.instance.UpdateBossBar(curHealth);

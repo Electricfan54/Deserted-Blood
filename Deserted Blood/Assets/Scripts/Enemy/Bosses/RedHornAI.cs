@@ -211,7 +211,11 @@ public class RedHornAI : EnemyAI
             cam.SetBossDistance(camDistance);
         }
     }
-
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        gameManager.instance.HideBossBar();
+    }
 
     void UpdateUI()
     {
