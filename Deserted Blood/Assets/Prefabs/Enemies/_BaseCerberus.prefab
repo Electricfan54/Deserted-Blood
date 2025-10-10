@@ -216,8 +216,8 @@ MonoBehaviour:
     m_Bits: 182
   animator: {fileID: 6230001678206522705}
   startState: 1
-  isSpecial: 0
-  enemyType: 0
+  isSpecial: 1
+  enemyType: 3
   abilityDrop: {fileID: 0}
   isFlying: 0
   moveSpeed: 5
