@@ -6,6 +6,8 @@ public class GateKeeperAI : EnemyAI
 {
 
     [Header("GateKeeper Variables")]
+    [SerializeField] Vector3 cameraFocusPos;
+    [SerializeField] Vector3 camDistance;
     [SerializeField] GameObject[] projSpawnPointList;
     [SerializeField] int melee0Damage;
     [SerializeField] int melee1Damage;
@@ -327,7 +329,13 @@ public class GateKeeperAI : EnemyAI
         gameManager.instance.ShowBossBar("Orc King", maxHealth);
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
+        CameraController cam = Camera.main.GetComponent<CameraController>();
+        if (cam != null && camDistance != Vector3.zero)
+        {
+            cam.SetBossDistance(camDistance);
+        }
     }
+
 
     void UpdateUI()
     {

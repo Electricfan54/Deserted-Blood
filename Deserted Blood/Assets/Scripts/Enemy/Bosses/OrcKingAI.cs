@@ -4,6 +4,8 @@ using System.Collections;
 public class OrcKingAI : EnemyAI
 {
     [Header("RedHorn Variables")]
+    [SerializeField] Vector3 cameraFocusPos;
+    [SerializeField] Vector3 camDistance;
     [SerializeField] GameObject[] projSpawnPointList;
     [SerializeField] GameObject[] enemySpawnPointList;
     [SerializeField] GameObject[] enemySpawnList;
@@ -12,8 +14,8 @@ public class OrcKingAI : EnemyAI
     [SerializeField] int melee2Damage;
     [SerializeField] float roarCooldown;
     [SerializeField] float projSpawnRate;
-
     bool bossFightTriggered = false;
+
 
     enum RoarType
     {
@@ -224,6 +226,11 @@ public class OrcKingAI : EnemyAI
         gameManager.instance.ShowBossBar("Orc King", maxHealth);
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
+        CameraController cam = Camera.main.GetComponent<CameraController>();
+        if (cam != null && camDistance != Vector3.zero)
+        {
+            cam.SetBossDistance(camDistance);
+        }
     }
 
     void UpdateUI()
