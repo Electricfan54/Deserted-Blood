@@ -13,21 +13,29 @@ public class RedHornAI : EnemyAI
     bool canRoar;
 
     int attackCalls;
-
+    bool bossFightTriggered = false;
     protected override void Start()
     {
         base.Start();
         attackCalls = 0;
         canRoar = true;
+        bossFightTriggered = false;
     }
 
 
     protected override void Update()
     {
+        if (!bossFightTriggered)
+            return;
+        else
+            UpdateUI();
         base.Update();
     }
     protected override void FixedUpdate()
     {
+        if (!bossFightTriggered)
+            return;
+
         if (hitStunned || !canMove)
         {
             curSpeed = 0;
@@ -188,5 +196,17 @@ public class RedHornAI : EnemyAI
     public override void TakeDamage(int damageAmount)
     {
         base.TakeDamage(damageAmount);
+    }
+
+    public void StartBossFight()
+    {
+        gameManager.instance.ShowBossBar("Orc King", maxHealth);
+        gameManager.instance.UpdateBossBar(curHealth);
+        bossFightTriggered = true;
+    }
+
+    void UpdateUI()
+    {
+        gameManager.instance.UpdateBossBar(curHealth);
     }
 }

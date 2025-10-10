@@ -15,6 +15,7 @@ public class EventTrigger : MonoBehaviour
     {
         if (triggered)
             return;
+        triggered = true;
         eventToTrigger?.Invoke();
     }
 }

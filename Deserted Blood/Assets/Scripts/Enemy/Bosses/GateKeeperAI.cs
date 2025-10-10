@@ -15,6 +15,7 @@ public class GateKeeperAI : EnemyAI
 
     bool canRoar;
     bool canJump;
+    bool bossFightTriggered;
 
     int attackCalls;
 
@@ -31,20 +32,16 @@ public class GateKeeperAI : EnemyAI
         attackCalls = 0;
         canRoar = true;
         canJump = true;
+        bossFightTriggered = false;
     }
 
 
     protected override void Update()
     {
-        //Debug Code
-#if UNITY_EDITOR
-        if (Input.GetKeyDown("z"))
-        {
-            TakeDamage(1);
-        }
-#endif
-
-
+        if (!bossFightTriggered)
+            return;
+        else
+            UpdateUI();
 
         if (fireDuration > 0)
             BurnEffect();
@@ -115,6 +112,9 @@ public class GateKeeperAI : EnemyAI
     }
     protected override void FixedUpdate()
     {
+        if (!bossFightTriggered)
+            return;
+
         if (hitStunned || !canMove)
         {
             curSpeed = 0;
@@ -320,5 +320,17 @@ public class GateKeeperAI : EnemyAI
     public void ResumeMovement()
     {
         canMove = true;
+    }
+
+    public void StartBossFight()
+    {
+        gameManager.instance.ShowBossBar("Orc King", maxHealth);
+        gameManager.instance.UpdateBossBar(curHealth);
+        bossFightTriggered = true;
+    }
+
+    void UpdateUI()
+    {
+        gameManager.instance.UpdateBossBar(curHealth);
     }
 }

@@ -1190,6 +1190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4240cc36e919bc549819af2eb1f0c283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrcKingAI
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   meshRenderer: {fileID: 3370855147570544474}
   groundLayer:
     serializedVersion: 2

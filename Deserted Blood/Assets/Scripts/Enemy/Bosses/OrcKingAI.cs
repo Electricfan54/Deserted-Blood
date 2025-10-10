@@ -13,6 +13,8 @@ public class OrcKingAI : EnemyAI
     [SerializeField] float roarCooldown;
     [SerializeField] float projSpawnRate;
 
+    bool bossFightTriggered = false;
+
     enum RoarType
     {
         Enemy = 0,
@@ -29,15 +31,23 @@ public class OrcKingAI : EnemyAI
         base.Start();
         attackCalls = 0;
         canRoar = true;
+        bossFightTriggered = false;
     }
 
 
     protected override void Update()
     {
+        if (!bossFightTriggered)
+            return;
+        else
+            UpdateUI();
         base.Update();
     }
     protected override void FixedUpdate()
     {
+        if (!bossFightTriggered)
+            return;
+
         if (hitStunned || !canMove)
         {
             curSpeed = 0;
@@ -207,5 +217,17 @@ public class OrcKingAI : EnemyAI
     public override void TakeDamage(int damageAmount)
     {
         base.TakeDamage(damageAmount);
+    }
+
+    public void StartBossFight()
+    {
+        gameManager.instance.ShowBossBar("Orc King", maxHealth);
+        gameManager.instance.UpdateBossBar(curHealth);
+        bossFightTriggered = true;
+    }
+
+    void UpdateUI()
+    {
+        gameManager.instance.UpdateBossBar(curHealth);
     }
 }

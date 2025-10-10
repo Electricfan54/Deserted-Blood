@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
+using UnityEngine.Events;
+using UnityEditor.UIElements;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
@@ -19,6 +20,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected EnemyState curState;
     protected GameObject player;
     protected Vector3 targetPoint;
+
+    public UnityEvent onDeathEvent;
 
     [SerializeField] protected Renderer meshRenderer;
     [SerializeField] protected LayerMask groundLayer;
@@ -138,7 +141,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 #if UNITY_EDITOR
         if (Input.GetKeyDown("z"))
         {
-            TakeDamage(1);
+            TakeDamage(10);
         }
 #endif
 
@@ -217,9 +220,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
                 AttackTransitionCheck();
                 break;
             case EnemyState.dead:
-                AddToMilestone();
-                DropAbility();
-                Destroy(gameObject);
+                OnDeath();
                 break;
         }
     }
@@ -553,17 +554,28 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     public virtual void TakeDamage(int damageAmount)
     {
         curHealth -= damageAmount;
-        StartCoroutine(FlashRed());
         if (curHealth <= 0)
         {
             curHealth = 0;
             curState = EnemyState.dead;
+            return;
         }
+        StartCoroutine(FlashRed());
 
         if (hitReact)
             HitReact();
         else
             hitReact = true;
+    }
+
+    protected void OnDeath()
+    {
+        AddToMilestone();
+        DropAbility();
+        onDeathEvent?.Invoke();
+        animator.SetTrigger("dead");
+        gameObject.layer = LayerMask.NameToLayer("Dead");
+        Destroy(gameObject, 5);
     }
 
     protected virtual void Stopped()
