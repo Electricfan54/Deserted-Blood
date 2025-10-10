@@ -925,23 +925,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8061685348534513101, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
   m_PrefabInstance: {fileID: 5600307449753784306}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &743200398483310658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413840138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecdee2186209464d86e7d74b1f1a2b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerPassive
-  SpecialEnemyCount: 0
-  SpecialEnemyRequirement: 0
-  GolemMilestone: {fileID: 11400000, guid: bddbc663edbb75b43bc82153cf4e695b, type: 2}
-  CerberusMilestone: {fileID: 11400000, guid: 248a57e8638bb90468230a8db29aa32a, type: 2}
-  FlyingMilestone: {fileID: 11400000, guid: f791dc4663832b443912e0eccabf38ca, type: 2}
 --- !u!1001 &5600307449753784306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -950,10 +933,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3853556794737505947, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
-      propertyPath: MaxBloodMeter
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 6633970918242180610, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1001,10 +980,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6633970918242180610, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 743200398483310658}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

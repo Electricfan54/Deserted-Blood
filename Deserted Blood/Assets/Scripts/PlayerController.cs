@@ -80,11 +80,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
             }
         }
 
-        RaycastHit CeilingCheck;
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
-        {
-            playerVel.y = -2;
-        }
+        //RaycastHit CeilingCheck;
+        //if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
+        //{
+        //    playerVel.y = -2;
+        //}
 
         Movement();
     }

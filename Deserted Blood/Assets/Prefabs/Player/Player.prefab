@@ -2654,7 +2654,7 @@ MonoBehaviour:
   MaxJumps: 2
   JumpStrength: 15
   gravityStrength: 30
-  SlideGravity: 0
+  SlideGravity: 7
   Speed: 15
   isGrounded: 0
   hasThirdAbility: 0
