@@ -353,6 +353,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     IEnumerator MappaPunch()
     {
+        canMove = false;
         isAttacking = true;
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].SetActive(true);
@@ -360,6 +361,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         BaseAttacks[0].SetActive(false);
         playerVel.x = 0;
         isAttacking = false;
+        canMove = true;
     }
 
     IEnumerator FallingPunch()
