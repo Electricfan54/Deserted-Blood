@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     [SerializeField] int MaxJumps;
     [SerializeField] int JumpStrength;
     [SerializeField] int gravityStrength;
+    [SerializeField] int SlideGravity;
 
     [SerializeField] int Speed;
 
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     int origBloodMeter = 50;
     int origHP;
 
-    int playerXPush;
+    int playerXPush = 3;
 
     private void Awake()
     {
@@ -69,13 +70,20 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         else
         {
             isGrounded = false;
-            playerVel.y -= gravityStrength * Time.deltaTime;
+            if (WallInRange && playerVel.y <= 0)
+            {
+                playerVel.y -= SlideGravity * Time.deltaTime;
+            }
+            else
+            {
+                playerVel.y -= gravityStrength * Time.deltaTime;
+            }
         }
-        RaycastHit CeilingCheck;
 
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, 2.5f))
+        RaycastHit CeilingCheck;
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
         {
-            playerVel.y = 0;
+            playerVel.y = -2;
         }
 
         Movement();
@@ -114,10 +122,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
             JumpCount++;
         }
 
-        if(InputUp && playerVel.y > 0)
+        if(InputUp && playerVel.y > 0 && WallInRange == false)
         {
             playerVel.y = 0;
         }
+
+        
 
         WallJump();
     }
@@ -134,15 +144,22 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
             WallInRange = false;
         }
 
-        if(WallInRange && Input.GetButtonDown("Jump"))
+        if(WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
         {
-            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength, 0);
-           
+            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
+            transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
         }
 
         if(playerVel.x != 0)
         {
-            
+            if(playerVel.x > 0)
+            {
+                playerVel.x -= playerXPush * Time.deltaTime;
+            }
+            else
+            {
+                playerVel.x += playerXPush * Time.deltaTime;
+            }
         }
         
     }
