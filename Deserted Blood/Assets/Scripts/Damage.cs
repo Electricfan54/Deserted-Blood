@@ -32,7 +32,7 @@ public class Damage : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Player") && damagetype == DamageType.fireball)
         {
-            gameManager.instance.playerScript.ApplyBurnEffect(10, 1, 5);
+            gameManager.instance.playerScript.ApplyBurnEffect(10, 1, 5); 
         }
             if (damagetype==DamageType.deletable)
         {

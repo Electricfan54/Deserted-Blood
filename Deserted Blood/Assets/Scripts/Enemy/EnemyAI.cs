@@ -96,6 +96,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected float origAnimSpeed;
     protected Color beforeFreezeColor;
 
+    protected float StunDuration;
+    protected Color beforestunColor;
+
     protected bool canUpdate = true; //for stopping enemy update
     protected bool canMove = true; //for stopping enemy movement
 
@@ -615,8 +618,16 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         }
     }
 
-
-
- 
-  
+    public void ApplyStunEffect(float duration)
+    {
+        StunDuration -= Time.deltaTime;
+        if (StunDuration <= 0)
+        {
+            StunDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            animator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforestunColor;
+        }
     }
+}

@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     protected float origAnimSpeed;
     protected Color beforeFreezeColor;
 
+    protected float StunDuration;
+    protected Color beforeStunColor;
+
     protected bool canUpdate = true; //for stopping player input update
     protected bool canMove = true; //for stopping player movement
 
@@ -285,6 +288,19 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             canUpdate = true;
             PlayerAnimator.speed = origAnimSpeed;
             meshRenderer.material.color = beforeFreezeColor;
+        }
+    }
+
+    public void ApplyStunEffect(float duration)
+    {
+        StunDuration -= Time.deltaTime;
+        if (StunDuration <= 0)
+        {
+            StunDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            PlayerAnimator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforeStunColor;
         }
     }
 }
