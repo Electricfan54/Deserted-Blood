@@ -255,7 +255,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     public void ApplyFreezeEffect(float duration)
     {
-        freezeDuration = duration;
+        if (freezeDuration <=0 )
+            freezeDuration = duration;
         canMove = false;
         canUpdate = false;
 
