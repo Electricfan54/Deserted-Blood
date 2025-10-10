@@ -333,7 +333,7 @@ public class gameManager : MonoBehaviour
     public void ShowBossBar(string bossName, int maxHealth)
     {
         bossBarUI.SetActive(true);
-        bossNameText.text = bossNameText.ToString();
+        bossNameText.text = bossName;
         bossHPMax = maxHealth;
         
     }
