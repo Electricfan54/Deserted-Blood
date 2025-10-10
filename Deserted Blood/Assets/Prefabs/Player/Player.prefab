@@ -2565,6 +2565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8061685348534513101}
   - component: {fileID: 8817356792663352014}
+  - component: {fileID: 6795671254375290952}
   - component: {fileID: 3853556794737505947}
   - component: {fileID: 8543027307328747487}
   - component: {fileID: 8693288558738864613}
@@ -2614,6 +2615,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6795671254375290952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633970918242180610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecdee2186209464d86e7d74b1f1a2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPassive
+  SpecialEnemyCount: 0
+  SpecialEnemyRequirement: 0
+  GolemMilestone: {fileID: 11400000, guid: bddbc663edbb75b43bc82153cf4e695b, type: 2}
+  CerberusMilestone: {fileID: 11400000, guid: 248a57e8638bb90468230a8db29aa32a, type: 2}
+  FlyingMilestone: {fileID: 11400000, guid: f791dc4663832b443912e0eccabf38ca, type: 2}
 --- !u!114 &3853556794737505947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,10 +2647,20 @@ MonoBehaviour:
   CharController: {fileID: 8543027307328747487}
   PlayerAnimator: {fileID: 8817356792663352014}
   HP: 100
+  MaxHP: 0
+  BloodMeter: 0
+  MaxBloodMeter: 60
+  BasePlayerDamage: 0
   MaxJumps: 2
   JumpStrength: 15
   gravityStrength: 30
+  SlideGravity: 0
   Speed: 15
+  isGrounded: 0
+  hasThirdAbility: 0
+  abilities: []
+  listpos: 0
+  PlayerAbilites: {fileID: 0}
 --- !u!143 &8543027307328747487
 CharacterController:
   m_ObjectHideFlags: 0
