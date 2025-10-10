@@ -6,4 +6,5 @@ public interface IEffect
     public void ApplyFreezeEffect(float duration);
 
     // Add stun function
+    public void ApplyStunEffect(float duration);
 }

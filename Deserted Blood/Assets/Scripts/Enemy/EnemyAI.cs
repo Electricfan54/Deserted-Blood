@@ -58,12 +58,12 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     [Header("Melee Variables")]
     [SerializeField] protected List<GameObject> hitBoxes = new List<GameObject>();
-    [SerializeField] protected int meleeDamage;
+    public int meleeDamage;
 
     [Header("Ranged Variables")]
     [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
     [SerializeField] protected Transform projectileSpawn;
-    [SerializeField] protected int projDamage;
+    public int projDamage;
     [SerializeField] protected float projSpeed;
     [SerializeField] protected float projDestroyTime;
 
@@ -95,6 +95,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected float freezeDuration;
     protected float origAnimSpeed;
     protected Color beforeFreezeColor;
+
+    protected float StunDuration;
+    protected Color beforestunColor;
 
     protected bool canUpdate = true; //for stopping enemy update
     protected bool canMove = true; //for stopping enemy movement
@@ -149,11 +152,20 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             hitStunned = false;
             FreezeEffect();
             return;
+        }  
+        else if (!canUpdate && StunDuration > 0)
+        {
+            hitStunned = false;
+            StunEffect();
+            return;
         }
         else if (!canUpdate)
         {
             return;
         }
+
+      
+       
 
         UpdateAnimations();
 
@@ -589,7 +601,30 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             meshRenderer.material.color = Color.blue;
         }
     }
+public void ApplyStunEffect(float duration)
+    {
+        StunDuration = duration;
+        canMove = false;
+        canUpdate = false;
 
+        if (animator.speed != 0)
+        {
+            origAnimSpeed = animator.speed;
+            animator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            if (meshRenderer.material.color == Color.red)
+            {
+                beforestunColor = origColor;
+                origColor = Color.blue;
+            }
+            else
+                beforestunColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.yellow;
+        }
+    }
     protected virtual void BurnEffect()
     {
         fireDuration -= Time.deltaTime;
@@ -612,6 +647,21 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             canUpdate = true;
             animator.speed = origAnimSpeed;
             meshRenderer.material.color = beforeFreezeColor;
+        }
+    }
+
+    
+
+    protected virtual void StunEffect()
+    {
+        StunDuration -= Time.deltaTime;
+        if (StunDuration <= 0)
+        {
+            StunDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            animator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforestunColor;
         }
     }
 }
