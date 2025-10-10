@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform Target;
+    [SerializeField] public Transform Target;
     [SerializeField] float camSmoothSpeed;
     [SerializeField] Vector3 camDistance;
 
