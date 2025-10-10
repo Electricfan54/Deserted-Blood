@@ -4,6 +4,8 @@ using UnityEngine;
 public class RedHornAI : EnemyAI
 {
     [Header("RedHorn Variables")]
+    [SerializeField] Vector3 cameraFocusPos;
+    [SerializeField] Vector3 camDistance;
     [SerializeField] GameObject[] projSpawnList;
     [SerializeField] int melee0Damage;
     [SerializeField] int melee1Damage;
@@ -203,6 +205,16 @@ public class RedHornAI : EnemyAI
         gameManager.instance.ShowBossBar("Orc King", maxHealth);
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
+        CameraController cam = Camera.main.GetComponent<CameraController>();
+        if (cam != null && camDistance != Vector3.zero)
+        {
+            cam.SetBossDistance(camDistance);
+        }
+    }
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        gameManager.instance.HideBossBar();
     }
 
     void UpdateUI()

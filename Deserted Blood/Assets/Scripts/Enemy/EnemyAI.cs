@@ -568,7 +568,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             hitReact = true;
     }
 
-    protected void OnDeath()
+    protected virtual void OnDeath()
     {
         AddToMilestone();
         DropAbility();
@@ -622,7 +622,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             meshRenderer.material.color = Color.blue;
         }
     }
-public void ApplyStunEffect(float duration)
+    public void ApplyStunEffect(float duration)
     {
         StunDuration = duration;
         canMove = false;
