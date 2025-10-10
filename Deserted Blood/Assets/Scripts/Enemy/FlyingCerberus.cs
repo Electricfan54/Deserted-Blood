@@ -56,6 +56,8 @@ public class FlyingCerberus : EnemyAI
 
     public override void RangedAttack0()
     {
+        if (projectileSpawn == null)
+            return;
         // The flamethrower particle effect has multiple particle systems
         foreach (var fireEffect in fireEffects)
         {

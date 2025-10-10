@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class GateKeeperAI : EnemyAI
 {
@@ -16,6 +17,13 @@ public class GateKeeperAI : EnemyAI
     bool canJump;
 
     int attackCalls;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (projSpawnPointList.Length < 3)
+            projSpawnPointList = new GameObject[3];
+    }
 
     protected override void Start()
     {
@@ -53,6 +61,11 @@ public class GateKeeperAI : EnemyAI
         }
 
         UpdateAnimations();
+
+        if (projectileSpawn != null && inAttackAnim)
+        {
+            projectileSpawn.position = new Vector3(targetPoint.x, projectileSpawn.position.y, 0);
+        }
 
         if (isFlying)
         {
@@ -237,6 +250,8 @@ public class GateKeeperAI : EnemyAI
 
     public override void RangedAttack0()
     {
+        if (projSpawnPointList[0] == null)
+            return;
         Projectile proj = Instantiate(projectiles[0], projSpawnPointList[0].transform.position, projSpawnPointList[0].transform.rotation).GetComponent<Projectile>();
         proj.speed = projSpeed;
         proj.destroytime = projDestroyTime;
@@ -245,6 +260,8 @@ public class GateKeeperAI : EnemyAI
 
     public void RangedAttack1()
     {
+        if (projSpawnPointList[1] == null)
+            return;
         Projectile proj = Instantiate(projectiles[1], projSpawnPointList[1].transform.position, projSpawnPointList[1].transform.rotation).GetComponent<Projectile>();
         proj.speed = projSpeed;
         proj.destroytime = projDestroyTime;
@@ -253,6 +270,8 @@ public class GateKeeperAI : EnemyAI
 
     public void RangedAttack2()
     {
+        if (projSpawnPointList[2] == null)
+            return;
         Projectile proj = Instantiate(projectiles[2], projSpawnPointList[2].transform.position, projSpawnPointList[2].transform.rotation).GetComponent<Projectile>();
         proj.speed = projSpeed;
         proj.destroytime = projDestroyTime;
