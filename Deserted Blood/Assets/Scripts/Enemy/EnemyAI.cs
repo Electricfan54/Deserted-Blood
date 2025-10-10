@@ -268,11 +268,6 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected virtual void UpdateAnimations()
     {
         animator.SetFloat("curSpeed", curSpeed / moveSpeed);
-        if (inAttackAnim)
-        {
-            //Keeps the projectile spawn over the players head
-            projectileSpawn.transform.position = new Vector3(targetPoint.x, projectileSpawn.transform.position.y, 0);
-        }
     }
 
     protected virtual void GroundRoam()
