@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     void Movement()
     {
         float Horizantol = 0;
-        if (canUpdate)
+        if (canMove)
             Horizantol = Input.GetAxis("Horizontal");
 
         MoveDirection = new Vector3(Horizantol, 0, 0);
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
         CharController.Move(MoveDirection * Speed * Time.deltaTime);
 
-        if(canUpdate)
+        if(canMove)
             Jump();
 
         CharController.Move(playerVel * Time.deltaTime);
