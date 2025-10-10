@@ -9,8 +9,11 @@ public class buttonManager : MonoBehaviour
 
         DontDestroyOnLoad(gameManager.instance.uiMain);
 
-        Scene loadScene = SceneManager.GetSceneByName(playSceneName);
-        SceneManager.LoadScene(playSceneName);
+        if (playSceneName.Length != 0)
+        {
+            Scene loadScene = SceneManager.GetSceneByName(playSceneName);
+            SceneManager.LoadScene(playSceneName);
+        }
 
         gameManager.instance.CloseAllMenus();
 

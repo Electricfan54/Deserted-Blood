@@ -28,14 +28,24 @@ public class gameManager : MonoBehaviour
     [Header("UI Specific")]
     [SerializeField] GameObject menuActive;
 
+    [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
 
     List<GameObject> menuHierarchy = new List<GameObject>();
+
+    [SerializeField] bool mainMenuActive;
 
     [SerializeField] Slider sliderSFX, sliderMus;
     [SerializeField] TMP_Text volTextSFX, volTextMus;
 
     public Image playerHPBar;
+    public GameObject playerHUD;
+
+    public GameObject bossBarUI;
+    public Image bossBar;
+    public TMP_Text bossNameText;
+
+    int bossHPMax;
 
     [Header("Ability UI")]
     [SerializeField] GameObject chargeBase;
@@ -64,6 +74,12 @@ public class gameManager : MonoBehaviour
         instance = this;
 
         AttemptPlayerAssign();
+
+        if (mainMenuActive)
+        {
+            menuActive = menuMain;
+            menuActive.SetActive(true);
+        }
 
         if (menuActive != null)
         {
@@ -199,6 +215,17 @@ public class gameManager : MonoBehaviour
     public void AssignAbility(AbilitySlotMain selSlot)
     {
 
+        if (selSlot.chargeList.Count > 0)
+        {
+            for (int i = 0; i < selSlot.maxCharges; i++)
+            {
+                Destroy(selSlot.chargeList[i]);
+            }
+
+            selSlot.chargeList.Clear();
+
+        }
+
         for (int i = 0; i < selSlot.maxCharges; i++)
         {
 
@@ -228,6 +255,24 @@ public class gameManager : MonoBehaviour
 
         }
 
+    }
+
+    public void ShowBossBar(string bossName, int maxHealth)
+    {
+        bossBarUI.SetActive(true);
+        bossNameText.text = bossNameText.ToString();
+        bossHPMax = maxHealth;
+        
+    }
+
+    public void HideBossBar()
+    {
+        bossBarUI.SetActive(false);
+    }
+
+    public void UpdateBossBar(int currHealth)
+    {
+        bossBar.fillAmount = bossHPMax / currHealth;
     }
 
 }
