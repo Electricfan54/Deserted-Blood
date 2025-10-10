@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
 {
-    protected enum EnemyState
+    public enum EnemyState
     {
         stopped,
         roaming,
@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected LayerMask lineOfSightIgnoreLayer;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected EnemyState startState;
+    public EnemyState startState;
     public bool isSpecial = false;
 
     Color origColor;
@@ -50,7 +50,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [Header("Attack Variables")]
     [SerializeField] protected int maxHealth;
     protected int curHealth;
-    [SerializeField] protected int enemyAggroRange;
+    public int enemyAggroRange;
     [SerializeField] protected float attackRate = 0.5f;
     [SerializeField] protected float hitStunDuration = 0.5f;
     protected float hitStunTimer = 0;
@@ -100,7 +100,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected bool canMove = true; //for stopping enemy movement
 
     //To toggle hit react off for one call of take damage
-    bool hitReact = true;
+    protected bool hitReact = true;
 
 
     protected virtual void Awake()
