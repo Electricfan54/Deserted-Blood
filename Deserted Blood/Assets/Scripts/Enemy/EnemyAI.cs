@@ -256,6 +256,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected virtual void UpdateAnimations()
     {
         animator.SetFloat("curSpeed", curSpeed / moveSpeed);
+        if (inAttackAnim)
+        {
+            //Keeps the projectile spawn over the players head
+            projectileSpawn.transform.position = new Vector3(targetPoint.x, projectileSpawn.transform.position.y, 0);
+        }
     }
 
     protected virtual void GroundRoam()
@@ -412,6 +417,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     // Will be called by the attack animation
     public virtual void Attack0()
     {
+        if (hitStunned)
+            return;
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
@@ -431,6 +438,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         hitStunned = true;
         animator.SetTrigger("hit");
+        //Make shure there is no active hitboxes
+        for (int i = 0; i < hitBoxes.Count; i++)
+        {
+            hitBoxes[i].SetActive(false);
+        }
     }
 
     public virtual void AttackAnimEnd()
@@ -518,13 +530,13 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         return false;
     }
 
-    void DropAbility()
+    protected void DropAbility()
     {
         if (abilityDrop != null)
             Instantiate(abilityDrop, transform.position, Quaternion.identity);
     }
 
-    void AddToMilestone()
+    protected void AddToMilestone()
     {
         PlayerPassive.Instance.AddToMilestone(enemyType, isSpecial);
     }
