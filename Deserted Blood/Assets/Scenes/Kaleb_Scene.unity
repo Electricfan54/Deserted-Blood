@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3853556794737505947, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 2027348643}
     - target: {fileID: 6633970918242180610, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -732,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce340aac7e9438245a23c4f12ce62cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Effect
-  type: 1
+  type: 0
   duration: 10
   tickDamage: 1
   tickRate: 0.5
@@ -1010,6 +1014,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2027348643 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3095321566542897577, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
+  m_PrefabInstance: {fileID: 22542242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &424793577853357678
 PrefabInstance:
   m_ObjectHideFlags: 0
