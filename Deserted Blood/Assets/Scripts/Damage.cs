@@ -4,7 +4,7 @@ public class Damage : MonoBehaviour
 {
     enum DamageType
     {
-        deletable, nondeletable,fireball
+        deletable, nondeletable,fireball, iceball
     }
     public int damageammount;
     [SerializeField] DamageType damagetype;
@@ -34,7 +34,15 @@ public class Damage : MonoBehaviour
         {
             gameManager.instance.playerScript.ApplyBurnEffect(10, 1, 5); 
         }
-            if (damagetype==DamageType.deletable)
+        if (other.gameObject.CompareTag("Enemy") && damagetype == DamageType.iceball)
+        {
+            other.GetComponent<EnemyAI>().ApplyFreezeEffect(10);
+        }
+        if (other.gameObject.CompareTag("Player") && damagetype == DamageType.iceball)
+        {
+            gameManager.instance.playerScript.ApplyFreezeEffect(10);
+        }
+        if (damagetype==DamageType.deletable)
         {
             Destroy(gameObject);
         }
