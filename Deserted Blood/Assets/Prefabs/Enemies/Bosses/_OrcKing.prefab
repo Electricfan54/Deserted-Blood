@@ -1229,6 +1229,8 @@ MonoBehaviour:
   roamDist: 0
   roamStopDist: 0
   roamPauseTime: 0
+  cameraFocusPos: {x: 0, y: 0, z: 0}
+  camDistance: {x: 0, y: 1.2, z: -6.7}
   projSpawnPointList:
   - {fileID: 7373566481844187845}
   - {fileID: 1929295756474303078}
