@@ -433,6 +433,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     public virtual void RangedAttack0()
     {
+        if (projectileSpawn == null)
+            return;
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
         Projectile projScript = proj.GetComponent<Projectile>();

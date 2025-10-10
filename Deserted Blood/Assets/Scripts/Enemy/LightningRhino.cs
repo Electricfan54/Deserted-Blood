@@ -58,6 +58,8 @@ public class LightningRhino : EnemyAI
 
     public override void RangedAttack0()
     {
+        if (projectileSpawn == null)
+            return;
         Vector3 offsetPos = new Vector3(targetPoint.x, targetPoint.y + 1.0f, 0);
         Quaternion rot = Quaternion.LookRotation(offsetPos - projectileSpawn.position);
         projectileSpawn.rotation = rot;
