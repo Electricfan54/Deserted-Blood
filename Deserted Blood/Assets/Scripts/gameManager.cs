@@ -57,6 +57,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] float frameHeight;
     [SerializeField] float frameSpacing;
 
+    [SerializeField][Range(1,3)] int slotSelected;
+    [SerializeField] GameObject selHighlight;
+
     [Header("Transition Variables")]
     [SerializeField] Image transitionMain;
     float alphaLerp;
@@ -134,9 +137,7 @@ public class gameManager : MonoBehaviour
         if (transitionActive)
             Transition();
 
-        UpdateCharges(abilitySlot1);
-        UpdateCharges(abilitySlot2);
-        UpdateCharges(abilitySlot3);
+        UpdateAbilityUI();
 
     }
 
@@ -242,6 +243,28 @@ public class gameManager : MonoBehaviour
         }
     
 
+
+    }
+
+    public void UpdateAbilityUI()
+    {
+
+        UpdateCharges(abilitySlot1);
+        UpdateCharges(abilitySlot2);
+        UpdateCharges(abilitySlot3);
+
+        switch (slotSelected)
+        {
+            case 1:
+                selHighlight.transform.localPosition = new Vector2(810, -425);
+                break;
+            case 2:
+                selHighlight.transform.localPosition = new Vector2(610, -425);
+                break;
+            case 3:
+                selHighlight.transform.localPosition = new Vector2(410, -425);
+                break;
+        }
 
     }
 
