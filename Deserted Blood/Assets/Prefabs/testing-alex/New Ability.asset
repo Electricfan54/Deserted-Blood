@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdac6d5ca058fae4b8507515efbc1ebe, type: 3}
   m_Name: New Ability
   m_EditorClassIdentifier: Assembly-CSharp::Ability
-  type: 3
+  type: 5
   damage: 0
   maxCharge: 69
-  currentcharge: 67
-  abilityPrefab: {fileID: 4984640150016148582, guid: 36d33c01fc339e44cace9cdea247cd7b, type: 3}
+  currentcharge: 68
+  abilityPrefab: {fileID: 4984640150016148582, guid: 127a2ee70b907b5458234372fe06286b, type: 3}
   abilityPrefab2: {fileID: 0}

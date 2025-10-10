@@ -58,12 +58,12 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     [Header("Melee Variables")]
     [SerializeField] protected List<GameObject> hitBoxes = new List<GameObject>();
-    [SerializeField] protected int meleeDamage;
+    public int meleeDamage;
 
     [Header("Ranged Variables")]
     [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
     [SerializeField] protected Transform projectileSpawn;
-    [SerializeField] protected int projDamage;
+    public int projDamage;
     [SerializeField] protected float projSpeed;
     [SerializeField] protected float projDestroyTime;
 
