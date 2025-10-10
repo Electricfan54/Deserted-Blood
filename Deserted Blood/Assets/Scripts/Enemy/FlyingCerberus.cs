@@ -6,7 +6,7 @@ public class FlyingCerberus : EnemyAI
     [SerializeField] GameObject model;
     [SerializeField] ParticleSystem[] fireEffects;
     [SerializeField] float fireTick = 0.2f;
-    float fireTimer;
+    float flameTimer;
     bool isFiring;
 
     // Flying anims and get hit have different animation Y values
@@ -25,6 +25,7 @@ public class FlyingCerberus : EnemyAI
 
     protected override void Update()
     {
+        base.Update();
 
         if (inAttackAnim)
         {
@@ -32,9 +33,9 @@ public class FlyingCerberus : EnemyAI
             rot = Quaternion.LookRotation(offsetPos - projectileSpawn.position);
             projectileSpawn.rotation = rot;
 
-            if (fireTimer >= fireTick && isFiring)
+            if (flameTimer >= fireTick && isFiring)
             {
-                fireTimer = 0;
+                flameTimer = 0;
                 Projectile fire = Instantiate(projectiles[0], projectileSpawn.transform).GetComponent<Projectile>();
                 fire.speed = projSpeed;
                 fire.destroytime = projDestroyTime;
@@ -42,11 +43,10 @@ public class FlyingCerberus : EnemyAI
             }
             else
             {
-                fireTimer += Time.deltaTime;
+                flameTimer += Time.deltaTime;
             }
         }
 
-        base.Update();
     }
 
     protected override void AttackState()

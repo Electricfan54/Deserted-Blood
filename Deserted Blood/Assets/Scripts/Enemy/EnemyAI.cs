@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyAI : MonoBehaviour, Idamage
+public class EnemyAI : MonoBehaviour, Idamage, IEffect
 {
     protected enum EnemyState
     {
@@ -85,6 +86,22 @@ public class EnemyAI : MonoBehaviour, Idamage
     protected float roamPauseTimer;
 
 
+    // Status Effect variables
+    protected float fireDuration;
+    protected int fireTickDamage;
+    protected float fireTimer;
+    protected float fireTickRate;
+
+    protected float freezeDuration;
+    protected float origAnimSpeed;
+    protected Color beforeFreezeColor;
+
+    protected bool canUpdate = true; //for stopping enemy update
+    protected bool canMove = true; //for stopping enemy movement
+
+    //To toggle hit react off for one call of take damage
+    bool hitReact = true;
+
 
     protected virtual void Awake()
     {
@@ -107,6 +124,9 @@ public class EnemyAI : MonoBehaviour, Idamage
         origColor = meshRenderer.material.color;
 
         attackTimer = attackRate;//When the enemy goes to attack for the first time they dont wait
+
+        canUpdate = true;
+        canMove = true;
     }
 
     protected virtual void Update()
@@ -119,6 +139,23 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
 #endif
 
+
+        
+        if (fireDuration > 0)
+            BurnEffect();
+
+        if (!canUpdate && freezeDuration > 0)
+        {
+            hitStunned = false;
+            FreezeEffect();
+            return;
+        }
+        else if (!canUpdate)
+        {
+            return;
+        }
+
+        UpdateAnimations();
 
         if (isFlying)
         {
@@ -142,7 +179,6 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
 
         GroundCheck();
-        UpdateAnimations();
 
         switch (curState)
         {
@@ -178,8 +214,9 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     protected virtual void FixedUpdate()
     { 
-        if (hitStunned)
+        if (hitStunned || !canMove)
         {
+            curSpeed = 0;
             return;
         }
 
@@ -501,7 +538,11 @@ public class EnemyAI : MonoBehaviour, Idamage
             curHealth = 0;
             curState = EnemyState.dead;
         }
-        HitReact();
+
+        if (hitReact)
+            HitReact();
+        else
+            hitReact = true;
     }
 
     protected virtual void Stopped()
@@ -514,5 +555,63 @@ public class EnemyAI : MonoBehaviour, Idamage
         meshRenderer.material.color = Color.red;
         yield return new WaitForSeconds(.1f);
         meshRenderer.material.color = origColor;
+    }
+
+    public virtual void ApplyBurnEffect(float duration, int tickDamage, float tickrate)
+    {
+        fireDuration = duration;
+        fireTickDamage = tickDamage;
+        fireTickRate = tickrate;
+        fireTimer = 0;
+    }
+
+    public virtual void ApplyFreezeEffect(float duration)
+    {
+        freezeDuration = duration;
+        canMove = false;
+        canUpdate = false;
+
+        if (animator.speed != 0)
+        {
+            origAnimSpeed = animator.speed;
+            animator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            if (meshRenderer.material.color == Color.red)
+            {
+                beforeFreezeColor = origColor;
+                origColor = Color.blue;
+            }
+            else
+                beforeFreezeColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.blue;
+        }
+    }
+
+    protected virtual void BurnEffect()
+    {
+        fireDuration -= Time.deltaTime;
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= fireTickRate)
+        {
+            fireTimer = 0;
+            hitReact = false;
+            TakeDamage(fireTickDamage);
+        }
+    }
+
+    protected virtual void FreezeEffect()
+    {
+        freezeDuration -= Time.deltaTime;
+        if (freezeDuration <= 0)
+        {
+            freezeDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            animator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforeFreezeColor;
+        }
     }
 }
