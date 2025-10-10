@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyAI : MonoBehaviour, Idamage
+public class EnemyAI : MonoBehaviour, Idamage, IEffect
 {
-    protected enum EnemyState
+    public enum EnemyState
     {
         stopped,
         roaming,
@@ -23,7 +24,7 @@ public class EnemyAI : MonoBehaviour, Idamage
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected LayerMask lineOfSightIgnoreLayer;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected EnemyState startState;
+    public EnemyState startState;
     public bool isSpecial = false;
 
     Color origColor;
@@ -49,7 +50,7 @@ public class EnemyAI : MonoBehaviour, Idamage
     [Header("Attack Variables")]
     [SerializeField] protected int maxHealth;
     protected int curHealth;
-    [SerializeField] protected int enemyAggroRange;
+    public int enemyAggroRange;
     [SerializeField] protected float attackRate = 0.5f;
     [SerializeField] protected float hitStunDuration = 0.5f;
     protected float hitStunTimer = 0;
@@ -57,12 +58,12 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     [Header("Melee Variables")]
     [SerializeField] protected List<GameObject> hitBoxes = new List<GameObject>();
-    [SerializeField] protected int meleeDamage;
+    public int meleeDamage;
 
     [Header("Ranged Variables")]
     [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
     [SerializeField] protected Transform projectileSpawn;
-    [SerializeField] protected int projDamage;
+    public int projDamage;
     [SerializeField] protected float projSpeed;
     [SerializeField] protected float projDestroyTime;
 
@@ -84,6 +85,25 @@ public class EnemyAI : MonoBehaviour, Idamage
     [SerializeField] protected float roamPauseTime;
     protected float roamPauseTimer;
 
+
+    // Status Effect variables
+    protected float fireDuration;
+    protected int fireTickDamage;
+    protected float fireTimer;
+    protected float fireTickRate;
+
+    protected float freezeDuration;
+    protected float origAnimSpeed;
+    protected Color beforeFreezeColor;
+
+    protected float StunDuration;
+    protected Color beforestunColor;
+
+    protected bool canUpdate = true; //for stopping enemy update
+    protected bool canMove = true; //for stopping enemy movement
+
+    //To toggle hit react off for one call of take damage
+    protected bool hitReact = true;
 
 
     protected virtual void Awake()
@@ -107,6 +127,9 @@ public class EnemyAI : MonoBehaviour, Idamage
         origColor = meshRenderer.material.color;
 
         attackTimer = attackRate;//When the enemy goes to attack for the first time they dont wait
+
+        canUpdate = true;
+        canMove = true;
     }
 
     protected virtual void Update()
@@ -119,6 +142,32 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
 #endif
 
+
+        
+        if (fireDuration > 0)
+            BurnEffect();
+
+        if (!canUpdate && freezeDuration > 0)
+        {
+            hitStunned = false;
+            FreezeEffect();
+            return;
+        }  
+        else if (!canUpdate && StunDuration > 0)
+        {
+            hitStunned = false;
+            StunEffect();
+            return;
+        }
+        else if (!canUpdate)
+        {
+            return;
+        }
+
+      
+       
+
+        UpdateAnimations();
 
         if (isFlying)
         {
@@ -142,7 +191,6 @@ public class EnemyAI : MonoBehaviour, Idamage
         }
 
         GroundCheck();
-        UpdateAnimations();
 
         switch (curState)
         {
@@ -178,8 +226,9 @@ public class EnemyAI : MonoBehaviour, Idamage
 
     protected virtual void FixedUpdate()
     { 
-        if (hitStunned)
+        if (hitStunned || !canMove)
         {
+            curSpeed = 0;
             return;
         }
 
@@ -501,7 +550,11 @@ public class EnemyAI : MonoBehaviour, Idamage
             curHealth = 0;
             curState = EnemyState.dead;
         }
-        HitReact();
+
+        if (hitReact)
+            HitReact();
+        else
+            hitReact = true;
     }
 
     protected virtual void Stopped()
@@ -514,5 +567,101 @@ public class EnemyAI : MonoBehaviour, Idamage
         meshRenderer.material.color = Color.red;
         yield return new WaitForSeconds(.1f);
         meshRenderer.material.color = origColor;
+    }
+
+    public virtual void ApplyBurnEffect(float duration, int tickDamage, float tickrate)
+    {
+        fireDuration = duration;
+        fireTickDamage = tickDamage;
+        fireTickRate = tickrate;
+        fireTimer = 0;
+    }
+
+    public virtual void ApplyFreezeEffect(float duration)
+    {
+        freezeDuration = duration;
+        canMove = false;
+        canUpdate = false;
+
+        if (animator.speed != 0)
+        {
+            origAnimSpeed = animator.speed;
+            animator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            if (meshRenderer.material.color == Color.red)
+            {
+                beforeFreezeColor = origColor;
+                origColor = Color.blue;
+            }
+            else
+                beforeFreezeColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.blue;
+        }
+    }
+public void ApplyStunEffect(float duration)
+    {
+        StunDuration = duration;
+        canMove = false;
+        canUpdate = false;
+
+        if (animator.speed != 0)
+        {
+            origAnimSpeed = animator.speed;
+            animator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            if (meshRenderer.material.color == Color.red)
+            {
+                beforestunColor = origColor;
+                origColor = Color.blue;
+            }
+            else
+                beforestunColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.yellow;
+        }
+    }
+    protected virtual void BurnEffect()
+    {
+        fireDuration -= Time.deltaTime;
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= fireTickRate)
+        {
+            fireTimer = 0;
+            hitReact = false;
+            TakeDamage(fireTickDamage);
+        }
+    }
+
+    protected virtual void FreezeEffect()
+    {
+        freezeDuration -= Time.deltaTime;
+        if (freezeDuration <= 0)
+        {
+            freezeDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            animator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforeFreezeColor;
+        }
+    }
+
+    
+
+    protected virtual void StunEffect()
+    {
+        StunDuration -= Time.deltaTime;
+        if (StunDuration <= 0)
+        {
+            StunDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            animator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforestunColor;
+        }
     }
 }

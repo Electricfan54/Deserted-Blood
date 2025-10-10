@@ -20,7 +20,9 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag(other.tag))
+            return;
+        else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
         {
 
         }

@@ -4850,9 +4850,9 @@ GameObject:
   - component: {fileID: 3285425250295040847}
   - component: {fileID: 7726466304820935565}
   - component: {fileID: 2274820928084615725}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _LightningRhino
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

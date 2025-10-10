@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdac6d5ca058fae4b8507515efbc1ebe, type: 3}
+  m_Name: New Ability 1
+  m_EditorClassIdentifier: Assembly-CSharp::Ability
+  type: 1
+  damage: 33
+  shootpos: {fileID: 0}
+  maxCharge: 34
+  currentcharge: 34
+  abilityPrefab: {fileID: 8018087860373096494, guid: 154ade6417864004f826b072e2bae4f6, type: 3}

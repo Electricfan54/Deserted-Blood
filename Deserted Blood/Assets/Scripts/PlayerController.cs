@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Idamage,IPickup
+public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 {
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
+    [SerializeField] Renderer meshRenderer;
 
     [SerializeField] int HP;
     [SerializeField] int MaxHP;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     [SerializeField] int MaxJumps;
     [SerializeField] int JumpStrength;
     [SerializeField] int gravityStrength;
+    [SerializeField] int SlideGravity;
 
     [SerializeField] int Speed;
 
@@ -40,7 +42,23 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     int origBloodMeter = 50;
     int origHP;
 
-    int playerXPush;
+    int playerXPush = 3;
+
+    //Status effect variables
+    protected float burnDuration;
+    protected int burnTickDamage;
+    protected float burnTimer;
+    protected float burnTickRate;
+
+    protected float freezeDuration;
+    protected float origAnimSpeed;
+    protected Color beforeFreezeColor;
+
+    protected float StunDuration;
+    protected Color beforeStunColor;
+
+    protected bool canUpdate = true; //for stopping player input update
+    protected bool canMove = true; //for stopping player movement
 
     private void Awake()
     {
@@ -57,6 +75,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     // Update is called once per frame
     void Update()
     {
+        if (burnDuration > 0)
+            BurnEffect();
+        if (freezeDuration > 0)
+            FreezeEffect();
+        if(StunDuration > 0)
+            StunEffect();
         Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
         Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
         if (CharController.isGrounded)
@@ -69,14 +93,21 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         else
         {
             isGrounded = false;
-            playerVel.y -= gravityStrength * Time.deltaTime;
+            if (WallInRange && playerVel.y <= 0)
+            {
+                playerVel.y -= SlideGravity * Time.deltaTime;
+            }
+            else
+            {
+                playerVel.y -= gravityStrength * Time.deltaTime;
+            }
         }
-        RaycastHit CeilingCheck;
 
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, 2.5f))
-        {
-            playerVel.y = 0;
-        }
+        //RaycastHit CeilingCheck;
+        //if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
+        //{
+        //    playerVel.y = -2;
+        //}
 
         Movement();
     }
@@ -84,7 +115,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
     // Movement stuff
     void Movement()
     {
-        float Horizantol = Input.GetAxis("Horizontal");
+        float Horizantol = 0;
+        if (canMove)
+            Horizantol = Input.GetAxis("Horizontal");
 
         MoveDirection = new Vector3(Horizantol, 0, 0);
 
@@ -99,7 +132,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
 
         CharController.Move(MoveDirection * Speed * Time.deltaTime);
 
-        Jump();
+        if(canMove)
+            Jump();
 
         CharController.Move(playerVel * Time.deltaTime);
     }
@@ -114,10 +148,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
             JumpCount++;
         }
 
-        if(InputUp && playerVel.y > 0)
+        if(InputUp && playerVel.y > 0 && WallInRange == false)
         {
             playerVel.y = 0;
         }
+
+        
 
         WallJump();
     }
@@ -134,15 +170,22 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
             WallInRange = false;
         }
 
-        if(WallInRange && Input.GetButtonDown("Jump"))
+        if(WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
         {
-            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength, 0);
-           
+            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
+            transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
         }
 
         if(playerVel.x != 0)
         {
-            
+            if(playerVel.x > 0)
+            {
+                playerVel.x -= playerXPush * Time.deltaTime;
+            }
+            else
+            {
+                playerVel.x += playerXPush * Time.deltaTime;
+            }
         }
         
     }
@@ -191,6 +234,99 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup
         MaxHP += amount;
     }
 
+    public void ApplyBurnEffect(float duration, int tickDamage, float tickRate)
+    {
+        burnDuration = duration;
+        burnTickDamage = tickDamage;
+        burnTickRate = tickRate;
+        burnTimer = 0;
+    }
 
+    public void ApplyFreezeEffect(float duration)
+    {
+        freezeDuration = duration;
+        canMove = false;
+        canUpdate = false;
 
+        if (PlayerAnimator.speed != 0)
+        {
+            origAnimSpeed = PlayerAnimator.speed;
+            PlayerAnimator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            // Uncomment if player damage flash is implemented
+            //if (meshRenderer.material.color == Color.red)
+            //{
+            //    beforeFreezeColor = origColor;
+            //    origColor = Color.blue;
+            //}
+            //else
+                beforeFreezeColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.blue;
+        }
+    }
+
+    void BurnEffect()
+    {
+        burnDuration -= Time.deltaTime;
+        burnTimer += Time.deltaTime;
+        if (burnTimer >= burnTickRate)
+        {
+            burnTimer = 0;
+            TakeDamage(burnTickDamage);
+        }
+    }
+
+    void FreezeEffect()
+    {
+        freezeDuration -= Time.deltaTime;
+        if (freezeDuration <= 0)
+        {
+            freezeDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            PlayerAnimator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforeFreezeColor;
+        }
+    }
+
+    void StunEffect()
+    {
+        StunDuration -= Time.deltaTime;
+        if (StunDuration <= 0)
+        {
+            StunDuration = 0;
+            canMove = true;
+            canUpdate = true;
+            PlayerAnimator.speed = origAnimSpeed;
+            meshRenderer.material.color = beforeStunColor;
+        }
+    }
+    public void ApplyStunEffect(float duration)
+    {
+        StunDuration = duration;
+        canMove = false;
+        canUpdate = false;
+
+        if (PlayerAnimator.speed != 0)
+        {
+            origAnimSpeed = PlayerAnimator.speed;
+            PlayerAnimator.speed = 0;// Pause animation
+        }
+
+        if (meshRenderer.material.color != Color.blue)
+        {
+            // Uncomment if player damage flash is implemented
+            //if (meshRenderer.material.color == Color.red)
+            //{
+            //    beforeFreezeColor = origColor;
+            //    origColor = Color.blue;
+            //}
+            //else
+            beforeStunColor = meshRenderer.material.color;
+            meshRenderer.material.color = Color.yellow;
+        }
+    }
 }

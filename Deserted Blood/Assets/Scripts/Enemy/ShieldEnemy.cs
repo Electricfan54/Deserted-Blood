@@ -6,7 +6,7 @@ public class ShieldEnemy : EnemyAI
 
     protected override void FixedUpdate()
     {
-        if (hitStunned)
+        if (hitStunned || !canMove)
         {
             return;
         }

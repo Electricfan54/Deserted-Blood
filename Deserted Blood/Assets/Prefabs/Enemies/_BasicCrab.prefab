@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7011133600791058389}
   - component: {fileID: 7300644947850017625}
   - component: {fileID: 2103688851925421124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _AttackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,9 +81,9 @@ GameObject:
   - component: {fileID: 8564842001809736320}
   - component: {fileID: 4506376737784018208}
   - component: {fileID: 2340244084594349867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _BasicCrab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 483740, guid: d8d4d2c4e22d5294abe74dcb24776383, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 483740, guid: d8d4d2c4e22d5294abe74dcb24776383, type: 3}
       propertyPath: m_LocalRotation.x
@@ -255,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 483740, guid: d8d4d2c4e22d5294abe74dcb24776383, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 483740, guid: d8d4d2c4e22d5294abe74dcb24776383, type: 3}
       propertyPath: m_LocalRotation.z
@@ -267,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 483740, guid: d8d4d2c4e22d5294abe74dcb24776383, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 483740, guid: d8d4d2c4e22d5294abe74dcb24776383, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

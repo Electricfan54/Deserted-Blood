@@ -12,10 +12,12 @@ public  class Ability : ScriptableObject
     }
 
   public AbilityType type;
+    public int damage;
+   
     public int maxCharge;
     public int currentcharge;
     public GameObject abilityPrefab;
-
+ public GameObject abilityPrefab2;
 
 
 }
