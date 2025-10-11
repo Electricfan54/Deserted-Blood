@@ -294,13 +294,19 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
         if (meshRenderer.material.color != Color.blue)
         {
-            // Uncomment if player damage flash is implemented
-            //if (meshRenderer.material.color == Color.red)
-            //{
-            //    beforeFreezeColor = origColor;
-            //    origColor = Color.blue;
-            //}
-            //else
+            //Uncomment if player damage flash is implemented
+            /*if (meshRenderer.material.color == Color.red)
+            {
+                beforeFreezeColor = origColor;
+                origColor = Color.blue;
+            }
+            else*/
+            if (meshRenderer.material.color == Color.yellow)
+            {
+                beforeFreezeColor = beforeStunColor;
+                beforeStunColor = Color.blue;
+            }
+            else
                 beforeFreezeColor = meshRenderer.material.color;
             meshRenderer.material.color = Color.blue;
         }
