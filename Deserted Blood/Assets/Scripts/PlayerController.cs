@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if (StunDuration <= 0)
         {
             StunDuration = 0;
-         for(int i = 0;i< stuncharges.Count;i++ )
+         for(int i = 0;i< abilities.Count;i++ )
             {
  
                     abilities[i].currentcharge=stuncharges[i];
