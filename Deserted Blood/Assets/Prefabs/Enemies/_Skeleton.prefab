@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb942de432112804f9536e3ebe587e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   meshRenderer: {fileID: 902895344253494708}
   groundLayer:
     serializedVersion: 2
@@ -59,6 +62,7 @@ MonoBehaviour:
   animator: {fileID: 3653242114551940887}
   startState: 1
   isSpecial: 0
+  noDeathAnim: 1
   enemyType: 0
   abilityDrop: {fileID: 0}
   isFlying: 0
