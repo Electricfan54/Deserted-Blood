@@ -7887,26 +7887,30 @@ MonoBehaviour:
   bossNameText: {fileID: 5810668516679027380}
   chargeBase: {fileID: 7823392671730014307}
   abilitySlot1:
+    equippedAbility: {fileID: 0}
     chargeFrame: {fileID: 5577354072312013328}
     abilityIcon: {fileID: 8660077086413896972}
     maxCharges: 0
     currCharges: 0
     chargeList: []
   abilitySlot2:
+    equippedAbility: {fileID: 0}
     chargeFrame: {fileID: 938036626410609831}
     abilityIcon: {fileID: 8219600036896077027}
     maxCharges: 0
     currCharges: 0
     chargeList: []
   abilitySlot3:
+    equippedAbility: {fileID: 0}
     chargeFrame: {fileID: 1749097777867793581}
     abilityIcon: {fileID: 7425832337986240939}
     maxCharges: 0
     currCharges: 0
     chargeList: []
+  testAbility: {fileID: 11400000, guid: bf1062fea93f6e74784ac88ff9c4c7a5, type: 2}
   frameHeight: 150
-  frameSpacing: 2
-  slotSelected: 1
+  frameSpacing: 1
+  slotSelected: 0
   selHighlight: {fileID: 8015644174922292357}
   transitionMain: {fileID: 1992985933481746057}
   transTimeScale: 3

@@ -8,6 +8,7 @@ using TMPro;
 [System.Serializable]
 public struct AbilitySlotMain
 {
+    [SerializeField] public Ability equippedAbility;
     [SerializeField] public GameObject chargeFrame;
     [SerializeField] public Image abilityIcon;
     [SerializeField] public int maxCharges;
@@ -60,10 +61,12 @@ public class gameManager : MonoBehaviour
     public AbilitySlotMain abilitySlot2;
     public AbilitySlotMain abilitySlot3;
 
+    [SerializeField] Ability testAbility;
+
     [SerializeField] float frameHeight;
     [SerializeField] float frameSpacing;
 
-    [SerializeField][Range(1,3)] int slotSelected;
+    [Range(0,2)] public int slotSelected;
     [SerializeField] GameObject selHighlight;
 
     [Header("Transition Variables")]
@@ -132,14 +135,6 @@ public class gameManager : MonoBehaviour
 
         UpdateVolume();
 
-        abilitySlot1.currCharges = abilitySlot1.maxCharges;
-        abilitySlot2.currCharges = abilitySlot2.maxCharges;
-        abilitySlot3.currCharges = abilitySlot3.maxCharges;
-
-        AssignAbility(abilitySlot1);
-        AssignAbility(abilitySlot2);
-        AssignAbility(abilitySlot3);
-
     }
 
     // Update is called once per frame
@@ -148,7 +143,6 @@ public class gameManager : MonoBehaviour
         if (transitionActive)
             Transition();
 
-        UpdateAbilityUI();
         PauseFunction();
 
     }
@@ -274,7 +268,7 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void AssignAbility(AbilitySlotMain selSlot)
+    public void AssignAbility(AbilitySlotMain selSlot, Ability ability)
     {
 
         if (selSlot.chargeList.Count > 0)
@@ -287,6 +281,9 @@ public class gameManager : MonoBehaviour
             selSlot.chargeList.Clear();
 
         }
+
+        selSlot.maxCharges = ability.maxCharge;
+        selSlot.currCharges = selSlot.maxCharges;
 
         for (int i = 0; i < selSlot.maxCharges; i++)
         {
@@ -317,19 +314,15 @@ public class gameManager : MonoBehaviour
     public void UpdateAbilityUI()
     {
 
-        UpdateCharges(abilitySlot1);
-        UpdateCharges(abilitySlot2);
-        UpdateCharges(abilitySlot3);
-
         switch (slotSelected)
         {
-            case 1:
+            case 0:
                 selHighlight.transform.localPosition = new Vector2(810, -425);
                 break;
-            case 2:
+            case 1:
                 selHighlight.transform.localPosition = new Vector2(610, -425);
                 break;
-            case 3:
+            case 2:
                 selHighlight.transform.localPosition = new Vector2(410, -425);
                 break;
         }

@@ -36344,6 +36344,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 8416635333365860294, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+      propertyPath: testAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: bf1062fea93f6e74784ac88ff9c4c7a5, type: 2}
+    - target: {fileID: 8416635333365860294, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+      propertyPath: frameSpacing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416635333365860294, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+      propertyPath: slotSelected
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8500007527763828458, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
