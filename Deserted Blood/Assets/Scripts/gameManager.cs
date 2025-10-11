@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 [System.Serializable]
 public struct AbilitySlotMain
@@ -32,6 +33,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
+
+    [SerializeField] GameObject damageFlash;
 
     public GameObject pickUpPrompt;
 
@@ -372,6 +375,13 @@ public class gameManager : MonoBehaviour
     public void UpdateBossBar(int currHealth)
     {
         bossBar.fillAmount = (float)currHealth / (float)bossHPMax;
+    }
+
+    IEnumerator DamageFlash()
+    {
+        damageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        damageFlash.SetActive(false);
     }
 
 }
