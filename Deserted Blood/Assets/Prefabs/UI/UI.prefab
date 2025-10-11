@@ -7888,7 +7888,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9056364396037642351}
         m_TargetAssemblyTypeName: buttonManager, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7945,6 +7945,7 @@ MonoBehaviour:
   uiMain: {fileID: 4967404660036194682}
   player: {fileID: 0}
   playerScript: {fileID: 0}
+  playerCheckpoint: {fileID: 0}
   menuActive: {fileID: 1856797111417297439}
   menuMain: {fileID: 1856797111417297439}
   menuPause: {fileID: 1715069544030251449}

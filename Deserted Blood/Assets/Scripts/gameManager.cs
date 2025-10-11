@@ -393,7 +393,9 @@ public class gameManager : MonoBehaviour
     public void RespawnPlayer()
     {
 
-        
+        player.transform.position = playerCheckpoint.position;
+        playerScript.HP = playerScript.MaxHP;
+        UpdateHPBar(playerScript.MaxHP, playerScript.HP);
 
     }
 
