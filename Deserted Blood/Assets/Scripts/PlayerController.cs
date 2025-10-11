@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         MaxHP = origHP;
         origBloodMeter = MaxBloodMeter;
         gameManager.instance.UpdateHPBar(MaxHP, HP);
+        gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
+
     }
 
     // Update is called once per frame
@@ -237,6 +239,17 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             }
             StartCoroutine(IFrames());
         }
+    }
+
+    public void AddBloodAmount(int amount)
+    {
+        BloodMeter += amount;
+        if(BloodMeter > MaxBloodMeter)
+        {
+            BloodMeter = MaxBloodMeter;
+        }
+
+        gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
     }
 
     public void abilitystats(Ability ability)
