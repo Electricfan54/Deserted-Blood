@@ -1285,6 +1285,7 @@ MonoBehaviour:
   roamDist: 0
   roamStopDist: 0
   roamPauseTime: 0
+  bloodAddAmount: 100
   cameraFocusPos: {x: 0, y: 0, z: 0}
   camDistance: {x: 0, y: 1.2, z: -6.7}
   projSpawnPointList:
@@ -1321,7 +1322,7 @@ MonoBehaviour:
   melee1Damage: 25
   melee2Damage: 0
   roarCooldown: 10
-  projSpawnRate: 0.5
+  projSpawnRate: 0.3
 --- !u!95 &1458560940583899797
 Animator:
   serializedVersion: 7

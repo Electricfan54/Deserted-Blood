@@ -4924,6 +4924,7 @@ MonoBehaviour:
   roamDist: 3
   roamStopDist: 0.5
   roamPauseTime: 1
+  bloodAddAmount: 10
   chargeTime: 5
   lightningRange: 10
   chargeEffect: {fileID: 2432624159056337253}

@@ -142,6 +142,7 @@ MonoBehaviour:
   roamDist: 8
   roamStopDist: 1
   roamPauseTime: 2
+  bloodAddAmount: 1
 --- !u!54 &6628470156252707531
 Rigidbody:
   m_ObjectHideFlags: 0

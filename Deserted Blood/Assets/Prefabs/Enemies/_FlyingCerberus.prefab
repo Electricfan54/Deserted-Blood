@@ -173,6 +173,7 @@ MonoBehaviour:
   roamDist: 5
   roamStopDist: 0.5
   roamPauseTime: 1
+  bloodAddAmount: 10
   model: {fileID: 2259630661358689125}
   fireEffects:
   - {fileID: 3916575895341457981}
