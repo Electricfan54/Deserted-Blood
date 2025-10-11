@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
+public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 {
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     [SerializeField] int BloodMeter;
     [SerializeField] int MaxBloodMeter;
 
-    [Tooltip("Used for regular attacks")] [SerializeField] GameObject LightAttackHitbox;
+    [Tooltip("Used for regular attacks")][SerializeField] GameObject LightAttackHitbox;
     [SerializeField] GameObject[] BaseAttacks;
     [SerializeField] int BasePlayerDamage;
 
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     Vector3 playerVel;
 
     int CurrentMoveAnimationIndex;
-    
+
 
     public bool isGrounded;
     bool hasWallJumped = false;
@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     protected float StunDuration;
     protected Color beforeStunColor;
-   List<int>stuncharges=new List<int>();
+    List<int> stuncharges = new List<int>();
+    bool stunchar = false;
 
     protected bool canUpdate = true; //for stopping player input update
     protected bool canMove = true; //for stopping player movement
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             BurnEffect();
         if (freezeDuration > 0)
             FreezeEffect();
-        if(StunDuration > 0)
+        if (StunDuration > 0)
             StunEffect();
         //Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
         //Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
@@ -97,7 +98,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             isGrounded = true;
             playerVel.y = -2;
             JumpCount = 0;
-            if(hasWallJumped == true)
+            if (hasWallJumped == true)
             {
                 playerVel.x = 0;
                 hasWallJumped = false;
@@ -134,19 +135,19 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
         MoveDirection = new Vector3(Horizantol, 0, 0);
 
-        if(Horizantol > 0)
+        if (Horizantol > 0)
         {
-            transform.rotation = Quaternion.Euler(0,90,0);
+            transform.rotation = Quaternion.Euler(0, 90, 0);
         }
         else if (Horizantol < 0)
         {
-            transform.rotation = Quaternion.Euler(0,-90,0);
+            transform.rotation = Quaternion.Euler(0, -90, 0);
         }
 
 
         CharController.Move(MoveDirection * Speed * Time.deltaTime);
 
-        if(canMove)
+        if (canMove)
             Jump();
 
         BaseAbilityInputCheck();
@@ -172,18 +173,18 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     {
         var InputDown = Input.GetButtonDown("Jump");
         var InputUp = Input.GetButtonUp("Jump");
-        if(InputDown && JumpCount <  MaxJumps)
+        if (InputDown && JumpCount < MaxJumps)
         {
             playerVel.y = JumpStrength;
             JumpCount++;
         }
 
-        if(InputUp && playerVel.y > 0 && WallInRange == false)
+        if (InputUp && playerVel.y > 0 && WallInRange == false)
         {
             playerVel.y = 0;
         }
 
-        
+
 
         WallJump();
     }
@@ -191,7 +192,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     void WallJump()
     {
         RaycastHit WallCheck;
-        if(Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out WallCheck, .7f))
+        if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out WallCheck, .7f))
         {
             WallInRange = true;
         }
@@ -200,16 +201,16 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             WallInRange = false;
         }
 
-        if(WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
+        if (WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
         {
             hasWallJumped = true;
             playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
             transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
         }
 
-        if(playerVel.x != 0)
+        if (playerVel.x != 0)
         {
-            if(playerVel.x > 0)
+            if (playerVel.x > 0)
             {
                 playerVel.x -= playerXPush * Time.deltaTime;
             }
@@ -218,17 +219,17 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
                 playerVel.x += playerXPush * Time.deltaTime;
             }
         }
-        
+
     }
 
 
     // Ability or enemy related stuff
     public void TakeDamage(int DamageAmount)
     {
-        if(isInvinc == false)
+        if (isInvinc == false)
         {
             HP -= DamageAmount;
-            if(HP <= 0)
+            if (HP <= 0)
             {
                 // call game lose
             }
@@ -281,7 +282,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     public void ApplyFreezeEffect(float duration)
     {
-        if (freezeDuration <=0 )
+        if (freezeDuration <= 0)
             freezeDuration = duration;
         canMove = false;
         canUpdate = false;
@@ -301,7 +302,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             //    origColor = Color.blue;
             //}
             //else
-                beforeFreezeColor = meshRenderer.material.color;
+            beforeFreezeColor = meshRenderer.material.color;
             meshRenderer.material.color = Color.blue;
         }
     }
@@ -336,12 +337,15 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if (StunDuration <= 0)
         {
             StunDuration = 0;
-         for(int i = 0;i< stuncharges.Count;i++ )
-            {
- 
-                    abilities[i].currentcharge=stuncharges[i];
-            }
-            stuncharges.Clear();
+           
+                for (int i = 0; i < abilities.Count; i++)
+                {
+
+                    abilities[i].currentcharge = stuncharges[i];
+                }
+                stuncharges.Clear();
+                stunchar = false;
+            
 
         }
     }
@@ -353,7 +357,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             stuncharges.Add(abilities[i].currentcharge);
             abilities[i].currentcharge = 0;
         }
-
+        stunchar = true;
         if (meshRenderer.material.color != Color.blue)
         {
             // Uncomment if player damage flash is implemented
@@ -381,7 +385,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             StartCoroutine(FallingPunch());
         }
 
-        if(isAttacking == false && Input.GetKeyDown(KeyCode.G))
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.G))
         {
             // play animation using the animation index after making the stuff   for it
             // left, right, hook, right

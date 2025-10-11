@@ -11,7 +11,7 @@ public class pickup : MonoBehaviour
         if (pickup!=null)
         {
 
-            gameManager.instance.pickUpPrompt.SetActive(true);
+           // gameManager.instance.pickUpPrompt.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {

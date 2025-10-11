@@ -807,8 +807,19 @@ MonoBehaviour:
   player: {fileID: 0}
   playerScript: {fileID: 0}
   menuActive: {fileID: 0}
+  menuMain: {fileID: 0}
   menuPause: {fileID: 0}
+  isPaused: 0
+  mainMenuActive: 0
+  sliderSFX: {fileID: 0}
+  sliderMus: {fileID: 0}
+  volTextSFX: {fileID: 0}
+  volTextMus: {fileID: 0}
   playerHPBar: {fileID: 0}
+  playerHUD: {fileID: 0}
+  bossBarUI: {fileID: 0}
+  bossBar: {fileID: 0}
+  bossNameText: {fileID: 0}
   chargeBase: {fileID: 0}
   abilitySlot1:
     chargeFrame: {fileID: 0}
@@ -830,6 +841,8 @@ MonoBehaviour:
     chargeList: []
   frameHeight: 0
   frameSpacing: 0
+  slotSelected: 0
+  selHighlight: {fileID: 0}
   transitionMain: {fileID: 0}
   transTimeScale: 0
 --- !u!4 &466537702
@@ -906,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1030,7 +1043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1313,7 +1326,7 @@ Transform:
   m_GameObject: {fileID: 1230831542}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.12, y: 0, z: 9.28667}
+  m_LocalPosition: {x: -12.12, y: 2.91, z: 9.28667}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1530,6 +1543,10 @@ PrefabInstance:
       value: _Skeleton
       objectReference: {fileID: 0}
     - target: {fileID: 7788615725782641757, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
+      propertyPath: isSpecial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788615725782641757, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: abilityDrop
       value: 
       objectReference: {fileID: 5330793500607108865, guid: be5163695ea72454dab089a5f6b428a6, type: 3}
@@ -1635,7 +1652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2150,6 +2167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   Target: {fileID: 1500799868}
   camSmoothSpeed: 5
+  camDistance: {x: 0, y: 0, z: 0}
 --- !u!4 &2130832675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 902895344248059018, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}

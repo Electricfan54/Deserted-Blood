@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 1
-  damagetype: 3
+  damagetype: 2
 --- !u!54 &-1918786542916116412
 Rigidbody:
   m_ObjectHideFlags: 0

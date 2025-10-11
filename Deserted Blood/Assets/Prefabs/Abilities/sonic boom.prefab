@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5704964203476394524}
   - component: {fileID: 5585730074013464113}
-  - component: {fileID: -4199738481206984976}
+  - component: {fileID: 618656666160744723}
   m_Layer: 0
-  m_Name: Sphere 2
+  m_Name: sonic boom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4199738481206984976
+--- !u!114 &618656666160744723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,4 +66,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70a042a640676047a57d0f0ee02649d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::sonicboom
-  destroytime: 7
+  destroytime: 5
