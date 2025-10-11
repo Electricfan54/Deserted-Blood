@@ -202,7 +202,7 @@ public class RedHornAI : EnemyAI
 
     public void StartBossFight()
     {
-        gameManager.instance.ShowBossBar("Orc King", maxHealth);
+        gameManager.instance.ShowBossBar("Red Horn", maxHealth);
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();

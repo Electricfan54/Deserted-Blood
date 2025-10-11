@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
-using UnityEditor.UIElements;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
@@ -139,15 +138,6 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     protected virtual void Update()
     {
-        //Debug Code
-#if UNITY_EDITOR
-        if (Input.GetKeyDown("z"))
-        {
-            TakeDamage(10);
-        }
-#endif
-
-
         
         if (fireDuration > 0)
             BurnEffect();
@@ -580,6 +570,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             Destroy(gameObject);
             return;
         }
+
         animator.SetTrigger("dead");
         gameObject.layer = LayerMask.NameToLayer("Dead");
         Destroy(gameObject, 5);
@@ -593,6 +584,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected virtual IEnumerator FlashRed()
     {
         meshRenderer.material.color = Color.red;
+        meshRenderer.material.color = new Color(meshRenderer.material.color.r, meshRenderer.material.color.g, meshRenderer.material.color.b, 0.5f);
         yield return new WaitForSeconds(.1f);
         meshRenderer.material.color = origColor;
     }
