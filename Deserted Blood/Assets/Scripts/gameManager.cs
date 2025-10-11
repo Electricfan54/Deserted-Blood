@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuLose;
 
     public GameObject pickUpPrompt;
 
@@ -193,6 +194,14 @@ public class gameManager : MonoBehaviour
 
     }
 
+    public void GameOver()
+    {
+        PauseGame();
+        menuHierarchy.Add(menuLose);
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
     public void Transition()
     {
 
@@ -295,6 +304,13 @@ public class gameManager : MonoBehaviour
         }
     
 
+
+    }
+
+    public void UpdateHPBar(int maxHP, int currHP)
+    {
+
+        playerHPBar.fillAmount = (float)currHP / maxHP;
 
     }
 
