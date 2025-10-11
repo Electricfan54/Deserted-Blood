@@ -24,7 +24,7 @@ public class sonicboom : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.ApplyStunEffect(5);
+            return;
         }
     }
     IEnumerator destroysonicboom()
