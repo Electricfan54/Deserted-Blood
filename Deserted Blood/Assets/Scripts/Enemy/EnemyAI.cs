@@ -29,6 +29,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected Animator animator;
     public EnemyState startState;
     public bool isSpecial = false;
+    [SerializeField]
+    bool noDeathAnim = false;
 
     Color origColor;
 
@@ -573,6 +575,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         AddToMilestone();
         DropAbility();
         onDeathEvent?.Invoke();
+        if (noDeathAnim)
+        {
+            Destroy(gameObject);
+            return;
+        }
         animator.SetTrigger("dead");
         gameObject.layer = LayerMask.NameToLayer("Dead");
         Destroy(gameObject, 5);

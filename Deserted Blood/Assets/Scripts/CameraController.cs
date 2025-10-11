@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform Target;
+    public Transform Target;
     [SerializeField] float camSmoothSpeed;
     [SerializeField] Vector3 camDistance;
 
@@ -32,11 +32,14 @@ public class CameraController : MonoBehaviour
 
     public void SetBossDistance(Vector3 distance)
     {
-        if(camDistance == null)
-            camDistance = distance;
 
 
-        CurrentView = camDistance;
+        CurrentView = distance;
+    }
+
+    public void resetCam()
+    {
+        CurrentView = offset;
     }
 
 
