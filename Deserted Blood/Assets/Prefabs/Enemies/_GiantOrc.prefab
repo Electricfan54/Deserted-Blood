@@ -209,7 +209,7 @@ MonoBehaviour:
   moveSpeed: 5
   acceleration: 1
   chaseStopDist: 2
-  maxHealth: 10
+  maxHealth: 50
   enemyAggroRange: 5
   attackRate: 0.5
   hitStunDuration: 0.5
