@@ -365,6 +365,24 @@ public class gameManager : MonoBehaviour
 
     }
 
+    public void RestockCharges()
+    {
+
+        AbilitySlotMain selSlot = abilitySlots[slotSelected];
+
+        selSlot.currCharges = selSlot.maxCharges;
+
+        for (int i = 0; i < selSlot.maxCharges; i++)
+        {
+
+            selSlot.chargeList[i].GetComponent<Image>().color = new Color(0.2295596f, 0.8713329f, 1.0f);
+
+        }
+
+        abilitySlots[slotSelected] = selSlot;
+
+    }    
+
     public void ShowBossBar(string bossName, int maxHealth)
     {
         bossBarUI.SetActive(true);
