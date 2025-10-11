@@ -24,8 +24,11 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
     public GameObject uiMain;
 
+    [Header("Player Specific")]
     public GameObject player;
     public PlayerController playerScript;
+
+    public Transform playerCheckpoint;
 
     [Header("UI Specific")]
     [SerializeField] GameObject menuActive;
@@ -136,6 +139,9 @@ public class gameManager : MonoBehaviour
         {
             playerScript = player.GetComponent<PlayerController>();
         }
+
+        playerCheckpoint = player.transform;
+
     }
 
     private void Start()
@@ -382,6 +388,15 @@ public class gameManager : MonoBehaviour
         damageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         damageFlash.SetActive(false);
+    }
+
+    public void RespawnPlayer()
+    {
+
+        player.transform.position = playerCheckpoint.position;
+        playerScript.HP = playerScript.MaxHP;
+        UpdateHPBar(playerScript.MaxHP, playerScript.HP);
+
     }
 
 }
