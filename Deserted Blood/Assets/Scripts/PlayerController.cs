@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] Renderer meshRenderer;
 
-    [SerializeField] int HP;
-    [SerializeField] int MaxHP;
+    public int HP;
+    public int MaxHP;
     [SerializeField] int BloodMeter;
     [SerializeField] int MaxBloodMeter;
 
