@@ -87,6 +87,7 @@ MonoBehaviour:
   roamDist: 5
   roamStopDist: 0.5
   roamPauseTime: 1
+  bloodAddAmount: 10
 --- !u!95 &8161548875571044912
 Animator:
   serializedVersion: 7

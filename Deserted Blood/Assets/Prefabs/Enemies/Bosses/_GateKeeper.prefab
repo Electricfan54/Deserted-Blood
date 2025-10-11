@@ -622,6 +622,7 @@ MonoBehaviour:
   roamDist: 0
   roamStopDist: 0
   roamPauseTime: 0
+  bloodAddAmount: 100
   cameraFocusPos: {x: 0, y: 0, z: 0}
   camDistance: {x: 0, y: 0, z: 0}
   projSpawnPointList:

@@ -90,6 +90,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected float roamPauseTimer;
 
 
+    [Header("Player Blood Meter")]
+    [SerializeField] int bloodAddAmount;
+
     // Status Effect variables
     protected float fireDuration;
     protected int fireTickDamage;
@@ -565,6 +568,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         AddToMilestone();
         DropAbility();
         onDeathEvent?.Invoke();
+        gameManager.instance.player.GetComponent<PlayerController>().AddBloodAmount(bloodAddAmount);
         if (noDeathAnim)
         {
             Destroy(gameObject);
