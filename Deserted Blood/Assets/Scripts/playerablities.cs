@@ -34,7 +34,7 @@ public class playerablities : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
                 {
-                    gameManager.instance.player.transform.position =  hit.point;
+                    gameManager.instance.player.transform.position =  hit.point-gameManager.instance.player.transform.forward;
                     gameManager.instance.UpdateCharges();
                 }
             }
