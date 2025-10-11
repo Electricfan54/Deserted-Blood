@@ -24,8 +24,12 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
     public GameObject uiMain;
 
+    [Header("Player Specific")]
     public GameObject player;
     public PlayerController playerScript;
+
+    public Transform playerCheckpoint;
+    public Transform playerStartPos;
 
     [Header("UI Specific")]
     [SerializeField] GameObject menuActive;
@@ -49,6 +53,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text volTextSFX, volTextMus;
 
     public Image playerHPBar;
+    public Image playerBloodMeter;
     public GameObject playerHUD;
 
     public GameObject bossBarUI;
@@ -136,10 +141,19 @@ public class gameManager : MonoBehaviour
         {
             playerScript = player.GetComponent<PlayerController>();
         }
+
+        playerCheckpoint = player.transform;
+
     }
 
     private void Start()
     {
+
+        if (playerStartPos != null)
+        {
+            playerCheckpoint = playerStartPos;
+            player.transform.position = playerCheckpoint.position;
+        }
 
         UpdateVolume();
 
@@ -323,6 +337,13 @@ public class gameManager : MonoBehaviour
 
     }
 
+    public void UpdateBloodMeter(int maxBlood, int currBlood)
+    {
+
+        playerBloodMeter.fillAmount = (float)maxBlood / currBlood;
+
+    }
+
     public void UpdateAbilityUI()
     {
 
@@ -359,6 +380,24 @@ public class gameManager : MonoBehaviour
 
     }
 
+    public void RestockCharges()
+    {
+
+        AbilitySlotMain selSlot = abilitySlots[slotSelected];
+
+        selSlot.currCharges = selSlot.maxCharges;
+
+        for (int i = 0; i < selSlot.maxCharges; i++)
+        {
+
+            selSlot.chargeList[i].GetComponent<Image>().color = new Color(0.2295596f, 0.8713329f, 1.0f);
+
+        }
+
+        abilitySlots[slotSelected] = selSlot;
+
+    }    
+
     public void ShowBossBar(string bossName, int maxHealth)
     {
         bossBarUI.SetActive(true);
@@ -377,11 +416,20 @@ public class gameManager : MonoBehaviour
         bossBar.fillAmount = (float)currHealth / (float)bossHPMax;
     }
 
-    IEnumerator DamageFlash()
+    public IEnumerator DamageFlash()
     {
         damageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         damageFlash.SetActive(false);
+    }
+
+    public void RespawnPlayer()
+    {
+
+        player.transform.position = playerCheckpoint.position;
+        playerScript.HP = playerScript.MaxHP;
+        UpdateHPBar(playerScript.MaxHP, playerScript.HP);
+
     }
 
 }

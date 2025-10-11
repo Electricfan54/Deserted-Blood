@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] Renderer meshRenderer;
 
-    [SerializeField] int HP;
-    [SerializeField] int MaxHP;
+    public int HP;
+    public int MaxHP;
     [SerializeField] int BloodMeter;
     [SerializeField] int MaxBloodMeter;
 
@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         MaxHP = origHP;
         origBloodMeter = MaxBloodMeter;
         gameManager.instance.UpdateHPBar(MaxHP, HP);
+        gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
+
     }
 
     // Update is called once per frame
@@ -240,6 +242,17 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         }
     }
 
+    public void AddBloodAmount(int amount)
+    {
+        BloodMeter += amount;
+        if(BloodMeter > MaxBloodMeter)
+        {
+            BloodMeter = MaxBloodMeter;
+        }
+
+        gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
+    }
+
     public void abilitystats(Ability ability)
     {
         if(abilities.Count == 0)
@@ -322,13 +335,12 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
         if (meshRenderer.material.color != Color.yellow)
         {
-            // Uncomment if player damage flash is implemented
-            //if (meshRenderer.material.color == Color.red)
-            //{
-            //    beforeFreezeColor = origColor;
-            //    origColor = Color.blue;
-            //}
-            //else
+            if (meshRenderer.material.color == Color.yellow)
+            {
+                beforeFreezeColor = beforeStunColor;
+                beforeStunColor = Color.blue;
+            }
+            else
                 beforeFreezeColor = meshRenderer.material.color;
             meshRenderer.material.color = Color.blue;
         }
@@ -418,6 +430,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     {
         canMove = false;
         isAttacking = true;
+        isInvinc = true;
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].SetActive(true);
         yield return new WaitForSeconds(.4f);
@@ -425,11 +438,13 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         playerVel.x = 0;
         isAttacking = false;
         canMove = true;
+        isInvinc = false;
     }
 
     IEnumerator FallingPunch()
     {
         isAttacking = true;
+        isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
         yield return new WaitForSeconds(.5f);
         BaseAttacks[1].SetActive(true);
@@ -438,6 +453,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         playerVel.x = 0;
         BaseAttacks[1].SetActive(false);
         isAttacking = false;
+        isInvinc = false;
 
     }
 
