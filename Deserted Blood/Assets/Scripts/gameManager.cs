@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public PlayerController playerScript;
 
     public Transform playerCheckpoint;
+    public Transform playerStartPos;
 
     [Header("UI Specific")]
     [SerializeField] GameObject menuActive;
@@ -147,6 +148,9 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
+
+        playerCheckpoint = playerStartPos;
+        player.transform.position = playerCheckpoint.position;
 
         UpdateVolume();
 
