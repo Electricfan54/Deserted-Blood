@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     protected float StunDuration;
     protected Color beforeStunColor;
+   List<int>stuncharges=new List<int>();
 
     protected bool canUpdate = true; //for stopping player input update
     protected bool canMove = true; //for stopping player movement
@@ -310,22 +312,22 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if (StunDuration <= 0)
         {
             StunDuration = 0;
-            canMove = true;
-            canUpdate = true;
-            PlayerAnimator.speed = origAnimSpeed;
-            meshRenderer.material.color = beforeStunColor;
+         for(int i = 0;i< stuncharges.Count;i++ )
+            {
+ 
+                    abilities[i].currentcharge=stuncharges[i];
+            }
+            stuncharges.Clear();
+
         }
     }
     public void ApplyStunEffect(float duration)
     {
         StunDuration = duration;
-        canMove = false;
-        canUpdate = false;
-
-        if (PlayerAnimator.speed != 0)
+        for (int i = 0; i < abilities.Count; i++)
         {
-            origAnimSpeed = PlayerAnimator.speed;
-            PlayerAnimator.speed = 0;// Pause animation
+            stuncharges.Add(abilities[i].currentcharge);
+            abilities[i].currentcharge = 0;
         }
 
         if (meshRenderer.material.color != Color.blue)
