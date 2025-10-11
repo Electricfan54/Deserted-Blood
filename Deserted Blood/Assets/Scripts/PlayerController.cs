@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     public bool isGrounded;
     bool hasWallJumped = false;
     bool WallInRange;
+    public bool GateKeeperAbilityCheck = false;
+    public bool RedHornAbilityCheck = false;
 
     bool isInvinc = false;
     bool isAttacking = false;
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     protected float StunDuration;
     protected Color beforeStunColor;
-   List<int>stuncharges=new List<int>();
+    List<int>stuncharges=new List<int>();
 
     protected bool canUpdate = true; //for stopping player input update
     protected bool canMove = true; //for stopping player movement
@@ -403,9 +405,14 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             StartCoroutine(MappaPunch());
         }
 
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.C))
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.C) && GateKeeperAbilityCheck == true)
         {
             StartCoroutine(FallingPunch());
+        }
+
+        if(isAttacking == false && Input.GetKeyDown(KeyCode.Z) && RedHornAbilityCheck == false)
+        {
+
         }
 
         if(isAttacking == false && Input.GetKeyDown(KeyCode.G))
@@ -424,8 +431,10 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     IEnumerator MappaPunch()
     {
         canMove = false;
+        PlayerAnimator.SetBool("MappaPunchActive", true);
         isAttacking = true;
         isInvinc = true;
+        yield return new WaitForSeconds(0.2f);
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[0].SetActive(true);
@@ -435,6 +444,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         isAttacking = false;
         canMove = true;
         isInvinc = false;
+        PlayerAnimator.SetBool("MappaPunchActive", false);
+
     }
 
     IEnumerator FallingPunch()
