@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8540629852418742072}
   - component: {fileID: 3348555659223923170}
   m_Layer: 0
-  m_Name: working pickup
+  m_Name: tp pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,4 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f07ddff3af5dca4babffaa4c5c3af0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::pickup
-  ability: {fileID: 11400000, guid: bf1062fea93f6e74784ac88ff9c4c7a5, type: 2}
+  ability: {fileID: 11400000, guid: 92fcb10daf8d46d4aabdcab506d824b8, type: 2}

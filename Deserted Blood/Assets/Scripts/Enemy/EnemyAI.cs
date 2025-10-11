@@ -630,15 +630,15 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (animator.speed != 0)
         {
             origAnimSpeed = animator.speed;
-            animator.speed = 0;// Pause animation
+            animator.speed = 0;
         }
 
-        if (meshRenderer.material.color != Color.blue)
+        if (meshRenderer.material.color != Color.yellow)
         {
             if (meshRenderer.material.color == Color.red)
             {
                 beforestunColor = origColor;
-                origColor = Color.blue;
+                origColor = Color.yellow;
             }
             else
                 beforestunColor = meshRenderer.material.color;
