@@ -65,7 +65,7 @@ MonoBehaviour:
   isSpecial: 1
   noDeathAnim: 0
   enemyType: 0
-  abilityDrop: {fileID: 0}
+  abilityDrop: {fileID: 8655666854864889330, guid: f2984c1bbe1716b49acb541f294a92ea, type: 3}
   isFlying: 0
   moveSpeed: 10
   acceleration: 0.5
