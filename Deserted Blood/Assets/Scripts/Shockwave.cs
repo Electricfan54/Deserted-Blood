@@ -19,12 +19,17 @@ public class Shockwave : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("Player"))
+        {
+            return;
+        }
         Idamage dmg = other.GetComponent<Idamage>();
         if (dmg != null)
         {
             dmg.TakeDamage(shockwavedamage);
+ other.GetComponent<Rigidbody>().AddExplosionForce(500f, transform.position, 2f, 0f, ForceMode.Impulse);
         }
-        other.GetComponent<Rigidbody>().AddExplosionForce(500f, transform.position, 2f, 0f, ForceMode.Impulse);
+       
 
     }
     IEnumerator destroyshockwave()

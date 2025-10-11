@@ -264,7 +264,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         }
         else
         {
- for (int i = 0; i <= abilities.Count; i++)
+ for (int i = 0; i < abilities.Count; i++)
             {
                 if (abilities[i].type == ability.type)
                 {
