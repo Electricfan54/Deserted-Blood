@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 8564842001809736320}
   - component: {fileID: 4506376737784018208}
   - component: {fileID: 2340244084594349867}
+  - component: {fileID: 6226866365671496193}
   m_Layer: 7
   m_Name: _BasicCrab
   m_TagString: Enemy
@@ -103,6 +104,7 @@ Transform:
   m_Children:
   - {fileID: 5690012925823983987}
   - {fileID: 7011133600791058389}
+  - {fileID: 2364667686364229866}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &604800582020125737
@@ -117,6 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb942de432112804f9536e3ebe587e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   meshRenderer: {fileID: 5690012925835099281}
   groundLayer:
     serializedVersion: 2
@@ -127,6 +132,7 @@ MonoBehaviour:
   animator: {fileID: 8564842001809736320}
   startState: 1
   isSpecial: 0
+  noDeathAnim: 0
   enemyType: 0
   abilityDrop: {fileID: 0}
   isFlying: 0
@@ -207,6 +213,73 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023838948347328071}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.52195156, y: 1, z: 1}
+  m_Center: {x: 0.055975847, y: 0.5, z: 0}
+--- !u!114 &6226866365671496193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023838948347328071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02290c7b2dc0c2d4e8be1271a91ce163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  damageammount: 5
+  damagetype: 1
+--- !u!1 &5957305005343311900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2364667686364229866}
+  - component: {fileID: 5171805449776690347}
+  m_Layer: 10
+  m_Name: _GroundHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2364667686364229866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957305005343311900}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3342348416551761115}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5171805449776690347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957305005343311900}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

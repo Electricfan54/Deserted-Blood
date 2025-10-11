@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Linq;
 
 public class GateKeeperAI : EnemyAI
 {
@@ -161,11 +160,12 @@ public class GateKeeperAI : EnemyAI
         {
             case 0:
                 attackCalls++;
+                hitReact = false;
                 animator.SetTrigger("Attack0");
                 break;
             case 1:
-                attackCalls++;
                 attackCalls = 0;
+                hitReact = false;
                 animator.SetTrigger("Attack1");
                 break;
             case 2:
@@ -326,7 +326,7 @@ public class GateKeeperAI : EnemyAI
 
     public void StartBossFight()
     {
-        gameManager.instance.ShowBossBar("Orc King", maxHealth);
+        gameManager.instance.ShowBossBar("Gatekeeper", maxHealth);
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
