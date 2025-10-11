@@ -94,11 +94,12 @@ public class OrcKingAI : EnemyAI
         {
             case 0:
                 attackCalls++;
+                hitReact = false;
                 animator.SetTrigger("Attack0");
                 break;
             case 1:
-                hitReact = false;
                 attackCalls = 0;
+                hitReact = false;
                 animator.SetTrigger("Attack1");
                 break;
 
