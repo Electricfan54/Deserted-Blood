@@ -31,6 +31,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
 
+    public GameObject pickUpPrompt;
+
     public bool isPaused;
     float timeScaleOrig;
 
