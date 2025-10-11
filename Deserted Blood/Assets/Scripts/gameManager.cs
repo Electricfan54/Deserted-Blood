@@ -52,6 +52,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text volTextSFX, volTextMus;
 
     public Image playerHPBar;
+    public Image playerBloodMeter;
     public GameObject playerHUD;
 
     public GameObject bossBarUI;
@@ -326,6 +327,13 @@ public class gameManager : MonoBehaviour
     {
 
         playerHPBar.fillAmount = (float)currHP / maxHP;
+
+    }
+
+    public void UpdateBloodMeter(int maxBlood, int currBlood)
+    {
+
+        playerBloodMeter.fillAmount = (float)maxBlood / currBlood;
 
     }
 
