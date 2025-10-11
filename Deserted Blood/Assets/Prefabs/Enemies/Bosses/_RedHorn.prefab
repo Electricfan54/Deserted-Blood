@@ -310,6 +310,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 0
   damagetype: 1
+--- !u!1 &5681120431354459409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5497465887104621614}
+  - component: {fileID: 51552124973591384}
+  m_Layer: 10
+  m_Name: _GroundHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5497465887104621614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681120431354459409}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.23, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2177216973354372704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &51552124973591384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681120431354459409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.33, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5685451811166517174
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +667,7 @@ GameObject:
   - component: {fileID: 7708906319910374843}
   - component: {fileID: 1387299057350498867}
   - component: {fileID: 307548177233228990}
+  - component: {fileID: 5709150250897624999}
   m_Layer: 7
   m_Name: _RedHorn
   m_TagString: Enemy
@@ -637,6 +691,7 @@ Transform:
   - {fileID: 695994947071104338}
   - {fileID: 700005958627449171}
   - {fileID: 9187037292548379868}
+  - {fileID: 5497465887104621614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9084993381334000623
@@ -651,6 +706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf459066f74be6b48b6bae9936e328fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedHornAI
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   meshRenderer: {fileID: 594591931228110824}
   groundLayer:
     serializedVersion: 2
@@ -661,6 +719,7 @@ MonoBehaviour:
   animator: {fileID: 7708906319910374843}
   startState: 2
   isSpecial: 0
+  noDeathAnim: 0
   enemyType: 0
   abilityDrop: {fileID: 0}
   isFlying: 0
@@ -690,6 +749,8 @@ MonoBehaviour:
   roamDist: 0
   roamStopDist: 0
   roamPauseTime: 0
+  cameraFocusPos: {x: 0, y: 0, z: 0}
+  camDistance: {x: 0, y: 0, z: 0}
   projSpawnList:
   - {fileID: 3568026422062660095}
   - {fileID: 5685451811166517174}
@@ -762,12 +823,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.33, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5709150250897624999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325990259410274392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02290c7b2dc0c2d4e8be1271a91ce163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  damageammount: 5
+  damagetype: 1
 --- !u!1 &9084071747504579079
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 763993307290146850}
   - component: {fileID: 2710395567899288945}
   - component: {fileID: 2509881065844672488}
+  - component: {fileID: 1979097246146666594}
   m_Layer: 7
   m_Name: _Spider
   m_TagString: Enemy
@@ -35,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 4763936485470137881}
   - {fileID: 1402457143851656127}
+  - {fileID: 621141604474380482}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4695085254181638463
@@ -49,6 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681148afde531324eb922cd4065c2927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpiderEnemy
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   meshRenderer: {fileID: 4763936485456812517}
   groundLayer:
     serializedVersion: 2
@@ -59,6 +64,7 @@ MonoBehaviour:
   animator: {fileID: 2710395567899288945}
   startState: 0
   isSpecial: 0
+  noDeathAnim: 0
   enemyType: 0
   abilityDrop: {fileID: 0}
   isFlying: 0
@@ -147,12 +153,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.38, y: 1, z: 1}
   m_Center: {x: -0.1, y: 0.5, z: 0}
+--- !u!114 &1979097246146666594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851857130802978836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02290c7b2dc0c2d4e8be1271a91ce163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  damageammount: 5
+  damagetype: 1
 --- !u!1 &2642692936703837949
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +241,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 0
   damagetype: 1
+--- !u!1 &5431674090506476467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 621141604474380482}
+  - component: {fileID: 6033762952607165416}
+  m_Layer: 10
+  m_Name: _GroundHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &621141604474380482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431674090506476467}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
+  m_LocalPosition: {x: -7.34, y: 9.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4391186319074421567}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6033762952607165416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431674090506476467}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.38, y: 1, z: 1}
+  m_Center: {x: -0.1, y: 0.5, z: 0}
 --- !u!1001 &4763936485470580131
 PrefabInstance:
   m_ObjectHideFlags: 0
