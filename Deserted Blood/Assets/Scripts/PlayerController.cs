@@ -240,6 +240,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     {
         abilities.Add(ability);
         listpos = abilities.Count - 1;
+        gameManager.instance.UpdateAbilityUI();
+        gameManager.instance.AssignAbility();
     }
 
     IEnumerator IFrames()

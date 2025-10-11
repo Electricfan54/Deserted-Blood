@@ -308,8 +308,8 @@ public class gameManager : MonoBehaviour
             selSlot.chargeList.Add(newCharge);
 
         }
-    
 
+        abilitySlots[slotSelected] = selSlot;
 
     }
 
