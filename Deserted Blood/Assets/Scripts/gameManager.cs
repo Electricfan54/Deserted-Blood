@@ -66,6 +66,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] float frameHeight;
     [SerializeField] float frameSpacing;
 
+    public List<AbilitySlotMain> abilitySlots = new();
     [Range(0,2)] public int slotSelected;
     [SerializeField] GameObject selHighlight;
 
@@ -102,6 +103,10 @@ public class gameManager : MonoBehaviour
         {
             menuHierarchy.Add(menuActive);
         }
+
+        abilitySlots.Add(abilitySlot1);
+        abilitySlots.Add(abilitySlot2);
+        abilitySlots.Add(abilitySlot3);
 
         transTimer = 0;
         alphaLerp = 0;
@@ -268,8 +273,12 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void AssignAbility(AbilitySlotMain selSlot, Ability ability)
+    public void AssignAbility()
     {
+
+        AbilitySlotMain selSlot = abilitySlots[slotSelected];
+
+        Ability ability = playerScript.abilities[slotSelected];
 
         if (selSlot.chargeList.Count > 0)
         {
@@ -314,6 +323,8 @@ public class gameManager : MonoBehaviour
     public void UpdateAbilityUI()
     {
 
+        slotSelected = playerScript.listpos;
+
         switch (slotSelected)
         {
             case 0:
@@ -329,8 +340,12 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void UpdateCharges(AbilitySlotMain selSlot)
+    public void UpdateCharges()
     {
+
+        AbilitySlotMain selSlot = abilitySlots[slotSelected];
+
+        selSlot.currCharges = playerScript.abilities[slotSelected].currentcharge;
 
         for (int i = 0; i < (selSlot.maxCharges - selSlot.currCharges); i++)
         {
