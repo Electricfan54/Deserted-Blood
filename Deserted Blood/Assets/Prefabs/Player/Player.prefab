@@ -3468,10 +3468,10 @@ Animator:
   m_GameObject: {fileID: 6633970918242180610}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4d4027d07486df94da00272cdeac5079, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1361775cc6c229a49ad73c8e55dbf5d4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -3526,6 +3526,7 @@ MonoBehaviour:
   gravityStrength: 30
   SlideGravity: 7
   Speed: 15
+  animTranSpeed: 15
   isGrounded: 0
   hasThirdAbility: 0
   abilities: []
