@@ -425,7 +425,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     {
         canMove = false;
         isAttacking = true;
+        PlayerAnimator.SetBool("MappaPunchActive", true);
         isInvinc = true;
+        yield return new WaitForSeconds(0.25f);
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[0].SetActive(true);
@@ -435,6 +437,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         isAttacking = false;
         canMove = true;
         isInvinc = false;
+        PlayerAnimator.SetBool("MappaPunchActive", false);
     }
 
     IEnumerator FallingPunch()
