@@ -8,7 +8,7 @@ public class playerablities : MonoBehaviour
 
     int damage;
     [SerializeField] LayerMask ignore;
-    bool isusing;
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,7 +38,7 @@ public class playerablities : MonoBehaviour
         }
         else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.lightning && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
-            isusing = true;
+           
             damage = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].damage;
             StartCoroutine(chargetime());
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
@@ -47,7 +47,7 @@ public class playerablities : MonoBehaviour
         }
         else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.fire && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
             {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1+Vector3.left*1, gameManager.instance.player.transform.rotation);
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1+gameManager.instance.player.transform.forward*1, gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
@@ -59,8 +59,8 @@ public class playerablities : MonoBehaviour
         }
         else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.ice && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab2, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1+ gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab2, gameManager.instance.player.transform.position + Vector3.up * 1+ gameManager.instance.player.transform.forward * -1, gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
@@ -122,7 +122,7 @@ public class playerablities : MonoBehaviour
             }
         }
 
-        isusing = false;
+      
     }
 
     IEnumerator Slamtime()

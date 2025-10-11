@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
@@ -241,10 +242,34 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     public void abilitystats(Ability ability)
     {
-        abilities.Add(ability);
-        listpos = abilities.Count - 1;
-        gameManager.instance.UpdateAbilityUI();
-        gameManager.instance.AssignAbility();
+        if(abilities.Count == 0)
+        {
+            abilities.Add(ability);
+            listpos = abilities.Count - 1;
+            gameManager.instance.UpdateAbilityUI();
+            gameManager.instance.AssignAbility();
+        }
+        else
+        {
+ for (int i = 0; i <= abilities.Count; i++)
+            {
+                if (abilities[i].type == ability.type)
+                {
+                    abilities[i].currentcharge = abilities[i].maxCharge;
+                    gameManager.instance.UpdateCharges();
+                    gameManager.instance.AssignAbility();
+                    return;
+                }
+               
+                    abilities.Add(ability);
+                    listpos = abilities.Count - 1;
+                    gameManager.instance.UpdateAbilityUI();
+                    gameManager.instance.AssignAbility();
+                
+            }
+        }
+           
+      
     }
 
     IEnumerator IFrames()
@@ -295,7 +320,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             PlayerAnimator.speed = 0;// Pause animation
         }
 
-        if (meshRenderer.material.color != Color.blue)
+        if (meshRenderer.material.color != Color.yellow)
         {
             // Uncomment if player damage flash is implemented
             //if (meshRenderer.material.color == Color.red)
@@ -357,15 +382,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             abilities[i].currentcharge = 0;
         }
 
-        if (meshRenderer.material.color != Color.blue)
+        if (meshRenderer.material.color != Color.yellow)
         {
-            // Uncomment if player damage flash is implemented
-            //if (meshRenderer.material.color == Color.red)
-            //{
-            //    beforeFreezeColor = origColor;
-            //    origColor = Color.blue;
-            //}
-            //else
+        
             beforeStunColor = meshRenderer.material.color;
             meshRenderer.material.color = Color.yellow;
         }

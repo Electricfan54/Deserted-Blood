@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ae457db289583488400fa674915c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: -3
+  speed: 3
   destroytime: 3
   rb: {fileID: -1918786542916116412}
   dmg: {fileID: 0}
