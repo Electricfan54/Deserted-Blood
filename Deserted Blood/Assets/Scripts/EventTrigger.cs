@@ -6,6 +6,7 @@ public class EventTrigger : MonoBehaviour
     [SerializeField]
     UnityEvent eventToTrigger;
     public bool triggered = false;
+    public bool canRetrigger = false;
     private void Awake()
     {
         triggered = false;
@@ -13,7 +14,7 @@ public class EventTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (triggered)
+        if (triggered && !canRetrigger)
             return;
         triggered = true;
         eventToTrigger?.Invoke();
