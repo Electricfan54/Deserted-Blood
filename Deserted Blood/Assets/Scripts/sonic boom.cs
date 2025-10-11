@@ -20,11 +20,11 @@ public class sonicboom : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyAI>().ApplyStunEffect(3);
+            other.GetComponent<EnemyAI>().ApplyStunEffect(5);
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.ApplyStunEffect(3);
+            gameManager.instance.playerScript.ApplyStunEffect(5);
         }
     }
     IEnumerator destroysonicboom()
