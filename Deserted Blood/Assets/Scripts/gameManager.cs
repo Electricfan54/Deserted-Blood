@@ -149,8 +149,11 @@ public class gameManager : MonoBehaviour
     private void Start()
     {
 
-        playerCheckpoint = playerStartPos;
-        player.transform.position = playerCheckpoint.position;
+        if (playerStartPos != null)
+        {
+            playerCheckpoint = playerStartPos;
+            player.transform.position = playerCheckpoint.position;
+        }
 
         UpdateVolume();
 
