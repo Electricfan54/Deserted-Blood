@@ -405,6 +405,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     {
         canMove = false;
         isAttacking = true;
+        isInvinc = true;
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].SetActive(true);
         yield return new WaitForSeconds(.4f);
@@ -412,11 +413,13 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         playerVel.x = 0;
         isAttacking = false;
         canMove = true;
+        isInvinc = false;
     }
 
     IEnumerator FallingPunch()
     {
         isAttacking = true;
+        isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
         yield return new WaitForSeconds(.5f);
         BaseAttacks[1].SetActive(true);
@@ -425,6 +428,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         playerVel.x = 0;
         BaseAttacks[1].SetActive(false);
         isAttacking = false;
+        isInvinc = false;
 
     }
 
