@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdac6d5ca058fae4b8507515efbc1ebe, type: 3}
-  m_Name: New Ability 1
+  m_Name: sonic boom script
   m_EditorClassIdentifier: Assembly-CSharp::Ability
-  type: 1
-  damage: 33
-  shootpos: {fileID: 0}
-  maxCharge: 34
-  currentcharge: 34
-  abilityPrefab: {fileID: 8018087860373096494, guid: 154ade6417864004f826b072e2bae4f6, type: 3}
+  type: 6
+  damage: 0
+  maxCharge: 20
+  currentcharge: 0
+  abilityPrefab: {fileID: 4984640150016148582, guid: f01c6d12b587cae46ad380eca4484a5e, type: 3}
+  abilityPrefab2: {fileID: 0}

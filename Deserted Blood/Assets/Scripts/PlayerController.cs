@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         origHP = HP;
         MaxHP = origHP;
         origBloodMeter = MaxBloodMeter;
+        gameManager.instance.UpdateHPBar(MaxHP, HP);
     }
 
     // Update is called once per frame
@@ -228,9 +229,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if(isInvinc == false)
         {
             HP -= DamageAmount;
+            gameManager.instance.UpdateHPBar(MaxHP, HP);
             if(HP <= 0)
             {
                 // call game lose
+                gameManager.instance.GameOver();
             }
             StartCoroutine(IFrames());
         }
@@ -342,7 +345,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if (StunDuration <= 0)
         {
             StunDuration = 0;
-         for(int i = 0;i< stuncharges.Count;i++ )
+         for(int i = 0;i< abilities.Count;i++ )
             {
  
                     abilities[i].currentcharge=stuncharges[i];
