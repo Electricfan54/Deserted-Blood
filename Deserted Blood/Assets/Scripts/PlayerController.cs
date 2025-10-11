@@ -317,8 +317,9 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
 
     public void ApplyFreezeEffect(float duration)
     {
-        if (freezeDuration <=0 )
-            freezeDuration = duration;
+        if (freezeDuration > 0)
+            return;
+        freezeDuration = duration;
         canMove = false;
         canUpdate = false;
 
@@ -328,17 +329,14 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             PlayerAnimator.speed = 0;// Pause animation
         }
 
-        if (meshRenderer.material.color != Color.yellow)
+        if (meshRenderer.material.color == Color.yellow)
         {
-            if (meshRenderer.material.color == Color.yellow)
-            {
-                beforeFreezeColor = beforeStunColor;
-                beforeStunColor = Color.blue;
-            }
-            else
-                beforeFreezeColor = meshRenderer.material.color;
-            meshRenderer.material.color = Color.blue;
+            beforeFreezeColor = beforeStunColor;
+            beforeStunColor = Color.blue;
         }
+        else
+            beforeFreezeColor = meshRenderer.material.color;
+        meshRenderer.material.color = Color.blue;
     }
 
     void BurnEffect()
