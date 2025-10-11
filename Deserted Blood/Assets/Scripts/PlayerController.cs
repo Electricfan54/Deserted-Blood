@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     bool hasWallJumped = false;
     bool WallInRange;
     public bool GateKeeperAbilityCheck = false;
+    public bool RedHornAbilityCheck = false;
 
     bool isInvinc = false;
     bool isAttacking = false;
@@ -407,6 +408,11 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if (isAttacking == false && Input.GetKeyDown(KeyCode.C) && GateKeeperAbilityCheck == true)
         {
             StartCoroutine(FallingPunch());
+        }
+
+        if(isAttacking == false && Input.GetKeyDown(KeyCode.Z) && RedHornAbilityCheck == false)
+        {
+
         }
 
         if(isAttacking == false && Input.GetKeyDown(KeyCode.G))
