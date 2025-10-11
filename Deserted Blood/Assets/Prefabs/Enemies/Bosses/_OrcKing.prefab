@@ -1203,6 +1203,7 @@ MonoBehaviour:
   animator: {fileID: 1458560940583899797}
   startState: 2
   isSpecial: 0
+  noDeathAnim: 0
   enemyType: 0
   abilityDrop: {fileID: 0}
   isFlying: 0
