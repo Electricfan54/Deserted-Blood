@@ -377,7 +377,7 @@ public class gameManager : MonoBehaviour
         bossBar.fillAmount = (float)currHealth / (float)bossHPMax;
     }
 
-    IEnumerator DamageFlash()
+    public IEnumerator DamageFlash()
     {
         damageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
