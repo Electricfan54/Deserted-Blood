@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public PlayerController playerScript;
 
     public Transform playerCheckpoint;
+    public Transform playerStartPos;
 
     [Header("UI Specific")]
     [SerializeField] GameObject menuActive;
@@ -52,6 +53,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text volTextSFX, volTextMus;
 
     public Image playerHPBar;
+    public Image playerBloodMeter;
     public GameObject playerHUD;
 
     public GameObject bossBarUI;
@@ -146,6 +148,9 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
+
+        playerCheckpoint = playerStartPos;
+        player.transform.position = playerCheckpoint.position;
 
         UpdateVolume();
 
@@ -326,6 +331,13 @@ public class gameManager : MonoBehaviour
     {
 
         playerHPBar.fillAmount = (float)currHP / maxHP;
+
+    }
+
+    public void UpdateBloodMeter(int maxBlood, int currBlood)
+    {
+
+        playerBloodMeter.fillAmount = (float)maxBlood / currBlood;
 
     }
 
