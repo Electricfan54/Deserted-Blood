@@ -292,11 +292,6 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         isInvinc = false;
     }
 
-    public void AddBloodMeter(int amount)
-    {
-        BloodMeter += amount;
-    }
-
     public void AddBloodMeterMilestone(int AmounttoAdd)
     {
         MaxBloodMeter += AmounttoAdd;
@@ -432,6 +427,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         isAttacking = true;
         isInvinc = true;
         playerVel.x = transform.forward.x * 20;
+        BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[0].SetActive(true);
         yield return new WaitForSeconds(.4f);
         BaseAttacks[0].SetActive(false);
@@ -447,6 +443,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
         yield return new WaitForSeconds(.5f);
+        BaseAttacks[1].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[1].SetActive(true);
         playerVel = new Vector3(transform.forward.x * 10, -50, 0);
         yield return new WaitForSeconds(.2f);
@@ -460,6 +457,7 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     IEnumerator BasicAttack()
     {
         isAttacking = true;
+        LightAttackHitbox.GetComponent<Damage>().damageammount = BasePlayerDamage;
         LightAttackHitbox.SetActive(true);
         yield return new WaitForSeconds(.35f);
         LightAttackHitbox.SetActive(false);
