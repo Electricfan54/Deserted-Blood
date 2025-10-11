@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: lightning script
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   type: 1
-  damage: 2
+  damage: 4
   maxCharge: 34
   currentcharge: 34
   abilityPrefab: {fileID: 8018087860373096494, guid: 154ade6417864004f826b072e2bae4f6, type: 3}
