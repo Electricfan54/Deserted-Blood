@@ -340,6 +340,7 @@ public class GateKeeperAI : EnemyAI
     {
         base.OnDeath();
         gameManager.instance.HideBossBar();
+        gameManager.instance.playerScript.GateKeeperAbilityCheck = true;
     }
 
     void UpdateUI()

@@ -217,6 +217,7 @@ public class RedHornAI : EnemyAI
     {
         base.OnDeath();
         gameManager.instance.HideBossBar();
+        gameManager.instance.playerScript.RedHornAbilityCheck = true;
     }
 
     void UpdateUI()
