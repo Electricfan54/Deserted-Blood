@@ -24,12 +24,14 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
     [SerializeField] int SlideGravity;
 
     [SerializeField] int Speed;
+    [SerializeField] int animTranSpeed;
 
     int JumpCount;
     Vector3 MoveDirection;
     Vector3 playerVel;
 
     int CurrentMoveAnimationIndex;
+    
 
     public bool isGrounded;
     bool hasWallJumped = false;
@@ -141,13 +143,29 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             transform.rotation = Quaternion.Euler(0,-90,0);
         }
 
+
         CharController.Move(MoveDirection * Speed * Time.deltaTime);
 
         if(canMove)
             Jump();
 
         BaseAbilityInputCheck();
+        RunningAnimaiton();
         CharController.Move(playerVel * Time.deltaTime);
+    }
+
+    void RunningAnimaiton()
+    {
+        if (!isGrounded)
+        {
+            PlayerAnimator.SetFloat("RunningSpeed", 0);
+            return;
+        }
+        float currentAnimSpeed = PlayerAnimator.GetFloat("RunningSpeed");
+        Vector3 flat = new Vector3(MoveDirection.x, 0, 0);
+        float speed = flat.normalized.magnitude;
+
+        PlayerAnimator.SetFloat("RunningSpeed", Mathf.Lerp(currentAnimSpeed, speed, Time.deltaTime * animTranSpeed));
     }
 
     void Jump()
