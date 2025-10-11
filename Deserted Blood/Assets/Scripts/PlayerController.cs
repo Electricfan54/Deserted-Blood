@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
@@ -30,6 +28,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     int JumpCount;
     Vector3 MoveDirection;
     Vector3 playerVel;
+
+    float RegenHealthTimer = 0;
 
     int CurrentMoveAnimationIndex;
 
@@ -424,6 +424,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
             StartCoroutine(BasicAttack());
         }
+
+        RegenHealth();
     }
 
     IEnumerator MappaPunch()
@@ -473,5 +475,17 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         CurrentMoveAnimationIndex += 1;
     }
 
+    void RegenHealth()
+    {
+        RegenHealthTimer += Time.deltaTime;
+        if (Input.GetKey(KeyCode.H) && BloodMeter > 0 && RegenHealthTimer > 0.2f)
+        {
+            RegenHealthTimer = 0;
+            BloodMeter--;
+            HP++;
+            gameManager.instance.UpdateHPBar(MaxHP, HP);
+            gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
+        }
+    }
 
 }
