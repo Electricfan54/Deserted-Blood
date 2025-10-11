@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
             FreezeEffect();
         if(StunDuration > 0)
             StunEffect();
-        Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
-        Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
+        //Debug.DrawRay(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, Color.red);
+        //Debug.DrawRay(gameObject.transform.position + new Vector3(0,1.5f,0), gameObject.transform.forward * .7f, Color.red);
         if (CharController.isGrounded)
         {
             isGrounded = true;
@@ -228,6 +228,10 @@ public class PlayerController : MonoBehaviour, Idamage,IPickup, IEffect
         if(isInvinc == false)
         {
             HP -= DamageAmount;
+            if(HP <= 0)
+            {
+                // call game lose
+            }
             StartCoroutine(IFrames());
         }
     }
