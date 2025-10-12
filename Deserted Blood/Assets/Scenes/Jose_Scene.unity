@@ -649,6 +649,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4903187764100881393, guid: 4cb607bf6b8b45c42afa9c942aff256d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.969147
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903187764100881393, guid: 4cb607bf6b8b45c42afa9c942aff256d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 6054320340071095980, guid: 4cb607bf6b8b45c42afa9c942aff256d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -694,7 +702,8 @@ PrefabInstance:
       value: Sewer System
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3005946049299242441, guid: 4cb607bf6b8b45c42afa9c942aff256d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cb607bf6b8b45c42afa9c942aff256d, type: 3}

@@ -729,7 +729,7 @@ MonoBehaviour:
   maxHealth: 100
   enemyAggroRange: 8
   attackRate: 0.5
-  hitStunDuration: 0.5
+  hitStunDuration: 0
   hitBoxes:
   - {fileID: 5869908598710418902}
   - {fileID: 5564240013855586611}
