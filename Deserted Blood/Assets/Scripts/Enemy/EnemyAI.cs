@@ -215,7 +215,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
                 AttackTransitionCheck();
                 break;
             case EnemyState.dead:
-                OnDeath();
+                //OnDeath();
                 break;
         }
     }
@@ -553,6 +553,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             curHealth = 0;
             curState = EnemyState.dead;
+            OnDeath();
             return;
         }
         StartCoroutine(FlashRed());
