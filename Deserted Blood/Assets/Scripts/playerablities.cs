@@ -37,6 +37,11 @@ public class playerablities : MonoBehaviour
                     gameManager.instance.player.transform.position =  hit.point-gameManager.instance.player.transform.forward;
                     gameManager.instance.UpdateCharges();
                 }
+                else
+                {
+                    gameManager.instance.player.transform.position = gameManager.instance.player.transform.position + gameManager.instance.player.transform.forward * 5;
+                    gameManager.instance.UpdateCharges();
+                }
             }
 
 
