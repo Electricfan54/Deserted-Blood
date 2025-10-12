@@ -243,6 +243,7 @@ public class OrcKingAI : EnemyAI
         {
             cam.resetCam();
         }
+        gameManager.instance.ShowWinScreen();
     }
 
     void UpdateUI()
