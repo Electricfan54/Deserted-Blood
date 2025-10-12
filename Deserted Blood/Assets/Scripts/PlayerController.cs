@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     int origBloodMeter = 50;
     int origHP;
+    float bloodTimer;
 
     int playerXPush = 3;
 
@@ -430,6 +431,25 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
             StartCoroutine(BasicAttack());
         }
+
+        RegenHealth();
+        
+    }
+
+    void RegenHealth()
+    {
+        bloodTimer += Time.deltaTime;
+        if (isAttacking == false && Input.GetKey(KeyCode.H) && bloodTimer > 0.2f)
+        {
+            if (BloodMeter > 0)
+            {
+                bloodTimer = 0;
+                BloodMeter--;
+                HP++;
+                gameManager.instance.UpdateHPBar(MaxHP, HP);
+                gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
+            }
+        }
     }
 
     IEnumerator MappaPunch()
@@ -437,6 +457,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         canMove = false;
         isAttacking = true;
         isInvinc = true;
+        PlayerAnimator.SetBool("MappaPunchActive", true);
+        yield return new WaitForSeconds(0.2f);
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[0].SetActive(true);
@@ -445,6 +467,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         playerVel.x = 0;
         isAttacking = false;
         canMove = true;
+        PlayerAnimator.SetBool("MappaPunchActive", false);
         isInvinc = false;
     }
 
