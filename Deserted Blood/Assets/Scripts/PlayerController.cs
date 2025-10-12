@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] Renderer meshRenderer;
+    [SerializeField] int[] BasicAttackAnimations;
 
     public int HP;
     public int MaxHP;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     int origBloodMeter = 50;
     int origHP;
     float bloodTimer;
+    float M1CDtimer;
 
     int playerXPush = 3;
 
@@ -173,6 +175,10 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         float speed = flat.normalized.magnitude;
 
         PlayerAnimator.SetFloat("RunningSpeed", Mathf.Lerp(currentAnimSpeed, speed, Time.deltaTime * animTranSpeed));
+        if(PlayerAnimator.GetFloat("RunningSpeed") < 0)
+        {
+            PlayerAnimator.SetFloat("RunningSpeed", 0);
+        }
     }
 
     void Jump()
@@ -409,6 +415,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     // attack stuff
     void BaseAbilityInputCheck()
     {
+        M1CDtimer += Time.deltaTime;
         if (isAttacking == false && Input.GetKeyDown(KeyCode.X))
         {
             StartCoroutine(MappaPunch());
@@ -426,10 +433,13 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             // play animation using the animation index after making the stuff   for it
             // left, right, hook, right
-            if (CurrentMoveAnimationIndex > 3)
+            if (CurrentMoveAnimationIndex > BasicAttackAnimations.Length - 1 || M1CDtimer > 2)
                 CurrentMoveAnimationIndex = 0;
 
-            StartCoroutine(BasicAttack());
+            if(M1CDtimer > .7f)
+            {
+                StartCoroutine(BasicAttack());
+            }
         }
 
         RegenHealth();
@@ -490,6 +500,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     IEnumerator BasicAttack()
     {
+        M1CDtimer = 0;
+        PlayerAnimator.SetBool("M1", true);
+        PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
         isAttacking = true;
         LightAttackHitbox.GetComponent<Damage>().damageammount = BasePlayerDamage;
         LightAttackHitbox.SetActive(true);
@@ -497,6 +510,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         LightAttackHitbox.SetActive(false);
         isAttacking = false;
         CurrentMoveAnimationIndex += 1;
+        PlayerAnimator.SetBool("M1", false);
     }
 
 

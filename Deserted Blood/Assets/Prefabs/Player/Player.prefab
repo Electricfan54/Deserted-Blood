@@ -3081,6 +3081,7 @@ MonoBehaviour:
   CharController: {fileID: 8543027307328747487}
   PlayerAnimator: {fileID: 8817356792663352014}
   meshRenderer: {fileID: 3095321566542897577}
+  BasicAttackAnimations: 0000000000000000
   HP: 100
   MaxHP: 0
   BloodMeter: 0
@@ -3097,6 +3098,8 @@ MonoBehaviour:
   Speed: 15
   animTranSpeed: 15
   isGrounded: 0
+  GateKeeperAbilityCheck: 0
+  RedHornAbilityCheck: 0
   hasThirdAbility: 0
   abilities: []
   listpos: 0
