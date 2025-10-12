@@ -1131,6 +1131,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8666960177129065020, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+      propertyPath: camDistance
+      value: 
+      objectReference: {fileID: 928894517}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3315,6 +3319,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3944863862517825419, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
+      propertyPath: camDistance
+      value: 
+      objectReference: {fileID: 928894517}
     - target: {fileID: 7022975855328292959, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
       propertyPath: m_Name
       value: _GateKeeper
@@ -4626,6 +4634,7 @@ MonoBehaviour:
   Target: {fileID: 1535118833}
   camSmoothSpeed: 8
   camDistance: {x: 0, y: 0, z: 0}
+  GateKeeperTarget: {fileID: 0}
 --- !u!114 &928894519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10702,6 +10711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _RedHorn
       objectReference: {fileID: 0}
+    - target: {fileID: 9084993381334000623, guid: 657a4138c27fa92448a64b06875e8e2a, type: 3}
+      propertyPath: camDistance
+      value: 
+      objectReference: {fileID: 928894517}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
