@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 5681120431354459409}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.23, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -750,8 +750,7 @@ MonoBehaviour:
   roamStopDist: 0
   roamPauseTime: 0
   bloodAddAmount: 100
-  cameraFocusPos: {x: 0, y: 0, z: 0}
-  camDistance: {x: 0, y: 0, z: 0}
+  fightCamPos: {fileID: 0}
   projSpawnList:
   - {fileID: 3568026422062660095}
   - {fileID: 5685451811166517174}
