@@ -29,6 +29,9 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
 
+    public GameObject mainCamera;
+    public CameraController cameraScript;
+
     public Transform playerCheckpoint;
     public Transform playerStartPos;
 
@@ -101,6 +104,7 @@ public class gameManager : MonoBehaviour
     [Header("Audio - Music")]
     public AudioSource backgroundMusic;
     public AudioClip menuMusic;
+    public AudioClip levelMusic;
 
     [SerializeField] AudioMixer musicMixer;
     float musicVolume;
@@ -117,6 +121,7 @@ public class gameManager : MonoBehaviour
         {
             menuActive = menuMain;
             menuActive.SetActive(true);
+            Time.timeScale = 0;
 
             backgroundMusic.PlayOneShot(menuMusic);
 
@@ -300,6 +305,11 @@ public class gameManager : MonoBehaviour
             menuHierarchy.Clear();
 
             backgroundMusic.Stop();
+            Time.timeScale = timeScaleOrig;
+
+            backgroundMusic.clip = levelMusic;
+            backgroundMusic.Play();
+            Debug.Log(backgroundMusic.loop);
 
         }
     }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] Renderer meshRenderer;
+    [SerializeField] int[] BasicAttackAnimations;
 
     public int HP;
     public int MaxHP;
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     int origBloodMeter = 50;
     int origHP;
+    float bloodTimer;
+    float M1CDtimer;
+    float MapPunchTimer;
 
     int playerXPush = 3;
 
@@ -172,6 +176,10 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         float speed = flat.normalized.magnitude;
 
         PlayerAnimator.SetFloat("RunningSpeed", Mathf.Lerp(currentAnimSpeed, speed, Time.deltaTime * animTranSpeed));
+        if(PlayerAnimator.GetFloat("RunningSpeed") < 0)
+        {
+            PlayerAnimator.SetFloat("RunningSpeed", 0);
+        }
     }
 
     void Jump()
@@ -408,7 +416,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     // attack stuff
     void BaseAbilityInputCheck()
     {
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.X))
+        M1CDtimer += Time.deltaTime;
+        MapPunchTimer += Time.deltaTime;
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.X) && MapPunchTimer > 2.3f)
         {
             StartCoroutine(MappaPunch());
         }
@@ -425,18 +435,43 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             // play animation using the animation index after making the stuff   for it
             // left, right, hook, right
-            if (CurrentMoveAnimationIndex > 3)
+            if (CurrentMoveAnimationIndex > BasicAttackAnimations.Length - 1 || M1CDtimer > 2)
                 CurrentMoveAnimationIndex = 0;
 
-            StartCoroutine(BasicAttack());
+            if(M1CDtimer > .7f)
+            {
+                StartCoroutine(BasicAttack());
+            }
+        }
+
+        RegenHealth();
+        
+    }
+
+    void RegenHealth()
+    {
+        bloodTimer += Time.deltaTime;
+        if (isAttacking == false && Input.GetKey(KeyCode.H) && bloodTimer > 0.2f)
+        {
+            if (BloodMeter > 0)
+            {
+                bloodTimer = 0;
+                BloodMeter--;
+                HP++;
+                gameManager.instance.UpdateHPBar(MaxHP, HP);
+                gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
+            }
         }
     }
 
     IEnumerator MappaPunch()
     {
+        MapPunchTimer = 0;
         canMove = false;
         isAttacking = true;
         isInvinc = true;
+        PlayerAnimator.SetBool("MappaPunchActive", true);
+        yield return new WaitForSeconds(0.2f);
         playerVel.x = transform.forward.x * 20;
         BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[0].SetActive(true);
@@ -445,6 +480,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         playerVel.x = 0;
         isAttacking = false;
         canMove = true;
+        PlayerAnimator.SetBool("MappaPunchActive", false);
         isInvinc = false;
     }
 
@@ -467,6 +503,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     IEnumerator BasicAttack()
     {
+        M1CDtimer = 0;
+        PlayerAnimator.SetBool("M1", true);
+        PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
         isAttacking = true;
         LightAttackHitbox.GetComponent<Damage>().damageammount = BasePlayerDamage;
         LightAttackHitbox.SetActive(true);
@@ -474,6 +513,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         LightAttackHitbox.SetActive(false);
         isAttacking = false;
         CurrentMoveAnimationIndex += 1;
+        PlayerAnimator.SetBool("M1", false);
     }
 
 

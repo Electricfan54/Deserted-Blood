@@ -15,8 +15,8 @@ public class buttonManager : MonoBehaviour
     private void Update()
     {
 
-        sfxPreviewtimer += Time.deltaTime;
-        musPreviewtimer += Time.deltaTime;
+        sfxPreviewtimer += Time.unscaledDeltaTime;
+        musPreviewtimer += Time.unscaledDeltaTime;
 
     }
 

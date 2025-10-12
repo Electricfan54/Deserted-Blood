@@ -58,4 +58,9 @@ public class ShieldEnemy : EnemyAI
         }
     }
 
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+    }
+
 }

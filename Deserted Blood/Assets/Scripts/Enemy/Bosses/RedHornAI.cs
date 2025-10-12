@@ -4,7 +4,8 @@ using UnityEngine;
 public class RedHornAI : EnemyAI
 {
     [Header("RedHorn Variables")]
-    [SerializeField] Transform camDistance;
+    [Tooltip("The position the main cam will be set to during the boss fight")]
+    [SerializeField] Transform fightCamPos;
     [SerializeField] GameObject[] projSpawnList;
     [SerializeField] int melee0Damage;
     [SerializeField] int melee1Damage;
@@ -207,9 +208,9 @@ public class RedHornAI : EnemyAI
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        if (cam != null)
+        if (cam != null && fightCamPos != null)
         {
-            cam.SetBossDistance(camDistance);
+            cam.SetBossDistance(fightCamPos);
         }
     }
     protected override void OnDeath()
@@ -218,7 +219,7 @@ public class RedHornAI : EnemyAI
         gameManager.instance.HideBossBar();
         gameManager.instance.playerScript.RedHornAbilityCheck = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        if (cam != null && camDistance != null)
+        if (cam != null)
         {
             cam.resetCam();
         }
