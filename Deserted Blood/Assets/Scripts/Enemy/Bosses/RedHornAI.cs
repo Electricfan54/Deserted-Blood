@@ -218,7 +218,7 @@ public class RedHornAI : EnemyAI
         gameManager.instance.HideBossBar();
         gameManager.instance.playerScript.RedHornAbilityCheck = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        if (cam != null)
+        if (cam != null && camDistance != null)
         {
             cam.resetCam();
         }
