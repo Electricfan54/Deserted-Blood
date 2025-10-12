@@ -4,7 +4,8 @@ using System.Collections;
 public class OrcKingAI : EnemyAI
 {
     [Header("RedHorn Variables")]
-    [SerializeField] Transform camDistance;
+    [Tooltip("The position the main cam will be set to during the boss fight")]
+    [SerializeField] Transform fightCamPos;
     [SerializeField] GameObject[] projSpawnPointList;
     [SerializeField] GameObject[] enemySpawnPointList;
     [SerializeField] GameObject[] enemySpawnList;
@@ -227,9 +228,9 @@ public class OrcKingAI : EnemyAI
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        if (cam != null && camDistance != null)
+        if (cam != null && fightCamPos != null)
         {
-            cam.SetBossDistance(camDistance);
+            cam.SetBossDistance(fightCamPos);
         }
     }
 
