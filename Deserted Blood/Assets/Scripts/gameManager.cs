@@ -29,6 +29,9 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
 
+    public GameObject mainCamera;
+    public CameraController cameraScript;
+
     public Transform playerCheckpoint;
     public Transform playerStartPos;
 
