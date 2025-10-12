@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public struct AbilitySlotMain
@@ -89,6 +90,20 @@ public class gameManager : MonoBehaviour
     private float transEnd;
     float transTimer;
 
+    [Header("Audio - Sound Effects")]
+    [SerializeField] AudioSource soundEffects;
+    [SerializeField] AudioClip menuPop;
+
+    [SerializeField] AudioMixer sfxMixer;
+    float sfxVolume;
+
+    [Header("Audio - Music")]
+    [SerializeField] AudioSource backgroundMusic;
+    [SerializeField] AudioClip menuMusic;
+
+    [SerializeField] AudioMixer musicMixer;
+    float musicVolume;
+
     private void Awake()
     {
 
@@ -101,6 +116,9 @@ public class gameManager : MonoBehaviour
         {
             menuActive = menuMain;
             menuActive.SetActive(true);
+
+            backgroundMusic.PlayOneShot(menuMusic);
+
         }
         else
         {
@@ -271,6 +289,9 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(false);
             menuActive = null;
             menuHierarchy.Clear();
+
+            backgroundMusic.Stop();
+
         }
     }
 
@@ -287,6 +308,12 @@ public class gameManager : MonoBehaviour
 
         volTextSFX.text = (sliderSFX.value * 100).ToString("F0") + "%";
         volTextMus.text = (sliderMus.value * 100).ToString("F0") + "%";
+
+        sfxVolume = sliderSFX.value;
+        musicVolume = sliderMus.value;
+
+        musicMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
+        sfxMixer.SetFloat("SFXVolume", Mathf.Log10(sfxVolume) * 20);
 
     }
 
