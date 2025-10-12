@@ -38,6 +38,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuWin;
 
     [SerializeField] GameObject damageFlash;
 
@@ -233,6 +234,14 @@ public class gameManager : MonoBehaviour
         PauseGame();
         menuHierarchy.Add(menuLose);
         menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
+    public void ShowWinScreen()
+    {
+        PauseGame();
+        menuHierarchy.Add(menuWin);
+        menuActive = menuWin;
         menuActive.SetActive(true);
     }
 
