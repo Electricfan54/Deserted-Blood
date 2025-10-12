@@ -429,6 +429,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
+--- !u!1 &420027006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 420027007}
+  m_Layer: 0
+  m_Name: _BossCamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &420027007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420027006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.21828, y: 6.29, z: -11.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &502398783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8061685348534513101, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
@@ -587,6 +618,7 @@ MonoBehaviour:
   Target: {fileID: 502398783}
   camSmoothSpeed: 8
   camDistance: {x: 0, y: 0, z: 0}
+  GateKeeperTarget: {fileID: 0}
 --- !u!1 &890177135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7517385975655920244, guid: e3130a385866ff946896533546337847, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1384,8 +1416,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8666960177129065020, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+      propertyPath: camDistance
+      value: 
+      objectReference: {fileID: 420027007}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1905,3 +1941,4 @@ SceneRoots:
   - {fileID: 2938951822433521870}
   - {fileID: 3521010579796135285}
   - {fileID: 1380727669}
+  - {fileID: 420027007}

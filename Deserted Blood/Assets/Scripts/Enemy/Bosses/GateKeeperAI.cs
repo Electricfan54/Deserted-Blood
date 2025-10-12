@@ -5,8 +5,7 @@ public class GateKeeperAI : EnemyAI
 {
 
     [Header("GateKeeper Variables")]
-    [SerializeField] Vector3 cameraFocusPos;
-    [SerializeField] Vector3 camDistance;
+    [SerializeField] Transform camDistance;
     [SerializeField] GameObject[] projSpawnPointList;
     [SerializeField] int melee0Damage;
     [SerializeField] int melee1Damage;
@@ -330,7 +329,7 @@ public class GateKeeperAI : EnemyAI
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        if (cam != null && camDistance != Vector3.zero)
+        if (cam != null)
         {
             cam.SetBossDistance(camDistance);
         }
@@ -341,6 +340,11 @@ public class GateKeeperAI : EnemyAI
         base.OnDeath();
         gameManager.instance.HideBossBar();
         gameManager.instance.playerScript.GateKeeperAbilityCheck = true;
+        CameraController cam = Camera.main.GetComponent<CameraController>();
+        if (cam != null)
+        {
+            cam.resetCam();
+        }
     }
 
     void UpdateUI()
