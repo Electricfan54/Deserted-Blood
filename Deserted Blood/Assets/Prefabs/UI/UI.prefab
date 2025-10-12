@@ -9194,6 +9194,7 @@ MonoBehaviour:
   sfxMixer: {fileID: 24100000, guid: 308e4d2e3153f07439901f0be9bda8db, type: 2}
   backgroundMusic: {fileID: 8965002020263247518}
   menuMusic: {fileID: 8300000, guid: 110f043ee8d145c4cb3a1cab5931e649, type: 3}
+  levelMusic: {fileID: 8300000, guid: 82f3573f3f1be784e8a055fd6e6e0cde, type: 3}
   musicMixer: {fileID: 24100000, guid: 4e7ebe04529cc0a41aa6ad15e7f26035, type: 2}
 --- !u!1 &8827345981273299396
 GameObject:

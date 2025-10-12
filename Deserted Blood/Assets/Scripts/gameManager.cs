@@ -104,6 +104,7 @@ public class gameManager : MonoBehaviour
     [Header("Audio - Music")]
     public AudioSource backgroundMusic;
     public AudioClip menuMusic;
+    public AudioClip levelMusic;
 
     [SerializeField] AudioMixer musicMixer;
     float musicVolume;
@@ -305,6 +306,10 @@ public class gameManager : MonoBehaviour
 
             backgroundMusic.Stop();
             Time.timeScale = timeScaleOrig;
+
+            backgroundMusic.clip = levelMusic;
+            backgroundMusic.Play();
+            Debug.Log(backgroundMusic.loop);
 
         }
     }
