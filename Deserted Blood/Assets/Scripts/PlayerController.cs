@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     bool isInvinc = false;
     bool isAttacking = false;
 
-    public bool GatekeeperAbilityCheck = false;
+    public bool GateKeeperAbilityCheck = false;
     public bool RedHornAbilityCheck = false;
     public bool hasThirdAbility = false;
 
@@ -413,7 +413,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             StartCoroutine(MappaPunch());
         }
 
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.C) && GatekeeperAbilityCheck == true)
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.C) && GateKeeperAbilityCheck == true)
         {
             StartCoroutine(FallingPunch());
         }
