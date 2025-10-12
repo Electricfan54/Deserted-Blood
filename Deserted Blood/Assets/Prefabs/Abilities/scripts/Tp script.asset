@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   type: 4
   damage: 0
-  maxCharge: 0
-  currentcharge: 0
+  maxCharge: 10
+  currentcharge: 3
   abilityPrefab: {fileID: 0}
   abilityPrefab2: {fileID: 0}
