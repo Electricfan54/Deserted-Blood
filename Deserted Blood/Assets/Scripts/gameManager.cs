@@ -120,6 +120,7 @@ public class gameManager : MonoBehaviour
         {
             menuActive = menuMain;
             menuActive.SetActive(true);
+            Time.timeScale = 0;
 
             backgroundMusic.PlayOneShot(menuMusic);
 
@@ -303,6 +304,7 @@ public class gameManager : MonoBehaviour
             menuHierarchy.Clear();
 
             backgroundMusic.Stop();
+            Time.timeScale = timeScaleOrig;
 
         }
     }
