@@ -238,7 +238,7 @@ public class OrcKingAI : EnemyAI
         base.OnDeath();
         gameManager.instance.HideBossBar();
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        if (cam != null)
+        if (cam != null && camDistance != null)
         {
             cam.resetCam();
         }
