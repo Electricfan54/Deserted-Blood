@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     bool isInvinc = false;
     bool isAttacking = false;
 
+    public bool GatekeeperAbilityCheck = false;
+    public bool RedHornAbilityCheck = false;
     public bool hasThirdAbility = false;
 
 
@@ -411,11 +413,14 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             StartCoroutine(MappaPunch());
         }
 
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.C))
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.C) && GatekeeperAbilityCheck == true)
         {
             StartCoroutine(FallingPunch());
         }
+        if(isAttacking == false && Input.GetKeyDown(KeyCode.Z) && RedHornAbilityCheck == true)
+        {
 
+        }
         if (isAttacking == false && Input.GetKeyDown(KeyCode.G))
         {
             // play animation using the animation index after making the stuff   for it
