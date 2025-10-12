@@ -340,7 +340,7 @@ public class gameManager : MonoBehaviour
     public void UpdateBloodMeter(int maxBlood, int currBlood)
     {
 
-        playerBloodMeter.fillAmount = (float)maxBlood / currBlood;
+        playerBloodMeter.fillAmount = (float)currBlood / maxBlood;
 
     }
 
