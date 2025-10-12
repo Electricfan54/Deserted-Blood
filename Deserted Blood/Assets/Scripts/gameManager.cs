@@ -91,15 +91,15 @@ public class gameManager : MonoBehaviour
     float transTimer;
 
     [Header("Audio - Sound Effects")]
-    [SerializeField] AudioSource soundEffects;
-    [SerializeField] AudioClip menuPop;
+    public AudioSource soundEffects;
+    public AudioClip menuPop;
 
     [SerializeField] AudioMixer sfxMixer;
     float sfxVolume;
 
     [Header("Audio - Music")]
-    [SerializeField] AudioSource backgroundMusic;
-    [SerializeField] AudioClip menuMusic;
+    public AudioSource backgroundMusic;
+    public AudioClip menuMusic;
 
     [SerializeField] AudioMixer musicMixer;
     float musicVolume;

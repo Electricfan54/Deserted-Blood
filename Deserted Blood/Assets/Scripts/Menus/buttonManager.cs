@@ -4,6 +4,22 @@ using UnityEngine.SceneManagement;
 public class buttonManager : MonoBehaviour
 {
 
+    [SerializeField] float sfxPreviewCD;
+    [SerializeField] float musPreviewCD;
+
+    float sfxPreviewtimer;
+    float musPreviewtimer;
+
+
+
+    private void Update()
+    {
+
+        sfxPreviewtimer += Time.deltaTime;
+        musPreviewtimer += Time.deltaTime;
+
+    }
+
     public void Play(string playSceneName)
     {
 
@@ -15,6 +31,7 @@ public class buttonManager : MonoBehaviour
             SceneManager.LoadScene(playSceneName);
         }
 
+        gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
         gameManager.instance.CloseAllMenus();
 
     }
@@ -23,6 +40,7 @@ public class buttonManager : MonoBehaviour
     {
 
         gameManager.instance.UnpauseGame();
+        gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
 
     }
 
@@ -31,11 +49,14 @@ public class buttonManager : MonoBehaviour
 
         gameManager.instance.UnpauseGame();
         gameManager.instance.RespawnPlayer();
+        gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
 
     }
 
     public void Quit()
     {
+
+        gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
 
     #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -49,6 +70,7 @@ public class buttonManager : MonoBehaviour
     {
 
         gameManager.instance.OpenSubMenu(submenu);
+        gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
 
     }
 
@@ -56,12 +78,35 @@ public class buttonManager : MonoBehaviour
     {
 
         gameManager.instance.CloseSubMenu();
+        gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
 
     }
 
     public void UpdateVolumeSlider()
     {
         gameManager.instance.UpdateVolume();
+    }
+
+    public void PreviewSFXVolume()
+    {
+
+        if (sfxPreviewtimer >= sfxPreviewCD)
+        {
+            gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
+            sfxPreviewtimer = 0;
+        }
+
+    }
+
+    public void PreviewMusVolume()
+    {
+
+        if (musPreviewtimer >= musPreviewCD)
+        {
+            gameManager.instance.backgroundMusic.PlayOneShot(gameManager.instance.menuPop);
+            musPreviewtimer = 0;
+        }
+
     }
 
 }
