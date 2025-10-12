@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     int origHP;
     float bloodTimer;
     float M1CDtimer;
+    float MapPunchTimer;
 
     int playerXPush = 3;
 
@@ -416,7 +417,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     void BaseAbilityInputCheck()
     {
         M1CDtimer += Time.deltaTime;
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.X))
+        MapPunchTimer += Time.deltaTime;
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.X) && MapPunchTimer > 2.3f)
         {
             StartCoroutine(MappaPunch());
         }
@@ -464,6 +466,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     IEnumerator MappaPunch()
     {
+        MapPunchTimer = 0;
         canMove = false;
         isAttacking = true;
         isInvinc = true;
