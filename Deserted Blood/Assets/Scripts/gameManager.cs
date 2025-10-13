@@ -94,6 +94,11 @@ public class gameManager : MonoBehaviour
     private float transEnd;
     float transTimer;
 
+    [Header("Boss References")]
+    [SerializeField] GameObject gateKeeperRef;
+    [SerializeField] GameObject redHornRef;
+    [SerializeField] GameObject orcKingRef;
+
     [Header("Audio - Sound Effects")]
     public AudioSource soundEffects;
     public AudioClip menuPop;
