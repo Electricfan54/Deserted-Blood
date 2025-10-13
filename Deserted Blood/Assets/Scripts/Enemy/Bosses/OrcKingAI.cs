@@ -14,7 +14,7 @@ public class OrcKingAI : EnemyAI
     [SerializeField] int melee2Damage;
     [SerializeField] float roarCooldown;
     [SerializeField] float projSpawnRate;
-    bool bossFightTriggered = false;
+    public bool bossFightTriggered = false;
 
 
     enum RoarType
@@ -232,6 +232,14 @@ public class OrcKingAI : EnemyAI
         {
             cam.SetBossDistance(fightCamPos);
         }
+    }
+
+    public void StopBossFight()
+    {
+        gameManager.instance.HideBossBar();
+        gameManager.instance.cameraScript.resetCam();
+        curHealth = maxHealth;
+        transform.position = startPos;
     }
 
     protected override void OnDeath()
