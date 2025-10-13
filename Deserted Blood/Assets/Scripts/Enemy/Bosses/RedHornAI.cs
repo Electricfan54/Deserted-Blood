@@ -15,7 +15,7 @@ public class RedHornAI : EnemyAI
     bool canRoar;
 
     int attackCalls;
-    bool bossFightTriggered = false;
+    public bool bossFightTriggered = false;
     protected override void Start()
     {
         base.Start();
@@ -213,6 +213,15 @@ public class RedHornAI : EnemyAI
             cam.SetBossDistance(fightCamPos);
         }
     }
+
+    public void StopBossFight()
+    {
+        gameManager.instance.HideBossBar();
+        gameManager.instance.cameraScript.resetCam();
+        curHealth = maxHealth;
+        transform.position = startPos;
+    }
+    
     protected override void OnDeath()
     {
         base.OnDeath();

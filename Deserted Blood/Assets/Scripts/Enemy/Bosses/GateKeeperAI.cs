@@ -16,7 +16,7 @@ public class GateKeeperAI : EnemyAI
 
     bool canRoar;
     bool canJump;
-    bool bossFightTriggered;
+    public bool bossFightTriggered;
 
     int attackCalls;
 
@@ -334,6 +334,14 @@ public class GateKeeperAI : EnemyAI
         {
             cam.SetBossDistance(fightCamPos);
         }
+    }
+
+    public void StopBossFight()
+    {
+        gameManager.instance.HideBossBar();
+        gameManager.instance.cameraScript.resetCam();
+        curHealth = maxHealth;
+        transform.position = startPos;
     }
 
     protected override void OnDeath()
