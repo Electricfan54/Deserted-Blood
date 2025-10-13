@@ -69,7 +69,9 @@ public class LightningRhino : EnemyAI
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<Idamage>().TakeDamage(projDamage);
+                Idamage dmg = hit.collider.GetComponent<Idamage>();
+                if (dmg != null)
+                    hit.collider.GetComponent<Idamage>().TakeDamage(projDamage);
             }
         }
     }
