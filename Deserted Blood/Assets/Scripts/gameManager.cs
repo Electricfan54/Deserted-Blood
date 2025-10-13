@@ -403,13 +403,13 @@ public class gameManager : MonoBehaviour
         switch (slotSelected)
         {
             case 0:
-                selHighlight.transform.localPosition = new Vector2(810, -425);
+                selHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(-150, 115);
                 break;
             case 1:
-                selHighlight.transform.localPosition = new Vector2(610, -425);
+                selHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(-350, 115);
                 break;
             case 2:
-                selHighlight.transform.localPosition = new Vector2(410, -425);
+                selHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(-550, 115);
                 break;
         }
 
