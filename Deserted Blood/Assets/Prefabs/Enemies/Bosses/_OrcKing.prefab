@@ -1264,11 +1264,11 @@ MonoBehaviour:
   isFlying: 0
   moveSpeed: 10
   acceleration: 1
-  chaseStopDist: 2
+  chaseStopDist: 4
   maxHealth: 200
-  enemyAggroRange: 5
+  enemyAggroRange: 6
   attackRate: 0.2
-  hitStunDuration: 0.1
+  hitStunDuration: 0
   hitBoxes:
   - {fileID: 4093097999016402994}
   - {fileID: 2097794095576202707}
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   projectileSpawn: {fileID: 0}
   projDamage: 10
   projSpeed: 10
-  projDestroyTime: 5
+  projDestroyTime: 10
   roamIgnoreLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -1286,8 +1286,7 @@ MonoBehaviour:
   roamStopDist: 0
   roamPauseTime: 0
   bloodAddAmount: 100
-  cameraFocusPos: {x: 0, y: 0, z: 0}
-  camDistance: {x: 0, y: 1.2, z: -6.7}
+  fightCamPos: {fileID: 0}
   projSpawnPointList:
   - {fileID: 7373566481844187845}
   - {fileID: 1929295756474303078}
@@ -1321,8 +1320,9 @@ MonoBehaviour:
   melee0Damage: 15
   melee1Damage: 25
   melee2Damage: 0
-  roarCooldown: 10
+  roarCooldown: 8
   projSpawnRate: 0.3
+  bossFightTriggered: 0
 --- !u!95 &1458560940583899797
 Animator:
   serializedVersion: 7
