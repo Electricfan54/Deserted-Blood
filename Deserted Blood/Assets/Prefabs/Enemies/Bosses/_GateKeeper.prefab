@@ -598,11 +598,11 @@ MonoBehaviour:
   isFlying: 0
   moveSpeed: 5
   acceleration: 0.5
-  chaseStopDist: 2
+  chaseStopDist: 4
   maxHealth: 70
   enemyAggroRange: 7
   attackRate: 0.5
-  hitStunDuration: 0.5
+  hitStunDuration: 0
   hitBoxes:
   - {fileID: 718542761121807129}
   - {fileID: 2021883114749240015}
@@ -631,8 +631,9 @@ MonoBehaviour:
   melee0Damage: 10
   melee1Damage: 20
   slamDamage: 15
-  roarCooldown: 10
+  roarCooldown: 8
   jumpCooldown: 5
+  bossFightTriggered: 0
 --- !u!95 &3291484367154196407
 Animator:
   serializedVersion: 7
