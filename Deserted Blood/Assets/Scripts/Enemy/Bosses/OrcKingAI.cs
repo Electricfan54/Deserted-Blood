@@ -240,6 +240,7 @@ public class OrcKingAI : EnemyAI
         gameManager.instance.cameraScript.resetCam();
         curHealth = maxHealth;
         transform.position = startPos;
+        bossFightTriggered = false;
     }
 
     protected override void OnDeath()
