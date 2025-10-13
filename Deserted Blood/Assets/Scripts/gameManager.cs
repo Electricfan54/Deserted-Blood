@@ -95,9 +95,9 @@ public class gameManager : MonoBehaviour
     float transTimer;
 
     [Header("Boss References")]
-    [SerializeField] GameObject gateKeeperRef;
-    [SerializeField] GameObject redHornRef;
-    [SerializeField] GameObject orcKingRef;
+    [SerializeField] GateKeeperAI gateKeeperRef;
+    [SerializeField] RedHornAI redHornRef;
+    [SerializeField] OrcKingAI orcKingRef;
 
     [Header("Audio - Sound Effects")]
     public AudioSource soundEffects;
@@ -480,6 +480,28 @@ public class gameManager : MonoBehaviour
         player.transform.position = playerCheckpoint.position;
         playerScript.HP = playerScript.MaxHP;
         UpdateHPBar(playerScript.MaxHP, playerScript.HP);
+
+        if (gateKeeperRef != null)
+        {
+            if (gateKeeperRef.bossFightTriggered)
+            {
+                gateKeeperRef.StopBossFight();
+            }
+        }
+        if (redHornRef != null)
+        {
+            if (redHornRef.bossFightTriggered)
+            {
+                redHornRef.StopBossFight();
+            }
+        }
+        if (orcKingRef != null)
+        {
+            if (orcKingRef.bossFightTriggered)
+            {
+                orcKingRef.StopBossFight();
+            }
+        }
 
     }
 
