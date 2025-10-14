@@ -30,6 +30,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     public bool isSpecial = false;
     [SerializeField]
     bool noDeathAnim = false;
+    [SerializeField]
+    float destroyTime = 5.0f;
 
     Color origColor;
 
@@ -572,13 +574,13 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         gameManager.instance.player.GetComponent<PlayerController>().AddBloodAmount(bloodAddAmount);
         if (noDeathAnim)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, destroyTime);
             return;
         }
 
         animator.SetTrigger("dead");
         gameObject.layer = LayerMask.NameToLayer("Dead");
-        Destroy(gameObject, 5);
+        Destroy(gameObject, destroyTime);
     }
 
     protected virtual void Stopped()
