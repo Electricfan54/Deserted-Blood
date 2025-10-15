@@ -101,6 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 10
   damagetype: 1
+  hitStop: 1
+  stopTime: 0.05
 --- !u!1 &202314709438570015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 10
   damagetype: 1
+  hitStop: 1
+  stopTime: 10
 --- !u!1 &3583753680198753813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,6 +2184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 10
   damagetype: 1
+  hitStop: 1
+  stopTime: 0.1
 --- !u!1 &5619910152099292021
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,7 +3022,7 @@ Transform:
   m_GameObject: {fileID: 6633970918242180610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97646, y: 0, z: -0.30756}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
