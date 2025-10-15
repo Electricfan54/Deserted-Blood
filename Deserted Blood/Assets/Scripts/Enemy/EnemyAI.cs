@@ -54,6 +54,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected float chaseStopDist;
 
     [Header("Attack Variables")]
+    [SerializeField] protected ParticleSystem attackEffect;
+    [SerializeField] protected float effectDuration;
     [SerializeField] protected int maxHealth;
     protected int curHealth;
     public int enemyAggroRange;
@@ -424,6 +426,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (hitStunned)
             return;
+        StartCoroutine(PlayAttackEffect());
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
@@ -433,6 +436,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (projectileSpawn == null)
             return;
+        StartCoroutine(PlayAttackEffect());
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
         Projectile projScript = proj.GetComponent<Projectile>();
@@ -690,5 +694,14 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             animator.speed = origAnimSpeed;
             meshRenderer.material.color = beforestunColor;
         }
+    }
+
+    protected virtual IEnumerator PlayAttackEffect()
+    {
+        if (attackEffect == null)
+            yield return null;
+        attackEffect.Play();
+        yield return new WaitForSeconds(effectDuration);
+        attackEffect.Stop();
     }
 }
