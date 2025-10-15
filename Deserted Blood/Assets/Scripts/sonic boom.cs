@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class sonicboom : MonoBehaviour
 {
-    [SerializeField] int destroytime;
+  
+   
+
+[SerializeField] int destroytime;
+  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
