@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public class LightningRhino : EnemyAI
 {
@@ -63,7 +64,7 @@ public class LightningRhino : EnemyAI
         Vector3 offsetPos = new Vector3(targetPoint.x, targetPoint.y + 1.0f, 0);
         Quaternion rot = Quaternion.LookRotation(offsetPos - projectileSpawn.position);
         projectileSpawn.rotation = rot;
-
+        StartCoroutine(PlayAttackEffect());
         RaycastHit hit;
         if (Physics.Raycast(projectileSpawn.position, projectileSpawn.forward, out hit, lightningRange, ~lineOfSightIgnoreLayer))
         {

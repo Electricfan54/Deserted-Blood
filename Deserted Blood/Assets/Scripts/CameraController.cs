@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform GateKeeperTarget;
 
     Vector3 offset = new Vector3(0, 1.2f, -6.7f);
-    Vector3 CurrentView = new Vector3(0, 1.2f, -6.7f);
+    [SerializeField] Vector3 CurrentView = new Vector3(0, 1.2f, -6.7f);
     bool inBossFIght = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
