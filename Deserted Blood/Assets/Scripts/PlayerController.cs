@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     bool hasWallJumped = false;
     bool WallInRange;
 
-    bool isInvinc = false;
+  public  bool isInvinc = false;
     bool isAttacking = false;
 
     public bool GateKeeperAbilityCheck = false;

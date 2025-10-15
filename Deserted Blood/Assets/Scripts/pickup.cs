@@ -4,15 +4,17 @@ public class pickup : MonoBehaviour
 {
 
     [SerializeField] Ability ability;
+    bool canPickup;
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        IPickup pickup = other.GetComponent<IPickup>();
+        if (canPickup)
+        {
+          IPickup pickup = gameManager.instance.player.GetComponent<IPickup>();
         if (pickup!=null)
         {
 
-           gameManager.instance.pickUpPrompt.SetActive(true);
-
+           
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ability.currentcharge = ability.maxCharge;
@@ -22,6 +24,16 @@ public class pickup : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+      canPickup = true;
+gameManager.instance.pickUpPrompt.SetActive(true);
+
+        
     }
 
     private void OnTriggerExit(Collider other)

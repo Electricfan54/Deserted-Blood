@@ -21,73 +21,9 @@ public class playerablities : MonoBehaviour
     void Update()
     {
         selectability();
-        if (gameManager.instance.playerScript.abilities.Count == 0)
+      if (Input.GetButtonDown("Fire1"))
         {
-
-        }
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.tp && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0 && gameManager.instance.playerScript.isGrounded == false)
-        {
-            Debug.Log("Pew Pew");
-            if (gameManager.instance.playerScript.isGrounded == false)
-            {
-                gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
-                {
-                    gameManager.instance.player.transform.position =  hit.point-gameManager.instance.player.transform.forward;
-                    gameManager.instance.UpdateCharges();
-                }
-                else
-                {
-                    gameManager.instance.player.transform.position = gameManager.instance.player.transform.position + gameManager.instance.player.transform.forward * 5;
-                    gameManager.instance.UpdateCharges();
-                }
-            }
-
-
-
-        }
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.lightning && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
-        {
-
-            damage = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].damage;
-            StartCoroutine(chargetime());
-            Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-            gameManager.instance.UpdateCharges();
-        }
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.fire && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
-        {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-            gameManager.instance.UpdateCharges();
-        }
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.shockwave && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
-        {
-            StartCoroutine(Slamtime());
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-            gameManager.instance.UpdateCharges();
-        }
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.ice && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
-        {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab2, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * -1, gameManager.instance.player.transform.rotation);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-            gameManager.instance.UpdateCharges();
-        }
-
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sonicboom && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
-        {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-            gameManager.instance.UpdateCharges();
-        }
-
-        else if (Input.GetButtonDown("Fire1") && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sheild && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
-        {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
-            gameManager.instance.UpdateCharges();
+            useAbility();
         }
 
     }
@@ -109,6 +45,78 @@ public class playerablities : MonoBehaviour
 
     }
 
+    void useAbility()
+    {
+  if (gameManager.instance.playerScript.abilities.Count == 0)
+        {
+
+        }
+        else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.tp && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0 && gameManager.instance.playerScript.isGrounded == false)
+        {
+            Debug.Log("Pew Pew");
+            if (gameManager.instance.playerScript.isGrounded == false)
+            {
+                gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
+                {
+                    gameManager.instance.player.transform.position =  hit.point-gameManager.instance.player.transform.forward;
+                    gameManager.instance.UpdateCharges();
+                }
+                else
+                {
+                    gameManager.instance.player.transform.position = gameManager.instance.player.transform.position + gameManager.instance.player.transform.forward * 5;
+                    gameManager.instance.UpdateCharges();
+                }
+            }
+
+
+
+        }
+        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.lightning && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+
+            damage = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].damage;
+            StartCoroutine(chargetime());
+            Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            gameManager.instance.UpdateCharges();
+        }
+        else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.fire && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            gameManager.instance.UpdateCharges();
+        }
+        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.shockwave && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+            StartCoroutine(Slamtime());
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            gameManager.instance.UpdateCharges();
+        }
+        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.ice && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            gameManager.instance.UpdateCharges();
+        }
+
+        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sonicboom && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            gameManager.instance.UpdateCharges();
+        }
+
+        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sheild && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        {
+
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform);
+            gameManager.instance.playerScript.isInvinc = true;
+            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            gameManager.instance.UpdateCharges();
+        }
+    }
 
     void changegun()
     {

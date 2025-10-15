@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5704964203476394524}
   - component: {fileID: 5585730074013464113}
   - component: {fileID: 618656666160744723}
+  - component: {fileID: -6037465216389388481}
   m_Layer: 0
   m_Name: sonic boom
   m_TagString: Untagged
@@ -67,3 +68,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::sonicboom
   destroytime: 5
+--- !u!114 &-6037465216389388481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984640150016148582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce340aac7e9438245a23c4f12ce62cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Effect
+  type: 2
+  duration: 2
+  tickDamage: 0
+  tickRate: 0
