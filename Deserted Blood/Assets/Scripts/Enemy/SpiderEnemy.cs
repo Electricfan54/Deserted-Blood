@@ -22,6 +22,7 @@ public class SpiderEnemy : EnemyAI
             {
                 rig.useGravity = true;
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                rig.linearVelocity = new Vector3(0, -25, 0);
                 curState = EnemyState.chase;
             }
         }

@@ -17,7 +17,8 @@ public  class Ability : ScriptableObject
     public int maxCharge;
     public int currentcharge;
     public GameObject abilityPrefab;
- public GameObject abilityPrefab2;
+ public GameObject abilityPrefab2
+        ;public Sprite abilityIcon;
 
 
 }

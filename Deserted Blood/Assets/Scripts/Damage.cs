@@ -30,18 +30,12 @@ public class Damage : MonoBehaviour
         {
             other.GetComponent<EnemyAI>().ApplyBurnEffect(10,1,5);
         }
-        if(other.gameObject.CompareTag("Player") && damagetype == DamageType.fireball)
-        {
-            gameManager.instance.playerScript.ApplyBurnEffect(10, 1, 5); 
-        }
+        
         if (other.gameObject.CompareTag("Enemy") && damagetype == DamageType.iceball)
         {
             other.GetComponent<EnemyAI>().ApplyFreezeEffect(10);
         }
-        if (other.gameObject.CompareTag("Player") && damagetype == DamageType.iceball)
-        {
-            gameManager.instance.playerScript.ApplyFreezeEffect(10);
-        }
+       
         if (damagetype==DamageType.deletable)
         {
             Destroy(gameObject);

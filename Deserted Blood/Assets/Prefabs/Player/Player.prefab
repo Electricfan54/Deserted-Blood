@@ -2999,7 +2999,7 @@ GameObject:
   - component: {fileID: 3853556794737505947}
   - component: {fileID: 6350682885890037075}
   - component: {fileID: 8543027307328747487}
-  - component: {fileID: 8693288558738864613}
+  - component: {fileID: 6844780974230989795}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -3082,6 +3082,9 @@ MonoBehaviour:
   PlayerAnimator: {fileID: 8817356792663352014}
   meshRenderer: {fileID: 3095321566542897577}
   BasicAttackAnimations: 0000000000000000
+  Groundlayer:
+    serializedVersion: 2
+    m_Bits: 64
   HP: 100
   MaxHP: 0
   BloodMeter: 0
@@ -3144,8 +3147,8 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!136 &8693288558738864613
-CapsuleCollider:
+--- !u!65 &6844780974230989795
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3162,10 +3165,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6644941294725475289
 GameObject:

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
+using UnityEditorInternal;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
@@ -30,6 +31,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     public bool isSpecial = false;
     [SerializeField]
     bool noDeathAnim = false;
+    [SerializeField]
+    float destroyTime = 5.0f;
 
     Color origColor;
 
@@ -52,6 +55,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected float chaseStopDist;
 
     [Header("Attack Variables")]
+    [SerializeField] protected ParticleSystem attackEffect;
+    [SerializeField] protected float effectDuration;
     [SerializeField] protected int maxHealth;
     protected int curHealth;
     public int enemyAggroRange;
@@ -167,7 +172,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
         UpdateAnimations();
 
-        if (isFlying)
+        if (isFlying && curState != EnemyState.dead)
         {
             rig.linearVelocity = Vector3.zero;
         }
@@ -422,6 +427,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (hitStunned)
             return;
+        StartCoroutine(PlayAttackEffect());
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
@@ -431,6 +437,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (projectileSpawn == null)
             return;
+        StartCoroutine(PlayAttackEffect());
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
         Projectile projScript = proj.GetComponent<Projectile>();
@@ -570,15 +577,19 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         DropAbility();
         onDeathEvent?.Invoke();
         gameManager.instance.player.GetComponent<PlayerController>().AddBloodAmount(bloodAddAmount);
+        gameObject.layer = LayerMask.NameToLayer("Dead");
         if (noDeathAnim)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, destroyTime);
             return;
         }
-
+        if (isFlying)
+        {
+            rig.useGravity = true;
+            rig.linearVelocity = new Vector3(0, 5, 0);
+        }
         animator.SetTrigger("dead");
-        gameObject.layer = LayerMask.NameToLayer("Dead");
-        Destroy(gameObject, 5);
+        Destroy(gameObject, destroyTime);
     }
 
     protected virtual void Stopped()
@@ -675,8 +686,6 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         }
     }
 
-    
-
     protected virtual void StunEffect()
     {
         StunDuration -= Time.deltaTime;
@@ -687,6 +696,16 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             canUpdate = true;
             animator.speed = origAnimSpeed;
             meshRenderer.material.color = beforestunColor;
+        }
+    }
+
+    protected virtual IEnumerator PlayAttackEffect()
+    {
+        if (attackEffect != null)
+        {
+            attackEffect.Play();
+            yield return new WaitForSeconds(effectDuration);
+            attackEffect.Stop();
         }
     }
 }
