@@ -537,5 +537,12 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         PlayerAnimator.SetBool("M1", false);
     }
 
+    IEnumerator RedHornAbility()
+    {
+        isAttacking = true;
+        isInvinc = true;
+        
+    }
+
 
 }
