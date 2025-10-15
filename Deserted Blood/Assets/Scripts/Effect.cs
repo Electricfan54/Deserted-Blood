@@ -29,6 +29,7 @@ public class Effect : MonoBehaviour
                     break;
                 case EffectType.Stun:
                     //Add stun function call
+                    effect.ApplyStunEffect(duration);
                     break;
             }
         }
