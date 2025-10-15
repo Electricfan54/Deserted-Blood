@@ -425,7 +425,7 @@ public class gameManager : MonoBehaviour
         for (int i = 0; i < (selSlot.maxCharges - selSlot.currCharges); i++)
         {
 
-            selSlot.chargeList[(selSlot.maxCharges - 1) - i].GetComponent<Image>().color = new Color(0.0925596f, 0.1941795f, 0.4528302f);
+            selSlot.chargeList[(selSlot.maxCharges - 1) - i].GetComponent<Image>().color = new Color(0.25f, 0.25f, 0.25f);
 
         }
 
@@ -441,7 +441,7 @@ public class gameManager : MonoBehaviour
         for (int i = 0; i < selSlot.maxCharges; i++)
         {
 
-            selSlot.chargeList[i].GetComponent<Image>().color = new Color(0.2295596f, 0.8713329f, 1.0f);
+            selSlot.chargeList[i].GetComponent<Image>().color = new Color(1,1,1);
 
         }
 

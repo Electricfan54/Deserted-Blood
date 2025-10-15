@@ -2495,6 +2495,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5271580496960573079}
+  - {fileID: 1833584644335750895}
   - {fileID: 2516761823384528381}
   - {fileID: 6232616395608291120}
   - {fileID: 8596831777411169149}
@@ -4745,6 +4746,81 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5422667685086537220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833584644335750895}
+  - component: {fileID: 3297050099318151330}
+  - component: {fileID: 4674943281882516448}
+  m_Layer: 0
+  m_Name: ChargeBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1833584644335750895
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422667685086537220}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2931612977115197407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!222 &3297050099318151330
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422667685086537220}
+  m_CullTransparentMesh: 1
+--- !u!114 &4674943281882516448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422667685086537220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d1b9d0b8281c98141a5539fd7bf2fd2b, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 5
 --- !u!1 &5447755539329410986
 GameObject:
   m_ObjectHideFlags: 0
@@ -8476,7 +8552,7 @@ MonoBehaviour:
   bossBarUI: {fileID: 8497705599434518133}
   bossBar: {fileID: 2527545441148317945}
   bossNameText: {fileID: 5810668516679027380}
-  chargeBase: {fileID: 1261141562723434485}
+  chargeBase: {fileID: 5422667685086537220}
   abilitySlot1:
     equippedAbility: {fileID: 0}
     chargeFrame: {fileID: 3491558840023680390}
@@ -8893,6 +8969,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilitySlot.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7182528944436969618, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8989,11 +9069,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!1 &1261141562723434485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 797775133728891982, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
-  m_PrefabInstance: {fileID: 1914660755837328315}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3491558840023680390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3091368837601041981, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
