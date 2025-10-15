@@ -148,14 +148,17 @@ MonoBehaviour:
   startState: 1
   isSpecial: 1
   noDeathAnim: 0
+  destroyTime: 5
   enemyType: 2
   abilityDrop: {fileID: 8655666854864889330, guid: e247bbae773144a4782bc1aea6a82577, type: 3}
   isFlying: 1
   moveSpeed: 5
   acceleration: 0.1
-  chaseStopDist: 4
+  chaseStopDist: 8
+  attackEffect: {fileID: 0}
+  effectDuration: 0
   maxHealth: 20
-  enemyAggroRange: 6
+  enemyAggroRange: 10
   attackRate: 0.5
   hitStunDuration: 0.5
   hitBoxes: []

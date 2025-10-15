@@ -1,13 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
     enum DamageType
     {
-        deletable, nondeletable,fireball, iceball
+        deletable, nondeletable,
     }
     public int damageammount;
     [SerializeField] DamageType damagetype;
+    public bool hitStop;
+    public float stopTime;
+    float origTimeScale;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,14 +31,9 @@ public class Damage : MonoBehaviour
         {
             dmg.TakeDamage(damageammount);
         }
-        if(other.gameObject.CompareTag("Enemy")&&damagetype==DamageType.fireball)
+        if (hitStop)
         {
-            other.GetComponent<EnemyAI>().ApplyBurnEffect(10,1,5);
-        }
-        
-        if (other.gameObject.CompareTag("Enemy") && damagetype == DamageType.iceball)
-        {
-            other.GetComponent<EnemyAI>().ApplyFreezeEffect(10);
+            StartCoroutine(HitStop());
         }
        
         if (damagetype==DamageType.deletable)
@@ -42,5 +42,13 @@ public class Damage : MonoBehaviour
         }
 
 
+    }
+
+    IEnumerator HitStop()
+    {
+        origTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(stopTime);
+        Time.timeScale = origTimeScale;
     }
 }
