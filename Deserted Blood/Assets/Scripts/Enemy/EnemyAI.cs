@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
+using UnityEditorInternal;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
@@ -171,7 +172,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
         UpdateAnimations();
 
-        if (isFlying)
+        if (isFlying && curState != EnemyState.dead)
         {
             rig.linearVelocity = Vector3.zero;
         }
@@ -576,14 +577,18 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         DropAbility();
         onDeathEvent?.Invoke();
         gameManager.instance.player.GetComponent<PlayerController>().AddBloodAmount(bloodAddAmount);
+        gameObject.layer = LayerMask.NameToLayer("Dead");
         if (noDeathAnim)
         {
             Destroy(gameObject, destroyTime);
             return;
         }
-
+        if (isFlying)
+        {
+            rig.useGravity = true;
+            rig.linearVelocity = new Vector3(0, 5, 0);
+        }
         animator.SetTrigger("dead");
-        gameObject.layer = LayerMask.NameToLayer("Dead");
         Destroy(gameObject, destroyTime);
     }
 
@@ -681,8 +686,6 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         }
     }
 
-    
-
     protected virtual void StunEffect()
     {
         StunDuration -= Time.deltaTime;
@@ -698,10 +701,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     protected virtual IEnumerator PlayAttackEffect()
     {
-        if (attackEffect == null)
-            yield return null;
-        attackEffect.Play();
-        yield return new WaitForSeconds(effectDuration);
-        attackEffect.Stop();
+        if (attackEffect != null)
+        {
+            attackEffect.Play();
+            yield return new WaitForSeconds(effectDuration);
+            attackEffect.Stop();
+        }
     }
 }
