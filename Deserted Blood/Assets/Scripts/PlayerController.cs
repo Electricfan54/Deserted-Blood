@@ -274,6 +274,20 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         }
         else if (abilities.Count == 3)
         {
+            for (int i = 0; i < abilities.Count; i++)
+            {
+                if (abilities[i].type == ability.type)
+                {
+                    int temp=listpos;
+                    abilities[i].currentcharge = abilities[i].maxCharge;
+                    listpos = i;
+
+                    gameManager.instance.UpdateCharges();
+                    gameManager.instance.AssignAbility();
+                    listpos = temp;
+                    return;
+                }
+            }
             abilities[listpos] = ability;
             gameManager.instance.UpdateCharges();
             gameManager.instance.AssignAbility();
