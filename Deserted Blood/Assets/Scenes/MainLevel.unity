@@ -2166,10 +2166,6 @@ PrefabInstance:
       propertyPath: playerStartPos
       value: 
       objectReference: {fileID: 2079717520}
-    - target: {fileID: 8416635333365860294, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
-      propertyPath: playerCheckpoint
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8500007527763828458, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 64.22234
