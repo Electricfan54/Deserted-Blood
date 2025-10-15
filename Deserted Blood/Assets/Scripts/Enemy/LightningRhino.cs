@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 public class LightningRhino : EnemyAI
 {
     [Header("Lightning Rhino")]
     [SerializeField] float chargeTime;
     [SerializeField] float lightningRange;
-    [SerializeField] ParticleSystem chargeEffect;
+    [SerializeField] ParticleSystem[] chargeEffect;
     float chargeTimer;
     bool isCharging = false;
 
@@ -30,7 +31,8 @@ public class LightningRhino : EnemyAI
                 attackTimer = 0;
                 inAttackAnim = true;
                 isCharging = true;
-                chargeEffect.Play();
+                for (int i = 0; i < chargeEffect.Length; i++)
+                    chargeEffect[i].Play();
             }
         }
 
@@ -44,8 +46,8 @@ public class LightningRhino : EnemyAI
         {
             chargeTimer = 0;
             isCharging = false;
-
-            chargeEffect.Stop();
+            for (int i = 0; i < chargeEffect.Length; i++)
+                chargeEffect[i].Stop();
 
             animator.SetTrigger("Attack0");
         }
@@ -63,7 +65,7 @@ public class LightningRhino : EnemyAI
         Vector3 offsetPos = new Vector3(targetPoint.x, targetPoint.y + 1.0f, 0);
         Quaternion rot = Quaternion.LookRotation(offsetPos - projectileSpawn.position);
         projectileSpawn.rotation = rot;
-
+        StartCoroutine(PlayAttackEffect());
         RaycastHit hit;
         if (Physics.Raycast(projectileSpawn.position, projectileSpawn.forward, out hit, lightningRange, ~lineOfSightIgnoreLayer))
         {
@@ -83,7 +85,8 @@ public class LightningRhino : EnemyAI
         {
             isCharging = false;
             chargeTimer = 0;
-            chargeEffect.Stop();
+            for (int i = 0; i < chargeEffect.Length; i++)
+                chargeEffect[i].Stop();
         }
     }
 
@@ -99,7 +102,8 @@ public class LightningRhino : EnemyAI
             {
                 isCharging = false;
                 chargeTimer = 0;
-                chargeEffect.Stop();
+                for (int i = 0; i < chargeEffect.Length; i++)
+                    chargeEffect[i].Stop();
                 inAttackAnim = false;
             }
             curState = EnemyState.chase;
