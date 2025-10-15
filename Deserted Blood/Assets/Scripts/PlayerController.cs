@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     // Update is called once per frame
     void Update()
     {
+
         if (burnDuration > 0)
             BurnEffect();
         if (freezeDuration > 0)
@@ -133,8 +134,13 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         }
 
         Movement();
+    
     }
 
+    private void LateUpdate()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+    }
     // Movement stuff
     void Movement()
     {
