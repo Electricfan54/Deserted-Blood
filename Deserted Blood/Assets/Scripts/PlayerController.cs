@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] Renderer meshRenderer;
     [SerializeField] int[] BasicAttackAnimations;
+    [SerializeField] LayerMask Groundlayer;
 
     public int HP;
     public int MaxHP;
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         }
 
         RaycastHit CeilingCheck;
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f))
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1.5f, 0), gameObject.transform.up, out CeilingCheck, .8f, Groundlayer))
         {
             playerVel.y = -2;
         }
