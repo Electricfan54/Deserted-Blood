@@ -541,6 +541,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     {
         isAttacking = true;
         isInvinc = true;
+        yield return new WaitForSeconds(0.1f);
         
     }
 
