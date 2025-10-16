@@ -174,8 +174,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 121126098122046258, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 22542244}
   m_SourcePrefab: {fileID: 100100000, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
+--- !u!1 &22542243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 121126098122046258, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
+  m_PrefabInstance: {fileID: 22542242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &22542244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22542243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce340aac7e9438245a23c4f12ce62cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Effect
+  type: 1
+  duration: 0.5
+  tickDamage: 0
+  tickRate: 0
 --- !u!1001 &166448041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -732,7 +756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865953807453978980, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: canRetrigger
@@ -1105,6 +1129,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1518405038}
     m_Modifications:
+    - target: {fileID: 641708511459735881, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
+      propertyPath: hitStop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 641708511459735881, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
+      propertyPath: stopTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3534832091930004178, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1151,7 +1183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
