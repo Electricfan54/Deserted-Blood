@@ -1155,7 +1155,7 @@ MonoBehaviour:
   attackEffect: {fileID: 0}
   effectDuration: 0
   maxHealth: 10
-  enemyAggroRange: 5
+  enemyAggroRange: 10
   attackRate: 0.5
   hitStunDuration: 0.5
   hitBoxes:

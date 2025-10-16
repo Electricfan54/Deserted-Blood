@@ -68,6 +68,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 0
   damagetype: 1
+  hitStop: 0
+  stopTime: 0
 --- !u!1 &2023838948347328071
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,12 +135,15 @@ MonoBehaviour:
   startState: 1
   isSpecial: 0
   noDeathAnim: 0
+  destroyTime: 5
   enemyType: 0
   abilityDrop: {fileID: 0}
   isFlying: 0
   moveSpeed: 5
   acceleration: 1
   chaseStopDist: 1
+  attackEffect: {fileID: 0}
+  effectDuration: 0
   maxHealth: 10
   enemyAggroRange: 5
   attackRate: 0.5
@@ -242,6 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 5
   damagetype: 1
+  hitStop: 0
+  stopTime: 0
 --- !u!1 &5957305005343311900
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5957305005343311900}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

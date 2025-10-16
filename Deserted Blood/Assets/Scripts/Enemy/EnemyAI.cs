@@ -58,6 +58,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [Header("Attack Variables")]
     [SerializeField] protected ParticleSystem attackEffect;
     [SerializeField] protected float effectDuration;
+    protected bool shouldPlayEffect = false;
     [SerializeField] protected int maxHealth;
     protected int curHealth;
     public int enemyAggroRange;
@@ -428,7 +429,12 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (hitStunned)
             return;
-        StartCoroutine(PlayAttackEffect());
+
+        //toggles effect
+        shouldPlayEffect = !shouldPlayEffect;
+        if (shouldPlayEffect)
+            StartCoroutine(PlayAttackEffect());
+
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
@@ -438,7 +444,12 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (projectileSpawn == null)
             return;
-        StartCoroutine(PlayAttackEffect());
+
+        //toggles effect
+        shouldPlayEffect = !shouldPlayEffect;
+        if (shouldPlayEffect)
+            StartCoroutine(PlayAttackEffect());
+
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
         Projectile projScript = proj.GetComponent<Projectile>();
