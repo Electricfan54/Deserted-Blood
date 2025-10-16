@@ -248,6 +248,19 @@ public class GateKeeperAI : EnemyAI
     {
         if (hitStunned)
             return;
+
+        if (attackEffect != null)
+        {
+            //effect play logic
+            shouldPlayEffect = !shouldPlayEffect;
+            if (shouldPlayEffect && effectOneShot)
+                StartCoroutine(PlayAttackEffect());
+            else if (shouldPlayEffect)
+                attackEffect.Play();
+            else if (!shouldPlayEffect)
+                attackEffect.Stop();
+        }
+
         //Toggle hitbox
         hitBoxes[2].SetActive(!hitBoxes[2].activeSelf);
         hitBoxes[2].GetComponent<Damage>().damageammount = slamDamage;
