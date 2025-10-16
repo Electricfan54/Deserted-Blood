@@ -732,7 +732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865953807453978980, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: canRetrigger
@@ -745,14 +745,14 @@ PrefabInstance:
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: eventToTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1514873924}
+      objectReference: {fileID: 3521010579796135291}
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: eventToTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartBossFight
       objectReference: {fileID: 0}
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: eventToTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GateKeeperAI, Assembly-CSharp
+      value: OrcKingAI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: eventToTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -834,17 +834,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2368762275493202184, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
   m_PrefabInstance: {fileID: 1514873918}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1514873924 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3944863862517825419, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
-  m_PrefabInstance: {fileID: 1514873918}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901276098615e5346b9ac7d1fa013e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GateKeeperAI
 --- !u!1 &1518405037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,6 +1375,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1535570462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -14.49}
+--- !u!1001 &367978267271502466
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997686528171210931, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369886995678620588, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: m_Name
+      value: _BiggerOrcKing
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151750145917436057, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
+      propertyPath: projRoarEffect
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
 --- !u!1001 &424793577853357678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1664,7 +1714,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1648135072146764310, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10.8
       objectReference: {fileID: 0}
     - target: {fileID: 1648135072146764310, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1720,6 +1770,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1648135072146764310, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
   m_PrefabInstance: {fileID: 3521010579796135285}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3521010579796135291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8666960177129065020, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+  m_PrefabInstance: {fileID: 3521010579796135285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4240cc36e919bc549819af2eb1f0c283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrcKingAI
 --- !u!1001 &3934335689190318747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2255,5 +2316,6 @@ SceneRoots:
   - {fileID: 166448041}
   - {fileID: 22542242}
   - {fileID: 1535570462}
-  - {fileID: 1518405038}
   - {fileID: 1614084470}
+  - {fileID: 1518405038}
+  - {fileID: 367978267271502466}
