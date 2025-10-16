@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: e0151d2c7bc1bfc4a82177d0298dd56e
+AssetOrigin:
+  serializedVersion: 1
+  productId: 24530
+  packageName: Tileable Bricks Wall
+  packageVersion: 1.0
+  assetPath: Assets/TileableBricksWall/Textures/Bricks_diffuse.TGA
+  uploadId: 39242
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,10 +122,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 24530
-  packageName: Tileable Bricks Wall
-  packageVersion: 1.0
-  assetPath: Assets/TileableBricksWall/Textures/Bricks_diffuse.TGA
-  uploadId: 39242
