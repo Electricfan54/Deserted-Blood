@@ -1220,6 +1220,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _GiantOrc
       objectReference: {fileID: 0}
+    - target: {fileID: 7517385975655920244, guid: e3130a385866ff946896533546337847, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1541,10 +1545,6 @@ PrefabInstance:
     - target: {fileID: 7020628260575893429, guid: 1983fd21844beea4884e2ed0778c86dc, type: 3}
       propertyPath: m_Name
       value: _FlyingHornet
-      objectReference: {fileID: 0}
-    - target: {fileID: 7020628260575893429, guid: 1983fd21844beea4884e2ed0778c86dc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7306274679663955322, guid: 1983fd21844beea4884e2ed0778c86dc, type: 3}
       propertyPath: m_LocalPosition.x
