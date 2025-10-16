@@ -2138,7 +2138,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.391685
+      - time: 0.27212018
+        functionName: StartRoarEffect
+        data: 
+        objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5481695
         functionName: Roar
         data: 
         objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
@@ -2147,6 +2154,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.95623654
         functionName: AttackAnimEnd
+        data: 
+        objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6393991
+        functionName: StopRoarEffect
         data: 
         objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
         floatParameter: 0

@@ -431,17 +431,20 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (hitStunned)
             return;
 
-        //effect play logic
-        shouldPlayEffect = !shouldPlayEffect;
-        if (shouldPlayEffect && effectOneShot)
-            StartCoroutine(PlayAttackEffect());
-        else if (shouldPlayEffect)
-            attackEffect.Play();
-        else if (!shouldPlayEffect)
-            attackEffect.Stop();
+        if (attackEffect != null)
+        {
+            //effect play logic
+            shouldPlayEffect = !shouldPlayEffect;
+            if (shouldPlayEffect && effectOneShot)
+                StartCoroutine(PlayAttackEffect());
+            else if (shouldPlayEffect)
+                attackEffect.Play();
+            else if (!shouldPlayEffect)
+                attackEffect.Stop();
+        }
 
-            //Toggle hitbox
-            hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
+        //Toggle hitbox
+        hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
     }
 
@@ -450,14 +453,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (projectileSpawn == null)
             return;
 
-        //effect play logic
-        shouldPlayEffect = !shouldPlayEffect;
-        if (shouldPlayEffect && effectOneShot)
-            StartCoroutine(PlayAttackEffect());
-        else if (shouldPlayEffect)
-            attackEffect.Play();
-        else if (!shouldPlayEffect)
-            attackEffect.Stop();
+        if (attackEffect != null)
+        {
+            //effect play logic
+            shouldPlayEffect = !shouldPlayEffect;
+            if (shouldPlayEffect && effectOneShot)
+                StartCoroutine(PlayAttackEffect());
+            else if (shouldPlayEffect)
+                attackEffect.Play();
+            else if (!shouldPlayEffect)
+                attackEffect.Stop();
+        }
 
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
