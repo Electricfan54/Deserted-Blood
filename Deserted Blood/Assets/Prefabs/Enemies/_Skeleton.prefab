@@ -1153,6 +1153,7 @@ MonoBehaviour:
   acceleration: 1
   chaseStopDist: 2
   attackEffect: {fileID: 0}
+  effectOneShot: 0
   effectDuration: 0
   maxHealth: 10
   enemyAggroRange: 10
@@ -2211,7 +2212,7 @@ MonoBehaviour:
   damageammount: 10
   damagetype: 1
   hitStop: 0
-  stopTime: 0
+  stopTime: 0.1
 --- !u!1 &8646247983986128776
 GameObject:
   m_ObjectHideFlags: 0

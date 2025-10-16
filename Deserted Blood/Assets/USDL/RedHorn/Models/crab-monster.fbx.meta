@@ -1698,6 +1698,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.17863105
+        functionName: StartRoarEffect
+        data: 
+        objectReferenceParameter: {fileID: 8325990259410274392, guid: 657a4138c27fa92448a64b06875e8e2a, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.68948257
+        functionName: StopRoarEffect
+        data: 
+        objectReferenceParameter: {fileID: 8325990259410274392, guid: 657a4138c27fa92448a64b06875e8e2a, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

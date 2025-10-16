@@ -3,7 +3,7 @@ using System.Collections;
 
 public class OrcKingAI : EnemyAI
 {
-    [Header("RedHorn Variables")]
+    [Header("OrcKing Variables")]
     [Tooltip("The position the main cam will be set to during the boss fight")]
     [SerializeField] Transform fightCamPos;
     [SerializeField] GameObject[] projSpawnPointList;
@@ -15,6 +15,11 @@ public class OrcKingAI : EnemyAI
     [SerializeField] float roarCooldown;
     [SerializeField] float projSpawnRate;
     public bool bossFightTriggered = false;
+
+    [Header("Effects")]
+    [SerializeField] ParticleSystem summonRoarEffect;
+    [SerializeField] ParticleSystem projRoarEffect;
+    //bool shouldPlayEffect = false;
 
 
     enum RoarType
@@ -258,5 +263,29 @@ public class OrcKingAI : EnemyAI
     void UpdateUI()
     {
         gameManager.instance.UpdateBossBar(curHealth);
+    }
+
+    public void StartRoarEffect()
+    {
+        switch (roarType)
+        {
+            case RoarType.Enemy:
+                if (summonRoarEffect != null)
+                    summonRoarEffect.Play();
+                break;
+            case RoarType.Proj:
+                if (projRoarEffect != null)
+                    projRoarEffect.Play();
+                break;
+        }
+    }
+
+    public void StopRoarEffect()
+    {
+        if (summonRoarEffect != null && projRoarEffect != null)
+        {
+            summonRoarEffect.Stop();
+            projRoarEffect.Stop();
+        }
     }
 }

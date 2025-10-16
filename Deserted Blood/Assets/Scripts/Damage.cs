@@ -11,7 +11,6 @@ public class Damage : MonoBehaviour
     [SerializeField] DamageType damagetype;
     public bool hitStop;
     public float stopTime;
-    float origTimeScale;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,7 +32,7 @@ public class Damage : MonoBehaviour
         }
         if (hitStop)
         {
-            StartCoroutine(HitStop());
+            gameManager.instance.HitStop(stopTime);
         }
        
         if (damagetype==DamageType.deletable)
@@ -42,13 +41,5 @@ public class Damage : MonoBehaviour
         }
 
 
-    }
-
-    IEnumerator HitStop()
-    {
-        origTimeScale = Time.timeScale;
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(stopTime);
-        Time.timeScale = origTimeScale;
     }
 }

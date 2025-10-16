@@ -431,17 +431,20 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (hitStunned)
             return;
 
-        //effect play logic
-        shouldPlayEffect = !shouldPlayEffect;
-        if (shouldPlayEffect && effectOneShot)
-            StartCoroutine(PlayAttackEffect());
-        else if (shouldPlayEffect)
-            attackEffect.Play();
-        else if (!shouldPlayEffect)
-            attackEffect.Stop();
+        if (attackEffect != null)
+        {
+            //effect play logic
+            shouldPlayEffect = !shouldPlayEffect;
+            if (shouldPlayEffect && effectOneShot)
+                StartCoroutine(PlayAttackEffect());
+            else if (shouldPlayEffect)
+                attackEffect.Play();
+            else if (!shouldPlayEffect)
+                attackEffect.Stop();
+        }
 
-            //Toggle hitbox
-            hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
+        //Toggle hitbox
+        hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
     }
 
@@ -450,14 +453,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (projectileSpawn == null)
             return;
 
-        //effect play logic
-        shouldPlayEffect = !shouldPlayEffect;
-        if (shouldPlayEffect && effectOneShot)
-            StartCoroutine(PlayAttackEffect());
-        else if (shouldPlayEffect)
-            attackEffect.Play();
-        else if (!shouldPlayEffect)
-            attackEffect.Stop();
+        if (attackEffect != null)
+        {
+            //effect play logic
+            shouldPlayEffect = !shouldPlayEffect;
+            if (shouldPlayEffect && effectOneShot)
+                StartCoroutine(PlayAttackEffect());
+            else if (shouldPlayEffect)
+                attackEffect.Play();
+            else if (!shouldPlayEffect)
+                attackEffect.Stop();
+        }
 
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
@@ -621,7 +627,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected virtual IEnumerator FlashRed()
     {
         meshRenderer.material.color = Color.red;
-        meshRenderer.material.color = new Color(meshRenderer.material.color.r, meshRenderer.material.color.g, meshRenderer.material.color.b, 0.5f);
+        meshRenderer.material.color = new Color(meshRenderer.material.color.r, meshRenderer.material.color.g, meshRenderer.material.color.b, 1.0f);
         yield return new WaitForSeconds(.1f);
         meshRenderer.material.color = origColor;
     }
@@ -706,6 +712,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             canUpdate = true;
             animator.speed = origAnimSpeed;
             meshRenderer.material.color = beforeFreezeColor;
+            origColor = beforeFreezeColor;
         }
     }
 

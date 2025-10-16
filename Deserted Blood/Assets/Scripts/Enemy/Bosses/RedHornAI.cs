@@ -16,6 +16,10 @@ public class RedHornAI : EnemyAI
 
     int attackCalls;
     public bool bossFightTriggered = false;
+
+    [Header("Effect Variables")]
+    [SerializeField] ParticleSystem roarEffect;
+
     protected override void Start()
     {
         base.Start();
@@ -23,7 +27,6 @@ public class RedHornAI : EnemyAI
         canRoar = true;
         bossFightTriggered = false;
     }
-
 
     protected override void Update()
     {
@@ -238,5 +241,21 @@ public class RedHornAI : EnemyAI
     void UpdateUI()
     {
         gameManager.instance.UpdateBossBar(curHealth);
+    }
+
+    public void StartRoarEffect()
+    {
+        if (roarEffect != null)
+        {
+            roarEffect.Play();
+        }
+    }
+
+    public void StopRoarEffect()
+    {
+        if (roarEffect != null)
+        {
+            roarEffect.Stop();
+        }
     }
 }

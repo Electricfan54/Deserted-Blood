@@ -40,8 +40,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     bool hasWallJumped = false;
     bool WallInRange;
 
-  public  bool isInvinc = false;
+    public  bool isInvinc = false;
     bool isAttacking = false;
+    bool canAttack = true;
 
     public bool GateKeeperAbilityCheck = false;
     public bool RedHornAbilityCheck = false;
@@ -76,6 +77,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     protected bool canUpdate = true; //for stopping player input update
     protected bool canMove = true; //for stopping player movement
+
+    GameObject CurrentAttack;
 
     private void Awake()
     {
@@ -361,6 +364,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         freezeDuration = duration;
         canMove = false;
         canUpdate = false;
+        canAttack = false;
+
+        StopAttack();
 
         if (PlayerAnimator.speed != 0)
         {
@@ -397,6 +403,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             freezeDuration = 0;
             canMove = true;
             canUpdate = true;
+            canAttack = true;
             PlayerAnimator.speed = origAnimSpeed;
             meshRenderer.material.color = beforeFreezeColor;
         }
@@ -452,7 +459,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
 
         }
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.G))
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.G) && canAttack == true)
         {
             // play animation using the animation index after making the stuff   for it
             // left, right, hook, right
@@ -543,6 +550,24 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         isInvinc = true;
         yield return new WaitForSeconds(0.1f);
         
+    }
+
+    void StopAttack()
+    {
+        if(LightAttackHitbox.activeSelf)
+        {
+            LightAttackHitbox.SetActive(false);
+        }
+
+        if (BaseAttacks[0].activeSelf) // mappa Punch
+        {
+            BaseAttacks[0].SetActive(false);
+        }
+
+        if(BaseAttacks[1].activeSelf) //  falling punch
+        {
+            BaseAttacks[1].SetActive(false);
+        }
     }
 
 
