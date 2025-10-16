@@ -627,7 +627,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected virtual IEnumerator FlashRed()
     {
         meshRenderer.material.color = Color.red;
-        meshRenderer.material.color = new Color(meshRenderer.material.color.r, meshRenderer.material.color.g, meshRenderer.material.color.b, 0.5f);
+        meshRenderer.material.color = new Color(meshRenderer.material.color.r, meshRenderer.material.color.g, meshRenderer.material.color.b, 1.0f);
         yield return new WaitForSeconds(.1f);
         meshRenderer.material.color = origColor;
     }
@@ -712,6 +712,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             canUpdate = true;
             animator.speed = origAnimSpeed;
             meshRenderer.material.color = beforeFreezeColor;
+            origColor = beforeFreezeColor;
         }
     }
 
