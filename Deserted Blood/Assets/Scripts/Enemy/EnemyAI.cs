@@ -57,6 +57,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     [Header("Attack Variables")]
     [SerializeField] protected ParticleSystem attackEffect;
+    [SerializeField] protected bool effectOneShot;
     [SerializeField] protected float effectDuration;
     protected bool shouldPlayEffect = false;
     [SerializeField] protected int maxHealth;
@@ -430,13 +431,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (hitStunned)
             return;
 
-        //toggles effect
+        //effect play logic
         shouldPlayEffect = !shouldPlayEffect;
-        if (shouldPlayEffect)
+        if (shouldPlayEffect && effectOneShot)
             StartCoroutine(PlayAttackEffect());
+        else if (shouldPlayEffect)
+            attackEffect.Play();
+        else if (!shouldPlayEffect)
+            attackEffect.Stop();
 
-        //Toggle hitbox
-        hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
+            //Toggle hitbox
+            hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
     }
 
@@ -445,10 +450,14 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         if (projectileSpawn == null)
             return;
 
-        //toggles effect
+        //effect play logic
         shouldPlayEffect = !shouldPlayEffect;
-        if (shouldPlayEffect)
+        if (shouldPlayEffect && effectOneShot)
             StartCoroutine(PlayAttackEffect());
+        else if (shouldPlayEffect)
+            attackEffect.Play();
+        else if (!shouldPlayEffect)
+            attackEffect.Stop();
 
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));

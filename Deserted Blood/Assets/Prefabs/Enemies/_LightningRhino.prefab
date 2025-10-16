@@ -14584,6 +14584,7 @@ MonoBehaviour:
   acceleration: 0.1
   chaseStopDist: 10
   attackEffect: {fileID: 6240154357929307897}
+  effectOneShot: 1
   effectDuration: 0.1
   maxHealth: 30
   enemyAggroRange: 15
@@ -14692,6 +14693,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 5
   damagetype: 1
+  hitStop: 0
+  stopTime: 0
 --- !u!1 &8424408385012249696
 GameObject:
   m_ObjectHideFlags: 0
