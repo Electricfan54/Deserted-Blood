@@ -20,6 +20,9 @@ public class GateKeeperAI : EnemyAI
 
     int attackCalls;
 
+    [Header("Effect Variables")]
+    [SerializeField] ParticleSystem roarEffect;
+
     protected override void Awake()
     {
         base.Awake();
@@ -245,6 +248,19 @@ public class GateKeeperAI : EnemyAI
     {
         if (hitStunned)
             return;
+
+        if (attackEffect != null)
+        {
+            //effect play logic
+            shouldPlayEffect = !shouldPlayEffect;
+            if (shouldPlayEffect && effectOneShot)
+                StartCoroutine(PlayAttackEffect());
+            else if (shouldPlayEffect)
+                attackEffect.Play();
+            else if (!shouldPlayEffect)
+                attackEffect.Stop();
+        }
+
         //Toggle hitbox
         hitBoxes[2].SetActive(!hitBoxes[2].activeSelf);
         hitBoxes[2].GetComponent<Damage>().damageammount = slamDamage;
@@ -360,5 +376,21 @@ public class GateKeeperAI : EnemyAI
     void UpdateUI()
     {
         gameManager.instance.UpdateBossBar(curHealth);
+    }
+
+    public void StartRoarEffect()
+    {
+        if (roarEffect != null)
+        {
+            roarEffect.Play();
+        }
+    }
+
+    public void StopRoarEffect()
+    {
+        if (roarEffect != null)
+        {
+            roarEffect.Stop();
+        }
     }
 }

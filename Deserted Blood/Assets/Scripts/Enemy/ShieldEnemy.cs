@@ -22,6 +22,9 @@ public class ShieldEnemy : EnemyAI
                 else
                     curSpeed = 0;
                 break;
+            case EnemyState.chase:
+                curSpeed = 0;
+                break;
             case EnemyState.attacking:
                 targetPoint = player.transform.position;
                 break;

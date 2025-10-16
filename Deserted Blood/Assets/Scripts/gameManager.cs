@@ -80,7 +80,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] float frameSpacing;
 
     public List<AbilitySlotMain> abilitySlots = new();
-    [Range(0,2)] public int slotSelected;
+    [Range(0, 2)] public int slotSelected;
     [SerializeField] GameObject selHighlight;
 
     [Header("Transition Variables")]
@@ -159,7 +159,7 @@ public class gameManager : MonoBehaviour
     {
 
         AttemptPlayerAssign();
-        
+
     }
 
     private void AttemptPlayerAssign()
@@ -441,20 +441,20 @@ public class gameManager : MonoBehaviour
         for (int i = 0; i < selSlot.maxCharges; i++)
         {
 
-            selSlot.chargeList[i].GetComponent<Image>().color = new Color(1,1,1);
+            selSlot.chargeList[i].GetComponent<Image>().color = new Color(1, 1, 1);
 
         }
 
         abilitySlots[slotSelected] = selSlot;
 
-    }    
+    }
 
     public void ShowBossBar(string bossName, int maxHealth)
     {
         bossBarUI.SetActive(true);
         bossNameText.text = bossName;
         bossHPMax = maxHealth;
-        
+
     }
 
     public void HideBossBar()
@@ -505,4 +505,20 @@ public class gameManager : MonoBehaviour
 
     }
 
+
+    public void HitStop(float duration)
+    {
+        if (Time.timeScale > 0)
+        {
+            StartCoroutine(HitStopCo(duration));
+        }
+    }
+
+    IEnumerator HitStopCo(float duration)
+    {
+        float origTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = origTimeScale;
+    }
 }

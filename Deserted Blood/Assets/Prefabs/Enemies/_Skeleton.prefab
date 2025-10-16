@@ -1152,8 +1152,11 @@ MonoBehaviour:
   moveSpeed: 5
   acceleration: 1
   chaseStopDist: 2
+  attackEffect: {fileID: 0}
+  effectOneShot: 0
+  effectDuration: 0
   maxHealth: 10
-  enemyAggroRange: 5
+  enemyAggroRange: 10
   attackRate: 0.5
   hitStunDuration: 0.5
   hitBoxes:
@@ -1255,6 +1258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 5
   damagetype: 1
+  hitStop: 0
+  stopTime: 0
 --- !u!1 &4788268787891342679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,6 +2211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 10
   damagetype: 1
+  hitStop: 0
+  stopTime: 0.1
 --- !u!1 &8646247983986128776
 GameObject:
   m_ObjectHideFlags: 0
