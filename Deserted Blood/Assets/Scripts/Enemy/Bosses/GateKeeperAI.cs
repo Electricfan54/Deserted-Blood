@@ -20,6 +20,9 @@ public class GateKeeperAI : EnemyAI
 
     int attackCalls;
 
+    [Header("Effect Variables")]
+    [SerializeField] ParticleSystem roarEffect;
+
     protected override void Awake()
     {
         base.Awake();
@@ -360,5 +363,21 @@ public class GateKeeperAI : EnemyAI
     void UpdateUI()
     {
         gameManager.instance.UpdateBossBar(curHealth);
+    }
+
+    public void StartRoarEffect()
+    {
+        if (roarEffect != null)
+        {
+            roarEffect.Play();
+        }
+    }
+
+    public void StopRoarEffect()
+    {
+        if (roarEffect != null)
+        {
+            roarEffect.Stop();
+        }
     }
 }

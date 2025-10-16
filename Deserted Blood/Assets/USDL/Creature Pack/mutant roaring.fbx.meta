@@ -55,22 +55,36 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.34825286
+      - time: 0.30884814
+        functionName: StartRoarEffect
+        data: 
+        objectReferenceParameter: {fileID: 7022975855328292959, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.51759905
         functionName: RangedAttack0
         data: 
         objectReferenceParameter: {fileID: 7022975855328292959, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.3963609
+      - time: 0.5657071
         functionName: RangedAttack1
         data: 
         objectReferenceParameter: {fileID: 7022975855328292959, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.44240403
+      - time: 0.61175025
         functionName: RangedAttack2
+        data: 
+        objectReferenceParameter: {fileID: 7022975855328292959, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7963274
+        functionName: StopRoarEffect
         data: 
         objectReferenceParameter: {fileID: 7022975855328292959, guid: b2d2f0907d5f8934fb3b4a159b8dc80c, type: 3}
         floatParameter: 0
