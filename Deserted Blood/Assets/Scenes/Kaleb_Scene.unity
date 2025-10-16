@@ -628,7 +628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865953807453978980, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3001912772261816008, guid: 5994960d87c3f404ba0ead0d7cfb5073, type: 3}
       propertyPath: eventToTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -877,7 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1008,7 +1008,7 @@ GameObject:
   - component: {fileID: 2023790752}
   - component: {fileID: 2023790751}
   - component: {fileID: 2023790750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,10 +1176,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1602163232130415769, guid: e3130a385866ff946896533546337847, type: 3}
-      propertyPath: abilityDrop
-      value: 
-      objectReference: {fileID: 8655666854864889330, guid: 82e511d28490c5a418b2120209317763, type: 3}
     - target: {fileID: 6721937902335035956, guid: e3130a385866ff946896533546337847, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1894,10 +1890,6 @@ PrefabInstance:
     - target: {fileID: 8247692209110960021, guid: 841a5b028315b294da46c178e95fd1f3, type: 3}
       propertyPath: m_Name
       value: _BaseCerberus
-      objectReference: {fileID: 0}
-    - target: {fileID: 8247692209110960021, guid: 841a5b028315b294da46c178e95fd1f3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

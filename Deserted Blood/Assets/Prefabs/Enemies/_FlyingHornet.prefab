@@ -164,7 +164,7 @@ MonoBehaviour:
   hitBoxes: []
   meleeDamage: 0
   projectiles:
-  - {fileID: 387570333031549360, guid: 75aeb4b78a065a14692f430bc4fabad9, type: 3}
+  - {fileID: 7207992942933475600, guid: cab33ca1ac9801a4a9cab2fca42fbb8d, type: 3}
   projectileSpawn: {fileID: 4743415629509033787}
   projDamage: 5
   projSpeed: 10
@@ -260,6 +260,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 5
   damagetype: 1
+  hitStop: 0
+  stopTime: 0
 --- !u!1001 &7457085852316728825
 PrefabInstance:
   m_ObjectHideFlags: 0

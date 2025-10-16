@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
 using UnityEditorInternal;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
@@ -56,7 +57,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     [Header("Attack Variables")]
     [SerializeField] protected ParticleSystem attackEffect;
+    [SerializeField] protected bool effectOneShot;
     [SerializeField] protected float effectDuration;
+    protected bool shouldPlayEffect = false;
     [SerializeField] protected int maxHealth;
     protected int curHealth;
     public int enemyAggroRange;
@@ -300,7 +303,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         // Offsets the ray position on the y and local x
         Vector3 rayPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z) + transform.right * .2f;
-        if (Physics.Raycast(rayPos, Vector3.down, 0.2f, groundLayer))
+        if (Physics.Raycast(rayPos, Vector3.down, 0.5f, groundLayer))
         {
             return true;
         }
@@ -427,9 +430,18 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (hitStunned)
             return;
-        StartCoroutine(PlayAttackEffect());
-        //Toggle hitbox
-        hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
+
+        //effect play logic
+        shouldPlayEffect = !shouldPlayEffect;
+        if (shouldPlayEffect && effectOneShot)
+            StartCoroutine(PlayAttackEffect());
+        else if (shouldPlayEffect)
+            attackEffect.Play();
+        else if (!shouldPlayEffect)
+            attackEffect.Stop();
+
+            //Toggle hitbox
+            hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
     }
 
@@ -437,7 +449,16 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         if (projectileSpawn == null)
             return;
-        StartCoroutine(PlayAttackEffect());
+
+        //effect play logic
+        shouldPlayEffect = !shouldPlayEffect;
+        if (shouldPlayEffect && effectOneShot)
+            StartCoroutine(PlayAttackEffect());
+        else if (shouldPlayEffect)
+            attackEffect.Play();
+        else if (!shouldPlayEffect)
+            attackEffect.Stop();
+
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
         GameObject proj = Instantiate(projectiles[0], projectileSpawn.transform.position, Quaternion.LookRotation(playerDir));
         Projectile projScript = proj.GetComponent<Projectile>();
@@ -623,6 +644,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             origAnimSpeed = animator.speed;
             animator.speed = 0;// Pause animation
+            DeactivateHitboxes();
         }
 
         if (meshRenderer.material.color != Color.blue)
@@ -647,6 +669,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             origAnimSpeed = animator.speed;
             animator.speed = 0;
+            DeactivateHitboxes();
         }
 
         if (meshRenderer.material.color != Color.yellow)
@@ -706,6 +729,14 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             attackEffect.Play();
             yield return new WaitForSeconds(effectDuration);
             attackEffect.Stop();
+        }
+    }
+
+    protected virtual void DeactivateHitboxes()
+    {
+        for (int i = 0; i < hitBoxes.Count; i++)
+        {
+            hitBoxes[i].SetActive(false);
         }
     }
 }

@@ -1254,7 +1254,7 @@ MonoBehaviour:
   damageammount: 10
   damagetype: 1
   hitStop: 1
-  stopTime: 10
+  stopTime: 0.1
 --- !u!1 &3583753680198753813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2185,7 @@ MonoBehaviour:
   damageammount: 10
   damagetype: 1
   hitStop: 1
-  stopTime: 0.1
+  stopTime: 0.08
 --- !u!1 &5619910152099292021
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,6 +3107,7 @@ MonoBehaviour:
   Speed: 15
   animTranSpeed: 15
   isGrounded: 0
+  isInvinc: 0
   GateKeeperAbilityCheck: 0
   RedHornAbilityCheck: 0
   hasThirdAbility: 0
