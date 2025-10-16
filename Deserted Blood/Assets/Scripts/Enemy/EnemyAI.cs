@@ -301,7 +301,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     {
         // Offsets the ray position on the y and local x
         Vector3 rayPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z) + transform.right * .2f;
-        if (Physics.Raycast(rayPos, Vector3.down, 0.2f, groundLayer))
+        if (Physics.Raycast(rayPos, Vector3.down, 0.5f, groundLayer))
         {
             return true;
         }
