@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
 using UnityEditorInternal;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
@@ -623,6 +624,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             origAnimSpeed = animator.speed;
             animator.speed = 0;// Pause animation
+            DeactivateHitboxes();
         }
 
         if (meshRenderer.material.color != Color.blue)
@@ -647,6 +649,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             origAnimSpeed = animator.speed;
             animator.speed = 0;
+            DeactivateHitboxes();
         }
 
         if (meshRenderer.material.color != Color.yellow)
@@ -706,6 +709,14 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             attackEffect.Play();
             yield return new WaitForSeconds(effectDuration);
             attackEffect.Stop();
+        }
+    }
+
+    protected virtual void DeactivateHitboxes()
+    {
+        for (int i = 0; i < hitBoxes.Count; i++)
+        {
+            hitBoxes[i].SetActive(false);
         }
     }
 }
