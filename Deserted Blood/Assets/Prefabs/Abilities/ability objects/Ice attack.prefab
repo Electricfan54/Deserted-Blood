@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7601684955475804529}
   - component: {fileID: -1918786542916116412}
   - component: {fileID: 8171368401674854705}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ice attack
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -145,6 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damage
   damageammount: 1
   damagetype: 3
+  hitStop: 0
+  stopTime: 0
 --- !u!54 &-1918786542916116412
 Rigidbody:
   m_ObjectHideFlags: 0

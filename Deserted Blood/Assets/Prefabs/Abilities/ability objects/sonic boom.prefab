@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5585730074013464113}
   - component: {fileID: 618656666160744723}
   - component: {fileID: -6037465216389388481}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sonic boom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

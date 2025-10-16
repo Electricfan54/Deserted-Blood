@@ -27,7 +27,7 @@ public class Shockwave : MonoBehaviour
         if (dmg != null)
         {
             dmg.TakeDamage(shockwavedamage);
- other.GetComponent<Rigidbody>().AddExplosionForce(500f, transform.position, 2f, 0f, ForceMode.Impulse);
+ other.GetComponent<Rigidbody>().AddExplosionForce(10f, transform.position, 2f, 0f, ForceMode.Impulse);
         }
        
 
