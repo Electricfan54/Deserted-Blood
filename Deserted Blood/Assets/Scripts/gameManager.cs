@@ -200,8 +200,9 @@ public class gameManager : MonoBehaviour
 
     void PauseFunction()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel")|| Input.GetKeyDown(KeyCode.P))
         {
+            
             if (menuActive == null)
             {
                 PauseGame();

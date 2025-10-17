@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
                 abilities[i].currentcharge = stuncharges[i];
             }
             stuncharges.Clear();
-            gameObject.GetComponent<MeshRenderer>().material.color = beforeStunColor;
+            meshRenderer.material.color = beforeStunColor;
         }
     }
     public void ApplyStunEffect(float duration)
@@ -481,7 +481,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         bloodTimer += Time.deltaTime;
         if (isAttacking == false && Input.GetKey(KeyCode.H) && bloodTimer > 0.2f)
         {
-            if (BloodMeter > 0)
+            if (BloodMeter > 0&HP!=MaxHP)
             {
                 bloodTimer = 0;
                 BloodMeter--;
