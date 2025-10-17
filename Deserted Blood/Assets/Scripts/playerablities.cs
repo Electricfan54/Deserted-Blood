@@ -51,8 +51,11 @@ public class playerablities : MonoBehaviour
         {
 
         }
+
+        //Teleport ability
         else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.tp && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0 && gameManager.instance.playerScript.isGrounded == false)
         {
+           
             Debug.Log("Pew Pew");
             if (gameManager.instance.playerScript.isGrounded == false)
             {
@@ -73,6 +76,8 @@ public class playerablities : MonoBehaviour
 
 
         }
+
+        //lightning ability
         else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.lightning && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
 
@@ -82,32 +87,36 @@ public class playerablities : MonoBehaviour
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
+
+        //fire ability
         else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.fire && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
             Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
+  //shockwave ability
         else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.shockwave && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
             StartCoroutine(Slamtime());
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
+  //ice ability
         else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.ice && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
             Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
-
+  //sonicBoom ability
         else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sonicboom && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
             Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
-
+  //sheild ability
         else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sheild && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
 

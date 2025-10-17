@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
                 abilities[i].currentcharge = stuncharges[i];
             }
             stuncharges.Clear();
-
+            gameObject.GetComponent<MeshRenderer>().material.color = beforeStunColor;
         }
     }
     public void ApplyStunEffect(float duration)
