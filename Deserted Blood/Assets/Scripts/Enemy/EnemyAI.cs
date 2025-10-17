@@ -511,11 +511,22 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             hitBoxes[i].SetActive(false);
         }
+
+        if (attackEffect != null)
+        {
+            attackEffect.Stop();
+        }
+        if (audSource != null)
+            audSource.Stop();
     }
 
     public virtual void AttackAnimEnd()
     {
         inAttackAnim = false;
+        if (attackEffect != null)
+        {
+            attackEffect.Stop();
+        }
     }
 
     protected virtual void StoppedTransitionCheck()
@@ -629,6 +640,13 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     protected virtual void OnDeath()
     {
+        if (attackEffect != null)
+        {
+            attackEffect.Stop();
+        }
+        if (audSource != null)
+            audSource.Stop();
+
         AddToMilestone();
         DropAbility();
         onDeathEvent?.Invoke();
@@ -693,6 +711,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
                 beforeFreezeColor = meshRenderer.material.color;
             meshRenderer.material.color = Color.blue;
         }
+
+        if (attackEffect != null)
+        {
+            attackEffect.Stop();
+        }
     }
     public void ApplyStunEffect(float duration)
     {
@@ -717,6 +740,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             else
                 beforestunColor = meshRenderer.material.color;
             meshRenderer.material.color = Color.yellow;
+        }
+
+        if (attackEffect != null)
+        {
+            attackEffect.Stop();
         }
     }
     protected virtual void BurnEffect()

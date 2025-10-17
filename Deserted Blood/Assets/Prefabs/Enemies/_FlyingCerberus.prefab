@@ -179,12 +179,13 @@ MonoBehaviour:
   roamStopDist: 0.5
   roamPauseTime: 1
   bloodAddAmount: 10
-  audSource: {fileID: 0}
+  audSource: {fileID: 2879659802172085152}
   walkingSounds: []
   walkingVol: 0
   walkSoundInterval: 0
-  attackSounds: []
-  attackVol: 0
+  attackSounds:
+  - {fileID: 8300000, guid: 7d156b8a5b340cd46bcf0a76557dd2dd, type: 3}
+  attackVol: 0.5
   hitSounds: []
   hitVol: 0
   model: {fileID: 2259630661358689125}
