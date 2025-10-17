@@ -125,3 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::pickup
   ability: {fileID: 11400000, guid: f533ccbff4614dd45ad00d264387cca7, type: 2}
+  ground:
+    serializedVersion: 2
+    m_Bits: 65
