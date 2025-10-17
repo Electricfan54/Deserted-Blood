@@ -121,6 +121,20 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected bool hitReact = true;
 
 
+    [Header("Sound Variables")]
+    [SerializeField] protected AudioSource audSource;
+    [SerializeField] protected AudioClip[] walkingSounds;
+    [SerializeField] protected float walkingVol;
+    [SerializeField] protected float walkSoundInterval;
+    protected float walkSoundTimer;
+    [SerializeField] protected AudioClip[] attackSounds;
+    [SerializeField] protected float attackVol;
+    protected bool shouldPlayAttackSound;
+    [SerializeField] protected AudioClip[] hitSounds;
+    [SerializeField] protected float hitVol;
+
+
+
     protected virtual void Awake()
     {
         rig = GetComponent<Rigidbody>();
@@ -226,6 +240,21 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
                 //OnDeath();
                 break;
         }
+
+
+        //Walk Sound effects
+        if (walkingSounds.Length > 0 && curSpeed > 0 && walkSoundTimer > walkSoundInterval)
+        {
+            walkSoundTimer = 0;
+            int rand = Random.Range(0, walkingSounds.Length);
+            float randPitch = Random.Range(0.9f, 1.1f);
+            audSource.pitch = randPitch;
+            audSource.PlayOneShot(walkingSounds[rand], walkingVol);
+        }
+        else if (walkingSounds.Length > 0)
+            walkSoundTimer += Time.deltaTime;
+
+
     }
 
     protected virtual void FixedUpdate()
@@ -745,5 +774,16 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             hitBoxes[i].SetActive(false);
         }
+    }
+
+    public void PlayAttackSFX()
+    {
+        if (attackSounds.Length < 0)
+            return;
+        shouldPlayAttackSound = false;
+        int rand = Random.Range(0, attackSounds.Length);
+        float randPitch = Random.Range(0.9f, 1.1f);
+        audSource.pitch = randPitch;
+        audSource.PlayOneShot(attackSounds[rand], attackVol);
     }
 }

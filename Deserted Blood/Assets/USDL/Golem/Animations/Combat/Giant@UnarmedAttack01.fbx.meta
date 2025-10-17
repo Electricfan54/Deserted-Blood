@@ -83,6 +83,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.38103762
+        functionName: PlayAttackSFX
+        data: 
+        objectReferenceParameter: {fileID: 8525243267965557702, guid: 45c0aefed34f1fa449ccea42ab8b5297, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
