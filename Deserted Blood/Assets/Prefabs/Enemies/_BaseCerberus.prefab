@@ -12033,12 +12033,13 @@ MonoBehaviour:
   roamStopDist: 1
   roamPauseTime: 2
   bloodAddAmount: 10
-  audSource: {fileID: 0}
+  audSource: {fileID: 7506355886908207760}
   walkingSounds: []
   walkingVol: 0
   walkSoundInterval: 0
-  attackSounds: []
-  attackVol: 0
+  attackSounds:
+  - {fileID: 8300000, guid: ea188eb568992177195e7f0a9eaa4824, type: 3}
+  attackVol: 1
   hitSounds: []
   hitVol: 0
 --- !u!95 &6230001678206522705
