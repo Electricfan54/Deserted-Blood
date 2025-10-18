@@ -96,6 +96,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected float roamStopDist;
     [SerializeField] protected float roamPauseTime;
     protected float roamPauseTimer;
+    //Air roam failsafe
+    [SerializeField] protected float roamMaxTravelTime = 10.0f;
+    protected float roamTimer;
 
 
     [Header("Player Blood Meter")]
@@ -124,15 +127,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [Header("Sound Variables")]
     [SerializeField] protected AudioSource audSource;
     [SerializeField] protected AudioClip[] walkingSounds;
+    [SerializeField] protected bool walkSyncedWithAnim;
     [SerializeField] protected float walkingVol;
     [SerializeField] protected float walkSoundInterval;
     protected float walkSoundTimer;
     [SerializeField] protected AudioClip[] attackSounds;
     [SerializeField] protected float attackVol;
-    protected bool shouldPlayAttackSound;
     [SerializeField] protected AudioClip[] hitSounds;
     [SerializeField] protected float hitVol;
-
+    //For pitch modulation
+    [SerializeField] protected float pitchMin = 0.8f;
+    [SerializeField] protected float pitchMax = 1.2f;
 
 
     protected virtual void Awake()
@@ -243,13 +248,12 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
 
         //Walk Sound effects
-        if (walkingSounds.Length > 0 && curSpeed > 0 && walkSoundTimer > walkSoundInterval)
+        bool isMoving = curSpeed > 0 || isFlying;//if flying the wing flapping sounds should always be playing
+        if (!walkSyncedWithAnim && walkingSounds.Length > 0 && isMoving && walkSoundTimer >= walkSoundInterval)
         {
             walkSoundTimer = 0;
             int rand = Random.Range(0, walkingSounds.Length);
-            float randPitch = Random.Range(0.9f, 1.1f);
-            audSource.pitch = randPitch;
-            audSource.PlayOneShot(walkingSounds[rand], walkingVol);
+            PlaySoundClip(walkingSounds[rand], walkingVol, pitchMin, pitchMax);
         }
         else if (walkingSounds.Length > 0)
             walkSoundTimer += Time.deltaTime;
@@ -373,10 +377,13 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     protected virtual void AirRoam()
     {
-        if (DistFromTarget() <= roamStopDist)
+        if (DistFromTarget() <= roamStopDist || roamTimer >= roamMaxTravelTime)
         {
+            roamTimer = 0;
             reachedRoamTarget = true;
         }
+        else
+            roamTimer += Time.deltaTime;
 
         if (reachedRoamTarget == true && roamPauseTimer >= roamPauseTime)
         {
@@ -400,9 +407,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         //Check if enemy has line of sight
         Vector3 dir = pos - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, dir, out hit, roamDist, ~roamIgnoreLayer))
+        if (Physics.Raycast(transform.position + (transform.up * 1.1f), dir, out hit, roamDist * 1.5f, ~roamIgnoreLayer))
         {
-            targetPoint = hit.point;
+            //Roof Check
+            if (hit.point.y - transform.position.y > 0)
+            {
+                targetPoint = hit.point;
+                targetPoint.y -= 1.7f;//Offset by the enemy height
+            }
+            else
+                targetPoint = hit.point;
+                
         }
         else
         {
@@ -516,8 +531,6 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             attackEffect.Stop();
         }
-        if (audSource != null)
-            audSource.Stop();
     }
 
     public virtual void AttackAnimEnd()
@@ -612,7 +625,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected void DropAbility()
     {
         if (abilityDrop != null)
-            Instantiate(abilityDrop, transform.position, Quaternion.identity);
+            Instantiate(abilityDrop, transform.position + (transform.up * 1.5f), Quaternion.identity);
     }
 
     protected void AddToMilestone()
@@ -623,6 +636,18 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     public virtual void TakeDamage(int damageAmount)
     {
         curHealth -= damageAmount;
+
+        //Sound Effects
+        if (hitSounds.Length > 0)
+        {
+            audSource.Stop();
+            int rand = Random.Range(0, hitSounds.Length);
+            PlaySoundClip(hitSounds[rand], hitVol);
+        }
+        else
+            audSource.Stop();
+
+
         if (curHealth <= 0)
         {
             curHealth = 0;
@@ -806,12 +831,24 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     public void PlayAttackSFX()
     {
-        if (attackSounds.Length < 0)
+        if (attackSounds.Length < 1)
             return;
-        shouldPlayAttackSound = false;
         int rand = Random.Range(0, attackSounds.Length);
-        float randPitch = Random.Range(0.9f, 1.1f);
+        PlaySoundClip(attackSounds[rand], attackVol);
+    }
+
+    protected void PlaySoundClip(AudioClip clip, float vol, float min = .8f, float max = 1.2f)
+    {
+        float randPitch = Random.Range(min, max);
         audSource.pitch = randPitch;
-        audSource.PlayOneShot(attackSounds[rand], attackVol);
+        audSource.PlayOneShot(clip, vol);
+    }
+
+    public void PlayStepSound()
+    {
+        if (!walkSyncedWithAnim)
+            return;
+        int rand = Random.Range(0, walkingSounds.Length);
+        PlaySoundClip(walkingSounds[rand], walkingVol);
     }
 }

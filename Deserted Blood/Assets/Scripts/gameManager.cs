@@ -39,6 +39,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
 
     [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
@@ -128,8 +129,6 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(true);
             Time.timeScale = 0;
 
-            backgroundMusic.PlayOneShot(menuMusic);
-
         }
         else
         {
@@ -184,7 +183,12 @@ public class gameManager : MonoBehaviour
             player.transform.position = playerCheckpoint.position;
         }
 
-        UpdateVolume();
+        LoadSettings();
+
+        if (mainMenuActive)
+        {
+            backgroundMusic.PlayOneShot(menuMusic);
+        }
 
     }
 
@@ -304,6 +308,7 @@ public class gameManager : MonoBehaviour
 
     public void CloseAllMenus()
     {
+
         if (menuActive != null)
         {
             menuActive.SetActive(false);
@@ -322,10 +327,42 @@ public class gameManager : MonoBehaviour
 
     public void CloseSubMenu() // Backs out in the menu list hierarchy
     {
+
+        if (menuActive == menuSettings)
+        {
+            SaveSettings();
+        }
+
         menuActive.SetActive(false);
         menuHierarchy.Remove(menuHierarchy[^1]);
         menuActive = menuHierarchy[^1];
         menuActive.SetActive(true);
+    }
+
+    private void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("sfxVol", sfxVolume);
+        //PlayerPrefs.Save();
+        PlayerPrefs.SetFloat("musVol", musicVolume);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadSettings()
+    {
+
+        if (PlayerPrefs.HasKey("sfxVol"))
+        {
+            sfxVolume = PlayerPrefs.GetFloat("sfxVol");
+            sliderSFX.value = sfxVolume;
+        }
+
+        if (PlayerPrefs.HasKey("musVol"))
+        {
+            musicVolume = PlayerPrefs.GetFloat("musVol");
+            sliderMus.value = musicVolume;
+        }
+
+        UpdateVolume();
     }
 
     public void UpdateVolume()

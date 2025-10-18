@@ -800,8 +800,29 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.0075718584
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {fileID: 6674615160248340520, guid: e7916725c5eddf2419a64cda29183781, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.09302349
+        functionName: PlayAttackSFX
+        data: 
+        objectReferenceParameter: {fileID: 6674615160248340520, guid: e7916725c5eddf2419a64cda29183781, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.24540903
         functionName: RangedAttack0
+        data: 
+        objectReferenceParameter: {fileID: 6674615160248340520, guid: e7916725c5eddf2419a64cda29183781, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.39892665
+        functionName: PlayStepSound
         data: 
         objectReferenceParameter: {fileID: 6674615160248340520, guid: e7916725c5eddf2419a64cda29183781, type: 3}
         floatParameter: 0
@@ -814,15 +835,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.95158625
-        functionName: AttackAnimEnd
+      - time: 0.69588566
+        functionName: PlayStepSound
         data: 
         objectReferenceParameter: {fileID: 6674615160248340520, guid: e7916725c5eddf2419a64cda29183781, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.09302349
-        functionName: PlayAttackSFX
+      - time: 0.95158625
+        functionName: AttackAnimEnd
         data: 
         objectReferenceParameter: {fileID: 6674615160248340520, guid: e7916725c5eddf2419a64cda29183781, type: 3}
         floatParameter: 0
