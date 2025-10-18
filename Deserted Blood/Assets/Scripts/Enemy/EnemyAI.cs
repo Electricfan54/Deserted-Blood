@@ -810,7 +810,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             return;
         shouldPlayAttackSound = false;
         int rand = Random.Range(0, attackSounds.Length);
-        float randPitch = Random.Range(0.9f, 1.1f);
+        float randPitch = Random.Range(0.8f, 1.2f);
         audSource.pitch = randPitch;
         audSource.PlayOneShot(attackSounds[rand], attackVol);
     }
