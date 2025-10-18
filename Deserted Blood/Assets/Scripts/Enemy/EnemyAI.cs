@@ -607,7 +607,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     protected void DropAbility()
     {
         if (abilityDrop != null)
-            Instantiate(abilityDrop, transform.position, Quaternion.identity);
+            Instantiate(abilityDrop, transform.position + (transform.up * 1.5f), Quaternion.identity);
     }
 
     protected void AddToMilestone()

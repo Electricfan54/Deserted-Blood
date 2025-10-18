@@ -297,7 +297,7 @@ MonoBehaviour:
   startState: 1
   isSpecial: 1
   noDeathAnim: 1
-  destroyTime: 5
+  destroyTime: 0.1
   enemyType: 1
   abilityDrop: {fileID: 8655666854864889330, guid: 711eef61e9be0824ea563509b26c9c3f, type: 3}
   isFlying: 0
@@ -338,8 +338,28 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7b69beceabbd8f24e8bc62d77ac7ca1c, type: 3}
   - {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
   attackVol: 0.6
-  hitSounds: []
-  hitVol: 0
+  hitSounds:
+  - {fileID: 8300000, guid: 879c5bb060c1e4046be4d435c5ab3bd7, type: 3}
+  - {fileID: 8300000, guid: b5ecee32c537d0d488cbcc82068146b4, type: 3}
+  - {fileID: 8300000, guid: c9d6834d74b8fb74398a6c155461159e, type: 3}
+  - {fileID: 8300000, guid: a9da9830ca63ad54d8ef3dd52bbfaf6e, type: 3}
+  - {fileID: 8300000, guid: 8cfde91442f1e8e4a8c76136a9bd341e, type: 3}
+  - {fileID: 8300000, guid: 9b4b327e8da05ad40afd9db4d4768336, type: 3}
+  - {fileID: 8300000, guid: fae0adc20ca1df84a8550fb2abda4480, type: 3}
+  - {fileID: 8300000, guid: ed99f19538e9bb94eb8819c0a3293362, type: 3}
+  - {fileID: 8300000, guid: a2615efdbc04da544bc5ea7624d25768, type: 3}
+  - {fileID: 8300000, guid: bb3e19c5245cc2f4cb2b066522ac5242, type: 3}
+  - {fileID: 8300000, guid: 2a6204f6cd84e4b40957a2ab7bf4bff4, type: 3}
+  - {fileID: 8300000, guid: 5d5cf43bfce927f48b90c1bef0f637cd, type: 3}
+  - {fileID: 8300000, guid: 8e380accb32d9bc4ca17821315de024a, type: 3}
+  - {fileID: 8300000, guid: 85d226f5119649d4384a72f843b9b5ea, type: 3}
+  - {fileID: 8300000, guid: e95070356047efa44be4d51d0f9b95c2, type: 3}
+  - {fileID: 8300000, guid: e52c0deb16577054e947624d51e02ba8, type: 3}
+  - {fileID: 8300000, guid: 1aa06318416e2c04390102e7e6525a06, type: 3}
+  - {fileID: 8300000, guid: c3e7d08636e40c646b212afa41004d07, type: 3}
+  - {fileID: 8300000, guid: 3cada1a057dc65e42b4e64853d5e3cc7, type: 3}
+  - {fileID: 8300000, guid: f86f0579b85511545b7929116f57c5ad, type: 3}
+  hitVol: 0.6
 --- !u!95 &5774685707626805314
 Animator:
   serializedVersion: 7
