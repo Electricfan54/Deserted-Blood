@@ -1158,7 +1158,7 @@ MonoBehaviour:
   maxHealth: 10
   enemyAggroRange: 10
   attackRate: 0.5
-  hitStunDuration: 0.5
+  hitStunDuration: 0
   hitBoxes:
   - {fileID: 8572803753582524602}
   meleeDamage: 10
@@ -1177,13 +1177,15 @@ MonoBehaviour:
   audSource: {fileID: 5930360492743364925}
   walkingSounds:
   - {fileID: 8300000, guid: f2e5086c55144ff4b972824219fde9fe, type: 3}
-  walkingVol: 1
+  walkSyncedWithAnim: 1
+  walkingVol: 0.5
   walkSoundInterval: 0.5
   attackSounds:
   - {fileID: 8300000, guid: be593dcc3a311064aa6e26e174f0772d, type: 3}
-  attackVol: 1
-  hitSounds: []
-  hitVol: 0
+  attackVol: 0.6
+  hitSounds:
+  - {fileID: 8300000, guid: f8d58742a04e5e04ebf86b26645247e4, type: 3}
+  hitVol: 0.6
 --- !u!54 &6628470156252707531
 Rigidbody:
   m_ObjectHideFlags: 0

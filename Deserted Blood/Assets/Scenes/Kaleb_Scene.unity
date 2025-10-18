@@ -37422,10 +37422,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Skeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 4638710538215633872, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44889,6 +44885,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _GiantOrc
       objectReference: {fileID: 0}
+    - target: {fileID: 7517385975655920244, guid: e3130a385866ff946896533546337847, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46605,10 +46605,6 @@ PrefabInstance:
     - target: {fileID: 8525243267965557702, guid: 45c0aefed34f1fa449ccea42ab8b5297, type: 3}
       propertyPath: m_Name
       value: _Golem
-      objectReference: {fileID: 0}
-    - target: {fileID: 8525243267965557702, guid: 45c0aefed34f1fa449ccea42ab8b5297, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
