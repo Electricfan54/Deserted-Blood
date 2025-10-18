@@ -249,10 +249,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
         //Walk Sound effects
         bool isMoving = curSpeed > 0 || isFlying;//if flying the wing flapping sounds should always be playing
-        if (!walkSyncedWithAnim && walkingSounds.Length > 0 && isMoving && walkSoundTimer > walkSoundInterval)
+        if (!walkSyncedWithAnim && walkingSounds.Length > 0 && isMoving && walkSoundTimer >= walkSoundInterval)
         {
             walkSoundTimer = 0;
-            PlayStepSound();
+            int rand = Random.Range(0, walkingSounds.Length);
+            PlaySoundClip(walkingSounds[rand], walkingVol, pitchMin, pitchMax);
         }
         else if (walkingSounds.Length > 0)
             walkSoundTimer += Time.deltaTime;
@@ -836,15 +837,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         PlaySoundClip(attackSounds[rand], attackVol);
     }
 
-    protected void PlaySoundClip(AudioClip clip, float vol)
+    protected void PlaySoundClip(AudioClip clip, float vol, float min = .8f, float max = 1.2f)
     {
-        float randPitch = Random.Range(pitchMin, pitchMax);
-        audSource.pitch = 1;
+        float randPitch = Random.Range(min, max);
+        audSource.pitch = randPitch;
         audSource.PlayOneShot(clip, vol);
     }
 
     public void PlayStepSound()
     {
+        if (!walkSyncedWithAnim)
+            return;
         int rand = Random.Range(0, walkingSounds.Length);
         PlaySoundClip(walkingSounds[rand], walkingVol);
     }
