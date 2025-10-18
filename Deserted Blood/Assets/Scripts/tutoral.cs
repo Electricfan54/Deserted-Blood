@@ -7,25 +7,33 @@ public class tutoral : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (TutorialText != null)
+        if (other.CompareTag("Player"))
         {
-            TutorialText.SetActive(true);
+            if (TutorialText != null)
+            {
+                TutorialText.SetActive(true);
+            }
         }
+
     }
     private void OnTriggerExit(Collider other)
     {
-        if (TutorialText != null)
-            TutorialText.SetActive(false);
-        
+        if (other.CompareTag("Player"))
+        {
+            if (TutorialText != null)
+                TutorialText.SetActive(false);
+        }
+
+
     }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

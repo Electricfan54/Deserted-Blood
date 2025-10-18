@@ -21,7 +21,7 @@ public class playerablities : MonoBehaviour
     void Update()
     {
         selectability();
-      if (Input.GetButtonDown("Fire1"))
+      if (Input.GetKeyDown(KeyCode.L))
         {
             useAbility();
         }
