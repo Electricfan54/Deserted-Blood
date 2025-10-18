@@ -39,6 +39,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
 
     [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
@@ -307,6 +308,7 @@ public class gameManager : MonoBehaviour
 
     public void CloseAllMenus()
     {
+
         if (menuActive != null)
         {
             menuActive.SetActive(false);
@@ -325,10 +327,24 @@ public class gameManager : MonoBehaviour
 
     public void CloseSubMenu() // Backs out in the menu list hierarchy
     {
+
+        if (menuActive == menuSettings)
+        {
+            SaveSettings();
+        }
+
         menuActive.SetActive(false);
         menuHierarchy.Remove(menuHierarchy[^1]);
         menuActive = menuHierarchy[^1];
         menuActive.SetActive(true);
+    }
+
+    private void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("sfxVol", sfxVolume);
+        //PlayerPrefs.Save();
+        PlayerPrefs.SetFloat("musVol", musicVolume);
+        PlayerPrefs.Save();
     }
 
     private void LoadSettings()
@@ -357,11 +373,6 @@ public class gameManager : MonoBehaviour
 
         sfxVolume = sliderSFX.value;
         musicVolume = sliderMus.value;
-
-        PlayerPrefs.SetFloat("sfxVol", sfxVolume);
-        //PlayerPrefs.Save();
-        PlayerPrefs.SetFloat("musVol", musicVolume);
-        PlayerPrefs.Save();
 
         musicMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
         sfxMixer.SetFloat("SFXVolume", Mathf.Log10(sfxVolume) * 20);

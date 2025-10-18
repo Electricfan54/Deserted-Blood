@@ -8583,6 +8583,7 @@ MonoBehaviour:
   playerStartPos: {fileID: 0}
   menuActive: {fileID: 1856797111417297439}
   menuMain: {fileID: 1856797111417297439}
+  menuSettings: {fileID: 7109270287706574413}
   menuPause: {fileID: 1715069544030251449}
   menuLose: {fileID: 3079430937331095577}
   menuWin: {fileID: 63230932433133988}
