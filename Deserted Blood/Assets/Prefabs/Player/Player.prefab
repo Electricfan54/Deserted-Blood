@@ -59,8 +59,8 @@ Transform:
   m_GameObject: {fileID: 121126098122046258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.064, z: 0.592}
-  m_LocalScale: {x: 3.1018643, y: 2.1906898, z: 2.0055368}
+  m_LocalPosition: {x: 0.00000002151, y: 1.318, z: 0.592}
+  m_LocalScale: {x: 0.86303174, y: 0.9811686, z: 0.72083}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8350023004557967991}
@@ -2141,8 +2141,8 @@ Transform:
   m_GameObject: {fileID: 5612910143643882857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.92, z: 0.982}
-  m_LocalScale: {x: 2.2367094, y: 3.1126, z: 3.0537794}
+  m_LocalPosition: {x: 0, y: 1.203, z: 0.561}
+  m_LocalScale: {x: 0.64522356, y: 1.0703276, z: 0.7101182}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 601352655964413754}
@@ -3102,13 +3102,13 @@ MonoBehaviour:
   BasePlayerDamage: 5
   MaxJumps: 2
   JumpStrength: 15
-  gravityStrength: 30
+  gravityStrength: 45
   SlideGravity: 7
   Speed: 15
   animTranSpeed: 15
   isGrounded: 0
   isInvinc: 0
-  GateKeeperAbilityCheck: 0
+  GateKeeperAbilityCheck: 1
   RedHornAbilityCheck: 0
   hasThirdAbility: 0
   abilities: []

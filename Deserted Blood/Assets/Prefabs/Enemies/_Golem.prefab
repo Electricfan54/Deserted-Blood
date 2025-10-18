@@ -327,13 +327,17 @@ MonoBehaviour:
   roamPauseTime: 2
   bloodAddAmount: 10
   audSource: {fileID: 7439778996719008675}
-  walkingSounds: []
-  walkingVol: 0
-  walkSoundInterval: 0
+  walkingSounds:
+  - {fileID: 8300000, guid: bfebeebe3e37f445d9dc512e0340a4a5, type: 3}
+  - {fileID: 8300000, guid: 080660eeba69ba3efa029effddad1363, type: 3}
+  - {fileID: 8300000, guid: 4e07dc4c5f3d23beba29707af79666da, type: 3}
+  walkSyncedWithAnim: 1
+  walkingVol: 0.5
+  walkSoundInterval: 0.5
   attackSounds:
   - {fileID: 8300000, guid: 7b69beceabbd8f24e8bc62d77ac7ca1c, type: 3}
   - {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
-  attackVol: 1
+  attackVol: 0.6
   hitSounds: []
   hitVol: 0
 --- !u!95 &5774685707626805314

@@ -9,6 +9,8 @@ public class LightningRhino : EnemyAI
     float chargeTimer;
     bool isCharging = false;
 
+    [SerializeField] AudioClip chargingSFX;
+    [SerializeField] float chargingSFXVol;
 
     protected override void Update()
     {
@@ -33,6 +35,11 @@ public class LightningRhino : EnemyAI
                 isCharging = true;
                 for (int i = 0; i < chargeEffect.Length; i++)
                     chargeEffect[i].Play();
+
+                //Sound effects
+                float randPitch = Random.Range(0.9f, 1.1f);
+                audSource.pitch = randPitch;
+                audSource.PlayOneShot(chargingSFX);
             }
         }
 
@@ -60,6 +67,7 @@ public class LightningRhino : EnemyAI
 
     public override void RangedAttack0()
     {
+        //audSource.Stop();
         if (projectileSpawn == null)
             return;
         Vector3 offsetPos = new Vector3(targetPoint.x, targetPoint.y + 1.0f, 0);

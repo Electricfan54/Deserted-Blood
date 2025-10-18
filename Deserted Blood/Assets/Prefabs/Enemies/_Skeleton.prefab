@@ -1078,7 +1078,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8727303172150737488}
-  - {fileID: 5985655753923712469}
   - {fileID: 1326749963223306170}
   - {fileID: 5432382368613747420}
   - {fileID: 8018863431857845696}
@@ -1159,7 +1158,7 @@ MonoBehaviour:
   maxHealth: 10
   enemyAggroRange: 10
   attackRate: 0.5
-  hitStunDuration: 0.5
+  hitStunDuration: 0
   hitBoxes:
   - {fileID: 8572803753582524602}
   meleeDamage: 10
@@ -1175,14 +1174,18 @@ MonoBehaviour:
   roamStopDist: 1
   roamPauseTime: 2
   bloodAddAmount: 1
-  audSource: {fileID: 0}
-  walkingSounds: []
-  walkingVol: 0
-  walkSoundInterval: 0
-  attackSounds: []
-  attackVol: 0
-  hitSounds: []
-  hitVol: 0
+  audSource: {fileID: 5930360492743364925}
+  walkingSounds:
+  - {fileID: 8300000, guid: f2e5086c55144ff4b972824219fde9fe, type: 3}
+  walkSyncedWithAnim: 1
+  walkingVol: 0.5
+  walkSoundInterval: 0.5
+  attackSounds:
+  - {fileID: 8300000, guid: be593dcc3a311064aa6e26e174f0772d, type: 3}
+  attackVol: 0.6
+  hitSounds:
+  - {fileID: 8300000, guid: f8d58742a04e5e04ebf86b26645247e4, type: 3}
+  hitVol: 0.6
 --- !u!54 &6628470156252707531
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2266,7 +2269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5985655753923712469
 Transform:
   m_ObjectHideFlags: 0
@@ -2275,12 +2278,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8572803753582524602}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 0.93, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.115, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3534832091930004178}
+  m_Father: {fileID: 8727303172150737472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5985849334287998641
 BoxCollider:
@@ -2301,8 +2304,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5533787, y: 2.1671257, z: 1}
-  m_Center: {x: -0.6494002, y: 0.24103665, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.51}
 --- !u!114 &641708511459735881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,12 +2560,20 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9500000, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 400046, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5985655753923712469}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
 --- !u!1 &8727303172150306352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100062, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
+  m_PrefabInstance: {fileID: 8727303172150337774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8727303172150737472 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400046, guid: f227b5017a7c0184a96c2c26f1e4408d, type: 3}
   m_PrefabInstance: {fileID: 8727303172150337774}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8727303172150737488 stripped

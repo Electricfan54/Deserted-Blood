@@ -14605,12 +14605,14 @@ MonoBehaviour:
   roamStopDist: 0.5
   roamPauseTime: 1
   bloodAddAmount: 10
-  audSource: {fileID: 0}
+  audSource: {fileID: 3672424471985313499}
   walkingSounds: []
   walkingVol: 0
   walkSoundInterval: 0
-  attackSounds: []
-  attackVol: 0
+  attackSounds:
+  - {fileID: 8300000, guid: 63deb49f29d9b044e9f2024ac92eb4c5, type: 3}
+  - {fileID: 8300000, guid: a8eac20e3be6e8c4fad798f3cf213002, type: 3}
+  attackVol: 1
   hitSounds: []
   hitVol: 0
   chargeTime: 5
@@ -14618,6 +14620,8 @@ MonoBehaviour:
   chargeEffect:
   - {fileID: 2432624159056337253}
   - {fileID: 8231977736866765379}
+  chargingSFX: {fileID: 8300000, guid: cca60791cd5b0e14984964975f89fc05, type: 3}
+  chargingSFXVol: 1
 --- !u!54 &3285425250295040847
 Rigidbody:
   m_ObjectHideFlags: 0

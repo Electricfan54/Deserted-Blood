@@ -124,12 +124,12 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [Header("Sound Variables")]
     [SerializeField] protected AudioSource audSource;
     [SerializeField] protected AudioClip[] walkingSounds;
+    [SerializeField] protected bool walkSyncedWithAnim;
     [SerializeField] protected float walkingVol;
     [SerializeField] protected float walkSoundInterval;
     protected float walkSoundTimer;
     [SerializeField] protected AudioClip[] attackSounds;
     [SerializeField] protected float attackVol;
-    protected bool shouldPlayAttackSound;
     [SerializeField] protected AudioClip[] hitSounds;
     [SerializeField] protected float hitVol;
 
@@ -243,13 +243,10 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
 
         //Walk Sound effects
-        if (walkingSounds.Length > 0 && curSpeed > 0 && walkSoundTimer > walkSoundInterval)
+        if (!walkSyncedWithAnim && walkingSounds.Length > 0 && curSpeed > 0 && walkSoundTimer > walkSoundInterval)
         {
             walkSoundTimer = 0;
-            int rand = Random.Range(0, walkingSounds.Length);
-            float randPitch = Random.Range(0.9f, 1.1f);
-            audSource.pitch = randPitch;
-            audSource.PlayOneShot(walkingSounds[rand], walkingVol);
+            PlayStepSound();
         }
         else if (walkingSounds.Length > 0)
             walkSoundTimer += Time.deltaTime;
@@ -516,8 +513,6 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         {
             attackEffect.Stop();
         }
-        if (audSource != null)
-            audSource.Stop();
     }
 
     public virtual void AttackAnimEnd()
@@ -623,6 +618,18 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     public virtual void TakeDamage(int damageAmount)
     {
         curHealth -= damageAmount;
+
+        //Sound Effects
+        if (hitSounds.Length > 0)
+        {
+            audSource.Stop();
+            int rand = Random.Range(0, hitSounds.Length);
+            PlaySoundClip(hitSounds[rand], hitVol);
+        }
+        else
+            audSource.Stop();
+
+
         if (curHealth <= 0)
         {
             curHealth = 0;
@@ -806,12 +813,22 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     public void PlayAttackSFX()
     {
-        if (attackSounds.Length < 0)
+        if (attackSounds.Length < 1)
             return;
-        shouldPlayAttackSound = false;
         int rand = Random.Range(0, attackSounds.Length);
-        float randPitch = Random.Range(0.9f, 1.1f);
-        audSource.pitch = randPitch;
-        audSource.PlayOneShot(attackSounds[rand], attackVol);
+        PlaySoundClip(attackSounds[rand], attackVol);
+    }
+
+    protected void PlaySoundClip(AudioClip clip, float vol)
+    {
+        float randPitch = Random.Range(0.8f, 1.2f);
+        audSource.pitch = 1;
+        audSource.PlayOneShot(clip, vol);
+    }
+
+    public void PlayStepSound()
+    {
+        int rand = Random.Range(0, walkingSounds.Length);
+        PlaySoundClip(walkingSounds[rand], walkingVol);
     }
 }
