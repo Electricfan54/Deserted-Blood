@@ -7,8 +7,8 @@ public class playerablities : MonoBehaviour
 {
 
     int damage;
-    [SerializeField] LayerMask ignore;
-
+    [SerializeField] LayerMask lightningtarget;
+    [SerializeField] ParticleSystem lightningeffect;    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -91,7 +91,7 @@ public class playerablities : MonoBehaviour
         //fire ability
         else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.fire && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 , gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
@@ -105,7 +105,7 @@ public class playerablities : MonoBehaviour
   //ice ability
         else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.ice && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
         {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 + gameManager.instance.player.transform.forward * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position , gameManager.instance.player.transform.rotation);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
@@ -135,10 +135,11 @@ public class playerablities : MonoBehaviour
     IEnumerator chargetime()
     {
         yield return new WaitForSeconds(.5f);
-        RaycastHit[] hit = Physics.RaycastAll(transform.position, transform.forward, 5);
+        RaycastHit[] hit = Physics.RaycastAll(transform.position+Vector3.up*1, transform.forward, 5, lightningtarget);
         for (int i = 0; i < hit.Length; i++)
         {
             Debug.Log("Hit" + hit[i].collider.name);
+       
             Idamage dam = hit[i].collider.GetComponent<Idamage>();
             if (dam != null)
             {
@@ -148,6 +149,7 @@ public class playerablities : MonoBehaviour
             {
                 Debug.Log("No Damageable component found on " + hit[i].collider.name);
             }
+            Instantiate(lightningeffect, hit[i].point, Quaternion.LookRotation(hit[i].normal));
         }
 
 
