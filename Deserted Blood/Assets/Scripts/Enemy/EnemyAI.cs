@@ -96,6 +96,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected float roamStopDist;
     [SerializeField] protected float roamPauseTime;
     protected float roamPauseTimer;
+    //Air roam failsafe
+    [SerializeField] protected float roamMaxTravelTime = 10.0f;
+    protected float roamTimer;
 
 
     [Header("Player Blood Meter")]
@@ -132,7 +135,9 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected float attackVol;
     [SerializeField] protected AudioClip[] hitSounds;
     [SerializeField] protected float hitVol;
-
+    //For pitch modulation
+    [SerializeField] protected float pitchMin = 0.8f;
+    [SerializeField] protected float pitchMax = 1.2f;
 
 
     protected virtual void Awake()
@@ -243,7 +248,8 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
 
         //Walk Sound effects
-        if (!walkSyncedWithAnim && walkingSounds.Length > 0 && curSpeed > 0 && walkSoundTimer > walkSoundInterval)
+        bool isMoving = curSpeed > 0 || isFlying;//if flying the wing flapping sounds should always be playing
+        if (!walkSyncedWithAnim && walkingSounds.Length > 0 && isMoving && walkSoundTimer > walkSoundInterval)
         {
             walkSoundTimer = 0;
             PlayStepSound();
@@ -370,10 +376,13 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     protected virtual void AirRoam()
     {
-        if (DistFromTarget() <= roamStopDist)
+        if (DistFromTarget() <= roamStopDist || roamTimer >= roamMaxTravelTime)
         {
+            roamTimer = 0;
             reachedRoamTarget = true;
         }
+        else
+            roamTimer += Time.deltaTime;
 
         if (reachedRoamTarget == true && roamPauseTimer >= roamPauseTime)
         {
@@ -397,9 +406,17 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         //Check if enemy has line of sight
         Vector3 dir = pos - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, dir, out hit, roamDist, ~roamIgnoreLayer))
+        if (Physics.Raycast(transform.position + (transform.up * 1.1f), dir, out hit, roamDist * 1.5f, ~roamIgnoreLayer))
         {
-            targetPoint = hit.point;
+            //Roof Check
+            if (hit.point.y - transform.position.y > 0)
+            {
+                targetPoint = hit.point;
+                targetPoint.y -= 1.7f;//Offset by the enemy height
+            }
+            else
+                targetPoint = hit.point;
+                
         }
         else
         {
@@ -821,7 +838,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
 
     protected void PlaySoundClip(AudioClip clip, float vol)
     {
-        float randPitch = Random.Range(0.8f, 1.2f);
+        float randPitch = Random.Range(pitchMin, pitchMax);
         audSource.pitch = 1;
         audSource.PlayOneShot(clip, vol);
     }
