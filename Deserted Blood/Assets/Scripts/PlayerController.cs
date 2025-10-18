@@ -227,6 +227,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         if (WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
         {
             hasWallJumped = true;
+            JumpCount = 0;
             playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
             transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
         }
