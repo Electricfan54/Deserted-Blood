@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: e8fb7ba757b6e6e4f8f33a4195496750, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: cc173f68bb8960440ad12f1d569c901e, type: 2}
   m_LightingSettings: {fileID: 1839091354}
 --- !u!196 &4
 NavMeshSettings:
@@ -19346,10 +19346,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3853556794737505947, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
-      propertyPath: GateKeeperAbilityCheck
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6633970918242180610, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
       propertyPath: m_Name
       value: Player

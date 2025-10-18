@@ -446,12 +446,12 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     {
         M1CDtimer += Time.deltaTime;
         MapPunchTimer += Time.deltaTime;
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.X) && MapPunchTimer > 2.3f)
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.B) && MapPunchTimer > 2.3f)
         {
             StartCoroutine(MappaPunch());
         }
 
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.C) && GateKeeperAbilityCheck == true)
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.N) && GateKeeperAbilityCheck == true)
         {
             StartCoroutine(FallingPunch());
         }
@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
 
         }
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.G) && canAttack == true)
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.J) && canAttack == true)
         {
             // play animation using the animation index after making the stuff   for it
             // left, right, hook, right
@@ -531,6 +531,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     IEnumerator BasicAttack()
     {
+        if(isGrounded)
+            canMove = false;
+
         M1CDtimer = 0;
         PlayerAnimator.SetBool("M1", true);
         PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
@@ -542,6 +545,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         isAttacking = false;
         CurrentMoveAnimationIndex += 1;
         PlayerAnimator.SetBool("M1", false);
+        canMove = true; 
     }
 
     IEnumerator RedHornAbility()
