@@ -177,15 +177,40 @@ MonoBehaviour:
   roamDist: 5
   roamStopDist: 1
   roamPauseTime: 2
+  roamMaxTravelTime: 10
   bloodAddAmount: 10
-  audSource: {fileID: 0}
-  walkingSounds: []
-  walkingVol: 0
-  walkSoundInterval: 0
+  audSource: {fileID: 3944114805466863870}
+  walkingSounds:
+  - {fileID: 8300000, guid: 8e08362088af64a4aa37e20df287d0c2, type: 3}
+  - {fileID: 8300000, guid: 8f309317f63e9a347942ac12fc049d53, type: 3}
+  - {fileID: 8300000, guid: 267bee16f55f52844814fc4b22f19ce1, type: 3}
+  - {fileID: 8300000, guid: 51d6ccd9afc2b0d4b824ba0ca28b1809, type: 3}
+  - {fileID: 8300000, guid: ec50eb6da0cb93c4e888657666a8f465, type: 3}
+  - {fileID: 8300000, guid: 7abb34629abbec74599a6bea58fbf692, type: 3}
+  - {fileID: 8300000, guid: c82f294035e383e439f495934620107b, type: 3}
+  - {fileID: 8300000, guid: a3b300347507c5541a8cd9308333ad1f, type: 3}
+  - {fileID: 8300000, guid: 2ea32e6175103b14a8e2e51baf9fb784, type: 3}
+  - {fileID: 8300000, guid: 01805de171a06474d9e63e9fa5faf563, type: 3}
+  - {fileID: 8300000, guid: a70d82af0391656469eca82c1d6ba067, type: 3}
+  - {fileID: 8300000, guid: f4ab28d681c577e4f92740181b88bda1, type: 3}
+  - {fileID: 8300000, guid: 840a52d503a28964997ad80edcee90ed, type: 3}
+  - {fileID: 8300000, guid: 4a070537375d7ef48944ee4ac1607f3f, type: 3}
+  - {fileID: 8300000, guid: 40e9ee063bd791e40bc26ed1478e4ab2, type: 3}
+  - {fileID: 8300000, guid: 93dce7689103849438830868d41e01d8, type: 3}
+  - {fileID: 8300000, guid: 85c020f8471c45c4381867781840371f, type: 3}
+  - {fileID: 8300000, guid: 1c5ecfbabbb5590409ad6954eb38db82, type: 3}
+  - {fileID: 8300000, guid: 755f805f3b7034b4aa8f3b9d7ea0b4e7, type: 3}
+  - {fileID: 8300000, guid: 35ca66c6b85193f46b5d1f4e6ec737b0, type: 3}
+  - {fileID: 8300000, guid: e09b8106389feeb45865be7259e47a98, type: 3}
+  walkSyncedWithAnim: 0
+  walkingVol: 1
+  walkSoundInterval: 0.1
   attackSounds: []
   attackVol: 0
   hitSounds: []
   hitVol: 0
+  pitchMin: 1.6
+  pitchMax: 1.8
 --- !u!95 &6597665351955289245
 Animator:
   serializedVersion: 7
