@@ -128,8 +128,6 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(true);
             Time.timeScale = 0;
 
-            backgroundMusic.PlayOneShot(menuMusic);
-
         }
         else
         {
@@ -184,7 +182,12 @@ public class gameManager : MonoBehaviour
             player.transform.position = playerCheckpoint.position;
         }
 
-        UpdateVolume();
+        LoadSettings();
+
+        if (mainMenuActive)
+        {
+            backgroundMusic.PlayOneShot(menuMusic);
+        }
 
     }
 
@@ -328,6 +331,24 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    private void LoadSettings()
+    {
+
+        if (PlayerPrefs.HasKey("sfxVol"))
+        {
+            sfxVolume = PlayerPrefs.GetFloat("sfxVol");
+            sliderSFX.value = sfxVolume;
+        }
+
+        if (PlayerPrefs.HasKey("musVol"))
+        {
+            musicVolume = PlayerPrefs.GetFloat("musVol");
+            sliderMus.value = musicVolume;
+        }
+
+        UpdateVolume();
+    }
+
     public void UpdateVolume()
     {
 
@@ -336,6 +357,11 @@ public class gameManager : MonoBehaviour
 
         sfxVolume = sliderSFX.value;
         musicVolume = sliderMus.value;
+
+        PlayerPrefs.SetFloat("sfxVol", sfxVolume);
+        //PlayerPrefs.Save();
+        PlayerPrefs.SetFloat("musVol", musicVolume);
+        PlayerPrefs.Save();
 
         musicMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
         sfxMixer.SetFloat("SFXVolume", Mathf.Log10(sfxVolume) * 20);
