@@ -158,7 +158,16 @@ public class gameManager : MonoBehaviour
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
 
+        GameObject uiCopy = GameObject.FindWithTag("ManagerCopy");
+
+        if (uiCopy != null && uiCopy.name == "UI")
+        {
+            Destroy(uiCopy);
+        }
+
         AttemptPlayerAssign();
+        backgroundMusic.clip = levelMusic;
+        backgroundMusic.Play();
 
     }
 
@@ -169,9 +178,8 @@ public class gameManager : MonoBehaviour
         if (player != null)
         {
             playerScript = player.GetComponent<PlayerController>();
+            playerCheckpoint = player.transform;
         }
-
-        playerCheckpoint = player.transform;
 
     }
 
@@ -319,9 +327,7 @@ public class gameManager : MonoBehaviour
             backgroundMusic.Stop();
             Time.timeScale = timeScaleOrig;
 
-            backgroundMusic.clip = levelMusic;
-            backgroundMusic.Play();
-            Debug.Log(backgroundMusic.loop);
+            //Debug.Log(backgroundMusic.loop);
 
         }
     }
