@@ -661,6 +661,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 130695949372152484, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+      propertyPath: CDMeter
+      value: 
+      objectReference: {fileID: 1642660503}
     - target: {fileID: 2055947713873672192, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -689,6 +693,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3931452510948148048, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4368989516127759473, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -703,7 +711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6068543526742806157, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7982407698904784982, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7263,6 +7271,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08cc4fed6cb79944db530fd9d146daa9, type: 3}
+--- !u!114 &1642660503 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3931452510948148048, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+  m_PrefabInstance: {fileID: 168478253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &1657403854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16092,6 +16111,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d2044cbe2c723409c3677ff4bb88ad, type: 3}
+--- !u!114 &1977150161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 130695949372152484, guid: 9f8d259b0964a1d41bead6ad68e94bc2, type: 3}
+  m_PrefabInstance: {fileID: 168478253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c18528619668e944adc6b6cc569371a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownManager
 --- !u!43 &1991297846
 Mesh:
   m_ObjectHideFlags: 0
@@ -16910,6 +16940,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3853556794737505947, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
+      propertyPath: CDmanager
+      value: 
+      objectReference: {fileID: 1977150161}
     - target: {fileID: 6633970918242180610, guid: 708ab0b7dc59d574a9f0a8c7d534e2e9, type: 3}
       propertyPath: m_Name
       value: Player

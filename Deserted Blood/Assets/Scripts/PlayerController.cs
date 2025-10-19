@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 {
+    [SerializeField] CooldownManager CDmanager;
+
     [SerializeField] CharacterController CharController;
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] Renderer meshRenderer;
@@ -511,6 +513,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             StartCoroutine(MappaPunch());
             gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[2]);
+            CDmanager.AddCoolDown("Vampiric Punch", 2.3f);
             SlowMove = true;
             
         }
