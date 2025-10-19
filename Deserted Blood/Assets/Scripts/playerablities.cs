@@ -82,6 +82,7 @@ public class playerablities : MonoBehaviour
         {
 
             damage = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].damage;
+            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
             StartCoroutine(chargetime());
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
@@ -140,7 +141,7 @@ public class playerablities : MonoBehaviour
         {
             Debug.Log("Hit" + hit[i].collider.name);
        
-            Idamage dam = hit[i].collider.GetComponent<Idamage>();
+            Idamage dam = hit[i].collider.GetComponentInParent<Idamage>();
             if (dam != null)
             {
                 dam.TakeDamage(damage);

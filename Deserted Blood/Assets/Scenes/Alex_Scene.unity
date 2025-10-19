@@ -1174,6 +1174,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1760846986}
+    - target: {fileID: 7949166071668451131, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8413829164979726939, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Name
       value: Tutorial
