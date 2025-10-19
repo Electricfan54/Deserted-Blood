@@ -14604,9 +14604,11 @@ MonoBehaviour:
   roamDist: 3
   roamStopDist: 0.5
   roamPauseTime: 1
+  roamMaxTravelTime: 10
   bloodAddAmount: 10
   audSource: {fileID: 3672424471985313499}
   walkingSounds: []
+  walkSyncedWithAnim: 0
   walkingVol: 0
   walkSoundInterval: 0
   attackSounds:
@@ -14615,6 +14617,8 @@ MonoBehaviour:
   attackVol: 1
   hitSounds: []
   hitVol: 0
+  pitchMin: 0.8
+  pitchMax: 1.2
   chargeTime: 5
   lightningRange: 10
   chargeEffect:

@@ -1173,6 +1173,7 @@ MonoBehaviour:
   roamDist: 8
   roamStopDist: 1
   roamPauseTime: 2
+  roamMaxTravelTime: 10
   bloodAddAmount: 1
   audSource: {fileID: 5930360492743364925}
   walkingSounds:
@@ -1186,6 +1187,8 @@ MonoBehaviour:
   hitSounds:
   - {fileID: 8300000, guid: f8d58742a04e5e04ebf86b26645247e4, type: 3}
   hitVol: 0.6
+  pitchMin: 0.8
+  pitchMax: 1.2
 --- !u!54 &6628470156252707531
 Rigidbody:
   m_ObjectHideFlags: 0
