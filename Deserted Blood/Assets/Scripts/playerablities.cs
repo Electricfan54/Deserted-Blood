@@ -65,11 +65,15 @@ public class playerablities : MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
                 {
                     gameManager.instance.player.transform.position =  hit.point-gameManager.instance.player.transform.forward;
+                    aud.pitch = Random.Range(0.8f, 1.2f);
+                    aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
                 }
                 else
                 {
                     gameManager.instance.player.transform.position = gameManager.instance.player.transform.position + gameManager.instance.player.transform.forward * 5;
+                    aud.pitch = Random.Range(0.8f, 1.2f);
+                    aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
                 }
             }
