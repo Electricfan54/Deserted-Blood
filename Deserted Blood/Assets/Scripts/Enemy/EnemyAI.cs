@@ -829,7 +829,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
         }
     }
 
-    public void PlayAttackSFX()
+    public virtual void PlayAttackSFX()
     {
         if (attackSounds.Length < 1)
             return;
