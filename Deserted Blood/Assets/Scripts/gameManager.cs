@@ -43,6 +43,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
+    public GameObject loadingScreen;
 
     public GameObject pickUpPrompt;
 
@@ -119,56 +120,71 @@ public class gameManager : MonoBehaviour
     private void Awake()
     {
 
-        instance = this;
-        timeScaleOrig = Time.timeScale;
-
-        AttemptPlayerAssign();
-
-        if (mainMenuActive)
+        if (gameManager.instance != null)
         {
-            menuActive = menuMain;
-            menuActive.SetActive(true);
-            Time.timeScale = 0;
-
+            Destroy(this.gameObject.transform.parent.gameObject);
         }
         else
         {
-            menuActive = null;
+
+            instance = this;
+            timeScaleOrig = Time.timeScale;
+
+            AttemptPlayerAssign();
+
+            if (mainMenuActive)
+            {
+                menuActive = menuMain;
+                menuActive.SetActive(true);
+                Time.timeScale = 0;
+
+            }
+            else
+            {
+                menuActive = null;
+            }
+
+            if (menuActive != null)
+            {
+                menuHierarchy.Add(menuActive);
+            }
+
+            abilitySlots.Add(abilitySlot1);
+            abilitySlots.Add(abilitySlot2);
+            abilitySlots.Add(abilitySlot3);
+
+            transTimer = 0;
+            alphaLerp = 0;
+
+            transStart = 0;
+            transEnd = 1;
         }
-
-        if (menuActive != null)
-        {
-            menuHierarchy.Add(menuActive);
-        }
-
-        abilitySlots.Add(abilitySlot1);
-        abilitySlots.Add(abilitySlot2);
-        abilitySlots.Add(abilitySlot3);
-
-        transTimer = 0;
-        alphaLerp = 0;
-
-        transStart = 0;
-        transEnd = 1;
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
 
-        GameObject uiCopy = GameObject.FindWithTag("ManagerCopy");
-
-        if (uiCopy != null && uiCopy.name == "UI")
+        if (SceneManager.GetActiveScene().name == "MainLevel" || SceneManager.GetActiveScene().name == "ShowCase level")
         {
-            Destroy(uiCopy);
+            AttemptPlayerAssign();
+            backgroundMusic.clip = levelMusic;
+            backgroundMusic.Play();
         }
 
-        AttemptPlayerAssign();
-        backgroundMusic.clip = levelMusic;
-        backgroundMusic.Play();
+        gameManager.instance.loadingScreen.SetActive(false);
 
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void AttemptPlayerAssign()
@@ -267,6 +283,26 @@ public class gameManager : MonoBehaviour
         menuHierarchy.Add(menuWin);
         menuActive = menuWin;
         menuActive.SetActive(true);
+    }
+
+    public void QuitToMenu()
+    {
+
+        Time.timeScale = timeScaleOrig;
+        isPaused = !isPaused;
+        menuActive.SetActive(false);
+        menuActive = null;
+        menuHierarchy.Clear();
+
+        menuActive = menuMain;
+        menuActive.SetActive(true);
+        menuHierarchy.Add(menuActive);
+        Time.timeScale = 0;
+
+        backgroundMusic.Stop();
+        backgroundMusic.clip = menuMusic;
+        backgroundMusic.Play();
+
     }
 
     public void Transition()

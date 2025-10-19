@@ -1,3 +1,4 @@
+using UnityEditor.ProBuilder;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,9 @@ public class buttonManager : MonoBehaviour
         {
             Scene loadScene = SceneManager.GetSceneByName(playSceneName);
             SceneManager.LoadScene(playSceneName);
+
+            gameManager.instance.loadingScreen.SetActive(true);
+
         }
 
         gameManager.instance.soundEffects.PlayOneShot(gameManager.instance.menuPop);
@@ -41,6 +45,8 @@ public class buttonManager : MonoBehaviour
 
         Scene loadScene = SceneManager.GetSceneByName("MainMenu");
         SceneManager.LoadScene("MainMenu");
+
+        gameManager.instance.QuitToMenu();
 
     }
 
