@@ -580,6 +580,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     IEnumerator FallingPunch()
     {
         isAttacking = true;
+        PlayerAnimator.SetBool("Jumping", false);
         PlayerAnimator.SetBool("Flyingpunch", true );
         isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
