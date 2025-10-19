@@ -204,13 +204,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 35ca66c6b85193f46b5d1f4e6ec737b0, type: 3}
   - {fileID: 8300000, guid: e09b8106389feeb45865be7259e47a98, type: 3}
   walkSyncedWithAnim: 1
-  walkingVol: 1
+  walkingVol: 0.5
   walkSoundInterval: 0.5
   attackSounds:
   - {fileID: 8300000, guid: 7d156b8a5b340cd46bcf0a76557dd2dd, type: 3}
-  attackVol: 0
-  hitSounds: []
-  hitVol: 0
+  attackVol: 0.6
+  hitSounds:
+  - {fileID: 8300000, guid: 71d8bb83e08cb88d7864496465c7edb2, type: 3}
+  hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
   model: {fileID: 2259630661358689125}
