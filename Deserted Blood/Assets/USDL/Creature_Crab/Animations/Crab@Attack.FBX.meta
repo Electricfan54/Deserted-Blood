@@ -281,6 +281,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.31708103
+        functionName: PlayAttackSFX
+        data: 
+        objectReferenceParameter: {fileID: 2023838948347328071, guid: 9b7e7a298b2401147873b69afd928c85, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.36402878
         functionName: Attack0
         data: 
@@ -290,6 +297,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.39856115
         functionName: Attack0
+        data: 
+        objectReferenceParameter: {fileID: 2023838948347328071, guid: 9b7e7a298b2401147873b69afd928c85, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.59705544
+        functionName: PlayAttackSFX
         data: 
         objectReferenceParameter: {fileID: 2023838948347328071, guid: 9b7e7a298b2401147873b69afd928c85, type: 3}
         floatParameter: 0
