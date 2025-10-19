@@ -22,6 +22,11 @@ public class GateKeeperAI : EnemyAI
 
     [Header("Effect Variables")]
     [SerializeField] ParticleSystem roarEffect;
+    [Header("Sound Effect Variables")]
+    [SerializeField] AudioClip[] slamSound;
+    [SerializeField] float slamVol;
+    [SerializeField] AudioClip roarSound;
+    [SerializeField] float roarVol;
 
     protected override void Awake()
     {
@@ -384,6 +389,8 @@ public class GateKeeperAI : EnemyAI
         {
             roarEffect.Play();
         }
+        if (roarSound != null && audSource != null)
+            PlaySoundClip(roarSound, roarVol);
     }
 
     public void StopRoarEffect()
@@ -392,5 +399,20 @@ public class GateKeeperAI : EnemyAI
         {
             roarEffect.Stop();
         }
+        if (roarSound != null && audSource != null)
+            audSource.Stop();
+    }
+
+    public void PlaySlamSFX()
+    {
+        if (audSource != null)
+        {
+            int rand = Random.Range(0, slamSound.Length);
+            PlaySoundClip(slamSound[rand], slamVol);
+        }
+    }
+
+    protected override void HitReact()
+    {
     }
 }
