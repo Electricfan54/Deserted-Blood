@@ -613,6 +613,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.23968574
+        functionName: PlayAttackSFX
+        data: 
+        objectReferenceParameter: {fileID: 851857130802978836, guid: ed28af69b3ae3f040ac1f5f530e16c4b, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.4458716
         functionName: Attack0
         data: 
