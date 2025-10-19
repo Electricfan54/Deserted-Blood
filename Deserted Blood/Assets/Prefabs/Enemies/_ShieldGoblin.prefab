@@ -94,15 +94,16 @@ MonoBehaviour:
   roamPauseTime: 1
   roamMaxTravelTime: 10
   bloodAddAmount: 10
-  audSource: {fileID: 0}
+  audSource: {fileID: 2716736883895309715}
   walkingSounds: []
   walkSyncedWithAnim: 0
   walkingVol: 0
   walkSoundInterval: 0
   attackSounds: []
   attackVol: 0
-  hitSounds: []
-  hitVol: 0
+  hitSounds:
+  - {fileID: 8300000, guid: b07c65c592f19194d8bbd61abb589c8b, type: 3}
+  hitVol: 0.5
   pitchMin: 0.8
   pitchMax: 1.2
 --- !u!95 &8161548875571044912
