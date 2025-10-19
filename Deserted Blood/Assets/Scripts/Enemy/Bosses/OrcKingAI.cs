@@ -16,10 +16,15 @@ public class OrcKingAI : EnemyAI
     [SerializeField] float projSpawnRate;
     public bool bossFightTriggered = false;
 
+    int attackHitboxCounter;
+
     [Header("Effects")]
     [SerializeField] ParticleSystem summonRoarEffect;
+    [SerializeField] AudioClip summonRoarSound;
+    [SerializeField] float summonRoarVol;
     [SerializeField] ParticleSystem projRoarEffect;
-    //bool shouldPlayEffect = false;
+    [SerializeField] AudioClip projRoarSound;
+    [SerializeField] float projRoarVol;
 
 
     enum RoarType
@@ -155,9 +160,27 @@ public class OrcKingAI : EnemyAI
 
     public override void Attack0()
     {
-        //Toggle hitbox
-        hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
-        hitBoxes[0].GetComponent<Damage>().damageammount = melee0Damage;
+        switch (attackHitboxCounter)
+        {
+            case 0:
+                attackHitboxCounter++;
+                hitBoxes[0].SetActive(true);
+                hitBoxes[0].GetComponent<Damage>().damageammount = melee0Damage;
+                break;
+            case 1:
+                attackHitboxCounter++;
+                hitBoxes[0].SetActive(false);
+                break;
+            case 2:
+                attackHitboxCounter++;
+                hitBoxes[2].SetActive(true);
+                hitBoxes[2].GetComponent<Damage>().damageammount = melee0Damage;
+                break;
+            case 3:
+                attackHitboxCounter = 0;
+                hitBoxes[2].SetActive(false);
+                break;
+        }
     }
 
     public void Attack1()
@@ -272,10 +295,14 @@ public class OrcKingAI : EnemyAI
             case RoarType.Enemy:
                 if (summonRoarEffect != null)
                     summonRoarEffect.Play();
+                if (summonRoarSound != null)
+                    PlaySoundClip(summonRoarSound, summonRoarVol);
                 break;
             case RoarType.Proj:
                 if (projRoarEffect != null)
                     projRoarEffect.Play();
+                if (projRoarSound != null)
+                    PlaySoundClip(projRoarSound, projRoarVol);
                 break;
         }
     }
@@ -287,5 +314,17 @@ public class OrcKingAI : EnemyAI
             summonRoarEffect.Stop();
             projRoarEffect.Stop();
         }
+        if (audSource != null)
+            audSource.Stop();
+    }
+
+    public override void PlayAttackSFX()
+    {
+        if (attackSounds.Length < 1)
+            return;
+        if (attackCalls == 1)
+            PlaySoundClip(attackSounds[0], attackVol);
+        else
+            PlaySoundClip(attackSounds[1], attackVol);
     }
 }
