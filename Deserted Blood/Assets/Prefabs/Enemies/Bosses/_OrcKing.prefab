@@ -1305,14 +1305,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b39ebdc3675b3c543a4ac7e0992f6927, type: 3}
   - {fileID: 8300000, guid: 2d1850b1a286916439920b25ee2a8df9, type: 3}
   walkSyncedWithAnim: 1
-  walkingVol: 1
+  walkingVol: 0.5
   walkSoundInterval: 0
   attackSounds:
   - {fileID: 8300000, guid: b99f5f9d19da49380b531e1d6649a8de, type: 3}
   - {fileID: 8300000, guid: 7e41ebba04479919cbf4850960cd7b28, type: 3}
-  attackVol: 1
-  hitSounds: []
-  hitVol: 0
+  attackVol: 0.6
+  hitSounds:
+  - {fileID: 8300000, guid: 68130b80f9f024c7e89459d6f48ad5b8, type: 3}
+  hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
   fightCamPos: {fileID: 0}

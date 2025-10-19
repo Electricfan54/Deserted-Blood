@@ -44598,6 +44598,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1518405038}
     m_Modifications:
+    - target: {fileID: 1602163232130415769, guid: e3130a385866ff946896533546337847, type: 3}
+      propertyPath: hitVol
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602163232130415769, guid: e3130a385866ff946896533546337847, type: 3}
+      propertyPath: hitSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602163232130415769, guid: e3130a385866ff946896533546337847, type: 3}
+      propertyPath: 'hitSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 68130b80f9f024c7e89459d6f48ad5b8, type: 3}
     - target: {fileID: 6721937902335035956, guid: e3130a385866ff946896533546337847, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -44644,7 +44656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7517385975655920244, guid: e3130a385866ff946896533546337847, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
