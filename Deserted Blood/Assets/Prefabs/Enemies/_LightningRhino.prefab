@@ -16601,6 +16601,9 @@ MonoBehaviour:
   hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
+  screenShake: 0
+  screenShakeDuration: 0
+  screenShakeStrength: 0
   chargeTime: 5
   lightningRange: 10
   chargeEffect:
@@ -16694,6 +16697,9 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0
+  applyScreenShake: 0
+  shakeDuration: 0
+  shakeStrength: 0
 --- !u!82 &3672424471985313499
 AudioSource:
   m_ObjectHideFlags: 0

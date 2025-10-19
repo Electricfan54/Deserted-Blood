@@ -4265,6 +4265,9 @@ MonoBehaviour:
   hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
+  screenShake: 0
+  screenShakeDuration: 0
+  screenShakeStrength: 0
   model: {fileID: 2259630661358689125}
   fireEffects:
   - {fileID: 3916575895341457981}
@@ -4356,6 +4359,9 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0
+  applyScreenShake: 0
+  shakeDuration: 0
+  shakeStrength: 0
 --- !u!82 &2879659802172085152
 AudioSource:
   m_ObjectHideFlags: 0

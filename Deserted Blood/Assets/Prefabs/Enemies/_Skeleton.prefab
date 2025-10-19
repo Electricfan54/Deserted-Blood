@@ -1189,6 +1189,9 @@ MonoBehaviour:
   hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
+  screenShake: 0
+  screenShakeDuration: 0
+  screenShakeStrength: 0
 --- !u!54 &6628470156252707531
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1275,6 +1278,9 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0
+  applyScreenShake: 0
+  shakeDuration: 0
+  shakeStrength: 0
 --- !u!82 &5930360492743364925
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2325,6 +2331,9 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0.1
+  applyScreenShake: 0
+  shakeDuration: 0
+  shakeStrength: 0
 --- !u!1 &8646247983986128776
 GameObject:
   m_ObjectHideFlags: 0
