@@ -2882,7 +2882,7 @@ MonoBehaviour:
   SlideGravity: 7
   maxSpeed: 10
   decreaseSpeed: 40
-  increaseSpeed: 20
+  increaseSpeed: 10
   animTranSpeed: 15
   isGrounded: 0
   isInvinc: 0
