@@ -573,10 +573,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         canMove = false;
         isAttacking = true;
         isInvinc = true;
+        PlayerAnimator.SetBool("Jumping", false);
         PlayerAnimator.SetBool("MappaPunchActive", true);
         yield return new WaitForSeconds(0.2f);
         playerVel.x = transform.forward.x * 20;
-        BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
+        BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 3;
         BaseAttacks[0].SetActive(true);
         yield return new WaitForSeconds(.4f);
         BaseAttacks[0].SetActive(false);
