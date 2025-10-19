@@ -989,7 +989,7 @@ RectTransform:
   m_GameObject: {fileID: 781593614933835706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 3, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2090494982948556595}
@@ -997,7 +997,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 325, y: -250}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 818, y: 616}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8254213769297141684
 CanvasRenderer:
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f4c4f63fd0475e4ca7f44c579d67d3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f85899cc0d01d4c4db2d9fc4a0f86d3b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3648,7 +3648,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f4c4f63fd0475e4ca7f44c579d67d3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a1d450f35641474c8b0b04bd9c9e23d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5379,14 +5379,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f4c4f63fd0475e4ca7f44c579d67d3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a1d450f35641474c8b0b04bd9c9e23d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8790,6 +8790,7 @@ MonoBehaviour:
   soundEffects: {fileID: 6813504662301343790}
   menuPop: {fileID: 8300000, guid: dee712d2b2ebc0246819e865530c9a0c, type: 3}
   sfxMixer: {fileID: 24100000, guid: 308e4d2e3153f07439901f0be9bda8db, type: 2}
+  sfxVolume: 0
   backgroundMusic: {fileID: 8965002020263247518}
   menuMusic: {fileID: 8300000, guid: 110f043ee8d145c4cb3a1cab5931e649, type: 3}
   levelMusic: {fileID: 8300000, guid: 82f3573f3f1be784e8a055fd6e6e0cde, type: 3}
@@ -9149,7 +9150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f4c4f63fd0475e4ca7f44c579d67d3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a1d450f35641474c8b0b04bd9c9e23d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
