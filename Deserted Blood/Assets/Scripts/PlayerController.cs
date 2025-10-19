@@ -619,6 +619,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     {
         //if(isGrounded)
         //    canMove = false;
+        PlayerAnimator.SetBool("Jumping", false);
         PlayerAnimator.SetBool("M1", true);
         PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
         M1CDtimer = 0;
