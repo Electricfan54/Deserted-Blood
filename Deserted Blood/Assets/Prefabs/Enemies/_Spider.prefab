@@ -61,7 +61,7 @@ MonoBehaviour:
     m_Bits: 64
   lineOfSightIgnoreLayer:
     serializedVersion: 2
-    m_Bits: 182
+    m_Bits: 1974
   animator: {fileID: 2710395567899288945}
   startState: 0
   isSpecial: 0
@@ -106,12 +106,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b39ebdc3675b3c543a4ac7e0992f6927, type: 3}
   - {fileID: 8300000, guid: 2d1850b1a286916439920b25ee2a8df9, type: 3}
   walkSyncedWithAnim: 0
-  walkingVol: 1
+  walkingVol: 0.5
   walkSoundInterval: 0.15
-  attackSounds: []
-  attackVol: 1
-  hitSounds: []
-  hitVol: 0
+  attackSounds:
+  - {fileID: 8300000, guid: 96395b1ca6402e5b9aef4905965bfa9b, type: 3}
+  attackVol: 0.6
+  hitSounds:
+  - {fileID: 8300000, guid: 51473676994670f408f796ea10b9a0db, type: 3}
+  hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
 --- !u!54 &763993307290146850

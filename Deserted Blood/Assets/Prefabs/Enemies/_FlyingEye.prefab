@@ -62,7 +62,7 @@ MonoBehaviour:
   lineOfSightIgnoreLayer:
     serializedVersion: 2
     m_Bits: 182
-  animator: {fileID: 0}
+  animator: {fileID: 4852744473371840724}
   startState: 1
   isSpecial: 0
   noDeathAnim: 0
