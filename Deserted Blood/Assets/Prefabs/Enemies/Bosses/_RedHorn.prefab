@@ -5444,6 +5444,9 @@ MonoBehaviour:
   hitVol: 0.7
   pitchMin: 1
   pitchMax: 1.4
+  screenShake: 1
+  screenShakeDuration: 1
+  screenShakeStrength: 0.8
   fightCamPos: {fileID: 0}
   projSpawnList:
   - {fileID: 3568026422062660095}

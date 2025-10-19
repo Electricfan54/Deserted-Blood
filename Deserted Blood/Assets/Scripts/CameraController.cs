@@ -13,7 +13,8 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        if (Target == null)
+            Target = gameManager.instance.player.transform;
     }
 
     void LateUpdate()

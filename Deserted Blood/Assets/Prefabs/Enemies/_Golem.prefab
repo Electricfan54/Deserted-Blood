@@ -2214,6 +2214,9 @@ MonoBehaviour:
   hitVol: 0.6
   pitchMin: 0.8
   pitchMax: 1.2
+  screenShake: 1
+  screenShakeDuration: 0.5
+  screenShakeStrength: 0.5
 --- !u!95 &5774685707626805314
 Animator:
   serializedVersion: 7
