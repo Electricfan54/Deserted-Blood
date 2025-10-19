@@ -90,6 +90,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     GameObject CurrentAttack;
 
+    //For Invincibility Effect
+    [SerializeField] Material invincMat;
+    Material origMat;
+     
+
     private void Awake()
     {
         PlayerAbilites = GetComponent<playerablities>();
@@ -102,7 +107,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         origBloodMeter = MaxBloodMeter;
         gameManager.instance.UpdateHPBar(MaxHP, HP);
         gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
-
+        origMat = meshRenderer.material;
     }
 
     // Update is called once per frame
@@ -384,7 +389,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     IEnumerator IFrames()
     {
         isInvinc = true;
+        meshRenderer.material = invincMat;
         yield return new WaitForSeconds(0.4f);
+        meshRenderer.material = origMat;
         isInvinc = false;
     }
 

@@ -17621,6 +17621,7 @@ MonoBehaviour:
   abilities: []
   listpos: 0
   PlayerAbilites: {fileID: 0}
+  invincMat: {fileID: 2100000, guid: 23b1f1cf4cb91574f9ae722085ec2ec3, type: 2}
 --- !u!114 &6350682885890037075
 MonoBehaviour:
   m_ObjectHideFlags: 0
