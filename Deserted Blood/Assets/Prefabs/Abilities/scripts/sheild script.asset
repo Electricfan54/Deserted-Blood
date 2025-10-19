@@ -15,7 +15,8 @@ MonoBehaviour:
   type: 5
   damage: 0
   maxCharge: 5
-  currentcharge: 4
+  currentcharge: 5
   abilityPrefab: {fileID: 6800604543546280664, guid: 1c0d1629b1a985d4bbf8484750bdd5d5, type: 3}
   abilityPrefab2: {fileID: 0}
   abilityIcon: {fileID: 21300000, guid: d8c9259a1b5839b42b980d18d349d10b, type: 3}
+  abilitySound: {fileID: 8300000, guid: 05c38cbc9b56db048922c4345f5fa1ce, type: 3}

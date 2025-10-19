@@ -19,3 +19,4 @@ MonoBehaviour:
   abilityPrefab: {fileID: 0}
   abilityPrefab2: {fileID: 0}
   abilityIcon: {fileID: 21300000, guid: 81a6fded4b333cf4c9f7f16189463966, type: 3}
+  abilitySound: {fileID: 8300000, guid: fe4da4f9c14cb7741aca0329411bed55, type: 3}

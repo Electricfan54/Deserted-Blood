@@ -106,7 +106,7 @@ public class gameManager : MonoBehaviour
     public AudioClip menuPop;
 
     [SerializeField] AudioMixer sfxMixer;
-    float sfxVolume;
+   public float sfxVolume;
 
     [Header("Audio - Music")]
     public AudioSource backgroundMusic;

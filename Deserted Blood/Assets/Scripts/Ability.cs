@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UIElements;
+using NUnit.Framework.Constraints;
 [CreateAssetMenu]
 public  class Ability : ScriptableObject
 {
@@ -20,5 +21,5 @@ public  class Ability : ScriptableObject
  public GameObject abilityPrefab2
         ;public Sprite abilityIcon;
 
-
+    public AudioClip abilitySound;
 }
