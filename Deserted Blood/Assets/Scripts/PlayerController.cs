@@ -495,8 +495,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             if(M1CDtimer > .7f)
             {
                 StartCoroutine(BasicAttack());
+                SlowMove = true;
             }
-            SlowMove = true;
+
         }
 
         RegenHealth();
@@ -575,8 +576,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         isAttacking = false;
         CurrentMoveAnimationIndex += 1;
         PlayerAnimator.SetBool("M1", false);
-        canMove = true;
         SlowMove = false;
+        canMove = true;
+
     }
 
     IEnumerator RedHornAbility()
