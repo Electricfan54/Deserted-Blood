@@ -8687,15 +8687,15 @@ MonoBehaviour:
     chargeList: []
   abilitySlot2:
     equippedAbility: {fileID: 0}
-    chargeFrame: {fileID: 0}
-    abilityIcon: {fileID: 0}
+    chargeFrame: {fileID: 5975878869678212466}
+    abilityIcon: {fileID: 7468918625787812462}
     maxCharges: 0
     currCharges: 0
     chargeList: []
   abilitySlot3:
     equippedAbility: {fileID: 0}
-    chargeFrame: {fileID: 0}
-    abilityIcon: {fileID: 0}
+    chargeFrame: {fileID: 7873268226853455978}
+    abilityIcon: {fileID: 6344178228935464822}
     maxCharges: 0
     currCharges: 0
     chargeList: []
@@ -9216,6 +9216,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilitySlot.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3091368837601041981, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_Name
+      value: AbilityCharges3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073254200116629885, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_Name
+      value: AbilityIcon3
+      objectReference: {fileID: 0}
     - target: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9306,6 +9314,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
   m_PrefabInstance: {fileID: 5162752625465382487}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6344178228935464822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2282977929122234657, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+  m_PrefabInstance: {fileID: 5162752625465382487}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &7873268226853455978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3091368837601041981, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+  m_PrefabInstance: {fileID: 5162752625465382487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8649208987448957775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9317,6 +9341,14 @@ PrefabInstance:
     - target: {fileID: 1671923565953649170, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Name
       value: AbilitySlot.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3091368837601041981, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_Name
+      value: AbilityCharges2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073254200116629885, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_Name
+      value: AbilityIcon2
       objectReference: {fileID: 0}
     - target: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Pivot.x
@@ -9408,3 +9440,19 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
   m_PrefabInstance: {fileID: 8649208987448957775}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5975878869678212466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3091368837601041981, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+  m_PrefabInstance: {fileID: 8649208987448957775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7468918625787812462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2282977929122234657, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+  m_PrefabInstance: {fileID: 8649208987448957775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
