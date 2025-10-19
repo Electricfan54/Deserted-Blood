@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
-using UnityEditorInternal;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour, Idamage, IEffect
