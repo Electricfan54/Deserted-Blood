@@ -564,10 +564,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     {
         //if(isGrounded)
         //    canMove = false;
-
-        M1CDtimer = 0;
         PlayerAnimator.SetBool("M1", true);
         PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
+        M1CDtimer = 0;
         isAttacking = true;
         LightAttackHitbox.GetComponent<Damage>().damageammount = BasePlayerDamage;
         LightAttackHitbox.SetActive(true);
