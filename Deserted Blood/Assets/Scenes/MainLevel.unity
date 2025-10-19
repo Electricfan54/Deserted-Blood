@@ -1760,6 +1760,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b863e7e226b08604087a1f371eb22fe3, type: 3}
+--- !u!1 &144775744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 120288, guid: b097780dab6b9c64a909835b66f8ffc0, type: 3}
+  m_PrefabInstance: {fileID: 7344754760237793853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &154101675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10889,7 +10894,7 @@ PrefabInstance:
     - target: {fileID: 7399220682383941991, guid: 4cb607bf6b8b45c42afa9c942aff256d, type: 3}
       propertyPath: onDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 144775744}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

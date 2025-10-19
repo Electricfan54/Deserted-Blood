@@ -9094,6 +9094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilitySlot.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6073254200116629885, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7182528944436969618, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_SizeDelta.y
       value: 1
@@ -9224,6 +9228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityIcon3
       objectReference: {fileID: 0}
+    - target: {fileID: 6073254200116629885, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9349,6 +9357,10 @@ PrefabInstance:
     - target: {fileID: 6073254200116629885, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Name
       value: AbilityIcon2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073254200116629885, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7916247480536228038, guid: 7f2888709f9e9e84e8877d28f3e878e3, type: 3}
       propertyPath: m_Pivot.x
