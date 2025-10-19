@@ -305,8 +305,12 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             //StartCoroutine(gameManager.instance.DamageFlash());
             if (HP <= 0)
             {
-                // call game lose
-                gameManager.instance.GameOver();
+                canAttack = false;
+                canMove = false;
+                canUpdate = false;
+                //Game loss screen is now called by the death animation
+                PlayerAnimator.applyRootMotion = true;
+                PlayerAnimator.SetTrigger("dead");
             }
             StartCoroutine(IFrames());
         }
@@ -651,5 +655,19 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         FootStepsOn = false;
     }
 
+    public void ActivateLoseScreen()
+    {
+        // call game lose
+        gameManager.instance.GameOver();
+    }
 
+    public void ResetPlayer()
+    {
+        HP = MaxHP;
+        canAttack = true;
+        canMove = true;
+        canUpdate = true;
+        PlayerAnimator.applyRootMotion = false;
+        PlayerAnimator.SetTrigger("reset");
+    }
 }

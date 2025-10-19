@@ -2164,7 +2164,7 @@ MonoBehaviour:
   hitStunDuration: 0.5
   hitBoxes:
   - {fileID: 3400209150586127302}
-  meleeDamage: 10
+  meleeDamage: 15
   projectiles: []
   projectileSpawn: {fileID: 0}
   projDamage: 0

@@ -515,7 +515,7 @@ public class gameManager : MonoBehaviour
     {
 
         player.transform.position = playerCheckpoint.position;
-        playerScript.HP = playerScript.MaxHP;
+        playerScript.ResetPlayer();
         UpdateHPBar(playerScript.MaxHP, playerScript.HP);
 
         if (gateKeeperRef != null)
