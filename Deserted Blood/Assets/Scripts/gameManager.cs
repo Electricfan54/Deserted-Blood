@@ -385,7 +385,7 @@ public class gameManager : MonoBehaviour
         AbilitySlotMain selSlot = abilitySlots[slotSelected];
 
         Ability ability = playerScript.abilities[slotSelected];
-
+        selSlot.abilityIcon.sprite = ability.abilityIcon;
         if (selSlot.chargeList.Count > 0)
         {
             for (int i = 0; i < selSlot.maxCharges; i++)
