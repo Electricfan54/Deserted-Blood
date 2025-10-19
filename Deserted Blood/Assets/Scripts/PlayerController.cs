@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             HP -= DamageAmount;
             gameManager.instance.UpdateHPBar(MaxHP, HP);
-            //StartCoroutine(gameManager.instance.DamageFlash());
+            StartCoroutine(gameManager.instance.flashDamage());
             if (HP <= 0)
             {
                 canAttack = false;
