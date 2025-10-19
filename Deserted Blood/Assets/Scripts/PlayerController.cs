@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     [SerializeField] int[] BasicAttackAnimations;
     [SerializeField] LayerMask Groundlayer;
 
+    [SerializeField] AudioClip[] AttackingSounds;
+    [SerializeField] AudioClip[] JumpingSounds;
+    [SerializeField] AudioClip[] FootStepsSounds;
+
     public int HP;
     public int MaxHP;
     [SerializeField] int BloodMeter;
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     float CurSpeed = 0f;
     bool SlowMove;
+    bool FootStepsOn = false;
 
     int CurrentMoveAnimationIndex;
 
@@ -115,6 +120,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         if (CharController.isGrounded)
         {
             isGrounded = true;
+            PlayerAnimator.SetBool("Jumping", false);
             playerVel.y = -2;
             JumpCount = 0;
             if (hasWallJumped == true)
@@ -190,6 +196,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         RunningAnimaiton();
         CharController.Move(playerVel * Time.deltaTime);
 
+        if(isGrounded && MoveDirection.normalized.magnitude > 0.3f && !FootStepsOn)
+        {
+            StartCoroutine(PlayFootsteps());
+        }
+
         if (MoveDirection.x == 0)
         {
             CurSpeed = 0;
@@ -220,8 +231,19 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         var InputUp = Input.GetButtonUp("Jump");
         if (InputDown && JumpCount < MaxJumps)
         {
+            if (JumpCount == 0)
+            {
+                gameManager.instance.soundEffects.PlayOneShot(JumpingSounds[0], 0.3f);
+            }
+            else
+            {
+                gameManager.instance.soundEffects.PlayOneShot(JumpingSounds[1], 0.3f);
+
+            }
+            PlayerAnimator.SetBool("Jumping", true);
             playerVel.y = JumpStrength;
             JumpCount++;
+
         }
 
         if (InputUp && playerVel.y > 0 && WallInRange == false)
@@ -250,8 +272,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             hasWallJumped = true;
             CurSpeed = 0;
-            JumpCount = 0;
-            playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
+            if(JumpCount > 0 )
+            {
+                JumpCount--;
+            }
+            playerVel = new Vector3(-transform.forward.x * 6, JumpStrength * 1.5f, 0);
             transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
         }
 
@@ -277,6 +302,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             HP -= DamageAmount;
             gameManager.instance.UpdateHPBar(MaxHP, HP);
+            //StartCoroutine(gameManager.instance.DamageFlash());
             if (HP <= 0)
             {
                 // call game lose
@@ -473,6 +499,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         if (isAttacking == false && Input.GetKeyDown(KeyCode.B) && MapPunchTimer > 2.3f)
         {
             StartCoroutine(MappaPunch());
+            gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[2]);
             SlowMove = true;
             
         }
@@ -494,6 +521,15 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
             if(M1CDtimer > .7f)
             {
+                if(CurrentMoveAnimationIndex == 0)
+                {
+                    gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[0], 0.4f);
+                }
+                else
+                {
+                    gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[1], 0.6f);
+
+                }
                 StartCoroutine(BasicAttack());
                 SlowMove = true;
             }
@@ -544,10 +580,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     IEnumerator FallingPunch()
     {
         isAttacking = true;
+        PlayerAnimator.SetBool("Jumping", false);
         PlayerAnimator.SetBool("Flyingpunch", true );
         isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.7f);
         BaseAttacks[1].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[1].SetActive(true);
         playerVel = new Vector3(transform.forward.x * 10, -50, 0);
@@ -604,6 +641,14 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             BaseAttacks[1].SetActive(false);
         }
+    }
+    
+    IEnumerator PlayFootsteps()
+    {
+        FootStepsOn = true;
+        gameManager.instance.soundEffects.PlayOneShot(FootStepsSounds[Random.Range(0, FootStepsSounds.Length)], .1f);
+        yield return new WaitForSeconds(0.35f);
+        FootStepsOn = false;
     }
 
 

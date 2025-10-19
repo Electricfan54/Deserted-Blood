@@ -44,8 +44,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
 
-    [SerializeField] GameObject damageFlash;
-
     public GameObject pickUpPrompt;
 
     public bool isPaused;
@@ -61,6 +59,9 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public Image playerBloodMeter;
     public GameObject playerHUD;
+    [SerializeField] GameObject damageOverlay;
+    public GameObject lowHealthOverlay;
+
 
     public GameObject bossBarUI;
     public Image bossBar;
@@ -385,6 +386,11 @@ public class gameManager : MonoBehaviour
         AbilitySlotMain selSlot = abilitySlots[slotSelected];
 
         Ability ability = playerScript.abilities[slotSelected];
+        if (!selSlot.abilityIcon.gameObject.activeSelf)
+        {
+            selSlot.abilityIcon.gameObject.SetActive(true);
+        }
+        selSlot.abilityIcon.sprite = ability.abilityIcon;
 
         if (selSlot.chargeList.Count > 0)
         {
@@ -505,13 +511,6 @@ public class gameManager : MonoBehaviour
         bossBar.fillAmount = (float)currHealth / (float)bossHPMax;
     }
 
-    public IEnumerator DamageFlash()
-    {
-        damageFlash.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        damageFlash.SetActive(false);
-    }
-
     public void RespawnPlayer()
     {
 
@@ -559,4 +558,12 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = origTimeScale;
     }
+
+    public IEnumerator flashDamage()
+    {
+        damageOverlay.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        damageOverlay.SetActive(false);
+    }
+
 }
