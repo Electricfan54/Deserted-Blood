@@ -70,6 +70,9 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0
+  applyScreenShake: 0
+  shakeDuration: 0
+  shakeStrength: 0
 --- !u!1 &2023838948347328071
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +189,9 @@ MonoBehaviour:
   hitVol: 0.6
   pitchMin: 1.3
   pitchMax: 1.5
+  screenShake: 0
+  screenShakeDuration: 0
+  screenShakeStrength: 0
 --- !u!95 &8564842001809736320
 Animator:
   serializedVersion: 7
@@ -272,6 +278,9 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0
+  applyScreenShake: 0
+  shakeDuration: 0
+  shakeStrength: 0
 --- !u!82 &7588023939248240942
 AudioSource:
   m_ObjectHideFlags: 0
