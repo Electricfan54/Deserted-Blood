@@ -385,6 +385,11 @@ public class GateKeeperAI : EnemyAI
 
     public void StartRoarEffect()
     {
+        if (screenShake)
+        {
+            ScreenShake.instance.ShakeScreen(screenShakeDuration, screenShakeStrength);
+        }
+
         if (roarEffect != null)
         {
             roarEffect.Play();

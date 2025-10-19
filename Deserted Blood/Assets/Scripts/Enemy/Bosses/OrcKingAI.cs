@@ -290,6 +290,11 @@ public class OrcKingAI : EnemyAI
 
     public void StartRoarEffect()
     {
+        if (screenShake)
+        {
+            ScreenShake.instance.ShakeScreen(screenShakeDuration, screenShakeStrength);
+        }
+
         switch (roarType)
         {
             case RoarType.Enemy:

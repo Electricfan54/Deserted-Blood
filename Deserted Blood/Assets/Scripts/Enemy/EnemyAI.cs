@@ -139,6 +139,10 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected float pitchMin = 0.8f;
     [SerializeField] protected float pitchMax = 1.2f;
 
+    [Header("Screen Shake")]
+    [SerializeField] protected bool screenShake;
+    [SerializeField] protected float screenShakeDuration;
+    [SerializeField] protected float screenShakeStrength;
 
     protected virtual void Awake()
     {
@@ -487,6 +491,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
                 attackEffect.Stop();
         }
 
+        if (screenShake)
+        {
+            ScreenShake.instance.ShakeScreen(screenShakeDuration, screenShakeStrength);
+        }
+
         //Toggle hitbox
         hitBoxes[0].SetActive(!hitBoxes[0].activeSelf);
         hitBoxes[0].GetComponent<Damage>().damageammount = meleeDamage;
@@ -507,6 +516,11 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
                 attackEffect.Play();
             else if (!shouldPlayEffect)
                 attackEffect.Stop();
+        }
+
+        if (screenShake)
+        {
+            ScreenShake.instance.ShakeScreen(screenShakeDuration, screenShakeStrength);
         }
 
         Vector3 playerDir = new Vector3(targetPoint.x, targetPoint.y + 1.0f, targetPoint.z) - projectileSpawn.transform.position;
