@@ -211,6 +211,8 @@ MonoBehaviour:
   attackVol: 0
   hitSounds: []
   hitVol: 0
+  pitchMin: 0.8
+  pitchMax: 1.2
   model: {fileID: 2259630661358689125}
   fireEffects:
   - {fileID: 3916575895341457981}

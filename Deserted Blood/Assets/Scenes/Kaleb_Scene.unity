@@ -44454,10 +44454,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7151750145917436057, guid: 42353e15118181f42a5dd8f237f12e81, type: 3}
-      propertyPath: projRoarEffect
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -26,12 +26,17 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     [SerializeField] int gravityStrength;
     [SerializeField] int SlideGravity;
 
-    [SerializeField] int Speed;
+    [SerializeField] int maxSpeed;
+    [SerializeField] float decreaseSpeed;
+    [SerializeField] float increaseSpeed;
     [SerializeField] int animTranSpeed;
 
     int JumpCount;
     Vector3 MoveDirection;
     Vector3 playerVel;
+
+    float CurSpeed = 0f;
+    bool SlowMove;
 
     int CurrentMoveAnimationIndex;
 
@@ -138,7 +143,6 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         }
 
         Movement();
-    
     }
 
     private void LateUpdate()
@@ -164,7 +168,20 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         }
 
 
-        CharController.Move(MoveDirection * Speed * Time.deltaTime);
+        if (SlowMove)
+        {
+            CurSpeed = Mathf.MoveTowards(CurSpeed, 0, decreaseSpeed * Time.deltaTime);
+        }
+        else
+        {
+            float targSpeed = Mathf.Abs(Horizantol) > 0 ? maxSpeed : 0;
+            CurSpeed = Mathf.MoveTowards(CurSpeed, targSpeed, increaseSpeed * Time.deltaTime);
+        }
+
+        MoveDirection = new Vector3(Horizantol, 0, 0).normalized * CurSpeed;
+
+        CharController.Move(MoveDirection * Time.deltaTime);
+
 
         if (canMove)
             Jump();
@@ -172,6 +189,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         BaseAbilityInputCheck();
         RunningAnimaiton();
         CharController.Move(playerVel * Time.deltaTime);
+
+        if (MoveDirection.x == 0)
+        {
+            CurSpeed = 0;
+        }
     }
 
     void RunningAnimaiton()
@@ -227,6 +249,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         if (WallInRange && Input.GetButtonDown("Jump") && !isGrounded)
         {
             hasWallJumped = true;
+            CurSpeed = 0;
             JumpCount = 0;
             playerVel = new Vector3(-transform.forward.x * 5, JumpStrength * 1.5f, 0);
             transform.rotation = Quaternion.Euler(0, -transform.forward.x > 0 ? 90 : -90, 0);
@@ -450,6 +473,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         if (isAttacking == false && Input.GetKeyDown(KeyCode.B) && MapPunchTimer > 2.3f)
         {
             StartCoroutine(MappaPunch());
+            SlowMove = true;
+            
         }
 
         if (isAttacking == false && Input.GetKeyDown(KeyCode.N) && GateKeeperAbilityCheck == true)
@@ -470,7 +495,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             if(M1CDtimer > .7f)
             {
                 StartCoroutine(BasicAttack());
+                SlowMove = true;
             }
+
         }
 
         RegenHealth();
@@ -511,11 +538,13 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         canMove = true;
         PlayerAnimator.SetBool("MappaPunchActive", false);
         isInvinc = false;
+        SlowMove = false;
     }
 
     IEnumerator FallingPunch()
     {
         isAttacking = true;
+        PlayerAnimator.SetBool("Flyingpunch", true );
         isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
         yield return new WaitForSeconds(.5f);
@@ -527,17 +556,17 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         BaseAttacks[1].SetActive(false);
         isAttacking = false;
         isInvinc = false;
+        PlayerAnimator.SetBool("Flyingpunch", false);
         // cool
     }
 
     IEnumerator BasicAttack()
     {
-        if(isGrounded)
-            canMove = false;
-
-        M1CDtimer = 0;
+        //if(isGrounded)
+        //    canMove = false;
         PlayerAnimator.SetBool("M1", true);
         PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
+        M1CDtimer = 0;
         isAttacking = true;
         LightAttackHitbox.GetComponent<Damage>().damageammount = BasePlayerDamage;
         LightAttackHitbox.SetActive(true);
@@ -546,7 +575,9 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         isAttacking = false;
         CurrentMoveAnimationIndex += 1;
         PlayerAnimator.SetBool("M1", false);
-        canMove = true; 
+        SlowMove = false;
+        canMove = true;
+
     }
 
     IEnumerator RedHornAbility()
