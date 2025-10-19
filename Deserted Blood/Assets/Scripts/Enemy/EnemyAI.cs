@@ -644,7 +644,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             int rand = Random.Range(0, hitSounds.Length);
             PlaySoundClip(hitSounds[rand], hitVol);
         }
-        else
+        else if (audSource != null)
             audSource.Stop();
 
 
