@@ -513,6 +513,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         {
             StartCoroutine(MappaPunch());
             gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[2]);
+            ScreenShake.instance.ShakeScreen(0.45f, 0.9f);
             CDmanager.AddCoolDown("Vampiric Punch", 2.3f);
             SlowMove = true;
             
@@ -545,6 +546,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
                 }
                 StartCoroutine(BasicAttack());
+                ScreenShake.instance.ShakeScreen(0.2f, 0.3f);
                 SlowMove = true;
             }
 
@@ -603,6 +605,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         BaseAttacks[1].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
         BaseAttacks[1].SetActive(true);
         playerVel = new Vector3(transform.forward.x * 10, -50, 0);
+        ScreenShake.instance.ShakeScreen(0.2f, 0.6f);
         yield return new WaitForSeconds(.2f);
         playerVel.x = 0;
         BaseAttacks[1].SetActive(false);
