@@ -2138,24 +2138,31 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.6175652
-        functionName: Attack0
+      - time: 0.52057254
+        functionName: PlayAttackSFX
         data: 
-        objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
+        objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.54373974
+        functionName: Attack1
+        data: 
+        objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7155363
         functionName: Attack0
         data: 
-        objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
+        objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.97374195
         functionName: AttackAnimEnd
         data: 
-        objectReferenceParameter: {fileID: 6938404717349697744, guid: 7717ba412d0237d45bc580c174912891, type: 3}
+        objectReferenceParameter: {fileID: 2856357008577667337, guid: 0ac8978a241136b4e85b3bb8e1dba7c6, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
