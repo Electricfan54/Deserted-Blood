@@ -189,6 +189,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         BaseAbilityInputCheck();
         RunningAnimaiton();
         CharController.Move(playerVel * Time.deltaTime);
+
+        if (MoveDirection.x == 0)
+        {
+            CurSpeed = 0;
+        }
     }
 
     void RunningAnimaiton()
