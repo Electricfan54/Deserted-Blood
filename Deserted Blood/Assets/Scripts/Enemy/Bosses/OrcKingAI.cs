@@ -327,4 +327,8 @@ public class OrcKingAI : EnemyAI
         else
             PlaySoundClip(attackSounds[1], attackVol);
     }
+
+    protected override void HitReact()
+    {
+    }
 }

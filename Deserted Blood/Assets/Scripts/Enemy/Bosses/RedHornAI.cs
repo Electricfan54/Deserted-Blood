@@ -19,6 +19,9 @@ public class RedHornAI : EnemyAI
 
     [Header("Effect Variables")]
     [SerializeField] ParticleSystem roarEffect;
+    [Header("Sound Effect Variables")]
+    [SerializeField] AudioClip roarSound;
+    [SerializeField] float roarVol;
 
     protected override void Start()
     {
@@ -249,6 +252,8 @@ public class RedHornAI : EnemyAI
         {
             roarEffect.Play();
         }
+        if (roarSound != null && audSource != null)
+            PlaySoundClip(roarSound, roarVol);
     }
 
     public void StopRoarEffect()
@@ -257,5 +262,11 @@ public class RedHornAI : EnemyAI
         {
             roarEffect.Stop();
         }
+        if (audSource != null)
+            audSource.Stop();
+    }
+
+    protected override void HitReact()
+    {
     }
 }
