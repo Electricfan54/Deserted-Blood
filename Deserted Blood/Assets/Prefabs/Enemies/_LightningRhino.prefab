@@ -14607,9 +14607,16 @@ MonoBehaviour:
   roamMaxTravelTime: 10
   bloodAddAmount: 10
   audSource: {fileID: 3672424471985313499}
-  walkingSounds: []
-  walkSyncedWithAnim: 0
-  walkingVol: 0
+  walkingSounds:
+  - {fileID: 8300000, guid: 848c0bfeb1f6aaa4bb432439d70ddc88, type: 3}
+  - {fileID: 8300000, guid: 3c58fe06303219146848550861803ddf, type: 3}
+  - {fileID: 8300000, guid: 0f6b0117f8fab274e99b19ff042ef931, type: 3}
+  - {fileID: 8300000, guid: 396acfcc749b18c488e77684d124f304, type: 3}
+  - {fileID: 8300000, guid: f58815c8dc6cb3a4e8316387bd92fad7, type: 3}
+  - {fileID: 8300000, guid: b39ebdc3675b3c543a4ac7e0992f6927, type: 3}
+  - {fileID: 8300000, guid: 2d1850b1a286916439920b25ee2a8df9, type: 3}
+  walkSyncedWithAnim: 1
+  walkingVol: 1
   walkSoundInterval: 0
   attackSounds:
   - {fileID: 8300000, guid: 63deb49f29d9b044e9f2024ac92eb4c5, type: 3}

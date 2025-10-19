@@ -45036,6 +45036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _ShieldGoblin
       objectReference: {fileID: 0}
+    - target: {fileID: 5398886026398723977, guid: fc9ad4e717ce952498a6004df836a568, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
