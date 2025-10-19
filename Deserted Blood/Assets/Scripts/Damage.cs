@@ -12,6 +12,11 @@ public class Damage : MonoBehaviour
     public bool hitStop;
     public float stopTime;
 
+    public bool applyScreenShake = false;
+    public float shakeDuration = .5f;
+    public float shakeStrength = .5f;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +45,8 @@ public class Damage : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (applyScreenShake)
+            ScreenShake.instance.ShakeScreen(shakeDuration, shakeStrength);
 
     }
 }
