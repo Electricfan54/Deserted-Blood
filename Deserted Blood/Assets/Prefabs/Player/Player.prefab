@@ -2880,8 +2880,8 @@ MonoBehaviour:
   JumpStrength: 15
   gravityStrength: 45
   SlideGravity: 7
-  maxSpeed: 20
-  decreaseSpeed: 50
+  maxSpeed: 10
+  decreaseSpeed: 40
   increaseSpeed: 20
   animTranSpeed: 15
   isGrounded: 0
@@ -2904,9 +2904,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1418f92105622fa41a7c703bf96730c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerablities
-  ignore:
+  lightningtarget:
     serializedVersion: 2
     m_Bits: 0
+  lightningeffect: {fileID: 0}
 --- !u!143 &8543027307328747487
 CharacterController:
   m_ObjectHideFlags: 0
