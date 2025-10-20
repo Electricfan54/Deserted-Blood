@@ -6473,14 +6473,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Game Developed by Team Tainted Gear:\r\n\r\n---------------------------------\r\n\r\nJose\r\n\r\nKaleb\r\n\r\nGabriel\r\n\r\nAlexsavier\r\n\r\n---------------------------------\r\n\r\nAsset
-    Credits:\r\n\r\n---------------------------------\r\n\r\nMusic: \r\n\r\nGuilhermeBernardes\r\nnakaradaalexander\r\n\r\nSound
-    Effects:\r\n\r\nUniversfield\r\nmjohansson\r\nblackcoatman\r\nurupin\r\nJulien\r\nmagnuswaker\r\nrawoperator\r\nrobinhood76\r\nDRAGON
-    STUDIO\r\nfreesound community\r\nfloraphonic\r\n\r\nUnity Asset Store:\r\n\r\nAquarius
-    Max\r\nSAT Productions\r\nVadim Ziambetov\r\nDr. Game\r\nDungeon Mason\r\nPolygon
-    Blacksmith\r\nMaksim Bugrimov\r\nAndryuha1981\r\nKalamona\r\nGabriel Aguiar Prod\r\nTitan
-    Moruma\r\nOlivier Girardot\r\nKevin Iglesias\r\nALP\r\nTexture Me!\r\nMatthew
-    Guz\r\nLB3D\r\nTS WORK\r\nAdvance Studios\r\nkarboosx\r\nAstra Forge\r\nIgniteCoders\r\nLamoot's
-    Game Art\r\nGame-Ready Studios\r\nunity-chan!\r\n\r\n---------------------------------"
+    Credits:\r\n\r\n---------------------------------\r\n\r\nMusic (Outsourced):
+    \r\n\r\nGuilhermeBernardes - Caves of Dawn (Menu Music)\r\nnakaradaalexander
+    - Combat One (Level Music)\r\n\r\nSound Effects :\r\n\r\n(Outsourced)\r\nUniversfield
+    - Click for Game Menu (Button Clicks)\r\nmjohansson - torrt skrik\r\nblackcoatman
+    - batlikedrill\r\nurupin - Fast Freezing Ice\r\nJulien - jm_fx_fireball-03\r\nmagnuswaker
+    - seismic slam\r\nrawoperator- module 2 pffiiii\r\nrobinhood76 - mini force gate
+    release\r\n\r\n(Unity Store)\r\nDRAGON STUDIO\r\nfreesound community\r\nfloraphonic\r\n\r\nUnity
+    Asset Store:\r\n\r\nAquarius Max\r\nSAT Productions\r\nVadim Ziambetov\r\nDr.
+    Game\r\nDungeon Mason\r\nPolygon Blacksmith\r\nMaksim Bugrimov\r\nAndryuha1981\r\nKalamona\r\nGabriel
+    Aguiar Prod\r\nTitan Moruma\r\nOlivier Girardot\r\nKevin Iglesias\r\nALP\r\nTexture
+    Me!\r\nMatthew Guz\r\nLB3D\r\nTS WORK\r\nAdvance Studios\r\nkarboosx\r\nAstra
+    Forge\r\nIgniteCoders\r\nLamoot's Game Art\r\nGame-Ready Studios\r\nunity-chan!\r\n\r\n---------------------------------"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9655,6 +9659,7 @@ MonoBehaviour:
   menuLose: {fileID: 3079430937331095577}
   menuWin: {fileID: 63230932433133988}
   loadingScreen: {fileID: 7803931206073229992}
+  quitButton: {fileID: 1884946644165543671}
   pickUpPrompt: {fileID: 6042669915495124959}
   isPaused: 0
   mainMenuActive: 1

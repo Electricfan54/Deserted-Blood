@@ -44,6 +44,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     public GameObject loadingScreen;
 
+    [SerializeField] GameObject quitButton;
+
     public GameObject pickUpPrompt;
 
     public bool isPaused;
@@ -213,6 +215,11 @@ public class gameManager : MonoBehaviour
         {
             backgroundMusic.PlayOneShot(menuMusic);
         }
+
+        #if PLATFORM_WEBGL
+        quitButton.SetActive(false);
+        #endif
+
 
     }
 
