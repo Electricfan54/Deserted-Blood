@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     protected bool canUpdate = true; //for stopping player input update
     protected bool canMove = true; //for stopping player movement
-
+    bool isdead;
     GameObject CurrentAttack;
 
     //For Invincibility Effect
@@ -308,11 +308,13 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             HP -= DamageAmount;
             gameManager.instance.UpdateHPBar(MaxHP, HP);
             StartCoroutine(gameManager.instance.flashDamage());
-            if (HP <= 0)
+            if (HP <= 0&&!isdead)
             {
+             
                 canAttack = false;
                 canMove = false;
                 canUpdate = false;
+                isdead = true;
                 //Game loss screen is now called by the death animation
                 PlayerAnimator.applyRootMotion = true;
                 PlayerAnimator.SetTrigger("dead");
@@ -678,6 +680,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         canAttack = true;
         canMove = true;
         canUpdate = true;
+       isdead = false;
         PlayerAnimator.applyRootMotion = false;
         PlayerAnimator.SetTrigger("reset");
     }

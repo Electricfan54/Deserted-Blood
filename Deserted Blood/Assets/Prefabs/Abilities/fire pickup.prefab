@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8540629852418742072}
   - component: {fileID: 3348555659223923170}
   - component: {fileID: -3694252072910554663}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: fire pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
