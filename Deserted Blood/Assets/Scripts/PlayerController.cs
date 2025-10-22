@@ -310,6 +310,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     // Ability or enemy related stuff
     public void TakeDamage(int DamageAmount)
     {
+        if (isdead)
+            { return; }
         if (isInvinc == false)
         {
             HP -= DamageAmount;
