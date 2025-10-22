@@ -179,6 +179,8 @@ public class gameManager : MonoBehaviour
             backgroundMusic.clip = levelMusic;
             backgroundMusic.Play();
             ResetAbilities();
+            playerStartPos = GameObject.Find("SpawnPoint").transform;
+            playerCheckpoint = playerStartPos;
         }
 
         gameManager.instance.loadingScreen.SetActive(false);
@@ -543,7 +545,7 @@ public class gameManager : MonoBehaviour
 
     }
 
-    private void ResetAbilities()
+    public void ResetAbilities()
     {
 
         for (int i = 0; i < abilitySlots.Count; i++)

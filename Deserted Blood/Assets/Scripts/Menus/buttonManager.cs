@@ -66,6 +66,14 @@ public class buttonManager : MonoBehaviour
 
     }
 
+    public void Respawn()
+    {
+
+        gameManager.instance.UnpauseGame();
+        gameManager.instance.player.transform.position = gameManager.instance.playerCheckpoint.position;
+
+    }
+
     public void Quit()
     {
 
