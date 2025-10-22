@@ -63693,7 +63693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02290c7b2dc0c2d4e8be1271a91ce163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damage
-  damageammount: 2
+  damageammount: 5
   damagetype: 1
   hitStop: 0
   stopTime: 0

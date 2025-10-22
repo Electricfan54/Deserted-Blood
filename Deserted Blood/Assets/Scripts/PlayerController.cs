@@ -353,9 +353,11 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
                     abilities[i].currentcharge = abilities[i].maxCharge;
                     listpos = i;
 
+                    gameManager.instance.slotSelected = listpos;
                     gameManager.instance.UpdateCharges();
                     gameManager.instance.AssignAbility();
                     listpos = temp;
+                    gameManager.instance.slotSelected = listpos;
                     return;
                 }
             }
@@ -370,14 +372,17 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             {
                 if (abilities[i].type == ability.type)
                 {
+                    int temp = listpos;
                     abilities[i].currentcharge = abilities[i].maxCharge;
+                    listpos = i;
+
+                    gameManager.instance.slotSelected = listpos;
                     gameManager.instance.UpdateCharges();
                     gameManager.instance.AssignAbility();
+                    listpos = temp;
+                    gameManager.instance.slotSelected = listpos;
                     return;
                 }
-
-
-
             }
             abilities.Add(ability);
             listpos = abilities.Count - 1;
