@@ -4852,7 +4852,7 @@ GameObject:
   - component: {fileID: -3968980727711892995}
   - component: {fileID: 7713398153256837519}
   - component: {fileID: -4767091028414614623}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Human_Spell_Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

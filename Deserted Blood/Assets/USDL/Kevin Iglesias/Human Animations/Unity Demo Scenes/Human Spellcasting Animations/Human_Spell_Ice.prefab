@@ -58812,7 +58812,7 @@ GameObject:
   - component: {fileID: -3142846479408761811}
   - component: {fileID: 2756596994042276750}
   - component: {fileID: 442373428156690876}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Human_Spell_Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}

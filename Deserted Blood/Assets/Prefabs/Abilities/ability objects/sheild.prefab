@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1634933495748282034}
   - component: {fileID: 7945231128590088616}
   - component: {fileID: 5931734229017633104}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: sheild
   m_TagString: Untagged
   m_Icon: {fileID: 0}

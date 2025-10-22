@@ -10,7 +10,7 @@ public class playerablities : MonoBehaviour
     [SerializeField] LayerMask lightningtarget;
     [SerializeField] ParticleSystem lightningeffect;
     [SerializeField] AudioSource aud;
-
+    Ability currentability;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,8 +22,13 @@ public class playerablities : MonoBehaviour
     void Update()
     {
         selectability();
-      if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
+            if (gameManager.instance.playerScript.abilities.Count != 0)
+            {
+               currentability = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos];
+            }
+           
             useAbility();
         }
 
@@ -48,15 +53,16 @@ public class playerablities : MonoBehaviour
 
     void useAbility()
     {
-  if (gameManager.instance.playerScript.abilities.Count == 0)
-        {
 
+        if (gameManager.instance.playerScript.abilities.Count == 0)
+        {
+            return;
         }
-
+        
         //Teleport ability
-        else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.tp && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0 && gameManager.instance.playerScript.isGrounded == false)
+        else if (currentability.type == Ability.AbilityType.tp && currentability.currentcharge > 0 && gameManager.instance.playerScript.isGrounded == false)
         {
-           
+
             Debug.Log("Pew Pew");
             if (gameManager.instance.playerScript.isGrounded == false)
             {
@@ -64,16 +70,16 @@ public class playerablities : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
                 {
-                    gameManager.instance.player.transform.position =  hit.point-gameManager.instance.player.transform.forward;
+                    gameManager.instance.player.transform.position = hit.point - gameManager.instance.player.transform.forward;
                     aud.pitch = Random.Range(0.8f, 1.2f);
-                    aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+                    aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
                 }
                 else
                 {
                     gameManager.instance.player.transform.position = gameManager.instance.player.transform.position + gameManager.instance.player.transform.forward * 5;
                     aud.pitch = Random.Range(0.8f, 1.2f);
-                    aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+                    aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
                 }
             }
@@ -83,62 +89,62 @@ public class playerablities : MonoBehaviour
         }
 
         //lightning ability
-        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.lightning && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        else if (currentability.type == Ability.AbilityType.lightning && currentability.currentcharge > 0)
         {
 
-            damage = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].damage;
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            damage = currentability.damage;
+            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
             StartCoroutine(chargetime());
             aud.pitch = Random.Range(0.8f, 1.2f);
-            aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound,gameManager.instance.sfxVolume);
+            aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
 
         //fire ability
-        else if (gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.fire && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        else if (currentability.type == Ability.AbilityType.fire && currentability.currentcharge > 0)
         {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1 , gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
             aud.pitch = Random.Range(0.8f, 1.2f);
-            aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+            aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
-  //shockwave ability
-        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.shockwave && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        //shockwave ability
+        else if (currentability.type == Ability.AbilityType.shockwave && currentability.currentcharge > 0)
         {
             StartCoroutine(Slamtime());
             aud.pitch = Random.Range(0.8f, 1.2f);
-            aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+            aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
-  //ice ability
-        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.ice && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        //ice ability
+        else if (currentability.type == Ability.AbilityType.ice &&currentability.currentcharge > 0)
         {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position , gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position, gameManager.instance.player.transform.rotation);
             aud.pitch = Random.Range(0.8f, 1.2f);
-            aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+            aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
-  //sonicBoom ability
-        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sonicboom && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        //sonicBoom ability
+        else if (currentability.type == Ability.AbilityType.sonicboom && currentability.currentcharge > 0)
         {
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
             aud.pitch = Random.Range(0.8f, 1.2f);
-            aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+            aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
-  //sheild ability
-        else if ( gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].type == Ability.AbilityType.sheild && gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge > 0)
+        //sheild ability
+        else if (currentability.type == Ability.AbilityType.sheild && currentability.currentcharge > 0)
         {
 
-            Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform);
+            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform);
             aud.pitch = Random.Range(0.8f, 1.2f);
-            aud.PlayOneShot(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilitySound, gameManager.instance.sfxVolume);
+            aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             gameManager.instance.playerScript.isInvinc = true;
             gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
@@ -153,11 +159,11 @@ public class playerablities : MonoBehaviour
     IEnumerator chargetime()
     {
         yield return new WaitForSeconds(.5f);
-        RaycastHit[] hit = Physics.RaycastAll(transform.position+Vector3.up*1, transform.forward, 5, lightningtarget);
+        RaycastHit[] hit = Physics.RaycastAll(transform.position + Vector3.up * 1, transform.forward, 5, lightningtarget);
         for (int i = 0; i < hit.Length; i++)
         {
             Debug.Log("Hit" + hit[i].collider.name);
-       
+
             Idamage dam = hit[i].collider.GetComponentInParent<Idamage>();
             if (dam != null)
             {
@@ -177,6 +183,6 @@ public class playerablities : MonoBehaviour
     {
         gameManager.instance.playerScript.transform.position = gameManager.instance.playerScript.transform.position + Vector3.up * 3;
         yield return new WaitForSeconds(.3f);
-        Instantiate(gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+        Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
     }
 }
