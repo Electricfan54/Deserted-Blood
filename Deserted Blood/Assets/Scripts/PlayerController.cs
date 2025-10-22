@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     public  bool isInvinc = false;
     bool isAttacking = false;
+    bool airAttacking = false;
     bool canAttack = true;
 
     public bool GateKeeperAbilityCheck = false;
@@ -139,13 +140,16 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         else
         {
             isGrounded = false;
-            if (WallInRange && playerVel.y <= 0)
+            if (WallInRange && playerVel.y <= 0 && airAttacking == false)
             {
                 playerVel.y -= SlideGravity * Time.deltaTime;
             }
             else
             {
-                playerVel.y -= gravityStrength * Time.deltaTime;
+                if(airAttacking == false)
+                {
+                    playerVel.y -= gravityStrength * Time.deltaTime;
+                }
             }
         }
 
@@ -551,8 +555,16 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
                     gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[1], 0.6f);
 
                 }
-                StartCoroutine(BasicAttack());
-                SlowMove = true;
+
+                if(isGrounded)
+                {
+                    StartCoroutine(BasicAttack());
+                    SlowMove = true;
+                }
+                else
+                {
+                    StartCoroutine(JumpingAttack());
+                }
             }
 
         }
@@ -639,6 +651,27 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         SlowMove = false;
         canMove = true;
 
+    }
+
+    IEnumerator JumpingAttack()
+    {
+        //PlayerAnimator.SetBool("Jumping", false);
+        PlayerAnimator.SetBool("M1", true);
+        PlayerAnimator.SetFloat("M1Count", CurrentMoveAnimationIndex);
+        airAttacking = true;
+        isAttacking = true;
+
+        M1CDtimer = 0;
+        playerVel.y = 0;
+        LightAttackHitbox.GetComponent<Damage>().damageammount = BasePlayerDamage;
+        LightAttackHitbox.SetActive(true);
+        yield return new WaitForSeconds(.2f);
+        LightAttackHitbox.SetActive(false);
+        airAttacking = false;
+        isAttacking = false;
+        CurrentMoveAnimationIndex += 1;
+        PlayerAnimator.SetBool("M1", false);
+        
     }
 
     IEnumerator RedHornAbility()
