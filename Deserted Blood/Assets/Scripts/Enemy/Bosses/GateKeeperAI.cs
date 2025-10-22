@@ -351,6 +351,7 @@ public class GateKeeperAI : EnemyAI
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
+        gameManager.instance.gateKeeperRef = this;
         if (cam != null && fightCamPos != null)
         {
             cam.SetBossDistance(fightCamPos);
