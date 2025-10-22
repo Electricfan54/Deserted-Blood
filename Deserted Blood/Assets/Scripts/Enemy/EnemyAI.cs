@@ -61,6 +61,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
     [SerializeField] protected int maxHealth;
     protected int curHealth;
     public int enemyAggroRange;
+    public int chaseAggroBuff = 5;
     [SerializeField] protected float attackRate = 0.5f;
     [SerializeField] protected float hitStunDuration = 0.5f;
     protected float hitStunTimer = 0;
@@ -586,7 +587,7 @@ public class EnemyAI : MonoBehaviour, Idamage, IEffect
             curSpeed = 0;
             curState = EnemyState.attacking;
         }
-        else if (DistFromTarget() > enemyAggroRange)
+        else if (DistFromTarget() > enemyAggroRange + chaseAggroBuff)
         {
             curState = EnemyState.roaming;
         }
