@@ -7,30 +7,41 @@ using System.Collections;
 public class CooldownManager : MonoBehaviour
 {
     [SerializeField] Image CDMeter;
+    [SerializeField] Image CDMeter2;
 
     public void AddCoolDown(string text, float CDTimer)
     {
-        CDMeter.gameObject.SetActive(true);
-        StartCoroutine(AddCD(CDTimer));
-        CDMeter.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        if(!CDMeter.IsActive())
+        {
+            CDMeter.gameObject.SetActive(true);
+            StartCoroutine(AddCD(CDTimer, CDMeter));
+            CDMeter.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        }
+        else
+        {
+            CDMeter2.gameObject.SetActive(true);
+            StartCoroutine(AddCD(CDTimer, CDMeter2));
+            CDMeter2.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        }
+  
 
     }
 
 
-    IEnumerator AddCD(float CDTimer)
+    IEnumerator AddCD(float CDTimer, Image meter)
     {
         float curTime = 0f;
-        CDMeter.fillAmount = 1f;
+        meter.fillAmount = 1f;
 
         while(curTime < CDTimer)
         {
             curTime += Time.deltaTime;
-            CDMeter.fillAmount = Mathf.Lerp(1f, 0f, curTime / CDTimer);
+            meter.fillAmount = Mathf.Lerp(1f, 0f, curTime / CDTimer);
             yield return null;
         }
 
-        CDMeter.fillAmount = 0f;
-        CDMeter.gameObject.SetActive(false);
+        meter.fillAmount = 0f;
+        meter.gameObject.SetActive(false);
     }
 
 }
