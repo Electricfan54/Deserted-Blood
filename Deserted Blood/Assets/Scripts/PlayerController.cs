@@ -404,7 +404,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     {
         isInvinc = true;
         meshRenderer.material = invincMat;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.6f);
         meshRenderer.material = origMat;
         isInvinc = false;
     }

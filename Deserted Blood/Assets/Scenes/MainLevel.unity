@@ -373,7 +373,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: -876546973899608171, guid: c56b200c2480bed4591e374d7f4e2379, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7475,6 +7475,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 989772180}
+    - target: {fileID: 2126422325346502055, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: c56b200c2480bed4591e374d7f4e2379, type: 3}
     - target: {fileID: 3347831618093175729, guid: b68599e46c582664ea62c656372d42cc, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7503,6 +7507,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2036128909}
+    - target: {fileID: 8157985584293563670, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: c56b200c2480bed4591e374d7f4e2379, type: 3}
     - target: {fileID: 8368455623622477274, guid: b68599e46c582664ea62c656372d42cc, type: 3}
       propertyPath: m_Name
       value: NewKingdomStreets
