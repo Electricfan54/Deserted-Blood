@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     int origHP;
     float bloodTimer;
     float M1CDtimer;
+    float FallingPunchTimer;
     float MapPunchTimer;
 
     int playerXPush = 3;
@@ -515,18 +516,20 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
     {
         M1CDtimer += Time.deltaTime;
         MapPunchTimer += Time.deltaTime;
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.B) && MapPunchTimer > 2.3f)
+        FallingPunchTimer += Time.deltaTime;
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.B) && MapPunchTimer > 3.5f)
         {
             StartCoroutine(MappaPunch());
             gameManager.instance.soundEffects.PlayOneShot(AttackingSounds[2]);
-            CDmanager.AddCoolDown("Vampiric Punch", 2.3f);
+            CDmanager.AddCoolDown("Vampiric Punch", 3.5f);
             SlowMove = true;
             
         }
 
-        if (isAttacking == false && Input.GetKeyDown(KeyCode.N) && GateKeeperAbilityCheck == true)
+        if (isAttacking == false && Input.GetKeyDown(KeyCode.N) && GateKeeperAbilityCheck == true && FallingPunchTimer > 3.2f)
         {
             StartCoroutine(FallingPunch());
+            CDmanager.AddCoolDown("Falling Punch", 3.2f);
         }
         if(isAttacking == false && Input.GetKeyDown(KeyCode.Z) && RedHornAbilityCheck == true)
         {
@@ -594,7 +597,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         PlayerAnimator.SetBool("MappaPunchActive", true);
         yield return new WaitForSeconds(0.2f);
         playerVel.x = transform.forward.x * 20;
-        BaseAttacks[0].GetComponent<Damage>().damageammount = BasePlayerDamage * 3;
+        BaseAttacks[0].GetComponent<Damage>().damageammount = (BasePlayerDamage + 4);
         BaseAttacks[0].SetActive(true);
         yield return new WaitForSeconds(.4f);
         BaseAttacks[0].SetActive(false);
@@ -608,6 +611,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
 
     IEnumerator FallingPunch()
     {
+        FallingPunchTimer = 0;
         isAttacking = true;
         PlayerAnimator.SetBool("Jumping", false);
         PlayerAnimator.SetBool("Flyingpunch", true );
