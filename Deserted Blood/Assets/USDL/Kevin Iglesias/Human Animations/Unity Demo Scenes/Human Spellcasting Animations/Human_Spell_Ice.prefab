@@ -58810,8 +58810,8 @@ GameObject:
   - component: {fileID: 4027589331229324516}
   - component: {fileID: 7472612689672244633}
   - component: {fileID: -3142846479408761811}
-  - component: {fileID: 442373428156690876}
   - component: {fileID: 2756596994042276750}
+  - component: {fileID: 442373428156690876}
   m_Layer: 3
   m_Name: Human_Spell_Ice
   m_TagString: Untagged
@@ -63665,22 +63665,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6}
   m_Center: {x: 0, y: 0, z: 5}
---- !u!114 &442373428156690876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7865134773366943936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce340aac7e9438245a23c4f12ce62cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Effect
-  type: 1
-  duration: 3
-  tickDamage: 0
-  tickRate: 0
 --- !u!114 &2756596994042276750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63697,6 +63681,25 @@ MonoBehaviour:
   damagetype: 1
   hitStop: 0
   stopTime: 0
+  applyScreenShake: 0
+  shakeDuration: 0.5
+  shakeStrength: 0.5
+--- !u!114 &442373428156690876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7865134773366943936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce340aac7e9438245a23c4f12ce62cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Effect
+  type: 1
+  duration: 3
+  tickDamage: 0
+  tickRate: 0
 --- !u!1 &8737383769722254927
 GameObject:
   m_ObjectHideFlags: 0

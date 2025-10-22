@@ -256,6 +256,7 @@ public class OrcKingAI : EnemyAI
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
+        gameManager.instance.orcKingRef = this;
         if (cam != null && fightCamPos != null)
         {
             cam.SetBossDistance(fightCamPos);

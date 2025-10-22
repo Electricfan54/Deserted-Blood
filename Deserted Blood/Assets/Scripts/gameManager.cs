@@ -99,9 +99,9 @@ public class gameManager : MonoBehaviour
     float transTimer;
 
     [Header("Boss References")]
-    [SerializeField] GateKeeperAI gateKeeperRef;
-    [SerializeField] RedHornAI redHornRef;
-    [SerializeField] OrcKingAI orcKingRef;
+    public GateKeeperAI gateKeeperRef;
+    public RedHornAI redHornRef;
+    public OrcKingAI orcKingRef;
 
     [Header("Audio - Sound Effects")]
     public AudioSource soundEffects;

@@ -214,6 +214,7 @@ public class RedHornAI : EnemyAI
         gameManager.instance.UpdateBossBar(curHealth);
         bossFightTriggered = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
+        gameManager.instance.redHornRef = this;
         if (cam != null && fightCamPos != null)
         {
             cam.SetBossDistance(fightCamPos);
