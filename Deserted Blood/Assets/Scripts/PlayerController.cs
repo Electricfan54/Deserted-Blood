@@ -108,6 +108,8 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         gameManager.instance.UpdateHPBar(MaxHP, HP);
         gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
         origMat = meshRenderer.material;
+
+        CDmanager = GameObject.Find("cooldownManager").GetComponent<CooldownManager>();
     }
 
     // Update is called once per frame

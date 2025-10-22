@@ -6846,6 +6846,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4406899844967931, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -203.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406899844967931, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033151024924366963, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -198.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033151024924366963, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.44
+      objectReference: {fileID: 0}
     - target: {fileID: 1119418763240157554, guid: b68599e46c582664ea62c656372d42cc, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6910,6 +6926,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 7694
       objectReference: {fileID: 0}
+    - target: {fileID: 6356629100381434645, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.29
+      objectReference: {fileID: 0}
     - target: {fileID: 7391047556623347970, guid: b68599e46c582664ea62c656372d42cc, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6921,6 +6941,14 @@ PrefabInstance:
     - target: {fileID: 8368455623622477274, guid: b68599e46c582664ea62c656372d42cc, type: 3}
       propertyPath: m_Name
       value: NewKingdomStreets
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178070061518367060, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -175.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178070061518367060, guid: b68599e46c582664ea62c656372d42cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
