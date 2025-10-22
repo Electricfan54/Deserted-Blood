@@ -37,16 +37,19 @@ public class pickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        canPickup = true;
+        if(other.tag == "Player")
+        {
+canPickup = true;
         gameManager.instance.pickUpPrompt.SetActive(true);
+        }
+            
 
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player" && gameManager.instance.pickUpPrompt.activeSelf)
+        if (other.tag == "Player" )
         {
             canPickup = false;
             gameManager.instance.pickUpPrompt.SetActive(false);
