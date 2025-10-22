@@ -119,6 +119,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] AudioMixer musicMixer;
     float musicVolume;
 
+    public GameObject airTeleportText;
+
     private void Awake()
     {
 

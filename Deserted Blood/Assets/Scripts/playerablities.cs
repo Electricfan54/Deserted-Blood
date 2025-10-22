@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class playerablities : MonoBehaviour
@@ -60,10 +58,9 @@ public class playerablities : MonoBehaviour
         }
         
         //Teleport ability
-        else if (currentability.type == Ability.AbilityType.tp && currentability.currentcharge > 0 && gameManager.instance.playerScript.isGrounded == false)
+        else if (currentability.type == Ability.AbilityType.tp && currentability.currentcharge > 0)
         {
 
-            Debug.Log("Pew Pew");
             if (gameManager.instance.playerScript.isGrounded == false)
             {
                 gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
@@ -82,6 +79,10 @@ public class playerablities : MonoBehaviour
                     aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
                 }
+            }
+            else if (!gameManager.instance.airTeleportText.activeSelf)
+            {
+                StartCoroutine(ShowAirTeleportPopup());
             }
 
 
@@ -184,5 +185,12 @@ public class playerablities : MonoBehaviour
         gameManager.instance.playerScript.transform.position = gameManager.instance.playerScript.transform.position + Vector3.up * 3;
         yield return new WaitForSeconds(.3f);
         Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+    }
+
+    IEnumerator ShowAirTeleportPopup()
+    {
+        gameManager.instance.airTeleportText.SetActive(true);
+        yield return new WaitForSeconds(1);
+        gameManager.instance.airTeleportText.SetActive(false);
     }
 }
