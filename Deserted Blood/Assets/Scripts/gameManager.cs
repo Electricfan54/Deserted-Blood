@@ -177,6 +177,7 @@ public class gameManager : MonoBehaviour
             AttemptPlayerAssign();
             backgroundMusic.clip = levelMusic;
             backgroundMusic.Play();
+            ResetAbilities();
         }
 
         gameManager.instance.loadingScreen.SetActive(false);
@@ -538,6 +539,36 @@ public class gameManager : MonoBehaviour
         }
 
         abilitySlots[slotSelected] = selSlot;
+
+    }
+
+    private void ResetAbilities()
+    {
+
+        for (int i = 0; i < abilitySlots.Count; i++)
+        {
+
+            if (abilitySlots[i].maxCharges > 0)
+            {
+                AbilitySlotMain selSlot = abilitySlots[i];
+
+                selSlot.abilityIcon.gameObject.SetActive(false);
+
+                for (int j = 0; j < selSlot.maxCharges; j++)
+                {
+                    Destroy(selSlot.chargeList[j]);
+                }
+
+                selSlot.chargeList.Clear();
+
+                selSlot.maxCharges = 0;
+                selSlot.currCharges = 0;
+
+                abilitySlots[i] = selSlot;
+
+            }
+
+        }
 
     }
 
