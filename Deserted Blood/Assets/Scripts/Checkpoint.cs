@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
         if (gameManager.instance.playerCheckpoint != checkpointPos)
         {
             gameManager.instance.playerCheckpoint = checkpointPos;
+            gameManager.instance.AnnounceCheckpoint();
         }
 
     }

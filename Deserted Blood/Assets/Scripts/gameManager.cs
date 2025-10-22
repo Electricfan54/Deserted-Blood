@@ -47,6 +47,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject quitButton;
 
     public GameObject pickUpPrompt;
+    [SerializeField] GameObject checkPointPopUp;
 
     public bool isPaused;
     float timeScaleOrig;
@@ -621,6 +622,24 @@ public class gameManager : MonoBehaviour
 
     }
 
+    public void AnnounceCheckpoint()
+    {
+
+        if (!checkPointPopUp.activeSelf)
+        {
+            StartCoroutine(AnnounceCheckCo());
+        }
+
+    }
+
+    IEnumerator AnnounceCheckCo()
+    {
+
+        checkPointPopUp.SetActive(true);
+        yield return new WaitForSeconds(2);
+        checkPointPopUp.SetActive(false);
+
+    }
 
     public void HitStop(float duration)
     {
