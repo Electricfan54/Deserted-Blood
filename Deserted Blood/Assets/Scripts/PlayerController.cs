@@ -602,7 +602,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         PlayerAnimator.SetBool("MappaPunchActive", true);
         yield return new WaitForSeconds(0.2f);
         playerVel.x = transform.forward.x * 20;
-        BaseAttacks[0].GetComponent<Damage>().damageammount = (BasePlayerDamage + 4);
+        BaseAttacks[0].GetComponent<Damage>().damageammount = (BasePlayerDamage + 5);
         BaseAttacks[0].SetActive(true);
         yield return new WaitForSeconds(.4f);
         BaseAttacks[0].SetActive(false);
@@ -623,7 +623,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
         isInvinc = true;
         playerVel = new Vector3(transform.forward.x * 10, JumpStrength * 1.2f, 0);
         yield return new WaitForSeconds(.7f);
-        BaseAttacks[1].GetComponent<Damage>().damageammount = BasePlayerDamage * 2;
+        BaseAttacks[1].GetComponent<Damage>().damageammount = BasePlayerDamage + 3;
         BaseAttacks[1].SetActive(true);
         playerVel = new Vector3(transform.forward.x * 10, -50, 0);
         ScreenShake.instance.ShakeScreen(0.5f, 0.6f);
