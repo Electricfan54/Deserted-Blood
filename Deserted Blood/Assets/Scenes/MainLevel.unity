@@ -6167,6 +6167,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 6.87
       objectReference: {fileID: 0}
+    - target: {fileID: 103252897823171535, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 57.336002
+      objectReference: {fileID: 0}
+    - target: {fileID: 103252897823171535, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 103252897823171535, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.73
+      objectReference: {fileID: 0}
     - target: {fileID: 211038901218115668, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_LocalPosition.x
       value: -558
@@ -6218,12 +6230,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 524422800}
     - target: {fileID: 900965063864193529, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: wall jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 900965063864193529, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1086899107542037762, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_LocalScale.x
       value: 6.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087657011402362484, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_text
+      value: jump on a wall then wait to slide down to jump off it again
+      objectReference: {fileID: 0}
+    - target: {fileID: 1984625396173743320, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: punch tut
       objectReference: {fileID: 0}
     - target: {fileID: 1984625396173743320, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
@@ -6238,8 +6262,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 297660279}
     - target: {fileID: 2343706970481581021, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: jump tut
+      objectReference: {fileID: 0}
+    - target: {fileID: 2343706970481581021, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561887011075068152, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: ability tut
       objectReference: {fileID: 0}
     - target: {fileID: 2561887011075068152, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
@@ -6249,6 +6281,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1838360000}
+    - target: {fileID: 3010145342974023801, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: move tut
+      objectReference: {fileID: 0}
     - target: {fileID: 3010145342974023801, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -6262,12 +6298,22 @@ PrefabInstance:
       value: 4203
       objectReference: {fileID: 0}
     - target: {fileID: 3302317635436232628, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: Heal tut
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302317635436232628, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4672430209921319772, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_LocalScale.x
       value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4709522520450606111, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_text
+      value: 'Press or hold space to jump(longer you hold the higher you go)
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 5199331359848278370, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Mesh
@@ -6276,6 +6322,10 @@ PrefabInstance:
     - target: {fileID: 5199331359848278370, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_VersionIndex
       value: 1803
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235247170377981272, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: double jump
       objectReference: {fileID: 0}
     - target: {fileID: 5235247170377981272, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
@@ -6314,8 +6364,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 524422800}
     - target: {fileID: 8094449712995041161, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_Name
+      value: charge tut
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094449712995041161, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156272544164843732, guid: 36822725110b5b24ba91558462a96205, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.86
       objectReference: {fileID: 0}
     - target: {fileID: 8413829164979726939, guid: 36822725110b5b24ba91558462a96205, type: 3}
       propertyPath: m_Name
