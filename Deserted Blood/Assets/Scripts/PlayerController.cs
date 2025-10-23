@@ -317,6 +317,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
             HP -= DamageAmount;
             gameManager.instance.UpdateHPBar(MaxHP, HP);
             StartCoroutine(gameManager.instance.flashDamage());
+            gameManager.instance.LowHPTest(HP, MaxHP);
             if (HP <= 0&&!isdead)
             {
              
@@ -588,6 +589,7 @@ public class PlayerController : MonoBehaviour, Idamage, IPickup, IEffect
                 bloodTimer = 0;
                 BloodMeter--;
                 HP++;
+                gameManager.instance.LowHPTest(HP, MaxHP);
                 gameManager.instance.UpdateHPBar(MaxHP, HP);
                 gameManager.instance.UpdateBloodMeter(MaxBloodMeter, BloodMeter);
             }

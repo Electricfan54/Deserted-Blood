@@ -181,6 +181,10 @@ public class gameManager : MonoBehaviour
             backgroundMusic.clip = levelMusic;
             backgroundMusic.Play();
             ResetAbilities();
+            if (lowHealthOverlay.activeSelf)
+            {
+                lowHealthOverlay.SetActive(false);
+            }
             playerStartPos = GameObject.Find("SpawnPoint").transform;
             playerCheckpoint = playerStartPos;
         }
@@ -601,6 +605,7 @@ public class gameManager : MonoBehaviour
         player.transform.position = playerCheckpoint.position;
         playerScript.ResetPlayer();
         UpdateHPBar(playerScript.MaxHP, playerScript.HP);
+        gameManager.instance.LowHPTest(playerScript.HP, playerScript.MaxHP);
 
         if (gateKeeperRef != null)
         {
@@ -622,6 +627,20 @@ public class gameManager : MonoBehaviour
             {
                 orcKingRef.StopBossFight();
             }
+        }
+
+    }
+
+    public void LowHPTest(int currHP, int maxHP)
+    {
+
+        if (currHP < maxHP / 4)
+        {
+            lowHealthOverlay.SetActive(true);
+        }
+        else if (lowHealthOverlay.activeSelf)
+        {
+            lowHealthOverlay.SetActive(false);
         }
 
     }
