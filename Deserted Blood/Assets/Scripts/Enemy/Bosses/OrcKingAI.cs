@@ -266,7 +266,9 @@ public class OrcKingAI : EnemyAI
     public void StopBossFight()
     {
         gameManager.instance.HideBossBar();
-        gameManager.instance.cameraScript.resetCam();
+        CameraController cam = Camera.main.GetComponent<CameraController>();
+        if (cam != null)
+            cam.resetCam();
         curHealth = maxHealth;
         transform.position = startPos;
         bossFightTriggered = false;
