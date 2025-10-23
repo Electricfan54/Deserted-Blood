@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class playerablities : MonoBehaviour
@@ -83,7 +84,7 @@ public class playerablities : MonoBehaviour
                     gameManager.instance.UpdateCharges();
                 }
             }
-            else if (!gameManager.instance.airTeleportText.activeSelf)
+            else if (!gameManager.instance.toolTipText.activeSelf)
             {
                 StartCoroutine(ShowAirTeleportPopup());
             }
@@ -192,8 +193,11 @@ public class playerablities : MonoBehaviour
 
     IEnumerator ShowAirTeleportPopup()
     {
-        gameManager.instance.airTeleportText.SetActive(true);
+        gameManager.instance.toolTipText.SetActive(true);
+        TMP_Text text = gameManager.instance.toolTipText.GetComponentInChildren<TMP_Text>();
+        text.color = Color.red;
+        text.text = "Air teleport only works in the air";
         yield return new WaitForSeconds(1);
-        gameManager.instance.airTeleportText.SetActive(false);
+        gameManager.instance.toolTipText.SetActive(false);
     }
 }

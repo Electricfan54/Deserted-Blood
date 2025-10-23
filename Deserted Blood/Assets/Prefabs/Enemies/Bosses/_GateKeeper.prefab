@@ -1995,6 +1995,7 @@ MonoBehaviour:
   effectDuration: 0
   maxHealth: 70
   enemyAggroRange: 7
+  chaseAggroBuff: 5
   attackRate: 0.5
   hitStunDuration: 0.2
   hitBoxes:

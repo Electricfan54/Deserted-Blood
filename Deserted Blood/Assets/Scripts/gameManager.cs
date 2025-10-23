@@ -119,7 +119,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] AudioMixer musicMixer;
     float musicVolume;
 
-    public GameObject airTeleportText;
+    public GameObject toolTipText;
 
     private void Awake()
     {
