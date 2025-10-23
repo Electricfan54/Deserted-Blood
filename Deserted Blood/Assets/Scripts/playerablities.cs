@@ -9,12 +9,15 @@ public class playerablities : MonoBehaviour
     [SerializeField] ParticleSystem lightningeffect;
     [SerializeField] AudioSource aud;
     Ability currentability;
-
+    [SerializeField] GameObject player;
+   [SerializeField] PlayerController playerScript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+ player = gameManager.instance.player;
+        playerScript = player.GetComponent<PlayerController>();
     }
+ 
 
     // Update is called once per frame
     void Update()
@@ -24,7 +27,7 @@ public class playerablities : MonoBehaviour
         {
             if (gameManager.instance.playerScript.abilities.Count != 0)
             {
-               currentability = gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos];
+               currentability = playerScript.abilities[playerScript.listpos];
             }
            
             useAbility();
@@ -34,15 +37,15 @@ public class playerablities : MonoBehaviour
 
     void selectability()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && gameManager.instance.playerScript.listpos < gameManager.instance.playerScript.abilities.Count - 1)
+        if (Input.GetKeyDown(KeyCode.Q) && playerScript.listpos < playerScript.abilities.Count - 1)
         {
-            gameManager.instance.playerScript.listpos++;
+            playerScript.listpos++;
             gameManager.instance.UpdateAbilityUI();
             changegun();
         }
-        else if (Input.GetKeyDown(KeyCode.W) && gameManager.instance.playerScript.listpos > 0)
+        else if (Input.GetKeyDown(KeyCode.W) && playerScript.listpos > 0)
         {
-            gameManager.instance.playerScript.listpos--;
+            playerScript.listpos--;
             gameManager.instance.UpdateAbilityUI();
             changegun();
         }
@@ -61,20 +64,20 @@ public class playerablities : MonoBehaviour
         else if (currentability.type == Ability.AbilityType.tp && currentability.currentcharge > 0)
         {
 
-            if (gameManager.instance.playerScript.isGrounded == false)
+            if (playerScript.isGrounded == false)
             {
-                gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+               playerScript.abilities[playerScript.listpos].currentcharge -= 1;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
                 {
-                    gameManager.instance.player.transform.position = hit.point - gameManager.instance.player.transform.forward;
+                  player.transform.position = hit.point - player.transform.forward;
                     aud.pitch = Random.Range(0.8f, 1.2f);
                     aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
                 }
                 else
                 {
-                    gameManager.instance.player.transform.position = gameManager.instance.player.transform.position + gameManager.instance.player.transform.forward * 5;
+                   player.transform.position = player.transform.position +player.transform.forward * 5;
                     aud.pitch = Random.Range(0.8f, 1.2f);
                     aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
                     gameManager.instance.UpdateCharges();
@@ -94,22 +97,22 @@ public class playerablities : MonoBehaviour
         {
 
             damage = currentability.damage;
-            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab,player.transform.position + Vector3.up * 1, player.transform.rotation);
             StartCoroutine(chargetime());
             aud.pitch = Random.Range(0.8f, 1.2f);
             aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
             Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 6, Color.red);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+           playerScript.abilities[playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
 
         //fire ability
         else if (currentability.type == Ability.AbilityType.fire && currentability.currentcharge > 0)
         {
-            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab, player.transform.position + Vector3.up * 1, player.transform.rotation);
             aud.pitch = Random.Range(0.8f, 1.2f);
             aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            playerScript.abilities[playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
         //shockwave ability
@@ -118,36 +121,36 @@ public class playerablities : MonoBehaviour
             StartCoroutine(Slamtime());
             aud.pitch = Random.Range(0.8f, 1.2f);
             aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+         playerScript.abilities[playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
         //ice ability
         else if (currentability.type == Ability.AbilityType.ice &&currentability.currentcharge > 0)
         {
-            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position, gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab, player.transform.position,player.transform.rotation);
             aud.pitch = Random.Range(0.8f, 1.2f);
             aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+            playerScript.abilities[playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
         //sonicBoom ability
         else if (currentability.type == Ability.AbilityType.sonicboom && currentability.currentcharge > 0)
         {
-            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform.position + Vector3.up * 1, gameManager.instance.player.transform.rotation);
+            Instantiate(currentability.abilityPrefab, player.transform.position + Vector3.up * 1, player.transform.rotation);
             aud.pitch = Random.Range(0.8f, 1.2f);
             aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+           playerScript.abilities[playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
         //sheild ability
         else if (currentability.type == Ability.AbilityType.sheild && currentability.currentcharge > 0)
         {
 
-            Instantiate(currentability.abilityPrefab, gameManager.instance.player.transform);
+            Instantiate(currentability.abilityPrefab, player.transform);
             aud.pitch = Random.Range(0.8f, 1.2f);
             aud.PlayOneShot(currentability.abilitySound, gameManager.instance.sfxVolume);
-            gameManager.instance.playerScript.isInvinc = true;
-            gameManager.instance.playerScript.abilities[gameManager.instance.playerScript.listpos].currentcharge -= 1;
+           playerScript.isInvinc = true;
+           playerScript.abilities[playerScript.listpos].currentcharge -= 1;
             gameManager.instance.UpdateCharges();
         }
     }
