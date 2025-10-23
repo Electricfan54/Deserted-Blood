@@ -10657,7 +10657,7 @@ MonoBehaviour:
   menuMusic: {fileID: 8300000, guid: 110f043ee8d145c4cb3a1cab5931e649, type: 3}
   levelMusic: {fileID: 8300000, guid: 82f3573f3f1be784e8a055fd6e6e0cde, type: 3}
   musicMixer: {fileID: 24100000, guid: 4e7ebe04529cc0a41aa6ad15e7f26035, type: 2}
-  airTeleportText: {fileID: 5175222545312518268}
+  toolTipText: {fileID: 5175222545312518268}
 --- !u!1 &8895005172436354437
 GameObject:
   m_ObjectHideFlags: 0

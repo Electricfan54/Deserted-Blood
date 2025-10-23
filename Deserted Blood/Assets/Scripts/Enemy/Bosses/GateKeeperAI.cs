@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class GateKeeperAI : EnemyAI
 {
@@ -115,7 +116,6 @@ public class GateKeeperAI : EnemyAI
             case EnemyState.dead:
                 AddToMilestone();
                 DropAbility();
-                Destroy(gameObject);
                 break;
         }
     }
@@ -372,9 +372,12 @@ public class GateKeeperAI : EnemyAI
     protected override void OnDeath()
     {
         base.OnDeath();
+        if (roarEffect != null)
+            roarEffect.Stop();
         gameManager.instance.HideBossBar();
         gameManager.instance.playerScript.GateKeeperAbilityCheck = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
+        StartCoroutine(ShowAbilityText());
         if (cam != null)
         {
             cam.resetCam();
@@ -422,5 +425,15 @@ public class GateKeeperAI : EnemyAI
 
     protected override void HitReact()
     {
+    }
+
+    IEnumerator ShowAbilityText()
+    {
+        gameManager.instance.toolTipText.SetActive(true);
+        TMP_Text text = gameManager.instance.toolTipText.GetComponentInChildren<TMP_Text>();
+        text.color = Color.white;
+        text.text = "Press N to use the falling punch ability";
+        yield return new WaitForSeconds(3);
+        gameManager.instance.toolTipText.SetActive(false);
     }
 }

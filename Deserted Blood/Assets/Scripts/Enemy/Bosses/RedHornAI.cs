@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class RedHornAI : EnemyAI
@@ -238,6 +239,7 @@ public class RedHornAI : EnemyAI
         gameManager.instance.HideBossBar();
         gameManager.instance.playerScript.RedHornAbilityCheck = true;
         CameraController cam = Camera.main.GetComponent<CameraController>();
+        StartCoroutine(ShowGoalText());
         if (cam != null)
         {
             cam.resetCam();
@@ -276,5 +278,15 @@ public class RedHornAI : EnemyAI
 
     protected override void HitReact()
     {
+    }
+
+    IEnumerator ShowGoalText()
+    {
+        gameManager.instance.toolTipText.SetActive(true);
+        TMP_Text text = gameManager.instance.toolTipText.GetComponentInChildren<TMP_Text>();
+        text.color = Color.white;
+        text.text = "The castle door is now open";
+        yield return new WaitForSeconds(3);
+        gameManager.instance.toolTipText.SetActive(false);
     }
 }
